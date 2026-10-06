@@ -56,11 +56,15 @@ class RingingActivity : ComponentActivity() {
         setContent {
             BudilaTheme {
                 val alarm by AlarmService.ringing.collectAsStateWithLifecycle()
-                RingingScreen(
-                    label = alarm?.label?.ifBlank { null } ?: getString(R.string.alarm_default_label),
-                    onSnooze = { AlarmService.snooze(this); finish() },
-                    onDismiss = { AlarmService.dismiss(this); finish() },
-                )
+                val settings by SettingsRepository.settings.collectAsStateWithLifecycle()
+                val label = alarm?.label?.ifBlank { null } ?: getString(R.string.alarm_default_label)
+                val onSnooze = { AlarmService.snooze(this); finish() }
+                val onDismiss = { AlarmService.dismiss(this); finish() }
+                if (settings.design == Design.INSTRUMENT) {
+                    InstrumentRingingScreen(label, onSnooze, onDismiss)
+                } else {
+                    RingingScreen(label, onSnooze, onDismiss)
+                }
             }
         }
     }

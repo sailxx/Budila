@@ -109,4 +109,32 @@
     <string name="hue">Teinte</string>
     <string name="saturation">Saturation</string>
     <string name="palette">Palette</string>
+
+    <!-- Дизайн «Инструмент» -->
+    <string name="design_title">Design</string>
+    <string name="design_instrument">Instrument</string>
+    <string name="design_material">Material 3</string>
+    <string name="design_desc">Le design propre à Budila : boîtier monochrome, touches et écrans en creux, comme une calculatrice d\'ingénieur</string>
+    <string name="itheme_classic">Classique</string>
+    <string name="itheme_paper">Papier</string>
+    <string name="itheme_mint">Menthe</string>
+    <string name="itheme_midnight">Minuit</string>
+    <string name="itheme_nord">Nord</string>
+    <string name="itheme_crimson">Carmin</string>
+    <string name="itheme_amber">Ambre</string>
+    <string name="theme_title">Thème</string>
+    <string name="mode_title">Mode</string>
+    <string name="legend_next">Prochain</string>
+    <string name="legend_time">Heure</string>
+    <string name="legend_input">Saisie</string>
+    <string name="legend_ringing">Sonnerie</string>
+    <string name="legend_silence">Silence dans %1$s</string>
+    <string name="legend_attention">Attention</string>
+    <string name="legend_alarms">Alarmes</string>
+    <string name="legend_version">Version</string>
+    <string name="today">aujourd\'hui</string>
+    <string name="tomorrow">demain</string>
+    <string name="filter_all_short">Toutes</string>
+    <string name="erase">Effacer</string>
+    <string name="empty_text_key">Appuyez sur + pour créer la première</string>
 </resources>

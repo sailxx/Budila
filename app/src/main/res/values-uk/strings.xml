@@ -109,4 +109,32 @@
     <string name="hue">Тон</string>
     <string name="saturation">Насиченість</string>
     <string name="palette">Гама</string>
+
+    <!-- Дизайн «Инструмент» -->
+    <string name="design_title">Дизайн</string>
+    <string name="design_instrument">Інструмент</string>
+    <string name="design_material">Material 3</string>
+    <string name="design_desc">Фірмовий дизайн Budila: монохромний корпус, клавіші й заглиблені дисплеї, як в інженерного калькулятора</string>
+    <string name="itheme_classic">Класика</string>
+    <string name="itheme_paper">Папір</string>
+    <string name="itheme_mint">М\'ята</string>
+    <string name="itheme_midnight">Північ</string>
+    <string name="itheme_nord">Норд</string>
+    <string name="itheme_crimson">Кармін</string>
+    <string name="itheme_amber">Бурштин</string>
+    <string name="theme_title">Тема</string>
+    <string name="mode_title">Режим</string>
+    <string name="legend_next">Наступний</string>
+    <string name="legend_time">Час</string>
+    <string name="legend_input">Введення</string>
+    <string name="legend_ringing">Дзвінок</string>
+    <string name="legend_silence">Затихне за %1$s</string>
+    <string name="legend_attention">Увага</string>
+    <string name="legend_alarms">Будильники</string>
+    <string name="legend_version">Версія</string>
+    <string name="today">сьогодні</string>
+    <string name="tomorrow">завтра</string>
+    <string name="filter_all_short">Усі</string>
+    <string name="erase">Стерти</string>
+    <string name="empty_text_key">Натисніть +, щоб створити перший</string>
 </resources>

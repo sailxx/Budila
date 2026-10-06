@@ -31,7 +31,13 @@ enum class DarkMode(@StringRes val title: Int) {
     DARK(R.string.dark_dark),
 }
 
+/** Дизайн приложения: фирменный «Инструмент» (как в Okto) или Material 3. */
+enum class Design { INSTRUMENT, MATERIAL }
+
 data class AppSettings(
+    val design: Design = Design.INSTRUMENT,
+    /** Тема «Инструмента»; темы Material 3 — в [theme] */
+    val instrumentTheme: InstrumentTheme = InstrumentTheme.CLASSIC,
     val theme: AppTheme = if (AppTheme.dynamicAvailable) AppTheme.DYNAMIC else AppTheme.INDIGO,
     val darkMode: DarkMode = DarkMode.SYSTEM,
     /** Чистый чёрный фон в тёмной теме */
@@ -74,6 +80,9 @@ object SettingsRepository {
         val theme = AppTheme.entries.find { it.name == prefs.getString("theme", null) }
             ?.takeIf { it != AppTheme.DYNAMIC || AppTheme.dynamicAvailable } ?: d.theme
         _settings.value = AppSettings(
+            design = Design.entries.find { it.name == prefs.getString("design", null) } ?: d.design,
+            instrumentTheme = InstrumentTheme.entries.find { it.name == prefs.getString("instrumentTheme", null) }
+                ?: d.instrumentTheme,
             theme = theme,
             darkMode = DarkMode.entries.find { it.name == prefs.getString("darkMode", null) } ?: d.darkMode,
             amoled = prefs.getBoolean("amoled", d.amoled),
@@ -94,6 +103,8 @@ object SettingsRepository {
         _settings.value = s
         if (!persist || !::prefs.isInitialized) return
         prefs.edit()
+            .putString("design", s.design.name)
+            .putString("instrumentTheme", s.instrumentTheme.name)
             .putString("theme", s.theme.name)
             .putString("darkMode", s.darkMode.name)
             .putBoolean("amoled", s.amoled)

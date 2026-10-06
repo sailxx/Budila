@@ -109,4 +109,32 @@
     <string name="hue">Odcień</string>
     <string name="saturation">Nasycenie</string>
     <string name="palette">Paleta</string>
+
+    <!-- Дизайн «Инструмент» -->
+    <string name="design_title">Wygląd</string>
+    <string name="design_instrument">Instrument</string>
+    <string name="design_material">Material 3</string>
+    <string name="design_desc">Własny wygląd Budili: monochromatyczna obudowa, klawisze i wpuszczone wyświetlacze jak w kalkulatorze inżynierskim</string>
+    <string name="itheme_classic">Klasyczny</string>
+    <string name="itheme_paper">Papier</string>
+    <string name="itheme_mint">Mięta</string>
+    <string name="itheme_midnight">Północ</string>
+    <string name="itheme_nord">Nord</string>
+    <string name="itheme_crimson">Karmazyn</string>
+    <string name="itheme_amber">Bursztyn</string>
+    <string name="theme_title">Motyw</string>
+    <string name="mode_title">Tryb</string>
+    <string name="legend_next">Następny</string>
+    <string name="legend_time">Godzina</string>
+    <string name="legend_input">Wpisywanie</string>
+    <string name="legend_ringing">Dzwoni</string>
+    <string name="legend_silence">Ucichnie za %1$s</string>
+    <string name="legend_attention">Uwaga</string>
+    <string name="legend_alarms">Budziki</string>
+    <string name="legend_version">Wersja</string>
+    <string name="today">dziś</string>
+    <string name="tomorrow">jutro</string>
+    <string name="filter_all_short">Wszystkie</string>
+    <string name="erase">Usuń</string>
+    <string name="empty_text_key">Naciśnij +, aby utworzyć pierwszy</string>
 </resources>

@@ -109,4 +109,32 @@
     <string name="hue">Farbton</string>
     <string name="saturation">Sättigung</string>
     <string name="palette">Palette</string>
+
+    <!-- Дизайн «Инструмент» -->
+    <string name="design_title">Design</string>
+    <string name="design_instrument">Instrument</string>
+    <string name="design_material">Material 3</string>
+    <string name="design_desc">Budilas eigenes Design: monochromes Gehäuse, Tasten und vertiefte Displays wie bei einem Ingenieursrechner</string>
+    <string name="itheme_classic">Klassisch</string>
+    <string name="itheme_paper">Papier</string>
+    <string name="itheme_mint">Minze</string>
+    <string name="itheme_midnight">Mitternacht</string>
+    <string name="itheme_nord">Nord</string>
+    <string name="itheme_crimson">Karmin</string>
+    <string name="itheme_amber">Bernstein</string>
+    <string name="theme_title">Thema</string>
+    <string name="mode_title">Modus</string>
+    <string name="legend_next">Nächster</string>
+    <string name="legend_time">Zeit</string>
+    <string name="legend_input">Eingabe</string>
+    <string name="legend_ringing">Klingelt</string>
+    <string name="legend_silence">Stumm in %1$s</string>
+    <string name="legend_attention">Achtung</string>
+    <string name="legend_alarms">Wecker</string>
+    <string name="legend_version">Version</string>
+    <string name="today">heute</string>
+    <string name="tomorrow">morgen</string>
+    <string name="filter_all_short">Alle</string>
+    <string name="erase">Löschen</string>
+    <string name="empty_text_key">Tippe auf +, um den ersten zu erstellen</string>
 </resources>

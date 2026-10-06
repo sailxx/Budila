@@ -60,7 +60,7 @@ class ScreensTest {
         content: @Composable () -> Unit,
     ) {
         if (dark) RuntimeEnvironment.setQualifiers("+night")
-        SettingsRepository.update { custom ?: AppSettings(theme = theme) }
+        SettingsRepository.update { custom ?: AppSettings(design = Design.MATERIAL, theme = theme) }
         compose.mainClock.autoAdvance = false
         compose.setContent { BudilaTheme { content() } }
         compose.mainClock.advanceTimeBy(1_500)
@@ -115,14 +115,14 @@ class ScreensTest {
 
     @Test fun customTheme() {
         RuntimeEnvironment.setQualifiers("+h1000dp")
-        val custom = AppSettings(theme = AppTheme.CUSTOM, customHue = 170f, customSaturation = 0.7f, customStyle = CustomStyle.Vibrant)
+        val custom = AppSettings(design = Design.MATERIAL, theme = AppTheme.CUSTOM, customHue = 170f, customSaturation = 0.7f, customStyle = CustomStyle.Vibrant)
         shot("12_custom_theme", custom = custom) { SettingsScreen(onBack = {}) }
     }
 
     @Test fun listCustom() {
         seed(sample)
         val custom = AppSettings(
-            theme = AppTheme.CUSTOM, darkMode = DarkMode.DARK,
+            design = Design.MATERIAL, theme = AppTheme.CUSTOM, darkMode = DarkMode.DARK,
             customHue = 20f, customSaturation = 0.8f, customStyle = CustomStyle.Expressive,
         )
         shot("13_list_custom_dark", custom = custom) { AlarmListScreen() }
@@ -164,4 +164,41 @@ class ScreensTest {
             AppIcon(Modifier.size(40.dp).clip(CircleShape))
         }
     }
+
+    // ---------- Дизайн «Инструмент» ----------
+
+    private fun instrument(theme: InstrumentTheme = InstrumentTheme.CLASSIC, dark: DarkMode = DarkMode.LIGHT, amoled: Boolean = false) =
+        AppSettings(design = Design.INSTRUMENT, instrumentTheme = theme, darkMode = dark, amoled = amoled)
+
+    @Test fun iList() { seed(sample); shot("i1_list", custom = instrument()) { InstrumentListScreen() } }
+
+    @Test fun iListDark() { seed(sample); shot("i2_list_dark", custom = instrument(dark = DarkMode.DARK)) { InstrumentListScreen() } }
+
+    @Test fun iListPaper() { seed(sample); shot("i3_list_paper", custom = instrument(InstrumentTheme.PAPER)) { InstrumentListScreen() } }
+
+    @Test fun iEditor() {
+        RuntimeEnvironment.setQualifiers("+h1700dp")
+        shot("i4_editor", custom = instrument()) {
+            Surface(color = LocalInstrument.current.bg) {
+                InstrumentEditorContent(
+                    sample[1], isNew = false, allTags = listOf("Работа", "Спорт", "Важное", "Учёба", "Лекарства"),
+                    onCancel = {}, onSave = {}, onDelete = {},
+                )
+            }
+        }
+    }
+
+    @Test fun iRinging() = shot("i5_ringing", custom = instrument()) { InstrumentRingingScreen("Работа", onSnooze = {}, onDismiss = {}) }
+
+    @Test fun iRingingOled() =
+        shot("i6_ringing_oled", custom = instrument(dark = DarkMode.DARK, amoled = true)) { InstrumentRingingScreen("Работа", onSnooze = {}, onDismiss = {}) }
+
+    @Test fun iSettings() {
+        RuntimeEnvironment.setQualifiers("+h1900dp")
+        shot("i7_settings", custom = instrument()) { InstrumentSettingsScreen(onBack = {}) }
+    }
+
+    @Test fun iListMidnight() { seed(sample); shot("i8_list_midnight", custom = instrument(InstrumentTheme.MIDNIGHT)) { InstrumentListScreen() } }
+
+    @Test fun iEmpty() { seed(emptyList()); shot("i9_empty", custom = instrument()) { InstrumentListScreen() } }
 }

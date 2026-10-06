@@ -84,6 +84,8 @@ class MainActivity : ComponentActivity() {
                     enableEdgeToEdge(statusBarStyle = style, navigationBarStyle = style)
                 }
 
+                val settings by SettingsRepository.settings.collectAsStateWithLifecycle()
+                val instrument = settings.design == Design.INSTRUMENT
                 var settingsOpen by rememberSaveable { mutableStateOf(false) }
                 BackHandler(enabled = settingsOpen) { settingsOpen = false }
                 Surface(color = MaterialTheme.colorScheme.background) {
@@ -96,10 +98,11 @@ class MainActivity : ComponentActivity() {
                         },
                         label = "screen",
                     ) { open ->
-                        if (open) {
-                            SettingsScreen(onBack = { settingsOpen = false })
-                        } else {
-                            AlarmListScreen(onOpenSettings = { settingsOpen = true })
+                        when {
+                            open && instrument -> InstrumentSettingsScreen(onBack = { settingsOpen = false })
+                            open -> SettingsScreen(onBack = { settingsOpen = false })
+                            instrument -> InstrumentListScreen(onOpenSettings = { settingsOpen = true })
+                            else -> AlarmListScreen(onOpenSettings = { settingsOpen = true })
                         }
                     }
                 }
@@ -108,22 +111,11 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-private data class EditorState(val alarm: Alarm, val isNew: Boolean)
+internal data class EditorState(val alarm: Alarm, val isNew: Boolean)
 
-@OptIn(ExperimentalMaterial3Api::class)
+/** Текущее время, обновляется в начале каждой секунды. */
 @Composable
-internal fun AlarmListScreen(onOpenSettings: () -> Unit = {}) {
-    val context = LocalContext.current
-    val alarms by AlarmRepository.alarms.collectAsStateWithLifecycle()
-    val scope = rememberCoroutineScope()
-    val snackbar = remember { SnackbarHostState() }
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-    var editor by remember { mutableStateOf<EditorState?>(null) }
-    var tagFilter by rememberSaveable { mutableStateOf<String?>(null) }
-    val allTags = remember(alarms) { alarms.flatMap { it.tags }.distinct().sorted() }
-    if (tagFilter != null && tagFilter !in allTags) tagFilter = null
-    val shown = if (tagFilter == null) alarms else alarms.filter { tagFilter in it.tags }
-
+internal fun rememberNow(): ZonedDateTime {
     var now by remember { mutableStateOf(ZonedDateTime.now()) }
     LaunchedEffect(Unit) {
         while (true) {
@@ -131,8 +123,22 @@ internal fun AlarmListScreen(onOpenSettings: () -> Unit = {}) {
             delay(1_000 - System.currentTimeMillis() % 1_000)
         }
     }
+    return now
+}
 
-    // --- разрешения ---
+/** Разрешения, без которых будильник звонит ненадёжно, и действия, чтобы их выдать. */
+internal class Permissions(
+    val notifOk: Boolean,
+    val exactOk: Boolean,
+    val fullScreenOk: Boolean,
+    val fixNotif: () -> Unit,
+    val fixExact: () -> Unit,
+    val fixFullScreen: () -> Unit,
+)
+
+@Composable
+internal fun rememberPermissions(): Permissions {
+    val context = LocalContext.current
     var permTick by remember { mutableIntStateOf(0) }
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
         permTick++
@@ -152,7 +158,33 @@ internal fun AlarmListScreen(onOpenSettings: () -> Unit = {}) {
     LaunchedEffect(Unit) {
         if (!notifOk && Build.VERSION.SDK_INT >= 33) notifLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
     }
+    return Permissions(
+        notifOk, exactOk, fullScreenOk,
+        fixNotif = {
+            if (Build.VERSION.SDK_INT >= 33) notifLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        },
+        fixExact = {
+            context.startActivity(
+                Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM, Uri.parse("package:${context.packageName}")),
+            )
+        },
+        fixFullScreen = {
+            context.startActivity(
+                Intent(
+                    Settings.ACTION_MANAGE_APP_USE_FULL_SCREEN_INTENT,
+                    Uri.parse("package:${context.packageName}"),
+                ),
+            )
+        },
+    )
+}
 
+/** Сохранение и удаление будильников с сообщением внизу экрана (и «Вернуть» после удаления). */
+internal class AlarmActions(
+    private val context: android.content.Context,
+    private val scope: kotlinx.coroutines.CoroutineScope,
+    val snackbar: SnackbarHostState,
+) {
     fun showMessage(text: String, action: String? = null, onAction: () -> Unit = {}) {
         scope.launch {
             snackbar.currentSnackbarData?.dismiss()
@@ -176,6 +208,49 @@ internal fun AlarmListScreen(onOpenSettings: () -> Unit = {}) {
             AlarmScheduler.schedule(context, alarm)
         }
     }
+}
+
+@Composable
+internal fun rememberAlarmActions(): AlarmActions {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    return remember { AlarmActions(context, scope, SnackbarHostState()) }
+}
+
+/** Новый будильник на 7:00 с настройками по умолчанию (и тегом, если включён фильтр). */
+internal fun newAlarm(tagFilter: String?): Alarm {
+    val s = SettingsRepository.current
+    return Alarm(
+        AlarmRepository.newId(), 7, 0,
+        vibrate = s.defaultVibrate,
+        gentle = s.gentleDefault,
+        tags = listOfNotNull(tagFilter),
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+internal fun AlarmListScreen(onOpenSettings: () -> Unit = {}) {
+    val context = LocalContext.current
+    val alarms by AlarmRepository.alarms.collectAsStateWithLifecycle()
+    val actions = rememberAlarmActions()
+    val snackbar = actions.snackbar
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    var editor by remember { mutableStateOf<EditorState?>(null) }
+    var tagFilter by rememberSaveable { mutableStateOf<String?>(null) }
+    val allTags = remember(alarms) { alarms.flatMap { it.tags }.distinct().sorted() }
+    if (tagFilter != null && tagFilter !in allTags) tagFilter = null
+    val shown = if (tagFilter == null) alarms else alarms.filter { tagFilter in it.tags }
+
+    val now = rememberNow()
+    val perms = rememberPermissions()
+    val notifOk = perms.notifOk
+    val exactOk = perms.exactOk
+    val fullScreenOk = perms.fullScreenOk
+
+    fun save(alarm: Alarm) = actions.save(alarm)
+
+    fun delete(alarm: Alarm) = actions.delete(alarm)
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -191,18 +266,7 @@ internal fun AlarmListScreen(onOpenSettings: () -> Unit = {}) {
         },
         floatingActionButton = {
             ExtendedFloatingActionButton(
-                onClick = {
-                    val s = SettingsRepository.current
-                    editor = EditorState(
-                        Alarm(
-                            AlarmRepository.newId(), 7, 0,
-                            vibrate = s.defaultVibrate,
-                            gentle = s.gentleDefault,
-                            tags = listOfNotNull(tagFilter),
-                        ),
-                        isNew = true,
-                    )
-                },
+                onClick = { editor = EditorState(newAlarm(tagFilter), isNew = true) },
                 icon = { Icon(Icons.Rounded.Add, null) },
                 text = { Text(stringResource(R.string.add)) },
             )
@@ -228,34 +292,24 @@ internal fun AlarmListScreen(onOpenSettings: () -> Unit = {}) {
                     Icons.Rounded.NotificationsOff,
                     stringResource(R.string.perm_notif_title),
                     stringResource(R.string.perm_notif_text),
-                ) {
-                    if (Build.VERSION.SDK_INT >= 33) notifLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-                }
+                    perms.fixNotif,
+                )
             }
             if (!exactOk) item(key = "p_exact") {
                 PermissionCard(
                     Icons.Rounded.Schedule,
                     stringResource(R.string.perm_exact_title),
                     stringResource(R.string.perm_exact_text),
-                ) {
-                    context.startActivity(
-                        Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM, Uri.parse("package:${context.packageName}")),
-                    )
-                }
+                    perms.fixExact,
+                )
             }
             if (!fullScreenOk) item(key = "p_fsi") {
                 PermissionCard(
                     Icons.Rounded.Fullscreen,
                     stringResource(R.string.perm_fsi_title),
                     stringResource(R.string.perm_fsi_text),
-                ) {
-                    context.startActivity(
-                        Intent(
-                            Settings.ACTION_MANAGE_APP_USE_FULL_SCREEN_INTENT,
-                            Uri.parse("package:${context.packageName}"),
-                        ),
-                    )
-                }
+                    perms.fixFullScreen,
+                )
             }
             if (allTags.isNotEmpty()) item(key = "tags") {
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -736,7 +790,7 @@ private fun EditorSwitch(icon: ImageVector, title: String, subtitle: String?, ch
 }
 
 /** «Вторник, 6 октября» / «Tuesday, October 6» — порядок частей по правилам языка. */
-private fun datePattern(locale: java.util.Locale): String {
+internal fun datePattern(locale: java.util.Locale): String {
     val best = DateFormat.getBestDateTimePattern(locale, "EEEEdMMMM")
     return if (best.any { it == ' ' || it == ',' }) best else "EEEE, d MMMM"
 }

@@ -8,6 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
@@ -50,20 +51,42 @@ fun colorSchemeFor(
     )
 }
 
+/** Светлая или тёмная по выбору «Авто / Светлая / Тёмная». */
+@Composable
+private fun darkModeOn(settings: AppSettings): Boolean {
+    val system = isSystemInDarkTheme()
+    return when (settings.darkMode) {
+        DarkMode.SYSTEM -> system
+        DarkMode.LIGHT -> false
+        DarkMode.DARK -> true
+    }
+}
+
+/** Тёмный ли экран сейчас; у тем «Инструмента» вроде «Бумаги» или «Полночи» яркость своя. */
 @Composable
 fun isAppInDarkTheme(): Boolean {
     val settings by SettingsRepository.settings.collectAsStateWithLifecycle()
-    return when (settings.darkMode) {
-        DarkMode.SYSTEM -> isSystemInDarkTheme()
-        DarkMode.LIGHT -> false
-        DarkMode.DARK -> true
+    val dark = darkModeOn(settings)
+    return if (settings.design == Design.INSTRUMENT) {
+        settings.instrumentTheme.palette(dark, settings.amoled).dark
+    } else {
+        dark
     }
 }
 
 @Composable
 fun BudilaTheme(content: @Composable () -> Unit) {
     val settings by SettingsRepository.settings.collectAsStateWithLifecycle()
-    val dark = isAppInDarkTheme()
+    val dark = darkModeOn(settings)
+    if (settings.design == Design.INSTRUMENT) {
+        val palette = settings.instrumentTheme.palette(dark, settings.amoled)
+        val colors = remember(palette) { palette.toColorScheme() }
+        val boot = rememberBoot()
+        CompositionLocalProvider(LocalInstrument provides palette, LocalBoot provides boot) {
+            MaterialTheme(colorScheme = colors, typography = GolosTypography, content = content)
+        }
+        return
+    }
     val context = LocalContext.current
     val colors = remember(settings, dark) {
         colorSchemeFor(context, settings.theme, dark, settings.amoled, settings)

@@ -109,4 +109,32 @@
     <string name="hue">Ton</string>
     <string name="saturation">Doygunluk</string>
     <string name="palette">Palet</string>
+
+    <!-- Дизайн «Инструмент» -->
+    <string name="design_title">Tasarım</string>
+    <string name="design_instrument">Enstrüman</string>
+    <string name="design_material">Material 3</string>
+    <string name="design_desc">Budila\'nın kendi tasarımı: tek renkli gövde, tuşlar ve gömme ekranlar; bir mühendislik hesap makinesi gibi</string>
+    <string name="itheme_classic">Klasik</string>
+    <string name="itheme_paper">Kâğıt</string>
+    <string name="itheme_mint">Nane</string>
+    <string name="itheme_midnight">Gece yarısı</string>
+    <string name="itheme_nord">Nord</string>
+    <string name="itheme_crimson">Kızıl</string>
+    <string name="itheme_amber">Kehribar</string>
+    <string name="theme_title">Tema</string>
+    <string name="mode_title">Mod</string>
+    <string name="legend_next">Sonraki</string>
+    <string name="legend_time">Saat</string>
+    <string name="legend_input">Giriş</string>
+    <string name="legend_ringing">Çalıyor</string>
+    <string name="legend_silence">%1$s sonra susar</string>
+    <string name="legend_attention">Dikkat</string>
+    <string name="legend_alarms">Alarmlar</string>
+    <string name="legend_version">Sürüm</string>
+    <string name="today">bugün</string>
+    <string name="tomorrow">yarın</string>
+    <string name="filter_all_short">Tümü</string>
+    <string name="erase">Sil</string>
+    <string name="empty_text_key">İlkini oluşturmak için + tuşuna basın</string>
 </resources>

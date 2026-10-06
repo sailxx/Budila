@@ -56,8 +56,8 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.IntentCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
-private const val GITHUB_USER = "https://github.com/sailxx"
-private const val GITHUB_REPO = "https://github.com/sailxx/Budila"
+internal const val GITHUB_USER = "https://github.com/sailxx"
+internal const val GITHUB_REPO = "https://github.com/sailxx/Budila"
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
@@ -67,19 +67,9 @@ internal fun SettingsScreen(onBack: () -> Unit) {
     val dark = isAppInDarkTheme()
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
 
-    val ringtoneLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { r ->
-        if (r.resultCode != Activity.RESULT_OK) return@rememberLauncherForActivityResult
-        val uri = r.data?.let {
-            IntentCompat.getParcelableExtra(it, RingtoneManager.EXTRA_RINGTONE_PICKED_URI, Uri::class.java)
-        }
-        SettingsRepository.update {
-            it.copy(ringtone = uri?.takeIf { u -> u != Settings.System.DEFAULT_ALARM_ALERT_URI }?.toString())
-        }
-    }
+    val pickRingtone = rememberRingtonePicker()
     val ringtoneTitle = remember(s.ringtone) { ringtoneTitle(context, s.ringtone) }
-    val version = remember {
-        runCatching { context.packageManager.getPackageInfo(context.packageName, 0).versionName }.getOrNull() ?: ""
-    }
+    val version = rememberAppVersion()
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -100,6 +90,27 @@ internal fun SettingsScreen(onBack: () -> Unit) {
             ),
         ) {
             item { SectionHeader(stringResource(R.string.section_appearance)) }
+            item {
+                ListItem(
+                    headlineContent = { Text(stringResource(R.string.design_title)) },
+                    leadingContent = { Icon(Icons.Rounded.Calculate, null) },
+                    supportingContent = {
+                        Column {
+                            Text(stringResource(R.string.design_desc))
+                            SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth().padding(top = 8.dp)) {
+                                listOf(Design.INSTRUMENT to R.string.design_instrument, Design.MATERIAL to R.string.design_material)
+                                    .forEachIndexed { i, (design, title) ->
+                                        SegmentedButton(
+                                            selected = s.design == design,
+                                            onClick = { SettingsRepository.update { it.copy(design = design) } },
+                                            shape = SegmentedButtonDefaults.itemShape(i, 2),
+                                        ) { Text(stringResource(title), maxLines = 1) }
+                                    }
+                            }
+                        }
+                    },
+                )
+            }
             item {
                 ThemePicker(settings = s, dark = dark) { t ->
                     SettingsRepository.update { it.copy(theme = t) }
@@ -169,18 +180,7 @@ internal fun SettingsScreen(onBack: () -> Unit) {
                     supportingContent = { Text(ringtoneTitle) },
                     leadingContent = { Icon(Icons.Rounded.MusicNote, null) },
                     trailingContent = { Icon(Icons.Rounded.ChevronRight, null) },
-                    modifier = Modifier.clickable {
-                        val current = s.ringtone?.let(Uri::parse) ?: Settings.System.DEFAULT_ALARM_ALERT_URI
-                        ringtoneLauncher.launch(
-                            Intent(RingtoneManager.ACTION_RINGTONE_PICKER)
-                                .putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALARM)
-                                .putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, context.getString(R.string.ringtone_picker_title))
-                                .putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true)
-                                .putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false)
-                                .putExtra(RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI, Settings.System.DEFAULT_ALARM_ALERT_URI)
-                                .putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, current),
-                        )
-                    },
+                    modifier = Modifier.clickable(onClick = pickRingtone),
                 )
             }
             item {
@@ -400,13 +400,48 @@ internal fun AppIcon(modifier: Modifier = Modifier) {
     }
 }
 
-private fun ringtoneTitle(context: Context, uri: String?): String {
+/** Системный выбор мелодии будильника; выбранная сохраняется в настройках. */
+@Composable
+internal fun rememberRingtonePicker(): () -> Unit {
+    val context = LocalContext.current
+    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { r ->
+        if (r.resultCode != Activity.RESULT_OK) return@rememberLauncherForActivityResult
+        val uri = r.data?.let {
+            IntentCompat.getParcelableExtra(it, RingtoneManager.EXTRA_RINGTONE_PICKED_URI, Uri::class.java)
+        }
+        SettingsRepository.update {
+            it.copy(ringtone = uri?.takeIf { u -> u != Settings.System.DEFAULT_ALARM_ALERT_URI }?.toString())
+        }
+    }
+    return {
+        val current = SettingsRepository.current.ringtone?.let(Uri::parse) ?: Settings.System.DEFAULT_ALARM_ALERT_URI
+        launcher.launch(
+            Intent(RingtoneManager.ACTION_RINGTONE_PICKER)
+                .putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALARM)
+                .putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, context.getString(R.string.ringtone_picker_title))
+                .putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true)
+                .putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false)
+                .putExtra(RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI, Settings.System.DEFAULT_ALARM_ALERT_URI)
+                .putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, current),
+        )
+    }
+}
+
+@Composable
+internal fun rememberAppVersion(): String {
+    val context = LocalContext.current
+    return remember {
+        runCatching { context.packageManager.getPackageInfo(context.packageName, 0).versionName }.getOrNull() ?: ""
+    }
+}
+
+internal fun ringtoneTitle(context: Context, uri: String?): String {
     if (uri == null) return context.getString(R.string.ringtone_default)
     return runCatching { RingtoneManager.getRingtone(context, Uri.parse(uri))?.getTitle(context) }
         .getOrNull() ?: context.getString(R.string.ringtone_custom)
 }
 
-private fun openUrl(context: Context, url: String) {
+internal fun openUrl(context: Context, url: String) {
     try {
         context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
     } catch (e: ActivityNotFoundException) {
