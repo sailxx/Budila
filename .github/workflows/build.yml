@@ -17,6 +17,6 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v6
       - name: Тесты и сборка
         run: ./gradlew testDebugUnitTest assembleRelease --no-daemon
