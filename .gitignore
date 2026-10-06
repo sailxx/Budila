@@ -1,0 +1,23 @@
+# Сборка
+build/
+.gradle/
+.kotlin/
+captures/
+*.apk
+*.aab
+
+# Локальные пути и секреты — никогда не коммитить
+local.properties
+keystore.properties
+*.jks
+*.keystore
+*.p12
+*.pem
+.env
+.env.*
+
+# IDE и ОС
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
