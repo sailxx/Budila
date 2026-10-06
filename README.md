@@ -65,6 +65,8 @@
 
 Нужен Android 8.0 или новее. Google Play и аккаунты не нужны.
 
+Budila есть и в [Komi Store](https://github.com/komi-store/komi-store) — магазине приложений из GitHub-релизов: найдите «Budila» в поиске, и Komi Store будет сам предлагать обновления.
+
 <details>
 <summary><b>Собрать из исходников</b></summary>
 
