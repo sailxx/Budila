@@ -143,6 +143,9 @@
 
     <!-- Выбор иконки -->
     <string name="icon_title">App icon</string>
+    <string name="icon_key">Key</string>
+    <string name="icon_key_light">Light</string>
+    <string name="icon_key_dark">Dark</string>
     <string name="icon_orange">Orange</string>
     <string name="icon_black">Black</string>
     <string name="icon_desc">The launcher may take a few seconds to update the icon</string>

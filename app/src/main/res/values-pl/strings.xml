@@ -140,6 +140,9 @@
 
     <!-- Выбор иконки -->
     <string name="icon_title">Ikona</string>
+    <string name="icon_key">Klawisz</string>
+    <string name="icon_key_light">Jasna</string>
+    <string name="icon_key_dark">Ciemna</string>
     <string name="icon_orange">Pomarańczowa</string>
     <string name="icon_black">Czarna</string>
     <string name="icon_desc">Ekran główny zaktualizuje ikonę za kilka sekund</string>

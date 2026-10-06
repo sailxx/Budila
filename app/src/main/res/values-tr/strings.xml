@@ -140,6 +140,9 @@
 
     <!-- Выбор иконки -->
     <string name="icon_title">Simge</string>
+    <string name="icon_key">Tuş</string>
+    <string name="icon_key_light">Açık</string>
+    <string name="icon_key_dark">Koyu</string>
     <string name="icon_orange">Turuncu</string>
     <string name="icon_black">Siyah</string>
     <string name="icon_desc">Ana ekran simgeyi birkaç saniye içinde günceller</string>

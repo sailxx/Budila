@@ -140,6 +140,9 @@
 
     <!-- Выбор иконки -->
     <string name="icon_title">App-Symbol</string>
+    <string name="icon_key">Taste</string>
+    <string name="icon_key_light">Hell</string>
+    <string name="icon_key_dark">Dunkel</string>
     <string name="icon_orange">Orange</string>
     <string name="icon_black">Schwarz</string>
     <string name="icon_desc">Der Startbildschirm aktualisiert das Symbol in wenigen Sekunden</string>

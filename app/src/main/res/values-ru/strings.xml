@@ -140,6 +140,9 @@
 
     <!-- Выбор иконки -->
     <string name="icon_title">Иконка</string>
+    <string name="icon_key">Клавиша</string>
+    <string name="icon_key_light">Светлая</string>
+    <string name="icon_key_dark">Тёмная</string>
     <string name="icon_orange">Оранжевая</string>
     <string name="icon_black">Чёрная</string>
     <string name="icon_desc">Рабочий стол обновит значок через несколько секунд</string>

@@ -140,6 +140,9 @@
 
     <!-- Выбор иконки -->
     <string name="icon_title">Icono</string>
+    <string name="icon_key">Tecla</string>
+    <string name="icon_key_light">Clara</string>
+    <string name="icon_key_dark">Oscura</string>
     <string name="icon_orange">Naranja</string>
     <string name="icon_black">Negro</string>
     <string name="icon_desc">La pantalla de inicio actualizará el icono en unos segundos</string>

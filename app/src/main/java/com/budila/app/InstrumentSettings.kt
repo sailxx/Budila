@@ -6,7 +6,9 @@ import android.os.Build
 import android.provider.Settings
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -111,7 +113,10 @@ internal fun InstrumentSettingsScreen(onBack: () -> Unit) {
             Spacer(Modifier.height(14.dp))
             CasingLegend(stringResource(R.string.icon_title))
             Spacer(Modifier.height(10.dp))
-            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                modifier = Modifier.horizontalScroll(rememberScrollState()).padding(bottom = 6.dp),
+            ) {
                 LauncherIcon.entries.forEach { option ->
                     val selected = option == icon
                     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.width(72.dp)) {

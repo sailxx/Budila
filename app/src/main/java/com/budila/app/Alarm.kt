@@ -114,6 +114,7 @@ class BudilaApp : Application() {
         super.onCreate()
         AlarmRepository.init(this)
         SettingsRepository.init(this)
+        LauncherIcon.normalize(this)
     }
 }
 

@@ -140,6 +140,9 @@
 
     <!-- Выбор иконки -->
     <string name="icon_title">Icona</string>
+    <string name="icon_key">Tasto</string>
+    <string name="icon_key_light">Chiara</string>
+    <string name="icon_key_dark">Scura</string>
     <string name="icon_orange">Arancione</string>
     <string name="icon_black">Nera</string>
     <string name="icon_desc">La schermata Home aggiornerà l’icona tra pochi secondi</string>

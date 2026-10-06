@@ -155,14 +155,16 @@ class ScreensTest {
     @Test fun icon() = shot("0_icon") {
         Row(
             modifier = Modifier.background(Color(0xFFE9E4F0)).padding(24.dp),
-            horizontalArrangement = Arrangement.spacedBy(24.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            AppIcon(Modifier.size(96.dp).clip(CircleShape))
-            AppIcon(Modifier.size(96.dp).clip(RoundedCornerShape(30.dp)))
-            AppIcon(Modifier.size(56.dp).clip(CircleShape))
-            AppIcon(Modifier.size(40.dp).clip(CircleShape))
-            AppIcon(Modifier.size(96.dp).clip(RoundedCornerShape(30.dp)), icon = LauncherIcon.BLACK)
+            // Все иконки на выбор: в квадратной и круглой маске
+            LauncherIcon.entries.forEach { icon ->
+                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    AppIcon(Modifier.size(56.dp).clip(RoundedCornerShape(18.dp)), icon = icon)
+                    AppIcon(Modifier.size(56.dp).clip(CircleShape), icon = icon)
+                }
+            }
         }
     }
 
