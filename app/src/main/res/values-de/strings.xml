@@ -137,4 +137,10 @@
     <string name="filter_all_short">Alle</string>
     <string name="erase">Löschen</string>
     <string name="empty_text_key">Tippe auf +, um den ersten zu erstellen</string>
+
+    <!-- Выбор иконки -->
+    <string name="icon_title">App-Symbol</string>
+    <string name="icon_orange">Orange</string>
+    <string name="icon_black">Schwarz</string>
+    <string name="icon_desc">Der Startbildschirm aktualisiert das Symbol in wenigen Sekunden</string>
 </resources>

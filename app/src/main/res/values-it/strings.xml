@@ -137,4 +137,10 @@
     <string name="filter_all_short">Tutte</string>
     <string name="erase">Cancella</string>
     <string name="empty_text_key">Premi + per creare la prima</string>
+
+    <!-- Выбор иконки -->
+    <string name="icon_title">Icona</string>
+    <string name="icon_orange">Arancione</string>
+    <string name="icon_black">Nera</string>
+    <string name="icon_desc">La schermata Home aggiornerà l’icona tra pochi secondi</string>
 </resources>

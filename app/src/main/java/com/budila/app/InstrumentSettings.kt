@@ -106,6 +106,31 @@ internal fun InstrumentSettingsScreen(onBack: () -> Unit) {
                 }
             }
         }
+        item {
+            val (icon, selectIcon) = rememberLauncherIcon()
+            Spacer(Modifier.height(14.dp))
+            CasingLegend(stringResource(R.string.icon_title))
+            Spacer(Modifier.height(10.dp))
+            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                LauncherIcon.entries.forEach { option ->
+                    val selected = option == icon
+                    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.width(72.dp)) {
+                        Key({ selectIcon(option) }, Modifier.size(72.dp, 64.dp), latched = selected) {
+                            AppIcon(Modifier.size(42.dp).clip(RoundedCornerShape(12.dp)), icon = option)
+                            if (selected) Led(true, Modifier.align(Alignment.TopEnd).padding(5.dp), size = 5.dp)
+                        }
+                        Spacer(Modifier.height(6.dp))
+                        Text(
+                            stringResource(option.title),
+                            style = IType.small.copy(fontSize = 12.5.sp, fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal),
+                            color = if (selected) colors.ink else colors.muted,
+                            maxLines = 1,
+                        )
+                    }
+                }
+            }
+            Text(stringResource(R.string.icon_desc), style = IType.small, color = colors.muted, modifier = Modifier.padding(top = 8.dp, bottom = 4.dp))
+        }
         if (Build.VERSION.SDK_INT >= 33) item {
             val locale = appLocale(context)
             Row_(Icons.Rounded.Language, stringResource(R.string.language), locale.getDisplayName(locale).replaceFirstChar { it.uppercase() }, external = true) {

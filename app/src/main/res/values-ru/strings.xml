@@ -137,4 +137,10 @@
     <string name="filter_all_short">Все</string>
     <string name="erase">Стереть</string>
     <string name="empty_text_key">Нажмите +, чтобы создать первый</string>
+
+    <!-- Выбор иконки -->
+    <string name="icon_title">Иконка</string>
+    <string name="icon_orange">Оранжевая</string>
+    <string name="icon_black">Чёрная</string>
+    <string name="icon_desc">Рабочий стол обновит значок через несколько секунд</string>
 </resources>

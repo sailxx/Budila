@@ -162,6 +162,7 @@ class ScreensTest {
             AppIcon(Modifier.size(96.dp).clip(RoundedCornerShape(30.dp)))
             AppIcon(Modifier.size(56.dp).clip(CircleShape))
             AppIcon(Modifier.size(40.dp).clip(CircleShape))
+            AppIcon(Modifier.size(96.dp).clip(RoundedCornerShape(30.dp)), icon = LauncherIcon.BLACK)
         }
     }
 

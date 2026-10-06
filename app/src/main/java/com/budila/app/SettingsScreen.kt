@@ -159,6 +159,30 @@ internal fun SettingsScreen(onBack: () -> Unit) {
                 ) { v -> SettingsRepository.update { it.copy(amoled = v) } }
             }
 
+            item {
+                val (icon, selectIcon) = rememberLauncherIcon()
+                ListItem(
+                    headlineContent = { Text(stringResource(R.string.icon_title)) },
+                    supportingContent = { Text(stringResource(R.string.icon_desc)) },
+                    leadingContent = { Icon(Icons.Rounded.Apps, null) },
+                    trailingContent = {
+                        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                            LauncherIcon.entries.forEach { option ->
+                                val selected = option == icon
+                                AppIcon(
+                                    Modifier
+                                        .size(44.dp)
+                                        .then(if (selected) Modifier.border(3.dp, MaterialTheme.colorScheme.primary, CircleShape) else Modifier)
+                                        .padding(if (selected) 5.dp else 0.dp)
+                                        .clip(CircleShape)
+                                        .clickable { selectIcon(option) },
+                                    icon = option,
+                                )
+                            }
+                        }
+                    },
+                )
+            }
             if (Build.VERSION.SDK_INT >= 33) item {
                 val locale = appLocale(context)
                 ListItem(
@@ -387,10 +411,12 @@ private fun AboutCard(version: String) {
 
 /** Иконка приложения из слоёв адаптивной иконки (видимая зона — центральные 72 из 108 dp). */
 @Composable
-internal fun AppIcon(modifier: Modifier = Modifier) {
+internal fun AppIcon(modifier: Modifier = Modifier, icon: LauncherIcon? = null) {
+    val context = LocalContext.current
+    val background = (icon ?: LauncherIcon.current(context)).background
     Box(modifier, contentAlignment = Alignment.Center) {
         Image(
-            painterResource(R.drawable.ic_launcher_background), null,
+            painterResource(background), null,
             contentScale = ContentScale.Crop, modifier = Modifier.fillMaxSize(),
         )
         Image(

@@ -137,4 +137,10 @@
     <string name="filter_all_short">Wszystkie</string>
     <string name="erase">Usuń</string>
     <string name="empty_text_key">Naciśnij +, aby utworzyć pierwszy</string>
+
+    <!-- Выбор иконки -->
+    <string name="icon_title">Ikona</string>
+    <string name="icon_orange">Pomarańczowa</string>
+    <string name="icon_black">Czarna</string>
+    <string name="icon_desc">Ekran główny zaktualizuje ikonę za kilka sekund</string>
 </resources>

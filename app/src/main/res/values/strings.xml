@@ -140,4 +140,10 @@
     <string name="filter_all_short">All</string>
     <string name="erase">Erase</string>
     <string name="empty_text_key">Press + to create the first one</string>
+
+    <!-- Выбор иконки -->
+    <string name="icon_title">App icon</string>
+    <string name="icon_orange">Orange</string>
+    <string name="icon_black">Black</string>
+    <string name="icon_desc">The launcher may take a few seconds to update the icon</string>
 </resources>

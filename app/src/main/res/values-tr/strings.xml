@@ -137,4 +137,10 @@
     <string name="filter_all_short">Tümü</string>
     <string name="erase">Sil</string>
     <string name="empty_text_key">İlkini oluşturmak için + tuşuna basın</string>
+
+    <!-- Выбор иконки -->
+    <string name="icon_title">Simge</string>
+    <string name="icon_orange">Turuncu</string>
+    <string name="icon_black">Siyah</string>
+    <string name="icon_desc">Ana ekran simgeyi birkaç saniye içinde günceller</string>
 </resources>

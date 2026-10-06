@@ -137,4 +137,10 @@
     <string name="filter_all_short">Усі</string>
     <string name="erase">Стерти</string>
     <string name="empty_text_key">Натисніть +, щоб створити перший</string>
+
+    <!-- Выбор иконки -->
+    <string name="icon_title">Іконка</string>
+    <string name="icon_orange">Помаранчева</string>
+    <string name="icon_black">Чорна</string>
+    <string name="icon_desc">Робочий стіл оновить значок за кілька секунд</string>
 </resources>

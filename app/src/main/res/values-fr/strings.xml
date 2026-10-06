@@ -137,4 +137,10 @@
     <string name="filter_all_short">Toutes</string>
     <string name="erase">Effacer</string>
     <string name="empty_text_key">Appuyez sur + pour créer la première</string>
+
+    <!-- Выбор иконки -->
+    <string name="icon_title">Icône</string>
+    <string name="icon_orange">Orange</string>
+    <string name="icon_black">Noire</string>
+    <string name="icon_desc">Le lanceur mettra à jour l’icône dans quelques secondes</string>
 </resources>

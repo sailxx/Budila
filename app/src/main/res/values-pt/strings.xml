@@ -137,4 +137,10 @@
     <string name="filter_all_short">Todos</string>
     <string name="erase">Apagar</string>
     <string name="empty_text_key">Toque em + para criar o primeiro</string>
+
+    <!-- Выбор иконки -->
+    <string name="icon_title">Ícone</string>
+    <string name="icon_orange">Laranja</string>
+    <string name="icon_black">Preto</string>
+    <string name="icon_desc">A tela inicial atualizará o ícone em alguns segundos</string>
 </resources>
