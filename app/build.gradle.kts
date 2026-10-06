@@ -15,8 +15,8 @@ android {
         applicationId = "com.budila.app"
         minSdk = 26
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 5
+        versionName = "1.5"
     }
 
     // Ключ подписи хранится вне репозитория; путь и пароли — в keystore.properties (в .gitignore)
@@ -72,6 +72,8 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.material:material-icons-extended")
+    // Палитры Material 3 из одного цвета (для 7 тем)
+    implementation("com.materialkolor:material-kolor:3.0.1")
 
     // Скриншоты экранов на JVM (./gradlew testDebugUnitTest → screenshots/)
     testImplementation("junit:junit:4.13.2")

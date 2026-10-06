@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="days_short">
+        <item>Lun</item><item>Mar</item><item>Mer</item><item>Jeu</item><item>Ven</item><item>Sam</item><item>Dim</item>
+    </string-array>
+    <string-array name="default_tags">
+        <item>Travail</item><item>Études</item><item>Sport</item><item>Médicaments</item><item>Week-end</item>
+    </string-array>
+
+    <string name="repeat_once">Une fois</string>
+    <string name="repeat_every_day">Tous les jours</string>
+    <string name="repeat_weekdays">En semaine</string>
+    <string name="repeat_weekend">Le week-end</string>
+    <string name="until_less_minute">dans moins d’une minute</string>
+    <string name="until_in">dans %1$s</string>
+    <string name="unit_days">%1$d j</string>
+    <string name="unit_hours">%1$d h</string>
+    <string name="unit_minutes">%1$d min</string>
+
+    <string name="channel_ringing">Alarme en cours</string>
+    <string name="alarm_default_label">Alarme</string>
+    <string name="snooze_for">Répéter dans %1$d min</string>
+    <string name="dismiss">Arrêter</string>
+
+    <string name="theme_indigo">Indigo</string>
+    <string name="theme_ocean">Océan</string>
+    <string name="theme_forest">Forêt</string>
+    <string name="theme_sunset">Crépuscule</string>
+    <string name="theme_sakura">Sakura</string>
+    <string name="theme_graphite">Graphite</string>
+    <string name="theme_custom">Perso</string>
+    <string name="dark_system">Auto</string>
+    <string name="dark_light">Clair</string>
+    <string name="dark_dark">Sombre</string>
+    <string name="style_tonal">Calme</string>
+    <string name="style_vibrant">Vive</string>
+    <string name="style_expressive">Expressive</string>
+    <string name="style_neutral">Feutrée</string>
+    <string name="style_fidelity">Fidèle</string>
+    <string name="style_rainbow">Arc-en-ciel</string>
+    <string name="style_fruit">Fruitée</string>
+
+    <string name="msg_will_ring">L’alarme sonnera %1$s</string>
+    <string name="msg_deleted">Alarme supprimée</string>
+    <string name="action_undo">Annuler</string>
+    <string name="settings">Paramètres</string>
+    <string name="add">Ajouter</string>
+    <string name="perm_notif_title">Notifications désactivées</string>
+    <string name="perm_notif_text">Sans elles, l’alarme ne peut pas afficher son écran.</string>
+    <string name="perm_exact_title">Pas d’accès aux alarmes exactes</string>
+    <string name="perm_exact_text">Sans lui, l’alarme peut être en retard.</string>
+    <string name="perm_fsi_title">Pas d’alertes plein écran</string>
+    <string name="perm_fsi_text">Autorisez-les pour que l’alarme s’ouvre sur l’écran de verrouillage.</string>
+    <string name="perm_allow">Autoriser</string>
+    <string name="filter_all">Toutes · %1$d</string>
+    <string name="next_alarm">Prochaine alarme</string>
+    <string name="not_scheduled">Aucune prévue</string>
+    <string name="empty_title">Aucune alarme pour l’instant</string>
+    <string name="empty_text">Appuyez sur « Ajouter » pour créer la première</string>
+
+    <string name="gentle_wake">Réveil en douceur</string>
+    <string name="gentle_wake_desc">Début discret : le volume monte pendant environ une minute, vibration après 30 secondes</string>
+    <string name="color_selected">Sélectionnée</string>
+    <string name="color_none">Sans couleur</string>
+    <string name="editor_new">Nouvelle alarme</string>
+    <string name="editor_edit">Modifier l’alarme</string>
+    <string name="input_mode">Mode de saisie</string>
+    <string name="label_name">Nom</string>
+    <string name="repeat_label">Répéter : %1$s</string>
+    <string name="tags">Étiquettes</string>
+    <string name="tag_custom">Étiquette perso</string>
+    <string name="tag_new">Nouvelle étiquette</string>
+    <string name="tag_add">Ajouter l’étiquette</string>
+    <string name="color">Couleur</string>
+    <string name="vibration">Vibration</string>
+    <string name="delete">Supprimer</string>
+    <string name="cancel">Annuler</string>
+    <string name="save">Enregistrer</string>
+
+    <string name="back">Retour</string>
+    <string name="section_appearance">Apparence</string>
+    <string name="section_ringing">Sonnerie</string>
+    <string name="section_about">À propos</string>
+    <string name="amoled_title">Fond noir</string>
+    <string name="amoled_desc">Noir pur en thème sombre — économise la batterie sur les écrans AMOLED</string>
+    <string name="language">Langue</string>
+    <string name="ringtone">Sonnerie</string>
+    <string name="ringtone_picker_title">Sonnerie d’alarme</string>
+    <string name="ringtone_default">Sonnerie d’alarme par défaut</string>
+    <string name="ringtone_custom">Sonnerie perso</string>
+    <string name="gentle_default_desc">Pour les nouvelles alarmes : début discret, le volume monte pendant environ une minute, vibration après 30 secondes. Désactivable pour chaque alarme</string>
+    <string name="snooze_title">Répéter dans</string>
+    <string name="timeout_title">Se taire sans réponse après</string>
+    <string name="minutes_short">%1$d min</string>
+    <string name="vibrate_default">Vibration pour les nouvelles alarmes</string>
+    <string name="link_source">Code source</string>
+    <string name="link_author">Auteur — sailxx</string>
+    <string name="link_updates">Rechercher des mises à jour</string>
+    <string name="link_updates_desc">Dernière version sur GitHub</string>
+    <string name="link_issue">Signaler un problème</string>
+    <string name="link_issue_desc">Ouvrir une issue sur GitHub</string>
+    <string name="link_star">Mettre une étoile</string>
+    <string name="link_star_desc">Si Budila vous plaît</string>
+    <string name="version">Version %1$s</string>
+    <string name="about_tagline">Un réveil sans pub ni internet</string>
+    <string name="no_browser">Aucun navigateur trouvé</string>
+    <string name="custom_theme">Thème perso</string>
+    <string name="custom_summary">Teinte %1$d° · %2$d%% · %3$s</string>
+    <string name="hue">Teinte</string>
+    <string name="saturation">Saturation</string>
+    <string name="palette">Palette</string>
+</resources>

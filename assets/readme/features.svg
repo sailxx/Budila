@@ -38,31 +38,31 @@
 
   <rect x="586.5" y="110.5" width="253" height="128" rx="14" class="card"/>
   <text x="606" y="140" class="m n">03</text>
-  <text x="606" y="166" class="s t">Мягкое пробуждение</text>
-  <text x="606" y="190" class="m x">Громкость плавно нарастает</text>
-  <text x="606" y="206" class="m x">около 30 секунд, вибрация —</text>
-  <text x="606" y="222" class="m x">по желанию</text>
+  <text x="606" y="166" class="s t">Спокойное пробуждение</text>
+  <text x="606" y="190" class="m x">Тихий старт, громкость растёт</text>
+  <text x="606" y="206" class="m x">около минуты. Включается у</text>
+  <text x="606" y="222" class="m x">каждого будильника отдельно</text>
 </g>
 <g class="f d3">
   <rect x="40.5" y="254.5" width="253" height="128" rx="14" class="card"/>
   <text x="60" y="284" class="m n">04</text>
-  <text x="60" y="310" class="s t">Повтор по дням</text>
-  <text x="60" y="334" class="m x">Будни, выходные, каждый день</text>
-  <text x="60" y="350" class="m x">или любые дни недели одним</text>
-  <text x="60" y="366" class="m x">касанием</text>
+  <text x="60" y="310" class="s t">Теги и цвета</text>
+  <text x="60" y="334" class="m x">Работа, Спорт, свои теги —</text>
+  <text x="60" y="350" class="m x">с фильтром. 10 цветов для</text>
+  <text x="60" y="366" class="m x">карточек будильников</text>
 
   <rect x="313.5" y="254.5" width="253" height="128" rx="14" class="card"/>
   <text x="333" y="284" class="m n">05</text>
-  <text x="333" y="310" class="s t">Отложить на 5 минут</text>
-  <text x="333" y="334" class="m x">С экрана звонка или прямо</text>
-  <text x="333" y="350" class="m x">из уведомления, не</text>
-  <text x="333" y="366" class="m x">разблокируя телефон</text>
+  <text x="333" y="310" class="s t">8 тем и свой цвет</text>
+  <text x="333" y="334" class="m x">Material You, 6 палитр и своя:</text>
+  <text x="333" y="350" class="m x">тон, насыщенность и 7 гамм.</text>
+  <text x="333" y="366" class="m x">Светлая, тёмная, AMOLED</text>
 
   <rect x="586.5" y="254.5" width="253" height="128" rx="14" class="card"/>
   <text x="606" y="284" class="m n">06</text>
-  <text x="606" y="310" class="s t">Не потеряется</text>
-  <text x="606" y="334" class="m x">Будильники восстанавливаются</text>
-  <text x="606" y="350" class="m x">после перезагрузки и смены</text>
-  <text x="606" y="366" class="m x">времени или часового пояса</text>
+  <text x="606" y="310" class="s t">10 языков</text>
+  <text x="606" y="334" class="m x">RU, EN, UK, ES, PT, DE, FR,</text>
+  <text x="606" y="350" class="m x">IT, TR, PL — дата и время</text>
+  <text x="606" y="366" class="m x">по правилам вашего языка</text>
 </g>
 </svg>

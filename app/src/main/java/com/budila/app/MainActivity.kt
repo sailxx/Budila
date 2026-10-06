@@ -11,13 +11,33 @@ import android.os.Bundle
 import android.provider.Settings
 import android.text.format.DateFormat
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
+import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.togetherWith
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.material.icons.automirrored.rounded.Label
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -33,6 +53,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
@@ -50,7 +71,40 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContent { BudilaTheme { AlarmListScreen() } }
+        setContent {
+            BudilaTheme {
+                // Иконки статус-бара подстраиваем под тему приложения, а не системы
+                val dark = isAppInDarkTheme()
+                LaunchedEffect(dark) {
+                    val style = if (dark) {
+                        SystemBarStyle.dark(android.graphics.Color.TRANSPARENT)
+                    } else {
+                        SystemBarStyle.light(android.graphics.Color.TRANSPARENT, android.graphics.Color.TRANSPARENT)
+                    }
+                    enableEdgeToEdge(statusBarStyle = style, navigationBarStyle = style)
+                }
+
+                var settingsOpen by rememberSaveable { mutableStateOf(false) }
+                BackHandler(enabled = settingsOpen) { settingsOpen = false }
+                Surface(color = MaterialTheme.colorScheme.background) {
+                    AnimatedContent(
+                        targetState = settingsOpen,
+                        transitionSpec = {
+                            val dir = if (targetState) 1 else -1
+                            (slideInHorizontally { w -> dir * w / 4 } + fadeIn()) togetherWith
+                                (slideOutHorizontally { w -> -dir * w / 4 } + fadeOut())
+                        },
+                        label = "screen",
+                    ) { open ->
+                        if (open) {
+                            SettingsScreen(onBack = { settingsOpen = false })
+                        } else {
+                            AlarmListScreen(onOpenSettings = { settingsOpen = true })
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -58,19 +112,23 @@ private data class EditorState(val alarm: Alarm, val isNew: Boolean)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun AlarmListScreen() {
+internal fun AlarmListScreen(onOpenSettings: () -> Unit = {}) {
     val context = LocalContext.current
     val alarms by AlarmRepository.alarms.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
     val snackbar = remember { SnackbarHostState() }
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     var editor by remember { mutableStateOf<EditorState?>(null) }
+    var tagFilter by rememberSaveable { mutableStateOf<String?>(null) }
+    val allTags = remember(alarms) { alarms.flatMap { it.tags }.distinct().sorted() }
+    if (tagFilter != null && tagFilter !in allTags) tagFilter = null
+    val shown = if (tagFilter == null) alarms else alarms.filter { tagFilter in it.tags }
 
     var now by remember { mutableStateOf(ZonedDateTime.now()) }
     LaunchedEffect(Unit) {
         while (true) {
             now = ZonedDateTime.now()
-            delay(10_000)
+            delay(1_000 - System.currentTimeMillis() % 1_000)
         }
     }
 
@@ -107,13 +165,13 @@ internal fun AlarmListScreen() {
     fun save(alarm: Alarm) {
         AlarmRepository.upsert(alarm)
         AlarmScheduler.schedule(context, alarm)
-        if (alarm.enabled) showMessage("Будильник прозвенит " + untilText(alarm.nextTrigger()))
+        if (alarm.enabled) showMessage(context.getString(R.string.msg_will_ring, untilText(context, alarm.nextTrigger())))
     }
 
     fun delete(alarm: Alarm) {
         AlarmScheduler.cancel(context, alarm.id)
         AlarmRepository.delete(alarm.id)
-        showMessage("Будильник удалён", "Вернуть") {
+        showMessage(context.getString(R.string.msg_deleted), context.getString(R.string.action_undo)) {
             AlarmRepository.upsert(alarm)
             AlarmScheduler.schedule(context, alarm)
         }
@@ -122,13 +180,31 @@ internal fun AlarmListScreen() {
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            LargeTopAppBar(title = { Text("Budila") }, scrollBehavior = scrollBehavior)
+            TopAppBar(
+                title = { ClockHeader(now) },
+                actions = {
+                    IconButton(onClick = onOpenSettings) { Icon(Icons.Rounded.Settings, stringResource(R.string.settings)) }
+                },
+                expandedHeight = 96.dp,
+                scrollBehavior = scrollBehavior,
+            )
         },
         floatingActionButton = {
             ExtendedFloatingActionButton(
-                onClick = { editor = EditorState(Alarm(AlarmRepository.newId(), 7, 0), isNew = true) },
+                onClick = {
+                    val s = SettingsRepository.current
+                    editor = EditorState(
+                        Alarm(
+                            AlarmRepository.newId(), 7, 0,
+                            vibrate = s.defaultVibrate,
+                            gentle = s.gentleDefault,
+                            tags = listOfNotNull(tagFilter),
+                        ),
+                        isNew = true,
+                    )
+                },
                 icon = { Icon(Icons.Rounded.Add, null) },
-                text = { Text("Добавить") },
+                text = { Text(stringResource(R.string.add)) },
             )
         },
         snackbarHost = { SnackbarHost(snackbar) },
@@ -150,8 +226,8 @@ internal fun AlarmListScreen() {
             if (!notifOk) item(key = "p_notif") {
                 PermissionCard(
                     Icons.Rounded.NotificationsOff,
-                    "Уведомления выключены",
-                    "Без них будильник не сможет показать экран звонка.",
+                    stringResource(R.string.perm_notif_title),
+                    stringResource(R.string.perm_notif_text),
                 ) {
                     if (Build.VERSION.SDK_INT >= 33) notifLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
                 }
@@ -159,8 +235,8 @@ internal fun AlarmListScreen() {
             if (!exactOk) item(key = "p_exact") {
                 PermissionCard(
                     Icons.Rounded.Schedule,
-                    "Нет доступа к точным будильникам",
-                    "Без него будильник может опаздывать.",
+                    stringResource(R.string.perm_exact_title),
+                    stringResource(R.string.perm_exact_text),
                 ) {
                     context.startActivity(
                         Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM, Uri.parse("package:${context.packageName}")),
@@ -170,8 +246,8 @@ internal fun AlarmListScreen() {
             if (!fullScreenOk) item(key = "p_fsi") {
                 PermissionCard(
                     Icons.Rounded.Fullscreen,
-                    "Нет полноэкранных оповещений",
-                    "Разрешите, чтобы будильник открывался поверх экрана блокировки.",
+                    stringResource(R.string.perm_fsi_title),
+                    stringResource(R.string.perm_fsi_text),
                 ) {
                     context.startActivity(
                         Intent(
@@ -181,8 +257,27 @@ internal fun AlarmListScreen() {
                     )
                 }
             }
+            if (allTags.isNotEmpty()) item(key = "tags") {
+                LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    item {
+                        FilterChip(
+                            selected = tagFilter == null,
+                            onClick = { tagFilter = null },
+                            label = { Text(stringResource(R.string.filter_all, alarms.size)) },
+                        )
+                    }
+                    items(allTags) { tag ->
+                        FilterChip(
+                            selected = tagFilter == tag,
+                            onClick = { tagFilter = if (tagFilter == tag) null else tag },
+                            label = { Text("$tag · ${alarms.count { tag in it.tags }}") },
+                            leadingIcon = { Icon(Icons.Rounded.Sell, null, Modifier.size(FilterChipDefaults.IconSize)) },
+                        )
+                    }
+                }
+            }
             if (alarms.isEmpty()) item(key = "empty") { EmptyState() }
-            items(alarms, key = { it.id }) { alarm ->
+            items(shown, key = { it.id }) { alarm ->
                 AlarmCard(
                     alarm = alarm,
                     onToggle = { save(alarm.copy(enabled = it)) },
@@ -196,6 +291,7 @@ internal fun AlarmListScreen() {
     editor?.let { state ->
         AlarmEditorSheet(
             state = state,
+            allTags = (allTags + defaultTags(context)).distinct(),
             onDismiss = { editor = null },
             onSave = { save(it); editor = null },
             onDelete = { delete(state.alarm); editor = null },
@@ -216,15 +312,15 @@ private fun NextAlarmCard(next: ZonedDateTime?, now: ZonedDateTime) {
     ) {
         Row(Modifier.padding(24.dp), verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
-                Text("Следующий будильник", style = MaterialTheme.typography.labelLarge)
+                Text(stringResource(R.string.next_alarm), style = MaterialTheme.typography.labelLarge)
                 Spacer(Modifier.height(4.dp))
                 if (next == null) {
-                    Text("Не запланирован", style = MaterialTheme.typography.headlineSmall)
+                    Text(stringResource(R.string.not_scheduled), style = MaterialTheme.typography.headlineSmall)
                 } else {
-                    val day = next.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale("ru"))
+                    val day = next.dayOfWeek.getDisplayName(TextStyle.SHORT, appLocale(context))
                         .replaceFirstChar { it.uppercase() }
                     Text("$day, ${formatTime(context, next.hour, next.minute)}", style = MaterialTheme.typography.headlineMedium)
-                    Text(untilText(next, now), style = MaterialTheme.typography.bodyMedium)
+                    Text(untilText(context, next, now), style = MaterialTheme.typography.bodyMedium)
                 }
             }
             Icon(
@@ -253,7 +349,7 @@ private fun PermissionCard(icon: ImageVector, title: String, text: String, onFix
                 Text(title, style = MaterialTheme.typography.titleSmall)
                 Text(text, style = MaterialTheme.typography.bodySmall)
             }
-            TextButton(onClick = onFix) { Text("Разрешить") }
+            TextButton(onClick = onFix) { Text(stringResource(R.string.perm_allow)) }
         }
     }
 }
@@ -270,9 +366,9 @@ private fun EmptyState() {
             tint = MaterialTheme.colorScheme.outline,
         )
         Spacer(Modifier.height(16.dp))
-        Text("Пока нет будильников", style = MaterialTheme.typography.titleMedium)
+        Text(stringResource(R.string.empty_title), style = MaterialTheme.typography.titleMedium)
         Text(
-            "Нажмите «Добавить», чтобы создать первый",
+            stringResource(R.string.empty_text),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
@@ -280,12 +376,39 @@ private fun EmptyState() {
 }
 
 @Composable
+private fun ClockHeader(now: ZonedDateTime) {
+    val context = LocalContext.current
+    val date = remember(now.toLocalDate()) {
+        now.format(DateTimeFormatter.ofPattern(datePattern(appLocale(context)), appLocale(context))).replaceFirstChar { it.uppercase() }
+    }
+    Column {
+        Text(
+            formatTime(context, now.hour, now.minute),
+            style = MaterialTheme.typography.headlineLarge,
+            fontWeight = FontWeight.SemiBold,
+        )
+        Text(
+            date,
+            style = MaterialTheme.typography.titleSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+    }
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
 private fun AlarmCard(alarm: Alarm, onToggle: (Boolean) -> Unit, onClick: () -> Unit, modifier: Modifier = Modifier) {
     val context = LocalContext.current
     val colors = MaterialTheme.colorScheme
-    val container by animateColorAsState(
-        if (alarm.enabled) colors.surfaceContainerHigh else colors.surfaceContainerLow, label = "container",
-    )
+    val dark = isAppInDarkTheme()
+    val accent = alarm.color?.let { Color(it) }
+    val base = if (alarm.enabled) colors.surfaceContainerHigh else colors.surfaceContainerLow
+    val tint = when {
+        !alarm.enabled -> 0.10f
+        dark -> 0.32f
+        else -> 0.22f
+    }
+    val container by animateColorAsState(accent?.let { lerp(base, it, tint) } ?: base, label = "container")
     val content = if (alarm.enabled) colors.onSurface else colors.onSurfaceVariant.copy(alpha = 0.6f)
     Card(
         onClick = onClick,
@@ -295,16 +418,35 @@ private fun AlarmCard(alarm: Alarm, onToggle: (Boolean) -> Unit, onClick: () -> 
     ) {
         Row(Modifier.padding(horizontal = 24.dp, vertical = 18.dp), verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        formatTime(context, alarm.hour, alarm.minute),
+                        style = MaterialTheme.typography.displayMedium,
+                        color = content,
+                    )
+                    if (alarm.gentle) {
+                        Spacer(Modifier.width(10.dp))
+                        Icon(
+                            Icons.Rounded.Spa, stringResource(R.string.gentle_wake),
+                            tint = (accent ?: colors.primary).copy(alpha = if (alarm.enabled) 1f else 0.5f),
+                            modifier = Modifier.size(22.dp),
+                        )
+                    }
+                }
                 Text(
-                    formatTime(context, alarm.hour, alarm.minute),
-                    style = MaterialTheme.typography.displayMedium,
-                    color = content,
-                )
-                Text(
-                    listOfNotNull(alarm.label.ifBlank { null }, daysText(alarm.days)).joinToString(" · "),
+                    listOfNotNull(alarm.label.ifBlank { null }, daysText(context, alarm.days)).joinToString(" · "),
                     style = MaterialTheme.typography.bodyMedium,
                     color = colors.onSurfaceVariant,
                 )
+                if (alarm.tags.isNotEmpty()) {
+                    Spacer(Modifier.height(8.dp))
+                    FlowRow(
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        verticalArrangement = Arrangement.spacedBy(6.dp),
+                    ) {
+                        alarm.tags.forEach { TagPill(it, accent) }
+                    }
+                }
             }
             Switch(
                 checked = alarm.enabled,
@@ -312,7 +454,50 @@ private fun AlarmCard(alarm: Alarm, onToggle: (Boolean) -> Unit, onClick: () -> 
                 thumbContent = if (alarm.enabled) {
                     { Icon(Icons.Rounded.Check, null, Modifier.size(SwitchDefaults.IconSize)) }
                 } else null,
+                colors = if (accent != null) {
+                    SwitchDefaults.colors(
+                        checkedTrackColor = accent,
+                        checkedThumbColor = Color.White,
+                        checkedIconColor = accent,
+                    )
+                } else {
+                    SwitchDefaults.colors()
+                },
             )
+        }
+    }
+}
+
+@Composable
+private fun TagPill(tag: String, accent: Color?) {
+    Surface(
+        shape = RoundedCornerShape(8.dp),
+        color = accent?.copy(alpha = 0.25f) ?: MaterialTheme.colorScheme.secondaryContainer,
+        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+    ) {
+        Text(tag, style = MaterialTheme.typography.labelMedium, modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp))
+    }
+}
+
+@Composable
+private fun ColorDot(color: Color?, selected: Boolean, onClick: () -> Unit) {
+    val scheme = MaterialTheme.colorScheme
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .size(36.dp)
+            .clip(CircleShape)
+            .background(color ?: scheme.surfaceContainerHighest)
+            .then(if (color == null) Modifier.border(1.5.dp, scheme.outlineVariant, CircleShape) else Modifier)
+            .clickable(onClick = onClick),
+    ) {
+        when {
+            selected -> Icon(
+                Icons.Rounded.Check, stringResource(R.string.color_selected),
+                tint = if (color == null) scheme.onSurface else Color.White,
+                modifier = Modifier.size(20.dp),
+            )
+            color == null -> Icon(Icons.Rounded.FormatColorReset, stringResource(R.string.color_none), tint = scheme.onSurfaceVariant, modifier = Modifier.size(18.dp))
         }
     }
 }
@@ -321,6 +506,7 @@ private fun AlarmCard(alarm: Alarm, onToggle: (Boolean) -> Unit, onClick: () -> 
 @Composable
 private fun AlarmEditorSheet(
     state: EditorState,
+    allTags: List<String>,
     onDismiss: () -> Unit,
     onSave: (Alarm) -> Unit,
     onDelete: () -> Unit,
@@ -336,6 +522,7 @@ private fun AlarmEditorSheet(
         AlarmEditorContent(
             alarm = state.alarm,
             isNew = state.isNew,
+            allTags = allTags,
             onCancel = { close(onDismiss) },
             onSave = { close { onSave(it) } },
             onDelete = { close(onDelete) },
@@ -343,11 +530,12 @@ private fun AlarmEditorSheet(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 internal fun AlarmEditorContent(
     alarm: Alarm,
     isNew: Boolean,
+    allTags: List<String> = emptyList(),
     onCancel: () -> Unit,
     onSave: (Alarm) -> Unit,
     onDelete: () -> Unit,
@@ -359,97 +547,196 @@ internal fun AlarmEditorContent(
     var label by remember { mutableStateOf(initial.label) }
     var days by remember { mutableIntStateOf(initial.days) }
     var vibrate by remember { mutableStateOf(initial.vibrate) }
+    var gentle by remember { mutableStateOf(initial.gentle) }
+    var tags by remember { mutableStateOf(initial.tags) }
+    var color by remember { mutableStateOf(initial.color) }
+    var addingTag by remember { mutableStateOf(false) }
+    var newTag by remember { mutableStateOf("") }
 
-        Column(
-            Modifier
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = 24.dp)
-                .padding(bottom = 24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
-                Text(
-                    if (isNew) "Новый будильник" else "Изменить будильник",
-                    style = MaterialTheme.typography.titleLarge,
-                    modifier = Modifier.weight(1f),
-                )
-                IconButton(onClick = { keyboardInput = !keyboardInput }) {
-                    Icon(if (keyboardInput) Icons.Rounded.Schedule else Icons.Rounded.Keyboard, "Режим ввода")
-                }
-            }
-            Spacer(Modifier.height(16.dp))
+    fun addTag() {
+        val t = newTag.trim()
+        if (t.isNotEmpty() && t !in tags) tags = tags + t
+        newTag = ""
+        addingTag = false
+    }
 
-            if (keyboardInput) TimeInput(state = timeState) else TimePicker(state = timeState)
-
-            OutlinedTextField(
-                value = label,
-                onValueChange = { label = it },
-                label = { Text("Название") },
-                leadingIcon = { Icon(Icons.Rounded.Label, null) },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
-                modifier = Modifier.fillMaxWidth(),
-            )
-
-            Spacer(Modifier.height(20.dp))
+    Column(
+        Modifier
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 24.dp)
+            .padding(bottom = 24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
             Text(
-                "Повтор: ${daysText(days).lowercase()}",
-                style = MaterialTheme.typography.titleSmall,
+                stringResource(if (isNew) R.string.editor_new else R.string.editor_edit),
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier.weight(1f),
+            )
+            IconButton(onClick = { keyboardInput = !keyboardInput }) {
+                Icon(if (keyboardInput) Icons.Rounded.Schedule else Icons.Rounded.Keyboard, stringResource(R.string.input_mode))
+            }
+        }
+        Spacer(Modifier.height(16.dp))
+
+        if (keyboardInput) TimeInput(state = timeState) else TimePicker(state = timeState)
+
+        OutlinedTextField(
+            value = label,
+            onValueChange = { label = it },
+            label = { Text(stringResource(R.string.label_name)) },
+            leadingIcon = { Icon(Icons.AutoMirrored.Rounded.Label, null) },
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
+            modifier = Modifier.fillMaxWidth(),
+        )
+
+        EditorSection(stringResource(R.string.repeat_label, daysText(context, days)))
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            dayShortNames(context).forEachIndexed { i, name ->
+                val bit = 1 shl i
+                val selected = days and bit != 0
+                Surface(
+                    onClick = { days = days xor bit },
+                    shape = CircleShape,
+                    color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceContainerHighest,
+                    contentColor = if (selected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.size(42.dp),
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Text(name, style = MaterialTheme.typography.labelLarge)
+                    }
+                }
+            }
+        }
+
+        EditorSection(stringResource(R.string.tags))
+        FlowRow(
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            (allTags + tags).distinct().forEach { tag ->
+                val selected = tag in tags
+                FilterChip(
+                    selected = selected,
+                    onClick = { tags = if (selected) tags - tag else tags + tag },
+                    label = { Text(tag) },
+                    leadingIcon = if (selected) {
+                        { Icon(Icons.Rounded.Check, null, Modifier.size(FilterChipDefaults.IconSize)) }
+                    } else null,
+                )
+            }
+            if (!addingTag) {
+                AssistChip(
+                    onClick = { addingTag = true },
+                    label = { Text(stringResource(R.string.tag_custom)) },
+                    leadingIcon = { Icon(Icons.Rounded.Add, null, Modifier.size(AssistChipDefaults.IconSize)) },
+                )
+            }
+        }
+        if (addingTag) {
+            OutlinedTextField(
+                value = newTag,
+                onValueChange = { if (it.length <= 20) newTag = it },
+                label = { Text(stringResource(R.string.tag_new)) },
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(
+                    capitalization = KeyboardCapitalization.Sentences,
+                    imeAction = ImeAction.Done,
+                ),
+                keyboardActions = KeyboardActions(onDone = { addTag() }),
+                trailingIcon = { IconButton(onClick = { addTag() }) { Icon(Icons.Rounded.Check, stringResource(R.string.tag_add)) } },
                 modifier = Modifier.fillMaxWidth(),
             )
-            Spacer(Modifier.height(10.dp))
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                DAY_SHORT.forEachIndexed { i, name ->
-                    val bit = 1 shl i
-                    val selected = days and bit != 0
-                    Surface(
-                        onClick = { days = days xor bit },
-                        shape = CircleShape,
-                        color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceContainerHighest,
-                        contentColor = if (selected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.size(42.dp),
-                    ) {
-                        Box(contentAlignment = Alignment.Center) {
-                            Text(name, style = MaterialTheme.typography.labelLarge)
-                        }
-                    }
+        }
+
+        EditorSection(stringResource(R.string.color))
+        FlowRow(
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            ColorDot(null, color == null) { color = null }
+            ALARM_COLORS.forEach { c -> ColorDot(Color(c), color == c) { color = c } }
+        }
+
+        Spacer(Modifier.height(12.dp))
+        EditorSwitch(
+            Icons.Rounded.Spa, stringResource(R.string.gentle_wake),
+            stringResource(R.string.gentle_wake_desc),
+            gentle,
+        ) { gentle = it }
+        EditorSwitch(Icons.Rounded.Vibration, stringResource(R.string.vibration), null, vibrate) { vibrate = it }
+
+        Spacer(Modifier.height(20.dp))
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
+            if (!isNew) {
+                TextButton(
+                    onClick = onDelete,
+                    colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.error),
+                ) {
+                    Icon(Icons.Rounded.Delete, null)
+                    Spacer(Modifier.width(8.dp))
+                    Text(stringResource(R.string.delete))
                 }
             }
-
-            Spacer(Modifier.height(12.dp))
-            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
-                Icon(Icons.Rounded.Vibration, null)
-                Spacer(Modifier.width(16.dp))
-                Text("Вибрация", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
-                Switch(checked = vibrate, onCheckedChange = { vibrate = it })
-            }
-
-            Spacer(Modifier.height(20.dp))
-            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
-                if (!isNew) {
-                    TextButton(
-                        onClick = onDelete,
-                        colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.error),
-                    ) {
-                        Icon(Icons.Rounded.Delete, null)
-                        Spacer(Modifier.width(8.dp))
-                        Text("Удалить")
-                    }
-                }
-                Spacer(Modifier.weight(1f))
-                TextButton(onClick = onCancel) { Text("Отмена") }
-                Spacer(Modifier.width(8.dp))
-                Button(onClick = {
-                    val result = initial.copy(
+            Spacer(Modifier.weight(1f))
+            TextButton(onClick = onCancel) { Text(stringResource(R.string.cancel)) }
+            Spacer(Modifier.width(8.dp))
+            Button(onClick = {
+                if (addingTag) addTag()
+                onSave(
+                    initial.copy(
                         hour = timeState.hour,
                         minute = timeState.minute,
                         label = label.trim(),
                         days = days,
                         vibrate = vibrate,
+                        gentle = gentle,
+                        tags = tags,
+                        color = color,
                         enabled = true,
-                    )
-                    onSave(result)
-                }) { Text("Сохранить") }
+                    ),
+                )
+            }) { Text(stringResource(R.string.save)) }
+        }
+    }
+}
+
+@Composable
+private fun EditorSection(title: String) {
+    Text(
+        title,
+        style = MaterialTheme.typography.titleSmall,
+        modifier = Modifier.fillMaxWidth().padding(top = 20.dp, bottom = 10.dp),
+    )
+}
+
+@Composable
+private fun EditorSwitch(icon: ImageVector, title: String, subtitle: String?, checked: Boolean, onChange: (Boolean) -> Unit) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(16.dp))
+            .clickable { onChange(!checked) }
+            .padding(vertical = 8.dp),
+    ) {
+        Icon(icon, null)
+        Spacer(Modifier.width(16.dp))
+        Column(Modifier.weight(1f)) {
+            Text(title, style = MaterialTheme.typography.bodyLarge)
+            if (subtitle != null) {
+                Text(subtitle, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
+        Spacer(Modifier.width(12.dp))
+        Switch(checked = checked, onCheckedChange = onChange)
+    }
+}
+
+/** «Вторник, 6 октября» / «Tuesday, October 6» — порядок частей по правилам языка. */
+private fun datePattern(locale: java.util.Locale): String {
+    val best = DateFormat.getBestDateTimePattern(locale, "EEEEdMMMM")
+    return if (best.any { it == ' ' || it == ',' }) best else "EEEE, d MMMM"
 }

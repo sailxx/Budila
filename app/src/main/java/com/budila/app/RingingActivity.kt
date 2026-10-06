@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -56,7 +57,7 @@ class RingingActivity : ComponentActivity() {
             BudilaTheme {
                 val alarm by AlarmService.ringing.collectAsStateWithLifecycle()
                 RingingScreen(
-                    label = alarm?.label?.ifBlank { null } ?: "Будильник",
+                    label = alarm?.label?.ifBlank { null } ?: getString(R.string.alarm_default_label),
                     onSnooze = { AlarmService.snooze(this); finish() },
                     onDismiss = { AlarmService.dismiss(this); finish() },
                 )
@@ -118,7 +119,7 @@ internal fun RingingScreen(label: String, onSnooze: () -> Unit, onDismiss: () ->
                 Button(onClick = onDismiss, modifier = Modifier.fillMaxWidth().height(72.dp)) {
                     Icon(Icons.Rounded.AlarmOff, null)
                     Spacer(Modifier.width(12.dp))
-                    Text("Выключить", style = MaterialTheme.typography.titleLarge)
+                    Text(stringResource(R.string.dismiss), style = MaterialTheme.typography.titleLarge)
                 }
                 FilledTonalButton(
                     onClick = onSnooze,
@@ -130,7 +131,7 @@ internal fun RingingScreen(label: String, onSnooze: () -> Unit, onDismiss: () ->
                 ) {
                     Icon(Icons.Rounded.Snooze, null)
                     Spacer(Modifier.width(12.dp))
-                    Text("Отложить на ${AlarmService.SNOOZE_MINUTES} мин", style = MaterialTheme.typography.titleMedium)
+                    Text(stringResource(R.string.snooze_for, SettingsRepository.current.snoozeMinutes), style = MaterialTheme.typography.titleMedium)
                 }
             }
         }

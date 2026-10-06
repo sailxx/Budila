@@ -16,12 +16,12 @@ import java.time.Duration
 import java.time.LocalTime
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 const val EXTRA_ALARM_ID = "alarm_id"
 const val EXTRA_SNOOZE = "snooze"
 const val ACTION_FIRE = "com.budila.app.FIRE"
 
-val DAY_SHORT = listOf("Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс")
 
 data class Alarm(
     val id: Int,
@@ -32,6 +32,11 @@ data class Alarm(
     val days: Int = 0,
     val enabled: Boolean = true,
     val vibrate: Boolean = true,
+    val tags: List<String> = emptyList(),
+    /** ARGB-цвет карточки; null — цвет темы */
+    val color: Int? = null,
+    /** Спокойное пробуждение: тихий старт, громкость растёт около минуты, вибрация позже */
+    val gentle: Boolean = true,
 ) {
     val isRepeating get() = days != 0
 
@@ -47,6 +52,7 @@ data class Alarm(
     fun toJson(): JSONObject = JSONObject()
         .put("id", id).put("hour", hour).put("minute", minute).put("label", label)
         .put("days", days).put("enabled", enabled).put("vibrate", vibrate)
+        .put("tags", JSONArray(tags)).put("color", color ?: JSONObject.NULL).put("gentle", gentle)
 
     companion object {
         fun fromJson(o: JSONObject) = Alarm(
@@ -57,40 +63,57 @@ data class Alarm(
             days = o.optInt("days"),
             enabled = o.optBoolean("enabled", true),
             vibrate = o.optBoolean("vibrate", true),
+            tags = o.optJSONArray("tags")?.let { a -> (0 until a.length()).map { a.getString(it) } } ?: emptyList(),
+            color = if (o.isNull("color")) null else o.optInt("color"),
+            gentle = o.optBoolean("gentle", true),
         )
     }
 }
 
+/** Палитра цветов для будильников */
+val ALARM_COLORS = listOf(
+    0xFFE53935, 0xFFFB8C00, 0xFFFDD835, 0xFF43A047, 0xFF00897B,
+    0xFF039BE5, 0xFF3949AB, 0xFF8E24AA, 0xFFD81B60, 0xFF6D4C41,
+).map { it.toInt() }
+
+fun dayShortNames(context: Context): List<String> = context.resources.getStringArray(R.array.days_short).toList()
+
+fun defaultTags(context: Context): List<String> = context.resources.getStringArray(R.array.default_tags).toList()
+
 fun formatTime(context: Context, hour: Int, minute: Int): String {
     val pattern = if (DateFormat.is24HourFormat(context)) "HH:mm" else "h:mm a"
-    return LocalTime.of(hour, minute).format(DateTimeFormatter.ofPattern(pattern))
+    return LocalTime.of(hour, minute).format(DateTimeFormatter.ofPattern(pattern, appLocale(context)))
 }
 
-fun daysText(days: Int): String = when (days) {
-    0 -> "Однократно"
-    0b1111111 -> "Каждый день"
-    0b0011111 -> "Будни"
-    0b1100000 -> "Выходные"
-    else -> DAY_SHORT.filterIndexed { i, _ -> days and (1 shl i) != 0 }.joinToString(", ")
+fun appLocale(context: Context): Locale = context.resources.configuration.locales[0]
+
+fun daysText(context: Context, days: Int): String = when (days) {
+    0 -> context.getString(R.string.repeat_once)
+    0b1111111 -> context.getString(R.string.repeat_every_day)
+    0b0011111 -> context.getString(R.string.repeat_weekdays)
+    0b1100000 -> context.getString(R.string.repeat_weekend)
+    else -> dayShortNames(context).filterIndexed { i, _ -> days and (1 shl i) != 0 }.joinToString(", ")
 }
 
-fun untilText(target: ZonedDateTime, now: ZonedDateTime = ZonedDateTime.now()): String {
+fun untilText(context: Context, target: ZonedDateTime, now: ZonedDateTime = ZonedDateTime.now()): String {
     val totalMin = (Duration.between(now, target).toMillis() + 59_999) / 60_000
-    if (totalMin <= 1) return "меньше чем через минуту"
-    val d = totalMin / 1440
-    val h = (totalMin % 1440) / 60
-    val m = totalMin % 60
-    return "через " + listOfNotNull(
-        if (d > 0) "$d д" else null,
-        if (h > 0) "$h ч" else null,
-        if (m > 0) "$m мин" else null,
+    if (totalMin <= 1) return context.getString(R.string.until_less_minute)
+    val d = (totalMin / 1440).toInt()
+    val h = ((totalMin % 1440) / 60).toInt()
+    val m = (totalMin % 60).toInt()
+    val parts = listOfNotNull(
+        if (d > 0) context.getString(R.string.unit_days, d) else null,
+        if (h > 0) context.getString(R.string.unit_hours, h) else null,
+        if (m > 0) context.getString(R.string.unit_minutes, m) else null,
     ).joinToString(" ")
+    return context.getString(R.string.until_in, parts)
 }
 
 class BudilaApp : Application() {
     override fun onCreate() {
         super.onCreate()
         AlarmRepository.init(this)
+        SettingsRepository.init(this)
     }
 }
 

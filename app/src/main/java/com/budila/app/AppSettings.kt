@@ -1,0 +1,110 @@
+package com.budila.app
+
+import android.content.Context
+import android.content.SharedPreferences
+import android.os.Build
+import androidx.annotation.StringRes
+import androidx.compose.ui.graphics.Color
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+
+enum class AppTheme(@StringRes val title: Int, val seed: Color) {
+    DYNAMIC(R.string.theme_material_you, Color(0xFF4F5B92)),
+    INDIGO(R.string.theme_indigo, Color(0xFF4F5B92)),
+    OCEAN(R.string.theme_ocean, Color(0xFF00838F)),
+    FOREST(R.string.theme_forest, Color(0xFF2E7D32)),
+    SUNSET(R.string.theme_sunset, Color(0xFFEF6C00)),
+    SAKURA(R.string.theme_sakura, Color(0xFFD81B60)),
+    GRAPHITE(R.string.theme_graphite, Color(0xFF5F6368)),
+    CUSTOM(R.string.theme_custom, Color(0xFF4F5B92)),
+    ;
+
+    companion object {
+        val dynamicAvailable get() = Build.VERSION.SDK_INT >= 31
+        val available get() = entries.filter { it != DYNAMIC || dynamicAvailable }
+    }
+}
+
+enum class DarkMode(@StringRes val title: Int) {
+    SYSTEM(R.string.dark_system),
+    LIGHT(R.string.dark_light),
+    DARK(R.string.dark_dark),
+}
+
+data class AppSettings(
+    val theme: AppTheme = if (AppTheme.dynamicAvailable) AppTheme.DYNAMIC else AppTheme.INDIGO,
+    val darkMode: DarkMode = DarkMode.SYSTEM,
+    /** Чистый чёрный фон в тёмной теме */
+    val amoled: Boolean = false,
+    /** null — системная мелодия будильника */
+    val ringtone: String? = null,
+    val gentleDefault: Boolean = true,
+    val snoozeMinutes: Int = 5,
+    val timeoutMinutes: Int = 10,
+    val defaultVibrate: Boolean = true,
+    /** Своя тема: тон (0–360), насыщенность и стиль палитры */
+    val customHue: Float = 265f,
+    val customSaturation: Float = 0.6f,
+    val customStyle: CustomStyle = CustomStyle.TonalSpot,
+) {
+    val customSeed get() = Color.hsv(customHue, customSaturation, 0.85f)
+}
+
+enum class CustomStyle(@StringRes val title: Int) {
+    TonalSpot(R.string.style_tonal),
+    Vibrant(R.string.style_vibrant),
+    Expressive(R.string.style_expressive),
+    Neutral(R.string.style_neutral),
+    Fidelity(R.string.style_fidelity),
+    Rainbow(R.string.style_rainbow),
+    FruitSalad(R.string.style_fruit),
+}
+
+object SettingsRepository {
+    private lateinit var prefs: SharedPreferences
+    private val _settings = MutableStateFlow(AppSettings())
+    val settings: StateFlow<AppSettings> = _settings
+    val current get() = _settings.value
+
+    @Synchronized
+    fun init(context: Context) {
+        if (::prefs.isInitialized) return
+        prefs = context.applicationContext.getSharedPreferences("settings", Context.MODE_PRIVATE)
+        val d = AppSettings()
+        val theme = AppTheme.entries.find { it.name == prefs.getString("theme", null) }
+            ?.takeIf { it != AppTheme.DYNAMIC || AppTheme.dynamicAvailable } ?: d.theme
+        _settings.value = AppSettings(
+            theme = theme,
+            darkMode = DarkMode.entries.find { it.name == prefs.getString("darkMode", null) } ?: d.darkMode,
+            amoled = prefs.getBoolean("amoled", d.amoled),
+            ringtone = prefs.getString("ringtone", null),
+            gentleDefault = prefs.getBoolean("gentleDefault", d.gentleDefault),
+            snoozeMinutes = prefs.getInt("snoozeMinutes", d.snoozeMinutes),
+            timeoutMinutes = prefs.getInt("timeoutMinutes", d.timeoutMinutes),
+            defaultVibrate = prefs.getBoolean("defaultVibrate", d.defaultVibrate),
+            customHue = prefs.getFloat("customHue", d.customHue),
+            customSaturation = prefs.getFloat("customSaturation", d.customSaturation),
+            customStyle = CustomStyle.entries.find { it.name == prefs.getString("customStyle", null) } ?: d.customStyle,
+        )
+    }
+
+    @Synchronized
+    fun update(persist: Boolean = true, transform: (AppSettings) -> AppSettings) {
+        val s = transform(_settings.value)
+        _settings.value = s
+        if (!persist || !::prefs.isInitialized) return
+        prefs.edit()
+            .putString("theme", s.theme.name)
+            .putString("darkMode", s.darkMode.name)
+            .putBoolean("amoled", s.amoled)
+            .putString("ringtone", s.ringtone)
+            .putBoolean("gentleDefault", s.gentleDefault)
+            .putInt("snoozeMinutes", s.snoozeMinutes)
+            .putInt("timeoutMinutes", s.timeoutMinutes)
+            .putBoolean("defaultVibrate", s.defaultVibrate)
+            .putFloat("customHue", s.customHue)
+            .putFloat("customSaturation", s.customSaturation)
+            .putString("customStyle", s.customStyle.name)
+            .apply()
+    }
+}

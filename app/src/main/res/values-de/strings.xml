@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="days_short">
+        <item>Mo</item><item>Di</item><item>Mi</item><item>Do</item><item>Fr</item><item>Sa</item><item>So</item>
+    </string-array>
+    <string-array name="default_tags">
+        <item>Arbeit</item><item>Studium</item><item>Sport</item><item>Medikamente</item><item>Wochenende</item>
+    </string-array>
+
+    <string name="repeat_once">Einmalig</string>
+    <string name="repeat_every_day">Jeden Tag</string>
+    <string name="repeat_weekdays">Werktags</string>
+    <string name="repeat_weekend">Am Wochenende</string>
+    <string name="until_less_minute">in weniger als einer Minute</string>
+    <string name="until_in">in %1$s</string>
+    <string name="unit_days">%1$d T.</string>
+    <string name="unit_hours">%1$d Std.</string>
+    <string name="unit_minutes">%1$d Min.</string>
+
+    <string name="channel_ringing">Wecker klingelt</string>
+    <string name="alarm_default_label">Wecker</string>
+    <string name="snooze_for">%1$d Min. schlummern</string>
+    <string name="dismiss">Ausschalten</string>
+
+    <string name="theme_indigo">Indigo</string>
+    <string name="theme_ocean">Ozean</string>
+    <string name="theme_forest">Wald</string>
+    <string name="theme_sunset">Abendrot</string>
+    <string name="theme_sakura">Sakura</string>
+    <string name="theme_graphite">Graphit</string>
+    <string name="theme_custom">Eigenes</string>
+    <string name="dark_system">Auto</string>
+    <string name="dark_light">Hell</string>
+    <string name="dark_dark">Dunkel</string>
+    <string name="style_tonal">Ruhig</string>
+    <string name="style_vibrant">Lebhaft</string>
+    <string name="style_expressive">Ausdrucksstark</string>
+    <string name="style_neutral">Gedämpft</string>
+    <string name="style_fidelity">Originalgetreu</string>
+    <string name="style_rainbow">Regenbogen</string>
+    <string name="style_fruit">Fruchtig</string>
+
+    <string name="msg_will_ring">Wecker klingelt %1$s</string>
+    <string name="msg_deleted">Wecker gelöscht</string>
+    <string name="action_undo">Rückgängig</string>
+    <string name="settings">Einstellungen</string>
+    <string name="add">Hinzufügen</string>
+    <string name="perm_notif_title">Benachrichtigungen sind aus</string>
+    <string name="perm_notif_text">Ohne sie kann der Wecker keinen Klingelbildschirm zeigen.</string>
+    <string name="perm_exact_title">Kein Zugriff auf genaue Wecker</string>
+    <string name="perm_exact_text">Ohne ihn kann sich der Wecker verspäten.</string>
+    <string name="perm_fsi_title">Keine Vollbild-Benachrichtigungen</string>
+    <string name="perm_fsi_text">Erlauben, damit der Wecker über dem Sperrbildschirm erscheint.</string>
+    <string name="perm_allow">Erlauben</string>
+    <string name="filter_all">Alle · %1$d</string>
+    <string name="next_alarm">Nächster Wecker</string>
+    <string name="not_scheduled">Nicht geplant</string>
+    <string name="empty_title">Noch keine Wecker</string>
+    <string name="empty_text">Tippe auf „Hinzufügen“, um den ersten zu erstellen</string>
+
+    <string name="gentle_wake">Sanftes Wecken</string>
+    <string name="gentle_wake_desc">Leiser Start: Die Lautstärke steigt etwa eine Minute lang, Vibration nach 30 Sekunden</string>
+    <string name="color_selected">Ausgewählt</string>
+    <string name="color_none">Keine Farbe</string>
+    <string name="editor_new">Neuer Wecker</string>
+    <string name="editor_edit">Wecker bearbeiten</string>
+    <string name="input_mode">Eingabemodus</string>
+    <string name="label_name">Name</string>
+    <string name="repeat_label">Wiederholen: %1$s</string>
+    <string name="tags">Tags</string>
+    <string name="tag_custom">Eigener Tag</string>
+    <string name="tag_new">Neuer Tag</string>
+    <string name="tag_add">Tag hinzufügen</string>
+    <string name="color">Farbe</string>
+    <string name="vibration">Vibration</string>
+    <string name="delete">Löschen</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="save">Speichern</string>
+
+    <string name="back">Zurück</string>
+    <string name="section_appearance">Darstellung</string>
+    <string name="section_ringing">Klingeln</string>
+    <string name="section_about">Über die App</string>
+    <string name="amoled_title">Schwarzer Hintergrund</string>
+    <string name="amoled_desc">Reines Schwarz im dunklen Design — spart Akku auf AMOLED-Displays</string>
+    <string name="language">Sprache</string>
+    <string name="ringtone">Klingelton</string>
+    <string name="ringtone_picker_title">Weckton</string>
+    <string name="ringtone_default">Standard-Weckton</string>
+    <string name="ringtone_custom">Eigener Ton</string>
+    <string name="gentle_default_desc">Für neue Wecker: leiser Start, die Lautstärke steigt etwa eine Minute lang, Vibration nach 30 Sekunden. Für jeden Wecker einzeln abschaltbar</string>
+    <string name="snooze_title">Schlummern für</string>
+    <string name="timeout_title">Verstummen, wenn unbeantwortet, nach</string>
+    <string name="minutes_short">%1$d Min.</string>
+    <string name="vibrate_default">Vibration bei neuen Weckern</string>
+    <string name="link_source">Quellcode</string>
+    <string name="link_author">Autor — sailxx</string>
+    <string name="link_updates">Nach Updates suchen</string>
+    <string name="link_updates_desc">Neueste Version auf GitHub</string>
+    <string name="link_issue">Problem melden</string>
+    <string name="link_issue_desc">Issue auf GitHub erstellen</string>
+    <string name="link_star">Einen Stern geben</string>
+    <string name="link_star_desc">Wenn dir Budila gefällt</string>
+    <string name="version">Version %1$s</string>
+    <string name="about_tagline">Ein Wecker ohne Werbung und ohne Internet</string>
+    <string name="no_browser">Kein Browser gefunden</string>
+    <string name="custom_theme">Eigenes Design</string>
+    <string name="custom_summary">Farbton %1$d° · %2$d%% · %3$s</string>
+    <string name="hue">Farbton</string>
+    <string name="saturation">Sättigung</string>
+    <string name="palette">Palette</string>
+</resources>

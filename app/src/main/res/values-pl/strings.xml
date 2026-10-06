@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="days_short">
+        <item>Pn</item><item>Wt</item><item>Śr</item><item>Cz</item><item>Pt</item><item>So</item><item>Nd</item>
+    </string-array>
+    <string-array name="default_tags">
+        <item>Praca</item><item>Nauka</item><item>Sport</item><item>Leki</item><item>Weekend</item>
+    </string-array>
+
+    <string name="repeat_once">Jednorazowo</string>
+    <string name="repeat_every_day">Codziennie</string>
+    <string name="repeat_weekdays">Dni robocze</string>
+    <string name="repeat_weekend">Weekendy</string>
+    <string name="until_less_minute">za mniej niż minutę</string>
+    <string name="until_in">za %1$s</string>
+    <string name="unit_days">%1$d d</string>
+    <string name="unit_hours">%1$d godz.</string>
+    <string name="unit_minutes">%1$d min</string>
+
+    <string name="channel_ringing">Dzwoniący alarm</string>
+    <string name="alarm_default_label">Alarm</string>
+    <string name="snooze_for">Drzemka %1$d min</string>
+    <string name="dismiss">Wyłącz</string>
+
+    <string name="theme_indigo">Indygo</string>
+    <string name="theme_ocean">Ocean</string>
+    <string name="theme_forest">Las</string>
+    <string name="theme_sunset">Zachód</string>
+    <string name="theme_sakura">Sakura</string>
+    <string name="theme_graphite">Grafit</string>
+    <string name="theme_custom">Własny</string>
+    <string name="dark_system">Auto</string>
+    <string name="dark_light">Jasny</string>
+    <string name="dark_dark">Ciemny</string>
+    <string name="style_tonal">Spokojna</string>
+    <string name="style_vibrant">Żywa</string>
+    <string name="style_expressive">Wyrazista</string>
+    <string name="style_neutral">Stonowana</string>
+    <string name="style_fidelity">Wierna</string>
+    <string name="style_rainbow">Tęcza</string>
+    <string name="style_fruit">Owocowa</string>
+
+    <string name="msg_will_ring">Alarm zadzwoni %1$s</string>
+    <string name="msg_deleted">Alarm usunięty</string>
+    <string name="action_undo">Cofnij</string>
+    <string name="settings">Ustawienia</string>
+    <string name="add">Dodaj</string>
+    <string name="perm_notif_title">Powiadomienia są wyłączone</string>
+    <string name="perm_notif_text">Bez nich alarm nie pokaże ekranu dzwonienia.</string>
+    <string name="perm_exact_title">Brak dostępu do dokładnych alarmów</string>
+    <string name="perm_exact_text">Bez niego alarm może się spóźniać.</string>
+    <string name="perm_fsi_title">Brak alertów pełnoekranowych</string>
+    <string name="perm_fsi_text">Zezwól, aby alarm otwierał się na ekranie blokady.</string>
+    <string name="perm_allow">Zezwól</string>
+    <string name="filter_all">Wszystkie · %1$d</string>
+    <string name="next_alarm">Następny alarm</string>
+    <string name="not_scheduled">Nie zaplanowano</string>
+    <string name="empty_title">Brak alarmów</string>
+    <string name="empty_text">Dotknij „Dodaj”, aby utworzyć pierwszy</string>
+
+    <string name="gentle_wake">Łagodne budzenie</string>
+    <string name="gentle_wake_desc">Cichy start: głośność rośnie przez około minutę, wibracje po 30 sekundach</string>
+    <string name="color_selected">Wybrany</string>
+    <string name="color_none">Bez koloru</string>
+    <string name="editor_new">Nowy alarm</string>
+    <string name="editor_edit">Edytuj alarm</string>
+    <string name="input_mode">Tryb wprowadzania</string>
+    <string name="label_name">Nazwa</string>
+    <string name="repeat_label">Powtarzaj: %1$s</string>
+    <string name="tags">Tagi</string>
+    <string name="tag_custom">Własny tag</string>
+    <string name="tag_new">Nowy tag</string>
+    <string name="tag_add">Dodaj tag</string>
+    <string name="color">Kolor</string>
+    <string name="vibration">Wibracje</string>
+    <string name="delete">Usuń</string>
+    <string name="cancel">Anuluj</string>
+    <string name="save">Zapisz</string>
+
+    <string name="back">Wstecz</string>
+    <string name="section_appearance">Wygląd</string>
+    <string name="section_ringing">Dzwonienie</string>
+    <string name="section_about">O aplikacji</string>
+    <string name="amoled_title">Czarne tło</string>
+    <string name="amoled_desc">Czysta czerń w ciemnym motywie — oszczędza baterię na ekranach AMOLED</string>
+    <string name="language">Język</string>
+    <string name="ringtone">Dzwonek</string>
+    <string name="ringtone_picker_title">Dzwonek alarmu</string>
+    <string name="ringtone_default">Domyślny dźwięk alarmu</string>
+    <string name="ringtone_custom">Własny dźwięk</string>
+    <string name="gentle_default_desc">Dla nowych alarmów: cichy start, głośność rośnie przez około minutę, wibracje po 30 sekundach. Można wyłączyć dla każdego alarmu</string>
+    <string name="snooze_title">Drzemka na</string>
+    <string name="timeout_title">Ucisz bez odpowiedzi po</string>
+    <string name="minutes_short">%1$d min</string>
+    <string name="vibrate_default">Wibracje w nowych alarmach</string>
+    <string name="link_source">Kod źródłowy</string>
+    <string name="link_author">Autor — sailxx</string>
+    <string name="link_updates">Sprawdź aktualizacje</string>
+    <string name="link_updates_desc">Najnowsze wydanie na GitHubie</string>
+    <string name="link_issue">Zgłoś problem</string>
+    <string name="link_issue_desc">Utwórz issue na GitHubie</string>
+    <string name="link_star">Daj gwiazdkę</string>
+    <string name="link_star_desc">Jeśli lubisz Budila</string>
+    <string name="version">Wersja %1$s</string>
+    <string name="about_tagline">Budzik bez reklam i internetu</string>
+    <string name="no_browser">Nie znaleziono przeglądarki</string>
+    <string name="custom_theme">Własny motyw</string>
+    <string name="custom_summary">Odcień %1$d° · %2$d%% · %3$s</string>
+    <string name="hue">Odcień</string>
+    <string name="saturation">Nasycenie</string>
+    <string name="palette">Paleta</string>
+</resources>

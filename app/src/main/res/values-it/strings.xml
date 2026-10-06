@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="days_short">
+        <item>Lun</item><item>Mar</item><item>Mer</item><item>Gio</item><item>Ven</item><item>Sab</item><item>Dom</item>
+    </string-array>
+    <string-array name="default_tags">
+        <item>Lavoro</item><item>Studio</item><item>Sport</item><item>Medicine</item><item>Weekend</item>
+    </string-array>
+
+    <string name="repeat_once">Una volta</string>
+    <string name="repeat_every_day">Ogni giorno</string>
+    <string name="repeat_weekdays">Giorni feriali</string>
+    <string name="repeat_weekend">Nel weekend</string>
+    <string name="until_less_minute">tra meno di un minuto</string>
+    <string name="until_in">tra %1$s</string>
+    <string name="unit_days">%1$d g</string>
+    <string name="unit_hours">%1$d h</string>
+    <string name="unit_minutes">%1$d min</string>
+
+    <string name="channel_ringing">Sveglia in corso</string>
+    <string name="alarm_default_label">Sveglia</string>
+    <string name="snooze_for">Posticipa %1$d min</string>
+    <string name="dismiss">Spegni</string>
+
+    <string name="theme_indigo">Indaco</string>
+    <string name="theme_ocean">Oceano</string>
+    <string name="theme_forest">Foresta</string>
+    <string name="theme_sunset">Tramonto</string>
+    <string name="theme_sakura">Sakura</string>
+    <string name="theme_graphite">Grafite</string>
+    <string name="theme_custom">Personale</string>
+    <string name="dark_system">Auto</string>
+    <string name="dark_light">Chiaro</string>
+    <string name="dark_dark">Scuro</string>
+    <string name="style_tonal">Calma</string>
+    <string name="style_vibrant">Vivace</string>
+    <string name="style_expressive">Espressiva</string>
+    <string name="style_neutral">Tenue</string>
+    <string name="style_fidelity">Fedele</string>
+    <string name="style_rainbow">Arcobaleno</string>
+    <string name="style_fruit">Fruttata</string>
+
+    <string name="msg_will_ring">La sveglia suonerà %1$s</string>
+    <string name="msg_deleted">Sveglia eliminata</string>
+    <string name="action_undo">Annulla</string>
+    <string name="settings">Impostazioni</string>
+    <string name="add">Aggiungi</string>
+    <string name="perm_notif_title">Notifiche disattivate</string>
+    <string name="perm_notif_text">Senza di esse la sveglia non può mostrare la schermata di chiamata.</string>
+    <string name="perm_exact_title">Nessun accesso alle sveglie esatte</string>
+    <string name="perm_exact_text">Senza, la sveglia potrebbe ritardare.</string>
+    <string name="perm_fsi_title">Nessun avviso a schermo intero</string>
+    <string name="perm_fsi_text">Consentili perché la sveglia si apra sopra la schermata di blocco.</string>
+    <string name="perm_allow">Consenti</string>
+    <string name="filter_all">Tutte · %1$d</string>
+    <string name="next_alarm">Prossima sveglia</string>
+    <string name="not_scheduled">Non programmata</string>
+    <string name="empty_title">Ancora nessuna sveglia</string>
+    <string name="empty_text">Tocca «Aggiungi» per creare la prima</string>
+
+    <string name="gentle_wake">Risveglio dolce</string>
+    <string name="gentle_wake_desc">Avvio silenzioso: il volume sale per circa un minuto, vibrazione dopo 30 secondi</string>
+    <string name="color_selected">Selezionato</string>
+    <string name="color_none">Nessun colore</string>
+    <string name="editor_new">Nuova sveglia</string>
+    <string name="editor_edit">Modifica sveglia</string>
+    <string name="input_mode">Modalità di inserimento</string>
+    <string name="label_name">Nome</string>
+    <string name="repeat_label">Ripeti: %1$s</string>
+    <string name="tags">Tag</string>
+    <string name="tag_custom">Tag personale</string>
+    <string name="tag_new">Nuovo tag</string>
+    <string name="tag_add">Aggiungi tag</string>
+    <string name="color">Colore</string>
+    <string name="vibration">Vibrazione</string>
+    <string name="delete">Elimina</string>
+    <string name="cancel">Annulla</string>
+    <string name="save">Salva</string>
+
+    <string name="back">Indietro</string>
+    <string name="section_appearance">Aspetto</string>
+    <string name="section_ringing">Suoneria</string>
+    <string name="section_about">Informazioni</string>
+    <string name="amoled_title">Sfondo nero</string>
+    <string name="amoled_desc">Nero puro nel tema scuro — risparmia batteria sugli schermi AMOLED</string>
+    <string name="language">Lingua</string>
+    <string name="ringtone">Suoneria</string>
+    <string name="ringtone_picker_title">Suoneria sveglia</string>
+    <string name="ringtone_default">Suoneria sveglia predefinita</string>
+    <string name="ringtone_custom">Suoneria personale</string>
+    <string name="gentle_default_desc">Per le nuove sveglie: avvio silenzioso, il volume sale per circa un minuto, vibrazione dopo 30 secondi. Disattivabile per ogni sveglia</string>
+    <string name="snooze_title">Posticipa di</string>
+    <string name="timeout_title">Tacere se senza risposta dopo</string>
+    <string name="minutes_short">%1$d min</string>
+    <string name="vibrate_default">Vibrazione per le nuove sveglie</string>
+    <string name="link_source">Codice sorgente</string>
+    <string name="link_author">Autore — sailxx</string>
+    <string name="link_updates">Cerca aggiornamenti</string>
+    <string name="link_updates_desc">Ultima versione su GitHub</string>
+    <string name="link_issue">Segnala un problema</string>
+    <string name="link_issue_desc">Apri una issue su GitHub</string>
+    <string name="link_star">Lascia una stella</string>
+    <string name="link_star_desc">Se Budila ti piace</string>
+    <string name="version">Versione %1$s</string>
+    <string name="about_tagline">Una sveglia senza pubblicità né internet</string>
+    <string name="no_browser">Nessun browser trovato</string>
+    <string name="custom_theme">Tema personale</string>
+    <string name="custom_summary">Tonalità %1$d° · %2$d%% · %3$s</string>
+    <string name="hue">Tonalità</string>
+    <string name="saturation">Saturazione</string>
+    <string name="palette">Palette</string>
+</resources>

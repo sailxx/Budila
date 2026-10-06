@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="days_short">
+        <item>Lu</item><item>Ma</item><item>Mi</item><item>Ju</item><item>Vi</item><item>Sá</item><item>Do</item>
+    </string-array>
+    <string-array name="default_tags">
+        <item>Trabajo</item><item>Estudios</item><item>Deporte</item><item>Medicinas</item><item>Fin de semana</item>
+    </string-array>
+
+    <string name="repeat_once">Una vez</string>
+    <string name="repeat_every_day">Todos los días</string>
+    <string name="repeat_weekdays">Entre semana</string>
+    <string name="repeat_weekend">Fines de semana</string>
+    <string name="until_less_minute">en menos de un minuto</string>
+    <string name="until_in">en %1$s</string>
+    <string name="unit_days">%1$d d</string>
+    <string name="unit_hours">%1$d h</string>
+    <string name="unit_minutes">%1$d min</string>
+
+    <string name="channel_ringing">Alarma sonando</string>
+    <string name="alarm_default_label">Alarma</string>
+    <string name="snooze_for">Posponer %1$d min</string>
+    <string name="dismiss">Apagar</string>
+
+    <string name="theme_indigo">Índigo</string>
+    <string name="theme_ocean">Océano</string>
+    <string name="theme_forest">Bosque</string>
+    <string name="theme_sunset">Atardecer</string>
+    <string name="theme_sakura">Sakura</string>
+    <string name="theme_graphite">Grafito</string>
+    <string name="theme_custom">Propio</string>
+    <string name="dark_system">Auto</string>
+    <string name="dark_light">Claro</string>
+    <string name="dark_dark">Oscuro</string>
+    <string name="style_tonal">Tranquila</string>
+    <string name="style_vibrant">Vibrante</string>
+    <string name="style_expressive">Expresiva</string>
+    <string name="style_neutral">Apagada</string>
+    <string name="style_fidelity">Fiel</string>
+    <string name="style_rainbow">Arcoíris</string>
+    <string name="style_fruit">Frutal</string>
+
+    <string name="msg_will_ring">La alarma sonará %1$s</string>
+    <string name="msg_deleted">Alarma eliminada</string>
+    <string name="action_undo">Deshacer</string>
+    <string name="settings">Ajustes</string>
+    <string name="add">Añadir</string>
+    <string name="perm_notif_title">Notificaciones desactivadas</string>
+    <string name="perm_notif_text">Sin ellas la alarma no puede mostrar su pantalla.</string>
+    <string name="perm_exact_title">Sin acceso a alarmas exactas</string>
+    <string name="perm_exact_text">Sin él la alarma puede retrasarse.</string>
+    <string name="perm_fsi_title">Sin alertas a pantalla completa</string>
+    <string name="perm_fsi_text">Permítelas para que la alarma se abra sobre la pantalla de bloqueo.</string>
+    <string name="perm_allow">Permitir</string>
+    <string name="filter_all">Todas · %1$d</string>
+    <string name="next_alarm">Próxima alarma</string>
+    <string name="not_scheduled">Sin programar</string>
+    <string name="empty_title">Aún no hay alarmas</string>
+    <string name="empty_text">Pulsa «Añadir» para crear la primera</string>
+
+    <string name="gentle_wake">Despertar suave</string>
+    <string name="gentle_wake_desc">Inicio silencioso: el volumen sube durante un minuto, vibración a los 30 segundos</string>
+    <string name="color_selected">Seleccionado</string>
+    <string name="color_none">Sin color</string>
+    <string name="editor_new">Nueva alarma</string>
+    <string name="editor_edit">Editar alarma</string>
+    <string name="input_mode">Modo de entrada</string>
+    <string name="label_name">Nombre</string>
+    <string name="repeat_label">Repetir: %1$s</string>
+    <string name="tags">Etiquetas</string>
+    <string name="tag_custom">Etiqueta propia</string>
+    <string name="tag_new">Nueva etiqueta</string>
+    <string name="tag_add">Añadir etiqueta</string>
+    <string name="color">Color</string>
+    <string name="vibration">Vibración</string>
+    <string name="delete">Eliminar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="save">Guardar</string>
+
+    <string name="back">Atrás</string>
+    <string name="section_appearance">Apariencia</string>
+    <string name="section_ringing">Sonido</string>
+    <string name="section_about">Acerca de</string>
+    <string name="amoled_title">Fondo negro</string>
+    <string name="amoled_desc">Negro puro en el tema oscuro: ahorra batería en pantallas AMOLED</string>
+    <string name="language">Idioma</string>
+    <string name="ringtone">Tono</string>
+    <string name="ringtone_picker_title">Tono de alarma</string>
+    <string name="ringtone_default">Tono de alarma predeterminado</string>
+    <string name="ringtone_custom">Tono propio</string>
+    <string name="gentle_default_desc">Para nuevas alarmas: inicio silencioso, el volumen sube durante un minuto, vibración a los 30 segundos. Se puede desactivar en cada alarma</string>
+    <string name="snooze_title">Posponer</string>
+    <string name="timeout_title">Silenciar si no respondes tras</string>
+    <string name="minutes_short">%1$d min</string>
+    <string name="vibrate_default">Vibración en alarmas nuevas</string>
+    <string name="link_source">Código fuente</string>
+    <string name="link_author">Autor — sailxx</string>
+    <string name="link_updates">Buscar actualizaciones</string>
+    <string name="link_updates_desc">Última versión en GitHub</string>
+    <string name="link_issue">Informar de un problema</string>
+    <string name="link_issue_desc">Crear un issue en GitHub</string>
+    <string name="link_star">Dar una estrella</string>
+    <string name="link_star_desc">Si te gusta Budila</string>
+    <string name="version">Versión %1$s</string>
+    <string name="about_tagline">Un despertador sin anuncios ni internet</string>
+    <string name="no_browser">No se encontró un navegador</string>
+    <string name="custom_theme">Tema propio</string>
+    <string name="custom_summary">Tono %1$d° · %2$d%% · %3$s</string>
+    <string name="hue">Tono</string>
+    <string name="saturation">Saturación</string>
+    <string name="palette">Gama</string>
+</resources>

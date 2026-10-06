@@ -1,55 +1,72 @@
 package com.budila.app
 
+import android.content.Context
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.materialkolor.PaletteStyle
+import com.materialkolor.dynamicColorScheme
 
-private val LightColors = lightColorScheme(
-    primary = Color(0xFF4F5B92),
-    onPrimary = Color(0xFFFFFFFF),
-    primaryContainer = Color(0xFFDDE1FF),
-    onPrimaryContainer = Color(0xFF071452),
-    secondary = Color(0xFF5A5D72),
-    secondaryContainer = Color(0xFFDFE1F9),
-    onSecondaryContainer = Color(0xFF171B2C),
-    tertiary = Color(0xFF75546F),
-    tertiaryContainer = Color(0xFFFFD7F5),
-    onTertiaryContainer = Color(0xFF2C122A),
-    background = Color(0xFFFBF8FF),
-    surface = Color(0xFFFBF8FF),
-)
+/** Палитра Material 3 для темы: из обоев (Material You) или построенная из цвета темы. */
+fun colorSchemeFor(
+    context: Context,
+    theme: AppTheme,
+    dark: Boolean,
+    amoled: Boolean,
+    settings: AppSettings = SettingsRepository.current,
+): ColorScheme {
+    if (theme == AppTheme.DYNAMIC && Build.VERSION.SDK_INT >= 31) {
+        val base = if (dark) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        return if (dark && amoled) {
+            base.copy(
+                background = Color.Black,
+                surface = Color.Black,
+                surfaceContainerLowest = Color.Black,
+                surfaceContainerLow = Color(0xFF0B0B0D),
+                surfaceContainer = Color(0xFF111114),
+            )
+        } else {
+            base
+        }
+    }
+    return dynamicColorScheme(
+        seedColor = if (theme == AppTheme.CUSTOM) settings.customSeed else theme.seed,
+        isDark = dark,
+        isAmoled = amoled,
+        style = when (theme) {
+            AppTheme.GRAPHITE -> PaletteStyle.Monochrome
+            AppTheme.CUSTOM -> PaletteStyle.valueOf(settings.customStyle.name)
+            else -> PaletteStyle.TonalSpot
+        },
+    )
+}
 
-private val DarkColors = darkColorScheme(
-    primary = Color(0xFFB8C4FF),
-    onPrimary = Color(0xFF202C61),
-    primaryContainer = Color(0xFF374379),
-    onPrimaryContainer = Color(0xFFDDE1FF),
-    secondary = Color(0xFFC3C5DD),
-    secondaryContainer = Color(0xFF424659),
-    onSecondaryContainer = Color(0xFFDFE1F9),
-    tertiary = Color(0xFFE4BAD9),
-    tertiaryContainer = Color(0xFF5C3D57),
-    onTertiaryContainer = Color(0xFFFFD7F5),
-    background = Color(0xFF121318),
-    surface = Color(0xFF121318),
-)
+@Composable
+fun isAppInDarkTheme(): Boolean {
+    val settings by SettingsRepository.settings.collectAsStateWithLifecycle()
+    return when (settings.darkMode) {
+        DarkMode.SYSTEM -> isSystemInDarkTheme()
+        DarkMode.LIGHT -> false
+        DarkMode.DARK -> true
+    }
+}
 
-/** Material 3 тема: на Android 12+ берёт цвета из обоев (Material You). */
 @Composable
 fun BudilaTheme(content: @Composable () -> Unit) {
-    val dark = isSystemInDarkTheme()
+    val settings by SettingsRepository.settings.collectAsStateWithLifecycle()
+    val dark = isAppInDarkTheme()
     val context = LocalContext.current
-    val colors = when {
-        Build.VERSION.SDK_INT >= 31 -> if (dark) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        dark -> DarkColors
-        else -> LightColors
+    val colors = remember(settings, dark) {
+        colorSchemeFor(context, settings.theme, dark, settings.amoled, settings)
     }
     MaterialTheme(colorScheme = colors, content = content)
 }

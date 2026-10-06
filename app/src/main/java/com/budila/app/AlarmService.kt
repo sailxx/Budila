@@ -11,6 +11,7 @@ import android.content.pm.ServiceInfo
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
@@ -28,12 +29,11 @@ import java.time.LocalTime
 class AlarmService : Service() {
 
     companion object {
-        const val SNOOZE_MINUTES = 5
         private const val ACTION_DISMISS = "com.budila.app.DISMISS"
         private const val ACTION_SNOOZE = "com.budila.app.SNOOZE"
         private const val CHANNEL_ID = "alarm_ringing"
         private const val NOTIFICATION_ID = 42
-        private const val TIMEOUT_MS = 10 * 60_000L
+        private const val GENTLE_VIBRATION_DELAY_MS = 30_000L
 
         /** Будильник, который звонит прямо сейчас (null — тишина). */
         val ringing = MutableStateFlow<Alarm?>(null)
@@ -61,11 +61,12 @@ class AlarmService : Service() {
     private val handler = Handler(Looper.getMainLooper())
     private val timeout = Runnable { stopRinging() }
     private var volume = 0.1f
+    private val timeoutMs get() = SettingsRepository.current.timeoutMinutes * 60_000L
     private val rampUp = object : Runnable {
         override fun run() {
-            volume = (volume + 0.05f).coerceAtMost(1f)
+            volume = (volume + 0.03f).coerceAtMost(1f)
             player?.setVolume(volume, volume)
-            if (volume < 1f) handler.postDelayed(this, 1500)
+            if (volume < 1f) handler.postDelayed(this, 2_000)
         }
     }
 
@@ -77,13 +78,14 @@ class AlarmService : Service() {
             ACTION_SNOOZE -> {
                 ringing.value?.let {
                     AlarmScheduler.scheduleAt(
-                        this, it.id, System.currentTimeMillis() + SNOOZE_MINUTES * 60_000L, snooze = true,
+                        this, it.id, System.currentTimeMillis() + SettingsRepository.current.snoozeMinutes * 60_000L, snooze = true,
                     )
                 }
                 stopRinging()
             }
             else -> {
                 AlarmRepository.init(this)
+                SettingsRepository.init(this)
                 val id = intent?.getIntExtra(EXTRA_ALARM_ID, -1) ?: -1
                 val now = LocalTime.now()
                 val alarm = AlarmRepository.get(id) ?: Alarm(id, now.hour, now.minute)
@@ -95,6 +97,7 @@ class AlarmService : Service() {
 
     private fun startRinging(alarm: Alarm) {
         stopSound()
+        handler.removeCallbacksAndMessages(null)
         ringing.value = alarm
         ServiceCompat.startForeground(
             this, NOTIFICATION_ID, buildNotification(alarm),
@@ -103,21 +106,24 @@ class AlarmService : Service() {
         if (wakeLock?.isHeld != true) {
             wakeLock = getSystemService(PowerManager::class.java)
                 .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "budila:ringing")
-                .apply { acquire(TIMEOUT_MS + 5_000) }
+                .apply { acquire(timeoutMs + 5_000) }
         }
-        playSound()
-        if (alarm.vibrate) vibrate()
+        playSound(alarm.gentle)
+        if (alarm.vibrate) {
+            if (alarm.gentle) handler.postDelayed({ vibrate() }, GENTLE_VIBRATION_DELAY_MS) else vibrate()
+        }
         handler.removeCallbacks(timeout)
-        handler.postDelayed(timeout, TIMEOUT_MS)
+        handler.postDelayed(timeout, timeoutMs)
     }
 
-    private fun playSound() {
+    private fun playSound(gentle: Boolean) {
         val uris = listOfNotNull(
+            SettingsRepository.current.ringtone?.let(Uri::parse),
             RingtoneManager.getActualDefaultRingtoneUri(this, RingtoneManager.TYPE_ALARM),
             RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE),
             RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION),
         )
-        volume = 0.1f
+        volume = if (gentle) 0.02f else 1f
         for (uri in uris) {
             val mp = MediaPlayer()
             try {
@@ -175,7 +181,7 @@ class AlarmService : Service() {
     private fun buildNotification(alarm: Alarm): Notification {
         val nm = getSystemService(NotificationManager::class.java)
         nm.createNotificationChannel(
-            NotificationChannel(CHANNEL_ID, "Звонок будильника", NotificationManager.IMPORTANCE_HIGH).apply {
+            NotificationChannel(CHANNEL_ID, getString(R.string.channel_ringing), NotificationManager.IMPORTANCE_HIGH).apply {
                 setSound(null, null)
                 enableVibration(false)
                 lockscreenVisibility = Notification.VISIBILITY_PUBLIC
@@ -196,7 +202,7 @@ class AlarmService : Service() {
         )
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_alarm)
-            .setContentTitle(alarm.label.ifBlank { "Будильник" })
+            .setContentTitle(alarm.label.ifBlank { getString(R.string.alarm_default_label) })
             .setContentText(formatTime(this, alarm.hour, alarm.minute))
             .setCategory(NotificationCompat.CATEGORY_ALARM)
             .setPriority(NotificationCompat.PRIORITY_MAX)
@@ -204,8 +210,8 @@ class AlarmService : Service() {
             .setOngoing(true)
             .setFullScreenIntent(fullScreen, true)
             .setContentIntent(fullScreen)
-            .addAction(0, "Отложить на $SNOOZE_MINUTES мин", snooze)
-            .addAction(0, "Выключить", dismiss)
+            .addAction(0, getString(R.string.snooze_for, SettingsRepository.current.snoozeMinutes), snooze)
+            .addAction(0, getString(R.string.dismiss), dismiss)
             .build()
     }
 }

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="days_short">
+        <item>Пн</item><item>Вт</item><item>Ср</item><item>Чт</item><item>Пт</item><item>Сб</item><item>Нд</item>
+    </string-array>
+    <string-array name="default_tags">
+        <item>Робота</item><item>Навчання</item><item>Спорт</item><item>Ліки</item><item>Вихідні</item>
+    </string-array>
+
+    <string name="repeat_once">Одноразово</string>
+    <string name="repeat_every_day">Щодня</string>
+    <string name="repeat_weekdays">Будні</string>
+    <string name="repeat_weekend">Вихідні</string>
+    <string name="until_less_minute">менш ніж за хвилину</string>
+    <string name="until_in">через %1$s</string>
+    <string name="unit_days">%1$d д</string>
+    <string name="unit_hours">%1$d год</string>
+    <string name="unit_minutes">%1$d хв</string>
+
+    <string name="channel_ringing">Дзвінок будильника</string>
+    <string name="alarm_default_label">Будильник</string>
+    <string name="snooze_for">Відкласти на %1$d хв</string>
+    <string name="dismiss">Вимкнути</string>
+
+    <string name="theme_indigo">Індиго</string>
+    <string name="theme_ocean">Океан</string>
+    <string name="theme_forest">Ліс</string>
+    <string name="theme_sunset">Захід</string>
+    <string name="theme_sakura">Сакура</string>
+    <string name="theme_graphite">Графіт</string>
+    <string name="theme_custom">Своя</string>
+    <string name="dark_system">Авто</string>
+    <string name="dark_light">Світла</string>
+    <string name="dark_dark">Темна</string>
+    <string name="style_tonal">Спокійна</string>
+    <string name="style_vibrant">Яскрава</string>
+    <string name="style_expressive">Виразна</string>
+    <string name="style_neutral">Приглушена</string>
+    <string name="style_fidelity">Точна</string>
+    <string name="style_rainbow">Веселка</string>
+    <string name="style_fruit">Фруктова</string>
+
+    <string name="msg_will_ring">Будильник задзвонить %1$s</string>
+    <string name="msg_deleted">Будильник видалено</string>
+    <string name="action_undo">Повернути</string>
+    <string name="settings">Налаштування</string>
+    <string name="add">Додати</string>
+    <string name="perm_notif_title">Сповіщення вимкнено</string>
+    <string name="perm_notif_text">Без них будильник не зможе показати екран дзвінка.</string>
+    <string name="perm_exact_title">Немає доступу до точних будильників</string>
+    <string name="perm_exact_text">Без нього будильник може запізнюватися.</string>
+    <string name="perm_fsi_title">Немає повноекранних сповіщень</string>
+    <string name="perm_fsi_text">Дозвольте, щоб будильник відкривався поверх екрана блокування.</string>
+    <string name="perm_allow">Дозволити</string>
+    <string name="filter_all">Усі · %1$d</string>
+    <string name="next_alarm">Наступний будильник</string>
+    <string name="not_scheduled">Не заплановано</string>
+    <string name="empty_title">Поки немає будильників</string>
+    <string name="empty_text">Натисніть «Додати», щоб створити перший</string>
+
+    <string name="gentle_wake">Спокійне пробудження</string>
+    <string name="gentle_wake_desc">Тихий старт: гучність зростає близько хвилини, вібрація — через 30 секунд</string>
+    <string name="color_selected">Вибрано</string>
+    <string name="color_none">Без кольору</string>
+    <string name="editor_new">Новий будильник</string>
+    <string name="editor_edit">Змінити будильник</string>
+    <string name="input_mode">Режим введення</string>
+    <string name="label_name">Назва</string>
+    <string name="repeat_label">Повтор: %1$s</string>
+    <string name="tags">Теги</string>
+    <string name="tag_custom">Свій тег</string>
+    <string name="tag_new">Новий тег</string>
+    <string name="tag_add">Додати тег</string>
+    <string name="color">Колір</string>
+    <string name="vibration">Вібрація</string>
+    <string name="delete">Видалити</string>
+    <string name="cancel">Скасувати</string>
+    <string name="save">Зберегти</string>
+
+    <string name="back">Назад</string>
+    <string name="section_appearance">Оформлення</string>
+    <string name="section_ringing">Дзвінок</string>
+    <string name="section_about">Про застосунок</string>
+    <string name="amoled_title">Чорний фон</string>
+    <string name="amoled_desc">Глибокий чорний у темній темі — заощаджує заряд на AMOLED-екранах</string>
+    <string name="language">Мова</string>
+    <string name="ringtone">Мелодія</string>
+    <string name="ringtone_picker_title">Мелодія будильника</string>
+    <string name="ringtone_default">Мелодія будильника за замовчуванням</string>
+    <string name="ringtone_custom">Своя мелодія</string>
+    <string name="gentle_default_desc">Для нових будильників: тихий старт, гучність зростає близько хвилини, вібрація — через 30 секунд. Можна вимкнути для кожного будильника окремо</string>
+    <string name="snooze_title">Відкласти на</string>
+    <string name="timeout_title">Затихнути, якщо не відповіли, через</string>
+    <string name="minutes_short">%1$d хв</string>
+    <string name="vibrate_default">Вібрація в нових будильниках</string>
+    <string name="link_source">Вихідний код</string>
+    <string name="link_author">Автор — sailxx</string>
+    <string name="link_updates">Перевірити оновлення</string>
+    <string name="link_updates_desc">Останній реліз на GitHub</string>
+    <string name="link_issue">Повідомити про проблему</string>
+    <string name="link_issue_desc">Створити issue на GitHub</string>
+    <string name="link_star">Поставити зірку</string>
+    <string name="link_star_desc">Якщо вам подобається Budila</string>
+    <string name="version">Версія %1$s</string>
+    <string name="about_tagline">Будильник без реклами та інтернету</string>
+    <string name="no_browser">Браузер не знайдено</string>
+    <string name="custom_theme">Своя тема</string>
+    <string name="custom_summary">Тон %1$d° · %2$d%% · %3$s</string>
+    <string name="hue">Тон</string>
+    <string name="saturation">Насиченість</string>
+    <string name="palette">Гама</string>
+</resources>
