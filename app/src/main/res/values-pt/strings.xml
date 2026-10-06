@@ -140,10 +140,7 @@
 
     <!-- Выбор иконки -->
     <string name="icon_title">Ícone</string>
-    <string name="icon_key">Tecla</string>
-    <string name="icon_key_light">Clara</string>
-    <string name="icon_key_dark">Escura</string>
     <string name="icon_orange">Laranja</string>
-    <string name="icon_black">Preto</string>
+    <string name="icon_white">Branco</string>
     <string name="icon_desc">A tela inicial atualizará o ícone em alguns segundos</string>
 </resources>

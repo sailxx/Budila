@@ -140,10 +140,7 @@
 
     <!-- Выбор иконки -->
     <string name="icon_title">Іконка</string>
-    <string name="icon_key">Клавіша</string>
-    <string name="icon_key_light">Світла</string>
-    <string name="icon_key_dark">Темна</string>
     <string name="icon_orange">Помаранчева</string>
-    <string name="icon_black">Чорна</string>
+    <string name="icon_white">Біла</string>
     <string name="icon_desc">Робочий стіл оновить значок за кілька секунд</string>
 </resources>

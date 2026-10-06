@@ -18,7 +18,7 @@
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="false"
-        android:icon="@mipmap/ic_launcher_key"
+        android:icon="@mipmap/ic_launcher_segments"
         android:label="@string/app_name"
         android:localeConfig="@xml/locales_config"
         android:supportsRtl="true"
@@ -31,10 +31,10 @@
 
         <!-- Ярлыки с разными иконками; включён ровно один (выбор в настройках, см. LauncherIcon) -->
         <activity-alias
-            android:name=".LauncherKey"
+            android:name=".LauncherSegments"
             android:enabled="true"
             android:exported="true"
-            android:icon="@mipmap/ic_launcher_key"
+            android:icon="@mipmap/ic_launcher_segments"
             android:targetActivity=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,46 +43,10 @@
         </activity-alias>
 
         <activity-alias
-            android:name=".LauncherKeyLight"
+            android:name=".LauncherSegmentsWhite"
             android:enabled="false"
             android:exported="true"
-            android:icon="@mipmap/ic_launcher_key_light"
-            android:targetActivity=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity-alias>
-
-        <activity-alias
-            android:name=".LauncherKeyDark"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@mipmap/ic_launcher_key_dark"
-            android:targetActivity=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity-alias>
-
-        <activity-alias
-            android:name=".LauncherOrange"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@mipmap/ic_launcher"
-            android:targetActivity=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity-alias>
-
-        <activity-alias
-            android:name=".LauncherBlack"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@mipmap/ic_launcher_black"
+            android:icon="@mipmap/ic_launcher_segments_white"
             android:targetActivity=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

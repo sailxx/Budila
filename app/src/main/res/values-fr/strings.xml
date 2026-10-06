@@ -140,10 +140,7 @@
 
     <!-- Выбор иконки -->
     <string name="icon_title">Icône</string>
-    <string name="icon_key">Touche</string>
-    <string name="icon_key_light">Claire</string>
-    <string name="icon_key_dark">Sombre</string>
     <string name="icon_orange">Orange</string>
-    <string name="icon_black">Noire</string>
+    <string name="icon_white">Blanche</string>
     <string name="icon_desc">Le lanceur mettra à jour l’icône dans quelques secondes</string>
 </resources>

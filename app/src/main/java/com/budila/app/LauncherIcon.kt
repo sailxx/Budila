@@ -22,11 +22,8 @@ enum class LauncherIcon(
     @DrawableRes val background: Int,
     @DrawableRes val foreground: Int,
 ) {
-    KEY(R.string.icon_key, ".LauncherKey", R.drawable.ic_launcher_background_key, R.drawable.ic_launcher_foreground_key),
-    KEY_LIGHT(R.string.icon_key_light, ".LauncherKeyLight", R.drawable.ic_launcher_background, R.drawable.ic_launcher_foreground_key_light),
-    KEY_DARK(R.string.icon_key_dark, ".LauncherKeyDark", R.drawable.ic_launcher_background, R.drawable.ic_launcher_foreground_key_dark),
-    ORANGE(R.string.icon_orange, ".LauncherOrange", R.drawable.ic_launcher_background, R.drawable.ic_launcher_foreground),
-    BLACK(R.string.icon_black, ".LauncherBlack", R.drawable.ic_launcher_background_black, R.drawable.ic_launcher_foreground),
+    SEGMENTS(R.string.icon_orange, ".LauncherSegments", R.drawable.ic_launcher_background_black, R.drawable.ic_launcher_foreground_segments),
+    SEGMENTS_WHITE(R.string.icon_white, ".LauncherSegmentsWhite", R.drawable.ic_launcher_background_black, R.drawable.ic_launcher_foreground_segments_white),
     ;
 
     private fun component(context: Context) = ComponentName(context.packageName, "com.budila.app$alias")
@@ -35,7 +32,7 @@ enum class LauncherIcon(
 
     companion object {
         /** Включена в манифесте; остальные ярлыки там выключены */
-        private val default = KEY
+        private val default = SEGMENTS
 
         /** Выбранная пользователем (явно включённый ярлык), иначе иконка по умолчанию. */
         fun current(context: Context): LauncherIcon =
