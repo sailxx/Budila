@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Значок уведомления: знак Budila -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"
     android:height="24dp"
-    android:viewportWidth="24"
-    android:viewportHeight="24">
+    android:viewportWidth="58"
+    android:viewportHeight="58"
+    android:tint="#FFFFFFFF">
+    <group android:translateX="-25" android:translateY="-26">
+    <group android:pivotX="54" android:pivotY="54" android:scaleX="1" android:scaleY="1">
+    <!-- корпус с вырезанными стрелками -->
     <path
         android:fillColor="#FFFFFFFF"
-        android:pathData="M22,5.72l-4.6,-3.86 -1.29,1.53 4.6,3.86L22,5.72zM7.88,3.39L6.6,1.86 2,5.71l1.29,1.53 4.59,-3.85zM12.5,8L11,8v6l4.75,2.85 0.75,-1.23 -4,-2.37L12.5,8zM12,4c-4.97,0 -9,4.03 -9,9s4.02,9 9,9c4.97,0 9,-4.03 9,-9s-4.03,-9 -9,-9zM12,20c-3.870,0 -7,-3.13 -7,-7s3.13,-7 7,-7 7,3.13 7,7 -3.13,7 -7,7z" />
+        android:fillType="evenOdd"
+        android:pathData="M54,37.5A19.5,19.5 0,1 1,54,76.5A19.5,19.5 0,1 1,54,37.5ZM48.27,51.06L54,55.33L62.38,49.06A2.3,2.3 0,0 1,65.13,52.75L55.38,60.04A2.3,2.3 0,0 1,52.62,60.04L45.52,54.74A2.3,2.3 0,0 1,48.27,51.06Z" />
+    <!-- колокольчики -->
+    <path
+        android:pathData="M31.31,44.93A25.7,25.7 0,0 1,43.96,33.34M64.04,33.34A25.7,25.7 0,0 1,76.69,44.93"
+        android:strokeWidth="6.4"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeLineCap="round" />
+    <!-- ножки -->
+    <path
+        android:pathData="M43.93,71.92L40.68,77.58M64.07,71.92L67.32,77.58"
+        android:strokeWidth="4.6"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeLineCap="round" />
+    </group>
+    </group>
 </vector>

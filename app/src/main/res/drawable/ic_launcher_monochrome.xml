@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Тематическая (монохромная) иконка Android 13+ -->
+<!-- Тематическая (монохромная) иконка Android 13+ — тот же знак -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+    <group android:pivotX="54" android:pivotY="54" android:scaleX="1.12" android:scaleY="1.12">
+    <!-- корпус с вырезанными стрелками -->
     <path
-        android:pathData="M34.97,46.13A21,21 0,0 1,45.12 35.97M62.88,35.97A21,21 0,0 1,73.03 46.13M45.1,67.7L42.2,71.8M62.9,67.7L65.8,71.8"
-        android:strokeWidth="4.2"
+        android:fillColor="#FFFFFFFF"
+        android:fillType="evenOdd"
+        android:pathData="M54,37.5A19.5,19.5 0,1 1,54,76.5A19.5,19.5 0,1 1,54,37.5ZM48.27,51.06L54,55.33L62.38,49.06A2.3,2.3 0,0 1,65.13,52.75L55.38,60.04A2.3,2.3 0,0 1,52.62,60.04L45.52,54.74A2.3,2.3 0,0 1,48.27,51.06Z" />
+    <!-- колокольчики -->
+    <path
+        android:pathData="M31.31,44.93A25.7,25.7 0,0 1,43.96,33.34M64.04,33.34A25.7,25.7 0,0 1,76.69,44.93"
+        android:strokeWidth="6.4"
         android:strokeColor="#FFFFFFFF"
         android:strokeLineCap="round" />
+    <!-- ножки -->
     <path
-        android:pathData="M54,55m-14,0a14,14 0,1 1,28 0a14,14 0,1 1,-28 0"
-        android:strokeWidth="3.2"
-        android:strokeColor="#FFFFFFFF" />
-    <path
-        android:pathData="M54,55L48.2,51.6M54,55L62.4,50.2"
-        android:strokeWidth="2.6"
+        android:pathData="M43.93,71.92L40.68,77.58M64.07,71.92L67.32,77.58"
+        android:strokeWidth="4.6"
         android:strokeColor="#FFFFFFFF"
         android:strokeLineCap="round" />
+    </group>
 </vector>
