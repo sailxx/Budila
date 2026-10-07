@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="440" viewBox="0 0 880 440" role="img" aria-label="Budila — Pünktlich aufwachen. Leicht aufstehen. Ein Material-3-Wecker für Android.">
+<style>
+.m{font-family:"JetBrains Mono",SFMono-Regular,Consolas,"Liberation Mono",Menlo,monospace}
+.s{font-family:"Google Sans",Roboto,"Segoe UI",Helvetica,Arial,sans-serif}
+.f{opacity:0;animation:in .7s ease-out forwards}
+.d1{animation-delay:.1s}.d2{animation-delay:.25s}.d3{animation-delay:.4s}.d4{animation-delay:.55s}.d5{animation-delay:.7s}.d6{animation-delay:.85s}.d7{animation-delay:1s}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.ring{transform-origin:808px 112px;animation:pulse 1.6s ease-out infinite}
+@keyframes pulse{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(2.6)}}
+.blink{animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:.25}}
+</style>
+<rect width="880" height="440" rx="18" fill="#121318"/>
+<rect x=".5" y=".5" width="879" height="439" rx="17.5" fill="none" stroke="#2A2C35"/>
+
+<g class="f d1">
+  <circle cx="44" cy="40" r="6" fill="#B8C4FF"/>
+  <text x="58" y="45.5" class="m" font-size="17" font-weight="700" fill="#E4E1E9">budila</text>
+  <text x="840" y="45" class="m" font-size="11" fill="#8F909A" text-anchor="end" letter-spacing="1">v1.5</text>
+</g>
+
+<text x="40" y="98" class="m f d2" font-size="10" fill="#8F909A" letter-spacing="3">WECKER · ANDROID · MATERIAL 3</text>
+<g class="f d3">
+  <text x="40" y="142" class="s" font-size="32" font-weight="700" fill="#E4E1E9">Pünktlich aufwachen.</text>
+  <text x="40" y="184" class="s" font-size="32" font-weight="700" fill="#E4E1E9"><tspan fill="#B8C4FF">Leicht</tspan> aufstehen.</text>
+</g>
+<g class="f d4 m" font-size="12" fill="#A9AAB5">
+  <text x="40" y="226">Ein Wecker in Material 3: sanftes Wecken, Tags, eigene</text>
+  <text x="40" y="246">Farben und 10 Sprachen. Ohne Werbung und Internet.</text>
+</g>
+
+<!-- мини-экран звонка -->
+<g class="f d5">
+  <rect x="560" y="80" width="280" height="190" rx="16" fill="#1B1C22" stroke="#2A2C35"/>
+  <circle cx="580" cy="104" r="4" fill="#B8C4FF" class="blink"/>
+  <text x="592" y="108" class="m" font-size="10" fill="#8F909A" letter-spacing="2">KLINGELT · JETZT</text>
+  <circle cx="808" cy="112" r="9" fill="none" stroke="#B8C4FF" stroke-width="2" class="ring"/>
+  <circle cx="808" cy="112" r="9" fill="#B8C4FF"/>
+  <text x="578" y="178" class="m" font-size="58" font-weight="700" fill="#B8C4FF">07:30</text>
+  <text x="580" y="204" class="s" font-size="13" fill="#C7C5D0">Arbeit · Werktags</text>
+  <rect x="578" y="222" width="150" height="32" rx="16" fill="#B8C4FF"/>
+  <text x="653" y="242.5" class="s" font-size="12" font-weight="700" fill="#202C61" text-anchor="middle">Ausschalten</text>
+  <rect x="738.5" y="222.5" width="84" height="31" rx="15.5" fill="none" stroke="#454857"/>
+  <text x="780.5" y="242.5" class="s" font-size="12" fill="#C7C5D0" text-anchor="middle">+5 Min.</text>
+</g>
+
+<!-- плитки -->
+<g class="f d6">
+  <rect x="40" y="302" width="188" height="98" rx="12" fill="#1B1C22" stroke="#2A2C35"/>
+  <text x="58" y="332" class="m" font-size="12" font-weight="700" fill="#B8C4FF">8 Designs + eigenes</text>
+  <text x="58" y="358" class="m" font-size="10.5" fill="#8F909A">Material You, Farbton und</text>
+  <text x="58" y="374" class="m" font-size="10.5" fill="#8F909A">Palette nach Wahl</text>
+
+  <rect x="244" y="302" width="188" height="98" rx="12" fill="#1B1C22" stroke="#2A2C35"/>
+  <text x="262" y="332" class="m" font-size="12" font-weight="700" fill="#B8C4FF">Ohne Internet</text>
+  <text x="262" y="358" class="m" font-size="10.5" fill="#8F909A">Kein Netzzugriff — die</text>
+  <text x="262" y="374" class="m" font-size="10.5" fill="#8F909A">Daten bleiben bei dir</text>
+</g>
+<g class="f d7">
+  <rect x="448" y="302" width="188" height="98" rx="12" fill="#1B1C22" stroke="#2A2C35"/>
+  <text x="466" y="332" class="m" font-size="12" font-weight="700" fill="#B8C4FF">Ohne Werbung</text>
+  <text x="466" y="358" class="m" font-size="10.5" fill="#8F909A">Keine Tracker, kein Abo,</text>
+  <text x="466" y="374" class="m" font-size="10.5" fill="#8F909A">keine Registrierung</text>
+
+  <rect x="652" y="302" width="188" height="98" rx="12" fill="#1B1C22" stroke="#2A2C35"/>
+  <text x="670" y="332" class="m" font-size="12" font-weight="700" fill="#B8C4FF">10 Sprachen</text>
+  <text x="670" y="358" class="m" font-size="10.5" fill="#8F909A">Deutsch, English, Español</text>
+  <text x="670" y="374" class="m" font-size="10.5" fill="#8F909A">und 7 weitere</text>
+</g>
+</svg>

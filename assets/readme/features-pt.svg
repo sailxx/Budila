@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="420" viewBox="0 0 880 420" role="img" aria-label="RECURSOS — Tudo o que você precisa de manhã">
+<style>
+.m{font-family:"JetBrains Mono",SFMono-Regular,Consolas,"Liberation Mono",Menlo,monospace}
+.s{font-family:"Google Sans",Roboto,"Segoe UI",Helvetica,Arial,sans-serif}
+.f{opacity:0;animation:in .7s ease-out forwards}
+.d1{animation-delay:.1s}.d2{animation-delay:.25s}.d3{animation-delay:.4s}.d4{animation-delay:.55s}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card{fill:#F3EFF7;stroke:#E3E1EC}
+.t{font-size:15px;font-weight:700;fill:#1B1B21}
+.x{font-size:10.5px;fill:#5F6070}
+.n{font-size:11px;font-weight:700;fill:#4F5B92}
+</style>
+<defs><pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#EAE7F0"/></pattern></defs>
+<rect width="880" height="420" rx="18" fill="#FBF8FF"/>
+<rect width="880" height="420" rx="18" fill="url(#dots)"/>
+<rect x=".5" y=".5" width="879" height="419" rx="17.5" fill="none" stroke="#E3E1EC"/>
+
+<g class="f d1">
+  <rect x="40" y="34" width="8" height="8" rx="1.5" fill="#4F5B92"/>
+  <text x="56" y="42" class="m" font-size="10" fill="#5F6070" letter-spacing="3">RECURSOS</text>
+  <text x="40" y="82" class="s" font-size="24" font-weight="700" fill="#1B1B21">Tudo o que você precisa <tspan fill="#4F5B92">de manhã</tspan></text>
+</g>
+
+<g class="f d2">
+  <rect x="40.5" y="110.5" width="253" height="128" rx="14" class="card"/>
+  <text x="60" y="140" class="m n">01</text>
+  <text x="60" y="166" class="s t">Alarme preciso</text>
+  <text x="60" y="190" class="m x">AlarmClock do sistema: toca no</text>
+  <text x="60" y="206" class="m x">minuto exato, mesmo com o</text>
+  <text x="60" y="222" class="m x">celular em repouso</text>
+
+  <rect x="313.5" y="110.5" width="253" height="128" rx="14" class="card"/>
+  <text x="333" y="140" class="m n">02</text>
+  <text x="333" y="166" class="s t">Sobre o bloqueio</text>
+  <text x="333" y="190" class="m x">Liga a tela e mostra botões</text>
+  <text x="333" y="206" class="m x">grandes “Desligar” e “Adiar”</text>
+
+  <rect x="586.5" y="110.5" width="253" height="128" rx="14" class="card"/>
+  <text x="606" y="140" class="m n">03</text>
+  <text x="606" y="166" class="s t">Despertar suave</text>
+  <text x="606" y="190" class="m x">Começa baixinho e o volume sobe</text>
+  <text x="606" y="206" class="m x">por cerca de um minuto. Ativado</text>
+  <text x="606" y="222" class="m x">em cada alarme</text>
+</g>
+<g class="f d3">
+  <rect x="40.5" y="254.5" width="253" height="128" rx="14" class="card"/>
+  <text x="60" y="284" class="m n">04</text>
+  <text x="60" y="310" class="s t">Etiquetas e cores</text>
+  <text x="60" y="334" class="m x">Trabalho, Esporte, suas</text>
+  <text x="60" y="350" class="m x">etiquetas, com filtro. 10 cores</text>
+  <text x="60" y="366" class="m x">para os cartões</text>
+
+  <rect x="313.5" y="254.5" width="253" height="128" rx="14" class="card"/>
+  <text x="333" y="284" class="m n">05</text>
+  <text x="333" y="310" class="s t">8 temas e sua cor</text>
+  <text x="333" y="334" class="m x">Material You, 6 paletas e uma</text>
+  <text x="333" y="350" class="m x">sua: tom, saturação e 7 gamas.</text>
+  <text x="333" y="366" class="m x">Claro, escuro, AMOLED</text>
+
+  <rect x="586.5" y="254.5" width="253" height="128" rx="14" class="card"/>
+  <text x="606" y="284" class="m n">06</text>
+  <text x="606" y="310" class="s t">10 idiomas</text>
+  <text x="606" y="334" class="m x">RU, EN, UK, ES, PT, DE, FR, IT,</text>
+  <text x="606" y="350" class="m x">TR, PL: data e hora no padrão</text>
+  <text x="606" y="366" class="m x">do seu idioma</text>
+</g>
+</svg>

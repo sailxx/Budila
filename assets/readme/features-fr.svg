@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="420" viewBox="0 0 880 420" role="img" aria-label="FONCTIONNALITÉS — Tout ce qu’il faut le matin">
+<style>
+.m{font-family:"JetBrains Mono",SFMono-Regular,Consolas,"Liberation Mono",Menlo,monospace}
+.s{font-family:"Google Sans",Roboto,"Segoe UI",Helvetica,Arial,sans-serif}
+.f{opacity:0;animation:in .7s ease-out forwards}
+.d1{animation-delay:.1s}.d2{animation-delay:.25s}.d3{animation-delay:.4s}.d4{animation-delay:.55s}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card{fill:#F3EFF7;stroke:#E3E1EC}
+.t{font-size:15px;font-weight:700;fill:#1B1B21}
+.x{font-size:10.5px;fill:#5F6070}
+.n{font-size:11px;font-weight:700;fill:#4F5B92}
+</style>
+<defs><pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#EAE7F0"/></pattern></defs>
+<rect width="880" height="420" rx="18" fill="#FBF8FF"/>
+<rect width="880" height="420" rx="18" fill="url(#dots)"/>
+<rect x=".5" y=".5" width="879" height="419" rx="17.5" fill="none" stroke="#E3E1EC"/>
+
+<g class="f d1">
+  <rect x="40" y="34" width="8" height="8" rx="1.5" fill="#4F5B92"/>
+  <text x="56" y="42" class="m" font-size="10" fill="#5F6070" letter-spacing="3">FONCTIONNALITÉS</text>
+  <text x="40" y="82" class="s" font-size="24" font-weight="700" fill="#1B1B21">Tout ce qu’il faut <tspan fill="#4F5B92">le matin</tspan></text>
+</g>
+
+<g class="f d2">
+  <rect x="40.5" y="110.5" width="253" height="128" rx="14" class="card"/>
+  <text x="60" y="140" class="m n">01</text>
+  <text x="60" y="166" class="s t">Réveil précis</text>
+  <text x="60" y="190" class="m x">AlarmClock du système : sonne à</text>
+  <text x="60" y="206" class="m x">la minute près, même quand le</text>
+  <text x="60" y="222" class="m x">téléphone dort</text>
+
+  <rect x="313.5" y="110.5" width="253" height="128" rx="14" class="card"/>
+  <text x="333" y="140" class="m n">02</text>
+  <text x="333" y="166" class="s t">Sur l’écran verrouillé</text>
+  <text x="333" y="190" class="m x">Allume l’écran et affiche de</text>
+  <text x="333" y="206" class="m x">grands boutons « Arrêter » et</text>
+  <text x="333" y="222" class="m x">« Répéter »</text>
+
+  <rect x="586.5" y="110.5" width="253" height="128" rx="14" class="card"/>
+  <text x="606" y="140" class="m n">03</text>
+  <text x="606" y="166" class="s t">Réveil en douceur</text>
+  <text x="606" y="190" class="m x">Démarrage discret, le volume</text>
+  <text x="606" y="206" class="m x">monte pendant environ une</text>
+  <text x="606" y="222" class="m x">minute. Réglable par alarme</text>
+</g>
+<g class="f d3">
+  <rect x="40.5" y="254.5" width="253" height="128" rx="14" class="card"/>
+  <text x="60" y="284" class="m n">04</text>
+  <text x="60" y="310" class="s t">Étiquettes et couleurs</text>
+  <text x="60" y="334" class="m x">Travail, Sport, tes étiquettes,</text>
+  <text x="60" y="350" class="m x">avec filtre. 10 couleurs pour</text>
+  <text x="60" y="366" class="m x">les cartes</text>
+
+  <rect x="313.5" y="254.5" width="253" height="128" rx="14" class="card"/>
+  <text x="333" y="284" class="m n">05</text>
+  <text x="333" y="310" class="s t">8 thèmes + ta couleur</text>
+  <text x="333" y="334" class="m x">Material You, 6 palettes et la</text>
+  <text x="333" y="350" class="m x">tienne : teinte, saturation, 7</text>
+  <text x="333" y="366" class="m x">gammes. Clair, sombre, AMOLED</text>
+
+  <rect x="586.5" y="254.5" width="253" height="128" rx="14" class="card"/>
+  <text x="606" y="284" class="m n">06</text>
+  <text x="606" y="310" class="s t">10 langues</text>
+  <text x="606" y="334" class="m x">RU, EN, UK, ES, PT, DE, FR, IT,</text>
+  <text x="606" y="350" class="m x">TR, PL : date et heure selon ta</text>
+  <text x="606" y="366" class="m x">langue</text>
+</g>
+</svg>

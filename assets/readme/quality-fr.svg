@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="470" viewBox="0 0 880 470" role="img" aria-label="LA QUALITÉ EN CHIFFRES — Léger, privé, sans droits superflus">
+<style>
+.m{font-family:"JetBrains Mono",SFMono-Regular,Consolas,"Liberation Mono",Menlo,monospace}
+.s{font-family:"Google Sans",Roboto,"Segoe UI",Helvetica,Arial,sans-serif}
+.f{opacity:0;animation:in .7s ease-out forwards}
+.d1{animation-delay:.1s}.d2{animation-delay:.25s}.d3{animation-delay:.4s}.d4{animation-delay:.55s}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card{fill:#1B1C22;stroke:#2A2C35}
+.lbl{font-size:9.5px;fill:#8F909A;letter-spacing:2px}
+.big{font-size:40px;font-weight:700}
+.sub{font-size:10.5px;fill:#8F909A}
+.p{font-size:11.5px;fill:#C7C5D0}
+.no{font-size:11.5px;fill:#6B6C76}
+</style>
+<rect width="880" height="470" rx="18" fill="#121318"/>
+<rect x=".5" y=".5" width="879" height="469" rx="17.5" fill="none" stroke="#2A2C35"/>
+
+<g class="f d1">
+  <rect x="40" y="34" width="8" height="8" rx="1.5" fill="#B8C4FF"/>
+  <text x="56" y="42" class="m" font-size="10" fill="#8F909A" letter-spacing="3">LA QUALITÉ EN CHIFFRES</text>
+  <text x="40" y="82" class="s" font-size="24" font-weight="700" fill="#E4E1E9"><tspan fill="#B8C4FF">Léger</tspan>, privé, <tspan fill="#B8C4FF">sans droits superflus</tspan></text>
+</g>
+
+<!-- цифры -->
+<g class="f d2">
+  <rect x="40.5" y="110.5" width="190" height="130" rx="14" class="card"/>
+  <text x="58" y="138" class="m lbl">TAILLE DE L’APK</text>
+  <text x="58" y="190" class="m big" fill="#B8C4FF">1,6<tspan font-size="16"> Mo</tspan></text>
+  <text x="58" y="220" class="m sub">après réduction R8</text>
+
+  <rect x="246.5" y="110.5" width="190" height="130" rx="14" class="card"/>
+  <text x="264" y="138" class="m lbl">TRAQUEURS</text>
+  <text x="264" y="190" class="m big" fill="#E4E1E9">0</text>
+  <text x="264" y="220" class="m sub">ni analytique, ni pub</text>
+
+  <rect x="40.5" y="256.5" width="190" height="130" rx="14" class="card"/>
+  <text x="58" y="284" class="m lbl">COMPATIBILITÉ</text>
+  <text x="58" y="336" class="m big" fill="#E4E1E9">8–16</text>
+  <text x="58" y="366" class="m sub">versions d’Android</text>
+
+  <rect x="246.5" y="256.5" width="190" height="130" rx="14" class="card"/>
+  <text x="264" y="284" class="m lbl">TESTS UI</text>
+  <text x="264" y="336" class="m big" fill="#E4E1E9">17/17</text>
+  <text x="264" y="366" class="m sub">réussis · <tspan fill="#B8C4FF">100 %</tspan></text>
+</g>
+
+<!-- разрешения -->
+<g class="f d3">
+  <rect x="452.5" y="110.5" width="387" height="276" rx="14" class="card"/>
+  <text x="472" y="138" class="m lbl">AUTORISATIONS</text>
+
+  <g class="m">
+    <circle cx="478" cy="167" r="7" fill="#B8C4FF"/><path d="M474.5 167l2.5 2.5 4.5-5" fill="none" stroke="#202C61" stroke-width="1.8" stroke-linecap="round"/>
+    <text x="494" y="171" class="p">Notifications et écran de sonnerie</text>
+    <circle cx="478" cy="195" r="7" fill="#B8C4FF"/><path d="M474.5 195l2.5 2.5 4.5-5" fill="none" stroke="#202C61" stroke-width="1.8" stroke-linecap="round"/>
+    <text x="494" y="199" class="p">Heure exacte de l’alarme</text>
+    <circle cx="478" cy="223" r="7" fill="#B8C4FF"/><path d="M474.5 223l2.5 2.5 4.5-5" fill="none" stroke="#202C61" stroke-width="1.8" stroke-linecap="round"/>
+    <text x="494" y="227" class="p">Démarrage après redémarrage</text>
+    <circle cx="478" cy="251" r="7" fill="#B8C4FF"/><path d="M474.5 251l2.5 2.5 4.5-5" fill="none" stroke="#202C61" stroke-width="1.8" stroke-linecap="round"/>
+    <text x="494" y="255" class="p">Vibration</text>
+
+    <line x1="472" y1="276" x2="820" y2="276" stroke="#2A2C35"/>
+
+    <circle cx="478" cy="301" r="7" fill="none" stroke="#454857"/><path d="M475 298l6 6m0-6-6 6" stroke="#6B6C76" stroke-width="1.5" stroke-linecap="round"/>
+    <text x="494" y="305" class="no">Internet</text>
+    <circle cx="654" cy="301" r="7" fill="none" stroke="#454857"/><path d="M651 298l6 6m0-6-6 6" stroke="#6B6C76" stroke-width="1.5" stroke-linecap="round"/>
+    <text x="670" y="305" class="no">Contacts</text>
+    <circle cx="478" cy="329" r="7" fill="none" stroke="#454857"/><path d="M475 326l6 6m0-6-6 6" stroke="#6B6C76" stroke-width="1.5" stroke-linecap="round"/>
+    <text x="494" y="333" class="no">Localisation</text>
+    <circle cx="654" cy="329" r="7" fill="none" stroke="#454857"/><path d="M651 326l6 6m0-6-6 6" stroke="#6B6C76" stroke-width="1.5" stroke-linecap="round"/>
+    <text x="670" y="333" class="no">Fichiers</text>
+    <circle cx="478" cy="357" r="7" fill="none" stroke="#454857"/><path d="M475 354l6 6m0-6-6 6" stroke="#6B6C76" stroke-width="1.5" stroke-linecap="round"/>
+    <text x="494" y="361" class="no">Caméra et micro</text>
+    <circle cx="654" cy="357" r="7" fill="none" stroke="#454857"/><path d="M651 354l6 6m0-6-6 6" stroke="#6B6C76" stroke-width="1.5" stroke-linecap="round"/>
+    <text x="670" y="361" class="no">Comptes</text>
+  </g>
+</g>
+
+<text x="40" y="430" class="m f d4" font-size="9.5" fill="#6B6C76">Données : ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · version 1.5</text>
+</svg>

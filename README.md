@@ -1,8 +1,12 @@
 <div align="center">
 
-<img src="assets/readme/hero.svg" width="100%" alt="Budila — Просыпайся вовремя. Вставай легко.">
+**Русский** · [English](README.en.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Polski](README.pl.md)
 
-<a href="https://github.com/sailxx/Budila/releases/latest/download/Budila.apk"><img src="assets/readme/cta.svg" height="44" alt="Скачать APK"></a>
+<br>
+
+<img src="assets/readme/hero-ru.svg" width="100%" alt="Budila — Просыпайся вовремя. Вставай легко.">
+
+<a href="https://github.com/sailxx/Budila/releases/latest/download/Budila.apk"><img src="assets/readme/cta-ru.svg" height="44" alt="Скачать APK"></a>
 
 [![Build](https://github.com/sailxx/Budila/actions/workflows/build.yml/badge.svg)](https://github.com/sailxx/Budila/actions/workflows/build.yml)
 
@@ -10,11 +14,11 @@
 
 <br>
 
-<img src="assets/readme/screens.svg" width="100%" alt="Экраны Budila: теги и цвета, своя тема, звонок, тёмная тема">
+<img src="assets/readme/screens-ru.svg" width="100%" alt="Экраны Budila: теги и цвета, своя тема, звонок, тёмная тема">
 
 <br>
 
-<img src="assets/readme/features.svg" width="100%" alt="Что умеет Budila">
+<img src="assets/readme/features-ru.svg" width="100%" alt="Что умеет Budila">
 
 <details>
 <summary><b>Подробнее о возможностях</b></summary>
@@ -55,11 +59,11 @@
 
 <br>
 
-<img src="assets/readme/quality.svg" width="100%" alt="Качество в цифрах">
+<img src="assets/readme/quality-ru.svg" width="100%" alt="Качество в цифрах">
 
 <br>
 
-<img src="assets/readme/design.svg" width="100%" alt="Дизайн-код: Material 3 и Material You">
+<img src="assets/readme/design-ru.svg" width="100%" alt="Дизайн-код: Material 3 и Material You">
 
 ## Установка
 
@@ -82,7 +86,7 @@ cd Budila
 ./gradlew assembleRelease
 ```
 
-Релизы собираются на GitHub автоматически: поднимите `versionCode`/`versionName` в `app/build.gradle.kts` и отправьте тег (`git tag v1.6 && git push origin v1.6`) — Actions соберёт, подпишет и опубликует `Budila.apk`. Для локальной подписанной сборки скопируйте `keystore.properties.example` в `keystore.properties` и укажите свой ключ; без него соберётся неподписанный APK. Скриншоты экранов (в том числе на английском, немецком и испанском) перерисовываются командой `./gradlew testDebugUnitTest` (Robolectric, без телефона) и появляются в `screenshots/`.
+Релизы собираются на GitHub автоматически: поднимите `versionCode`/`versionName` в `app/build.gradle.kts` и отправьте тег (`git tag v1.6 && git push origin v1.6`) — Actions соберёт, подпишет и опубликует `Budila.apk`. Для локальной подписанной сборки скопируйте `keystore.properties.example` в `keystore.properties` и укажите свой ключ; без него соберётся неподписанный APK. Скриншоты экранов (в том числе на английском, немецком и испанском) перерисовываются командой `./gradlew testDebugUnitTest` (Robolectric, без телефона) и появляются в `screenshots/`. Картинки README на всех языках собирает `node tools/readme/build.mjs`, тексты для них — в `tools/readme/strings.json`.
 
 **Стек:** Kotlin · Jetpack Compose · Material 3 · [MaterialKolor](https://github.com/jordond/MaterialKolor) · AlarmManager · Foreground Service.
 

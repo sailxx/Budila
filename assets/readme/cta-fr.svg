@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="292" height="48" viewBox="0 0 292 48" role="img" aria-label="Télécharger l’APK">
+<style>.m{font-family:"JetBrains Mono",SFMono-Regular,Consolas,"Liberation Mono",Menlo,monospace}</style>
+<rect x="1" y="1" width="290" height="46" rx="23" fill="#4F5B92"/>
+<path d="M38 15v13m-6-6 6 6 6-6M31 33h14" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="58" y="29" class="m" font-size="14" font-weight="700" fill="#fff">Télécharger l’APK</text>
+<text x="208" y="29" class="m" font-size="12" fill="#DDE1FF">· 1,6 Mo</text>
+</svg>

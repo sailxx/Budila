@@ -1,0 +1,362 @@
+{
+  "ru": {
+    "hero": {
+      "alt": "Budila — Просыпайся вовремя. Вставай легко. Будильник для Android в Material 3.",
+      "tag": "БУДИЛЬНИК · ANDROID · MATERIAL 3", "h1": "Просыпайся вовремя.", "h2": "*Вставай* легко.",
+      "sub": "Будильник в Material 3: спокойное пробуждение, теги,\nсвои цвета и 10 языков. Без рекламы и интернета.",
+      "ring": "ЗВОНОК · СЕЙЧАС", "alarm": "Работа · Будни", "off": "Выключить", "snooze": "+5 мин",
+      "tiles": [["8 тем + свой цвет", "Material You, тон и гамма\nна ваш вкус"], ["Без интернета", "Нет доступа к сети —\nданные только у вас"], ["Без рекламы", "Ни трекеров, ни подписок,\nни регистрации"], ["10 языков", "Русский, English,\nEspañol и ещё 7"]]
+    },
+    "cta": { "label": "Скачать APK", "size": "· 1,6 МБ" },
+    "features": {
+      "label": "ЧТО УМЕЕТ", "title": "Всё, что нужно *утром*",
+      "items": [
+        ["Точный звонок", "Системный AlarmClock: звонит\nминута в минуту, даже когда\nтелефон спит"],
+        ["Поверх блокировки", "Сам включает экран и\nпоказывает большие кнопки\n«Выключить» и «Отложить»"],
+        ["Спокойное пробуждение", "Тихий старт, громкость растёт\nоколо минуты. Включается у\nкаждого будильника отдельно"],
+        ["Теги и цвета", "Работа, Спорт, свои теги —\nс фильтром. 10 цветов для\nкарточек будильников"],
+        ["8 тем и свой цвет", "Material You, 6 палитр и своя:\nтон, насыщенность и 7 гамм.\nСветлая, тёмная, AMOLED"],
+        ["10 языков", "RU, EN, UK, ES, PT, DE, FR,\nIT, TR, PL — дата и время\nпо правилам вашего языка"]
+      ]
+    },
+    "quality": {
+      "label": "КАЧЕСТВО В ЦИФРАХ", "title": "*Лёгкий*, приватный, *без лишних прав*",
+      "apk": ["РАЗМЕР APK", "1,6", "МБ", "после сжатия R8"], "trackers": ["ТРЕКЕРЫ", "ни аналитики, ни рекламы"],
+      "support": ["ПОДДЕРЖКА", "версии Android"], "tests": ["UI-ТЕСТЫ", "проходят · *100%*"],
+      "perms": "РАЗРЕШЕНИЯ", "yes": ["Уведомления и экран звонка", "Точное время срабатывания", "Запуск после перезагрузки", "Вибрация"],
+      "no": ["Интернет", "Контакты", "Геолокация", "Файлы", "Камера и микрофон", "Аккаунты"],
+      "source": "Данные: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · версия 1.5"
+    },
+    "design": {
+      "label": "ДИЗАЙН-КОД", "title": "Material 3 и *Material You*",
+      "sub": "8 тем: Material You из обоев, 6 готовых палитр и своя — тон, насыщенность и гамма.",
+      "palette": "ПАЛИТРА", "font": "ШРИФТ", "digits": "время и цифры", "sample": "Aa Бб", "headings": "заголовки",
+      "shapes": "ФОРМЫ", "card": "карточка · 28dp", "mon": "Пн", "sat": "Сб", "days": "дни · круг", "save": "Сохранить", "button": "кнопка · пилюля"
+    },
+    "screens": { "alt": "Экраны Budila: теги и цвета, своя тема, звонок, тёмная тема", "labels": ["Теги и цвета", "Своя тема", "Звонок", "Тёмная тема"] }
+  },
+  "en": {
+    "hero": {
+      "alt": "Budila — Wake up on time. Get up with ease. A Material 3 alarm clock for Android.",
+      "tag": "ALARM CLOCK · ANDROID · MATERIAL 3", "h1": "Wake up on time.", "h2": "*Get up* with ease.",
+      "sub": "A Material 3 alarm clock: gentle wake-up, tags, your own colors and 10 languages. No ads, no internet.",
+      "ring": "RINGING · NOW", "alarm": "Work · Weekdays", "off": "Dismiss", "snooze": "+5 min",
+      "tiles": [["8 themes + custom", "Material You, any hue and palette"], ["No internet", "No network access — data stays with you"], ["No ads", "No trackers, no subscriptions, no sign-up"], ["10 languages", "English, Español, Deutsch and 7 more"]]
+    },
+    "cta": { "label": "Download APK", "size": "· 1.6 MB" },
+    "features": {
+      "label": "FEATURES", "title": "Everything you need *in the morning*",
+      "items": [
+        ["Precise alarm", "System AlarmClock: rings right on the minute, even when the phone is asleep"],
+        ["Over the lock screen", "Turns the screen on and shows big “Dismiss” and “Snooze” buttons"],
+        ["Gentle wake-up", "Quiet start, the volume rises for about a minute. Set for each alarm"],
+        ["Tags and colors", "Work, Sport, your own tags — with a filter. 10 colors for alarm cards"],
+        ["8 themes + your color", "Material You, 6 palettes and a custom one: hue, saturation, 7 styles. Light, dark, AMOLED"],
+        ["10 languages", "RU, EN, UK, ES, PT, DE, FR, IT, TR, PL — dates and times follow your language"]
+      ]
+    },
+    "quality": {
+      "label": "QUALITY IN NUMBERS", "title": "*Light*, private, *no extra permissions*",
+      "apk": ["APK SIZE", "1.6", "MB", "after R8 shrinking"], "trackers": ["TRACKERS", "no analytics, no ads"],
+      "support": ["SUPPORT", "Android versions"], "tests": ["UI TESTS", "passing · *100%*"],
+      "perms": "PERMISSIONS", "yes": ["Notifications and the ringing screen", "Exact alarm time", "Start after reboot", "Vibration"],
+      "no": ["Internet", "Contacts", "Location", "Files", "Camera and microphone", "Accounts"],
+      "source": "Source: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · version 1.5"
+    },
+    "design": {
+      "label": "DESIGN CODE", "title": "Material 3 and *Material You*",
+      "sub": "8 themes: Material You from your wallpaper, 6 ready-made palettes and a custom one — hue, saturation and style.",
+      "palette": "PALETTE", "font": "TYPEFACE", "digits": "time and numbers", "sample": "Aa Bb", "headings": "headings",
+      "shapes": "SHAPES", "card": "card · 28dp", "mon": "Mon", "sat": "Sat", "days": "days · circle", "save": "Save", "button": "button · pill"
+    },
+    "screens": { "alt": "Budila screens: tags and colors, custom theme, ringing, dark theme", "labels": ["Tags and colors", "Custom theme", "Ringing", "Dark theme"] }
+  },
+  "es": {
+    "hero": {
+      "alt": "Budila — Despierta a tiempo. Levántate sin esfuerzo. Un despertador Material 3 para Android.",
+      "tag": "DESPERTADOR · ANDROID · MATERIAL 3", "h1": "Despierta a tiempo.", "h2": "*Levántate* sin esfuerzo.",
+      "sub": "Un despertador Material 3: despertar suave, etiquetas, tus colores y 10 idiomas. Sin anuncios ni internet.",
+      "ring": "SONANDO · AHORA", "alarm": "Trabajo · Entre semana", "off": "Apagar", "snooze": "+5 min",
+      "tiles": [["8 temas + el tuyo", "Material You, tono y gama a tu gusto"], ["Sin internet", "Sin acceso a la red: tus datos son solo tuyos"], ["Sin anuncios", "Sin rastreadores ni suscripciones ni registro"], ["10 idiomas", "Español, English, Deutsch y 7 más"]]
+    },
+    "cta": { "label": "Descargar APK", "size": "· 1,6 MB" },
+    "features": {
+      "label": "FUNCIONES", "title": "Todo lo que necesitas *por la mañana*",
+      "items": [
+        ["Alarma precisa", "AlarmClock del sistema: suena al minuto exacto, incluso con el móvil en reposo"],
+        ["Sobre el bloqueo", "Enciende la pantalla y muestra botones grandes «Apagar» y «Posponer»"],
+        ["Despertar suave", "Empieza bajito y el volumen sube durante un minuto. Se activa en cada alarma"],
+        ["Etiquetas y colores", "Trabajo, Deporte, tus etiquetas, con filtro. 10 colores para las tarjetas"],
+        ["8 temas y tu color", "Material You, 6 paletas y una propia: tono, saturación y 7 gamas. Claro, oscuro, AMOLED"],
+        ["10 idiomas", "RU, EN, UK, ES, PT, DE, FR, IT, TR, PL: fecha y hora según tu idioma"]
+      ]
+    },
+    "quality": {
+      "label": "CALIDAD EN CIFRAS", "title": "*Ligero*, privado, *sin permisos de más*",
+      "apk": ["TAMAÑO DEL APK", "1,6", "MB", "tras la reducción R8"], "trackers": ["RASTREADORES", "ni analítica ni anuncios"],
+      "support": ["COMPATIBILIDAD", "versiones de Android"], "tests": ["PRUEBAS DE UI", "superadas · *100%*"],
+      "perms": "PERMISOS", "yes": ["Notificaciones y pantalla de alarma", "Hora exacta de la alarma", "Inicio tras reiniciar", "Vibración"],
+      "no": ["Internet", "Contactos", "Ubicación", "Archivos", "Cámara y micrófono", "Cuentas"],
+      "source": "Datos: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · versión 1.5"
+    },
+    "design": {
+      "label": "CÓDIGO DE DISEÑO", "title": "Material 3 y *Material You*",
+      "sub": "8 temas: Material You desde el fondo de pantalla, 6 paletas listas y una propia: tono, saturación y gama.",
+      "palette": "PALETA", "font": "TIPOGRAFÍA", "digits": "hora y números", "sample": "Aa Ññ", "headings": "títulos",
+      "shapes": "FORMAS", "card": "tarjeta · 28dp", "mon": "Lu", "sat": "Sá", "days": "días · círculo", "save": "Guardar", "button": "botón · píldora"
+    },
+    "screens": { "alt": "Pantallas de Budila: etiquetas y colores, tema propio, alarma sonando, tema oscuro", "labels": ["Etiquetas y colores", "Tema propio", "Alarma sonando", "Tema oscuro"] }
+  },
+  "pt": {
+    "hero": {
+      "alt": "Budila — Acorde na hora. Levante sem esforço. Um despertador Material 3 para Android.",
+      "tag": "DESPERTADOR · ANDROID · MATERIAL 3", "h1": "Acorde na hora.", "h2": "*Levante* sem esforço.",
+      "sub": "Um despertador Material 3: despertar suave, etiquetas, suas cores e 10 idiomas. Sem anúncios e sem internet.",
+      "ring": "TOCANDO · AGORA", "alarm": "Trabalho · Dias úteis", "off": "Desligar", "snooze": "+5 min",
+      "tiles": [["8 temas + o seu", "Material You, tom e gama do seu jeito"], ["Sem internet", "Sem acesso à rede: seus dados ficam com você"], ["Sem anúncios", "Sem rastreadores, sem assinaturas, sem cadastro"], ["10 idiomas", "Português, English, Español e mais 7"]]
+    },
+    "cta": { "label": "Baixar APK", "size": "· 1,6 MB" },
+    "features": {
+      "label": "RECURSOS", "title": "Tudo o que você precisa *de manhã*",
+      "items": [
+        ["Alarme preciso", "AlarmClock do sistema: toca no minuto exato, mesmo com o celular em repouso"],
+        ["Sobre o bloqueio", "Liga a tela e mostra botões grandes “Desligar” e “Adiar”"],
+        ["Despertar suave", "Começa baixinho e o volume sobe por cerca de um minuto. Ativado em cada alarme"],
+        ["Etiquetas e cores", "Trabalho, Esporte, suas etiquetas, com filtro. 10 cores para os cartões"],
+        ["8 temas e sua cor", "Material You, 6 paletas e uma sua: tom, saturação e 7 gamas. Claro, escuro, AMOLED"],
+        ["10 idiomas", "RU, EN, UK, ES, PT, DE, FR, IT, TR, PL: data e hora no padrão do seu idioma"]
+      ]
+    },
+    "quality": {
+      "label": "QUALIDADE EM NÚMEROS", "title": "*Leve*, privado, *sem permissões extras*",
+      "apk": ["TAMANHO DO APK", "1,6", "MB", "após a redução R8"], "trackers": ["RASTREADORES", "sem análise nem anúncios"],
+      "support": ["COMPATIBILIDADE", "versões do Android"], "tests": ["TESTES DE UI", "aprovados · *100%*"],
+      "perms": "PERMISSÕES", "yes": ["Notificações e tela de alarme", "Horário exato do alarme", "Início após reiniciar", "Vibração"],
+      "no": ["Internet", "Contatos", "Localização", "Arquivos", "Câmera e microfone", "Contas"],
+      "source": "Dados: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · versão 1.5"
+    },
+    "design": {
+      "label": "CÓDIGO DE DESIGN", "title": "Material 3 e *Material You*",
+      "sub": "8 temas: Material You do papel de parede, 6 paletas prontas e uma sua — tom, saturação e gama.",
+      "palette": "PALETA", "font": "FONTE", "digits": "hora e números", "sample": "Aa Çç", "headings": "títulos",
+      "shapes": "FORMAS", "card": "cartão · 28dp", "mon": "Seg", "sat": "Sáb", "days": "dias · círculo", "save": "Salvar", "button": "botão · pílula"
+    },
+    "screens": { "alt": "Telas do Budila: etiquetas e cores, tema próprio, alarme tocando, tema escuro", "labels": ["Etiquetas e cores", "Tema próprio", "Alarme tocando", "Tema escuro"] }
+  },
+  "de": {
+    "hero": {
+      "alt": "Budila — Pünktlich aufwachen. Leicht aufstehen. Ein Material-3-Wecker für Android.",
+      "tag": "WECKER · ANDROID · MATERIAL 3", "h1": "Pünktlich aufwachen.", "h2": "*Leicht* aufstehen.",
+      "sub": "Ein Wecker in Material 3: sanftes Wecken, Tags, eigene Farben und 10 Sprachen. Ohne Werbung und Internet.",
+      "ring": "KLINGELT · JETZT", "alarm": "Arbeit · Werktags", "off": "Ausschalten", "snooze": "+5 Min.",
+      "tiles": [["8 Designs + eigenes", "Material You, Farbton und Palette nach Wahl"], ["Ohne Internet", "Kein Netzzugriff — die Daten bleiben bei dir"], ["Ohne Werbung", "Keine Tracker, kein Abo, keine Registrierung"], ["10 Sprachen", "Deutsch, English, Español und 7 weitere"]]
+    },
+    "cta": { "label": "APK herunterladen", "size": "· 1,6 MB" },
+    "features": {
+      "label": "FUNKTIONEN", "title": "Alles, was du *morgens* brauchst",
+      "items": [
+        ["Pünktlicher Alarm", "System-AlarmClock: klingelt auf die Minute genau, auch wenn das Handy schläft"],
+        ["Auf dem Sperrbildschirm", "Schaltet den Bildschirm ein und zeigt große Knöpfe „Ausschalten“ und „Schlummern“"],
+        ["Sanftes Wecken", "Leiser Start, die Lautstärke steigt etwa eine Minute lang. Für jeden Wecker einzeln"],
+        ["Tags und Farben", "Arbeit, Sport, eigene Tags — mit Filter. 10 Farben für die Weckerkarten"],
+        ["8 Designs + eigene Farbe", "Material You, 6 Paletten + eigene: Farbton, Sättigung, Stil. Hell, dunkel, AMOLED"],
+        ["10 Sprachen", "RU, EN, UK, ES, PT, DE, FR, IT, TR, PL — Datum und Uhrzeit wie in deiner Sprache"]
+      ]
+    },
+    "quality": {
+      "label": "QUALITÄT IN ZAHLEN", "title": "*Leicht*, privat, *ohne unnötige Rechte*",
+      "apk": ["APK-GRÖSSE", "1,6", "MB", "nach R8-Verkleinerung"], "trackers": ["TRACKER", "ohne Analyse und Werbung"],
+      "support": ["UNTERSTÜTZUNG", "Android-Versionen"], "tests": ["UI-TESTS", "bestanden · *100%*"],
+      "perms": "BERECHTIGUNGEN", "yes": ["Benachrichtigungen und Weckbildschirm", "Exakte Weckzeit", "Start nach Neustart", "Vibration"],
+      "no": ["Internet", "Kontakte", "Standort", "Dateien", "Kamera und Mikrofon", "Konten"],
+      "source": "Quelle: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · Version 1.5"
+    },
+    "design": {
+      "label": "DESIGN-CODE", "title": "Material 3 und *Material You*",
+      "sub": "8 Designs: Material You aus dem Hintergrundbild, 6 fertige Paletten und eine eigene — Farbton, Sättigung, Stil.",
+      "palette": "PALETTE", "font": "SCHRIFT", "digits": "Uhrzeit und Ziffern", "sample": "Aa Ää", "headings": "Überschriften",
+      "shapes": "FORMEN", "card": "Karte · 28dp", "mon": "Mo", "sat": "Sa", "days": "Tage · Kreis", "save": "Speichern", "button": "Knopf · Pille"
+    },
+    "screens": { "alt": "Budila-Bildschirme: Tags und Farben, eigenes Design, Weckruf, dunkles Design", "labels": ["Tags und Farben", "Eigenes Design", "Weckruf", "Dunkles Design"] }
+  },
+  "fr": {
+    "hero": {
+      "alt": "Budila — Réveille-toi à l’heure. Lève-toi en douceur. Un réveil Material 3 pour Android.",
+      "tag": "RÉVEIL · ANDROID · MATERIAL 3", "h1": "Réveille-toi à l’heure.", "h2": "*Lève-toi* en douceur.",
+      "sub": "Un réveil Material 3 : réveil en douceur, étiquettes, tes couleurs et 10 langues. Sans pub ni internet.",
+      "ring": "SONNERIE · MAINTENANT", "alarm": "Travail · En semaine", "off": "Arrêter", "snooze": "+5 min",
+      "tiles": [["8 thèmes + le tien", "Material You, teinte et gamme à ton goût"], ["Sans internet", "Aucun accès réseau : tes données restent à toi"], ["Sans pub", "Ni traqueurs, ni abonnement, ni inscription"], ["10 langues", "Français, English, Español et 7 autres"]]
+    },
+    "cta": { "label": "Télécharger l’APK", "size": "· 1,6 Mo" },
+    "features": {
+      "label": "FONCTIONNALITÉS", "title": "Tout ce qu’il faut *le matin*",
+      "items": [
+        ["Réveil précis", "AlarmClock du système : sonne à la minute près, même quand le téléphone dort"],
+        ["Sur l’écran verrouillé", "Allume l’écran et affiche de grands boutons « Arrêter » et « Répéter »"],
+        ["Réveil en douceur", "Démarrage discret, le volume monte pendant environ une minute. Réglable par alarme"],
+        ["Étiquettes et couleurs", "Travail, Sport, tes étiquettes, avec filtre. 10 couleurs pour les cartes"],
+        ["8 thèmes + ta couleur", "Material You, 6 palettes et la tienne : teinte, saturation, 7 gammes. Clair, sombre, AMOLED"],
+        ["10 langues", "RU, EN, UK, ES, PT, DE, FR, IT, TR, PL : date et heure selon ta langue"]
+      ]
+    },
+    "quality": {
+      "label": "LA QUALITÉ EN CHIFFRES", "title": "*Léger*, privé, *sans droits superflus*",
+      "apk": ["TAILLE DE L’APK", "1,6", "Mo", "après réduction R8"], "trackers": ["TRAQUEURS", "ni analytique, ni pub"],
+      "support": ["COMPATIBILITÉ", "versions d’Android"], "tests": ["TESTS UI", "réussis · *100 %*"],
+      "perms": "AUTORISATIONS", "yes": ["Notifications et écran de sonnerie", "Heure exacte de l’alarme", "Démarrage après redémarrage", "Vibration"],
+      "no": ["Internet", "Contacts", "Localisation", "Fichiers", "Caméra et micro", "Comptes"],
+      "source": "Données : ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · version 1.5"
+    },
+    "design": {
+      "label": "CODE DE DESIGN", "title": "Material 3 et *Material You*",
+      "sub": "8 thèmes : Material You depuis le fond d’écran, 6 palettes prêtes et la tienne — teinte, saturation et gamme.",
+      "palette": "PALETTE", "font": "POLICE", "digits": "heure et chiffres", "sample": "Aa Éé", "headings": "titres",
+      "shapes": "FORMES", "card": "carte · 28dp", "mon": "Lun", "sat": "Sam", "days": "jours · cercle", "save": "Enregistrer", "button": "bouton · pilule"
+    },
+    "screens": { "alt": "Écrans de Budila : étiquettes et couleurs, thème perso, sonnerie, thème sombre", "labels": ["Étiquettes et couleurs", "Thème perso", "Sonnerie", "Thème sombre"] }
+  },
+  "it": {
+    "hero": {
+      "alt": "Budila — Svegliati in orario. Alzati senza fatica. Una sveglia Material 3 per Android.",
+      "tag": "SVEGLIA · ANDROID · MATERIAL 3", "h1": "Svegliati in orario.", "h2": "*Alzati* senza fatica.",
+      "sub": "Una sveglia Material 3: risveglio dolce, tag, i tuoi colori e 10 lingue. Senza pubblicità né internet.",
+      "ring": "SUONA · ORA", "alarm": "Lavoro · Giorni feriali", "off": "Spegni", "snooze": "+5 min",
+      "tiles": [["8 temi + il tuo", "Material You, tono e gamma come vuoi"], ["Senza internet", "Nessun accesso alla rete: i dati restano a te"], ["Senza pubblicità", "Zero tracker, abbonamenti o registrazioni"], ["10 lingue", "Italiano, English, Español e altre 7"]]
+    },
+    "cta": { "label": "Scarica l’APK", "size": "· 1,6 MB" },
+    "features": {
+      "label": "FUNZIONI", "title": "Tutto ciò che serve *al mattino*",
+      "items": [
+        ["Sveglia precisa", "AlarmClock di sistema: suona al minuto esatto, anche quando il telefono dorme"],
+        ["Sopra il blocco schermo", "Accende lo schermo e mostra grandi pulsanti «Spegni» e «Posticipa»"],
+        ["Risveglio dolce", "Inizio silenzioso, il volume sale per circa un minuto. Si attiva per ogni sveglia"],
+        ["Tag e colori", "Lavoro, Sport, tag personali, con filtro. 10 colori per le schede delle sveglie"],
+        ["8 temi e il tuo colore", "Material You, 6 palette e una tua: tono, saturazione, 7 gamme. Chiaro, scuro, AMOLED"],
+        ["10 lingue", "RU, EN, UK, ES, PT, DE, FR, IT, TR, PL: data e ora secondo la tua lingua"]
+      ]
+    },
+    "quality": {
+      "label": "LA QUALITÀ IN NUMERI", "title": "*Leggera*, privata, *senza permessi inutili*",
+      "apk": ["DIMENSIONE APK", "1,6", "MB", "dopo la riduzione R8"], "trackers": ["TRACKER", "né analisi né pubblicità"],
+      "support": ["COMPATIBILITÀ", "versioni di Android"], "tests": ["TEST UI", "superati · *100%*"],
+      "perms": "PERMESSI", "yes": ["Notifiche e schermata della sveglia", "Orario esatto della sveglia", "Avvio dopo il riavvio", "Vibrazione"],
+      "no": ["Internet", "Contatti", "Posizione", "File", "Fotocamera e microfono", "Account"],
+      "source": "Dati: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · versione 1.5"
+    },
+    "design": {
+      "label": "CODICE DI DESIGN", "title": "Material 3 e *Material You*",
+      "sub": "8 temi: Material You dallo sfondo, 6 palette pronte e una tua — tono, saturazione e gamma.",
+      "palette": "PALETTE", "font": "CARATTERE", "digits": "ora e numeri", "sample": "Aa Èè", "headings": "titoli",
+      "shapes": "FORME", "card": "scheda · 28dp", "mon": "Lun", "sat": "Sab", "days": "giorni · cerchio", "save": "Salva", "button": "pulsante · pillola"
+    },
+    "screens": { "alt": "Schermate di Budila: tag e colori, tema personale, sveglia che suona, tema scuro", "labels": ["Tag e colori", "Tema personale", "Sveglia", "Tema scuro"] }
+  },
+  "tr": {
+    "hero": {
+      "alt": "Budila — Zamanında uyan. Kolayca kalk. Android için Material 3 çalar saat.",
+      "tag": "ÇALAR SAAT · ANDROID · MATERIAL 3", "h1": "Zamanında uyan.", "h2": "*Kolayca* kalk.",
+      "sub": "Material 3 çalar saat: sakin uyanış, etiketler, kendi renklerin ve 10 dil. Reklamsız ve internetsiz.",
+      "ring": "ÇALIYOR · ŞİMDİ", "alarm": "İş · Hafta içi", "off": "Kapat", "snooze": "+5 dk",
+      "tiles": [["8 tema + seninki", "Material You, ton ve gama dilediğin gibi"], ["İnternet yok", "Ağ erişimi yok — veriler yalnızca sende"], ["Reklam yok", "İzleyici, abonelik ve kayıt yok"], ["10 dil", "Türkçe, English, Español ve 7 dil daha"]]
+    },
+    "cta": { "label": "APK'yı indir", "size": "· 1,6 MB" },
+    "features": {
+      "label": "ÖZELLİKLER", "title": "Sabah *ihtiyacın olan* her şey",
+      "items": [
+        ["Tam zamanında alarm", "Sistem AlarmClock'u: telefon uykudayken bile tam dakikasında çalar"],
+        ["Kilit ekranının üstünde", "Ekranı kendisi açar ve büyük “Kapat” ve “Ertele” düğmeleri gösterir"],
+        ["Sakin uyanış", "Sessiz başlar, ses yaklaşık bir dakikada yükselir. Her alarm için ayrı ayarlanır"],
+        ["Etiketler ve renkler", "İş, Spor, kendi etiketlerin — filtreyle. Alarm kartları için 10 renk"],
+        ["8 tema + kendi rengin", "Material You, 6 palet ve kendi paletin: ton, doygunluk, 7 gama. Açık, koyu, AMOLED"],
+        ["10 dil", "RU, EN, UK, ES, PT, DE, FR, IT, TR, PL — tarih ve saat dilinin kurallarıyla"]
+      ]
+    },
+    "quality": {
+      "label": "RAKAMLARLA KALİTE", "title": "*Hafif*, gizli, *gereksiz izin yok*",
+      "apk": ["APK BOYUTU", "1,6", "MB", "R8 küçültmesinden sonra"], "trackers": ["İZLEYİCİLER", "analiz ve reklam yok"],
+      "support": ["DESTEK", "Android sürümü"], "tests": ["UI TESTLERİ", "geçiyor · *%100*"],
+      "perms": "İZİNLER", "yes": ["Bildirimler ve alarm ekranı", "Tam alarm zamanı", "Yeniden başlatmadan sonra açılış", "Titreşim"],
+      "no": ["İnternet", "Kişiler", "Konum", "Dosyalar", "Kamera ve mikrofon", "Hesaplar"],
+      "source": "Kaynak: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · sürüm 1.5"
+    },
+    "design": {
+      "label": "TASARIM KODU", "title": "Material 3 ve *Material You*",
+      "sub": "8 tema: duvar kâğıdından Material You, 6 hazır palet ve kendi paletin — ton, doygunluk ve gama.",
+      "palette": "PALET", "font": "YAZI TİPİ", "digits": "saat ve rakamlar", "sample": "Aa Ğğ", "headings": "başlıklar",
+      "shapes": "ŞEKİLLER", "card": "kart · 28dp", "mon": "Pzt", "sat": "Cmt", "days": "günler · daire", "save": "Kaydet", "button": "düğme · hap"
+    },
+    "screens": { "alt": "Budila ekranları: etiketler ve renkler, özel tema, çalan alarm, koyu tema", "labels": ["Etiketler ve renkler", "Özel tema", "Çalan alarm", "Koyu tema"] }
+  },
+  "uk": {
+    "hero": {
+      "alt": "Budila — Прокидайся вчасно. Вставай легко. Будильник для Android у Material 3.",
+      "tag": "БУДИЛЬНИК · ANDROID · MATERIAL 3", "h1": "Прокидайся вчасно.", "h2": "*Вставай* легко.",
+      "sub": "Будильник у Material 3: спокійне пробудження, теги,\nсвої кольори та 10 мов. Без реклами та інтернету.",
+      "ring": "ДЗВІНОК · ЗАРАЗ", "alarm": "Робота · Будні", "off": "Вимкнути", "snooze": "+5 хв",
+      "tiles": [["8 тем + свій колір", "Material You, тон і гама\nна ваш смак"], ["Без інтернету", "Немає доступу до мережі —\nдані лише у вас"], ["Без реклами", "Ні трекерів, ні підписок,\nні реєстрації"], ["10 мов", "Українська, English,\nEspañol і ще 7"]]
+    },
+    "cta": { "label": "Завантажити APK", "size": "· 1,6 МБ" },
+    "features": {
+      "label": "ЩО ВМІЄ", "title": "Усе, що потрібно *зранку*",
+      "items": [
+        ["Точний дзвінок", "Системний AlarmClock: дзвонить хвилина в хвилину, навіть коли телефон спить"],
+        ["Поверх блокування", "Сам вмикає екран і показує великі кнопки «Вимкнути» і «Відкласти»"],
+        ["Спокійне пробудження", "Тихий старт, гучність зростає близько хвилини. Вмикається для кожного будильника"],
+        ["Теги й кольори", "Робота, Спорт, свої теги — з фільтром. 10 кольорів для карток будильників"],
+        ["8 тем і свій колір", "Material You, 6 палітр і своя: тон, насиченість і 7 гам. Світла, темна, AMOLED"],
+        ["10 мов", "RU, EN, UK, ES, PT, DE, FR, IT, TR, PL — дата й час за правилами вашої мови"]
+      ]
+    },
+    "quality": {
+      "label": "ЯКІСТЬ У ЦИФРАХ", "title": "*Легкий*, приватний, *без зайвих прав*",
+      "apk": ["РОЗМІР APK", "1,6", "МБ", "після стиснення R8"], "trackers": ["ТРЕКЕРИ", "ні аналітики, ні реклами"],
+      "support": ["ПІДТРИМКА", "версії Android"], "tests": ["UI-ТЕСТИ", "проходять · *100%*"],
+      "perms": "ДОЗВОЛИ", "yes": ["Сповіщення та екран дзвінка", "Точний час спрацювання", "Запуск після перезавантаження", "Вібрація"],
+      "no": ["Інтернет", "Контакти", "Геолокація", "Файли", "Камера й мікрофон", "Акаунти"],
+      "source": "Дані: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · версія 1.5"
+    },
+    "design": {
+      "label": "ДИЗАЙН-КОД", "title": "Material 3 і *Material You*",
+      "sub": "8 тем: Material You зі шпалер, 6 готових палітр і своя — тон, насиченість і гама.",
+      "palette": "ПАЛІТРА", "font": "ШРИФТ", "digits": "час і цифри", "sample": "Aa Її", "headings": "заголовки",
+      "shapes": "ФОРМИ", "card": "картка · 28dp", "mon": "Пн", "sat": "Сб", "days": "дні · коло", "save": "Зберегти", "button": "кнопка · пігулка"
+    },
+    "screens": { "alt": "Екрани Budila: теги й кольори, своя тема, дзвінок, темна тема", "labels": ["Теги й кольори", "Своя тема", "Дзвінок", "Темна тема"] }
+  },
+  "pl": {
+    "hero": {
+      "alt": "Budila — Budź się na czas. Wstawaj z łatwością. Budzik Material 3 na Androida.",
+      "tag": "BUDZIK · ANDROID · MATERIAL 3", "h1": "Budź się na czas.", "h2": "*Wstawaj* z łatwością.",
+      "sub": "Budzik w Material 3: łagodne budzenie, tagi, własne kolory i 10 języków. Bez reklam i internetu.",
+      "ring": "DZWONI · TERAZ", "alarm": "Praca · Dni robocze", "off": "Wyłącz", "snooze": "+5 min",
+      "tiles": [["8 motywów + własny", "Material You, odcień i gama do wyboru"], ["Bez internetu", "Brak dostępu do sieci — dane tylko u ciebie"], ["Bez reklam", "Bez trackerów, subskrypcji i rejestracji"], ["10 języków", "Polski, English, Español i 7 innych"]]
+    },
+    "cta": { "label": "Pobierz APK", "size": "· 1,6 MB" },
+    "features": {
+      "label": "FUNKCJE", "title": "Wszystko, czego trzeba *rano*",
+      "items": [
+        ["Dokładny alarm", "Systemowy AlarmClock: dzwoni co do minuty, nawet gdy telefon śpi"],
+        ["Na ekranie blokady", "Sam włącza ekran i pokazuje duże przyciski „Wyłącz” i „Drzemka”"],
+        ["Łagodne budzenie", "Cichy start, głośność rośnie przez około minutę. Włączane dla każdego budzika"],
+        ["Tagi i kolory", "Praca, Sport, własne tagi — z filtrem. 10 kolorów kart budzików"],
+        ["8 motywów i twój kolor", "Material You, 6 palet i własna: odcień, nasycenie, 7 gam. Jasny, ciemny, AMOLED"],
+        ["10 języków", "RU, EN, UK, ES, PT, DE, FR, IT, TR, PL — data i godzina według twojego języka"]
+      ]
+    },
+    "quality": {
+      "label": "JAKOŚĆ W LICZBACH", "title": "*Lekki*, prywatny, *bez zbędnych uprawnień*",
+      "apk": ["ROZMIAR APK", "1,6", "MB", "po zmniejszeniu R8"], "trackers": ["TRACKERY", "bez analityki i reklam"],
+      "support": ["WSPARCIE", "wersje Androida"], "tests": ["TESTY UI", "zaliczone · *100%*"],
+      "perms": "UPRAWNIENIA", "yes": ["Powiadomienia i ekran budzika", "Dokładny czas alarmu", "Start po ponownym uruchomieniu", "Wibracje"],
+      "no": ["Internet", "Kontakty", "Lokalizacja", "Pliki", "Aparat i mikrofon", "Konta"],
+      "source": "Dane: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · wersja 1.5"
+    },
+    "design": {
+      "label": "KOD DESIGNU", "title": "Material 3 i *Material You*",
+      "sub": "8 motywów: Material You z tapety, 6 gotowych palet i własna — odcień, nasycenie i gama.",
+      "palette": "PALETA", "font": "KRÓJ PISMA", "digits": "czas i cyfry", "sample": "Aa Łł", "headings": "nagłówki",
+      "shapes": "KSZTAŁTY", "card": "karta · 28dp", "mon": "Pn", "sat": "So", "days": "dni · koło", "save": "Zapisz", "button": "przycisk · pigułka"
+    },
+    "screens": { "alt": "Ekrany Budila: tagi i kolory, własny motyw, dzwoniący budzik, ciemny motyw", "labels": ["Tagi i kolory", "Własny motyw", "Dzwoniący budzik", "Ciemny motyw"] }
+  }
+}
