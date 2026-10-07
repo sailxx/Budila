@@ -25,7 +25,7 @@
       "support": ["ПОДДЕРЖКА", "версии Android"], "tests": ["UI-ТЕСТЫ", "проходят · *100%*"],
       "perms": "РАЗРЕШЕНИЯ", "yes": ["Уведомления и экран звонка", "Точное время срабатывания", "Запуск после перезагрузки", "Вибрация"],
       "no": ["Интернет", "Контакты", "Геолокация", "Файлы", "Камера и микрофон", "Аккаунты"],
-      "source": "Данные: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · версия 1.5"
+      "source": "Данные: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · версия {version}"
     },
     "design": {
       "label": "ДИЗАЙН-КОД", "title": "Material 3 и *Material You*",
@@ -61,7 +61,7 @@
       "support": ["SUPPORT", "Android versions"], "tests": ["UI TESTS", "passing · *100%*"],
       "perms": "PERMISSIONS", "yes": ["Notifications and the ringing screen", "Exact alarm time", "Start after reboot", "Vibration"],
       "no": ["Internet", "Contacts", "Location", "Files", "Camera and microphone", "Accounts"],
-      "source": "Source: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · version 1.5"
+      "source": "Source: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · version {version}"
     },
     "design": {
       "label": "DESIGN CODE", "title": "Material 3 and *Material You*",
@@ -97,7 +97,7 @@
       "support": ["COMPATIBILIDAD", "versiones de Android"], "tests": ["PRUEBAS DE UI", "superadas · *100%*"],
       "perms": "PERMISOS", "yes": ["Notificaciones y pantalla de alarma", "Hora exacta de la alarma", "Inicio tras reiniciar", "Vibración"],
       "no": ["Internet", "Contactos", "Ubicación", "Archivos", "Cámara y micrófono", "Cuentas"],
-      "source": "Datos: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · versión 1.5"
+      "source": "Datos: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · versión {version}"
     },
     "design": {
       "label": "CÓDIGO DE DISEÑO", "title": "Material 3 y *Material You*",
@@ -133,7 +133,7 @@
       "support": ["COMPATIBILIDADE", "versões do Android"], "tests": ["TESTES DE UI", "aprovados · *100%*"],
       "perms": "PERMISSÕES", "yes": ["Notificações e tela de alarme", "Horário exato do alarme", "Início após reiniciar", "Vibração"],
       "no": ["Internet", "Contatos", "Localização", "Arquivos", "Câmera e microfone", "Contas"],
-      "source": "Dados: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · versão 1.5"
+      "source": "Dados: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · versão {version}"
     },
     "design": {
       "label": "CÓDIGO DE DESIGN", "title": "Material 3 e *Material You*",
@@ -169,7 +169,7 @@
       "support": ["UNTERSTÜTZUNG", "Android-Versionen"], "tests": ["UI-TESTS", "bestanden · *100%*"],
       "perms": "BERECHTIGUNGEN", "yes": ["Benachrichtigungen und Weckbildschirm", "Exakte Weckzeit", "Start nach Neustart", "Vibration"],
       "no": ["Internet", "Kontakte", "Standort", "Dateien", "Kamera und Mikrofon", "Konten"],
-      "source": "Quelle: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · Version 1.5"
+      "source": "Quelle: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · Version {version}"
     },
     "design": {
       "label": "DESIGN-CODE", "title": "Material 3 und *Material You*",
@@ -205,7 +205,7 @@
       "support": ["COMPATIBILITÉ", "versions d’Android"], "tests": ["TESTS UI", "réussis · *100 %*"],
       "perms": "AUTORISATIONS", "yes": ["Notifications et écran de sonnerie", "Heure exacte de l’alarme", "Démarrage après redémarrage", "Vibration"],
       "no": ["Internet", "Contacts", "Localisation", "Fichiers", "Caméra et micro", "Comptes"],
-      "source": "Données : ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · version 1.5"
+      "source": "Données : ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · version {version}"
     },
     "design": {
       "label": "CODE DE DESIGN", "title": "Material 3 et *Material You*",
@@ -241,7 +241,7 @@
       "support": ["COMPATIBILITÀ", "versioni di Android"], "tests": ["TEST UI", "superati · *100%*"],
       "perms": "PERMESSI", "yes": ["Notifiche e schermata della sveglia", "Orario esatto della sveglia", "Avvio dopo il riavvio", "Vibrazione"],
       "no": ["Internet", "Contatti", "Posizione", "File", "Fotocamera e microfono", "Account"],
-      "source": "Dati: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · versione 1.5"
+      "source": "Dati: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · versione {version}"
     },
     "design": {
       "label": "CODICE DI DESIGN", "title": "Material 3 e *Material You*",
@@ -277,7 +277,7 @@
       "support": ["DESTEK", "Android sürümü"], "tests": ["UI TESTLERİ", "geçiyor · *%100*"],
       "perms": "İZİNLER", "yes": ["Bildirimler ve alarm ekranı", "Tam alarm zamanı", "Yeniden başlatmadan sonra açılış", "Titreşim"],
       "no": ["İnternet", "Kişiler", "Konum", "Dosyalar", "Kamera ve mikrofon", "Hesaplar"],
-      "source": "Kaynak: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · sürüm 1.5"
+      "source": "Kaynak: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · sürüm {version}"
     },
     "design": {
       "label": "TASARIM KODU", "title": "Material 3 ve *Material You*",
@@ -313,7 +313,7 @@
       "support": ["ПІДТРИМКА", "версії Android"], "tests": ["UI-ТЕСТИ", "проходять · *100%*"],
       "perms": "ДОЗВОЛИ", "yes": ["Сповіщення та екран дзвінка", "Точний час спрацювання", "Запуск після перезавантаження", "Вібрація"],
       "no": ["Інтернет", "Контакти", "Геолокація", "Файли", "Камера й мікрофон", "Акаунти"],
-      "source": "Дані: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · версія 1.5"
+      "source": "Дані: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · версія {version}"
     },
     "design": {
       "label": "ДИЗАЙН-КОД", "title": "Material 3 і *Material You*",
@@ -349,7 +349,7 @@
       "support": ["WSPARCIE", "wersje Androida"], "tests": ["TESTY UI", "zaliczone · *100%*"],
       "perms": "UPRAWNIENIA", "yes": ["Powiadomienia i ekran budzika", "Dokładny czas alarmu", "Start po ponownym uruchomieniu", "Wibracje"],
       "no": ["Internet", "Kontakty", "Lokalizacja", "Pliki", "Aparat i mikrofon", "Konta"],
-      "source": "Dane: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · wersja 1.5"
+      "source": "Dane: ./gradlew assembleRelease testDebugUnitTest · AndroidManifest.xml · wersja {version}"
     },
     "design": {
       "label": "KOD DESIGNU", "title": "Material 3 i *Material You*",

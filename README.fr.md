@@ -86,7 +86,7 @@ cd Budila
 ./gradlew assembleRelease
 ```
 
-Les versions sont compilées automatiquement sur GitHub : augmentez `versionCode`/`versionName` dans `app/build.gradle.kts` et poussez un tag (`git tag v1.6 && git push origin v1.6`) — Actions compile, signe et publie `Budila.apk`. Pour une compilation locale signée, copiez `keystore.properties.example` vers `keystore.properties` et indiquez votre clé ; sans elle, l’APK n’est pas signé. Les captures d’écran (y compris en anglais, allemand et espagnol) sont redessinées par `./gradlew testDebugUnitTest` (Robolectric, sans téléphone) et arrivent dans `screenshots/`. Les images du README dans toutes les langues sont générées par `node tools/readme/build.mjs` ; leurs textes sont dans `tools/readme/strings.json`.
+Les versions sont compilées automatiquement sur GitHub : augmentez `versionCode`/`versionName` dans `app/build.gradle.kts` et poussez un tag (`git tag v2.5 && git push origin v2.5`) — Actions compile, signe et publie `Budila.apk`. Pour une compilation locale signée, copiez `keystore.properties.example` vers `keystore.properties` et indiquez votre clé ; sans elle, l’APK n’est pas signé. Les captures d’écran (y compris en anglais, allemand et espagnol) sont redessinées par `./gradlew testDebugUnitTest` (Robolectric, sans téléphone) et arrivent dans `screenshots/`. Les images du README dans toutes les langues sont générées par `node tools/readme/build.mjs` ; leurs textes sont dans `tools/readme/strings.json`.
 
 **Technologies :** Kotlin · Jetpack Compose · Material 3 · [MaterialKolor](https://github.com/jordond/MaterialKolor) · AlarmManager · Foreground Service.
 

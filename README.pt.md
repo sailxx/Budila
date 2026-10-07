@@ -86,7 +86,7 @@ cd Budila
 ./gradlew assembleRelease
 ```
 
-As versões são compiladas no GitHub automaticamente: aumente `versionCode`/`versionName` em `app/build.gradle.kts` e envie uma tag (`git tag v1.6 && git push origin v1.6`) — o Actions compila, assina e publica o `Budila.apk`. Para uma compilação local assinada, copie `keystore.properties.example` para `keystore.properties` e informe sua chave; sem ela sai um APK não assinado. As capturas de tela (inclusive em inglês, alemão e espanhol) são refeitas por `./gradlew testDebugUnitTest` (Robolectric, sem celular) e aparecem em `screenshots/`. As imagens do README em todos os idiomas são geradas por `node tools/readme/build.mjs`; os textos delas ficam em `tools/readme/strings.json`.
+As versões são compiladas no GitHub automaticamente: aumente `versionCode`/`versionName` em `app/build.gradle.kts` e envie uma tag (`git tag v2.5 && git push origin v2.5`) — o Actions compila, assina e publica o `Budila.apk`. Para uma compilação local assinada, copie `keystore.properties.example` para `keystore.properties` e informe sua chave; sem ela sai um APK não assinado. As capturas de tela (inclusive em inglês, alemão e espanhol) são refeitas por `./gradlew testDebugUnitTest` (Robolectric, sem celular) e aparecem em `screenshots/`. As imagens do README em todos os idiomas são geradas por `node tools/readme/build.mjs`; os textos delas ficam em `tools/readme/strings.json`.
 
 **Tecnologias:** Kotlin · Jetpack Compose · Material 3 · [MaterialKolor](https://github.com/jordond/MaterialKolor) · AlarmManager · Foreground Service.
 

@@ -8,6 +8,8 @@ import { fileURLToPath } from 'node:url';
 const DIR = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.resolve(DIR, '../../assets/readme');
 const STR = JSON.parse(fs.readFileSync(path.join(DIR, 'strings.json'), 'utf8'));
+// Версия берётся из versionName в app/build.gradle.kts; в strings.json — {version}.
+const VERSION = fs.readFileSync(path.resolve(DIR, '../../app/build.gradle.kts'), 'utf8').match(/versionName\s*=\s*"([^"]+)"/)[1];
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 // *слово* — акцентный цвет
@@ -63,7 +65,7 @@ ${SANS}
 <g class="f d1">
   <circle cx="44" cy="40" r="6" fill="#B8C4FF"/>
   <text x="58" y="45.5" class="m" font-size="17" font-weight="700" fill="#E4E1E9">budila</text>
-  <text x="840" y="45" class="m" font-size="11" fill="#8F909A" text-anchor="end" letter-spacing="1">v1.5</text>
+  <text x="840" y="45" class="m" font-size="11" fill="#8F909A" text-anchor="end" letter-spacing="1">v${VERSION}</text>
 </g>
 
 <text x="40" y="98" class="m f d2" font-size="10" fill="#8F909A" letter-spacing="3">${esc(fit(t.hero.tag, 52))}</text>
@@ -234,7 +236,7 @@ ${q.no.map((s, i) => no(i, s)).join('\n')}
   </g>
 </g>
 
-<text x="40" y="430" class="m f d4" font-size="9.5" fill="#6B6C76">${esc(fit(q.source, 130))}</text>
+<text x="40" y="430" class="m f d4" font-size="9.5" fill="#6B6C76">${esc(fit(q.source.replace('{version}', VERSION), 130))}</text>
 </svg>
 `;
 }

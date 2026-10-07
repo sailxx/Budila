@@ -86,7 +86,7 @@ cd Budila
 ./gradlew assembleRelease
 ```
 
-Sürümler GitHub'da otomatik derlenir: `app/build.gradle.kts` içinde `versionCode`/`versionName` değerini artırın ve bir etiket gönderin (`git tag v1.6 && git push origin v1.6`) — Actions `Budila.apk` dosyasını derler, imzalar ve yayınlar. Yerel imzalı derleme için `keystore.properties.example` dosyasını `keystore.properties` olarak kopyalayıp anahtarınızı yazın; o olmadan imzasız bir APK çıkar. Ekran görüntüleri (İngilizce, Almanca ve İspanyolca olanlar dahil) `./gradlew testDebugUnitTest` ile yeniden çizilir (Robolectric, telefon gerekmez) ve `screenshots/` klasörüne düşer. Tüm dillerdeki README görsellerini `node tools/readme/build.mjs` oluşturur; metinleri `tools/readme/strings.json` dosyasındadır.
+Sürümler GitHub'da otomatik derlenir: `app/build.gradle.kts` içinde `versionCode`/`versionName` değerini artırın ve bir etiket gönderin (`git tag v2.5 && git push origin v2.5`) — Actions `Budila.apk` dosyasını derler, imzalar ve yayınlar. Yerel imzalı derleme için `keystore.properties.example` dosyasını `keystore.properties` olarak kopyalayıp anahtarınızı yazın; o olmadan imzasız bir APK çıkar. Ekran görüntüleri (İngilizce, Almanca ve İspanyolca olanlar dahil) `./gradlew testDebugUnitTest` ile yeniden çizilir (Robolectric, telefon gerekmez) ve `screenshots/` klasörüne düşer. Tüm dillerdeki README görsellerini `node tools/readme/build.mjs` oluşturur; metinleri `tools/readme/strings.json` dosyasındadır.
 
 **Teknolojiler:** Kotlin · Jetpack Compose · Material 3 · [MaterialKolor](https://github.com/jordond/MaterialKolor) · AlarmManager · Foreground Service.
 

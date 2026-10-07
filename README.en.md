@@ -86,7 +86,7 @@ cd Budila
 ./gradlew assembleRelease
 ```
 
-Releases are built on GitHub automatically: bump `versionCode`/`versionName` in `app/build.gradle.kts` and push a tag (`git tag v1.6 && git push origin v1.6`) — Actions will build, sign and publish `Budila.apk`. For a local signed build, copy `keystore.properties.example` to `keystore.properties` and fill in your key; without it you get an unsigned APK. Screenshots (including English, German and Spanish ones) are redrawn by `./gradlew testDebugUnitTest` (Robolectric, no phone needed) and land in `screenshots/`. The README images in every language are built by `node tools/readme/build.mjs`; their texts live in `tools/readme/strings.json`.
+Releases are built on GitHub automatically: bump `versionCode`/`versionName` in `app/build.gradle.kts` and push a tag (`git tag v2.5 && git push origin v2.5`) — Actions will build, sign and publish `Budila.apk`. For a local signed build, copy `keystore.properties.example` to `keystore.properties` and fill in your key; without it you get an unsigned APK. Screenshots (including English, German and Spanish ones) are redrawn by `./gradlew testDebugUnitTest` (Robolectric, no phone needed) and land in `screenshots/`. The README images in every language are built by `node tools/readme/build.mjs`; their texts live in `tools/readme/strings.json`.
 
 **Stack:** Kotlin · Jetpack Compose · Material 3 · [MaterialKolor](https://github.com/jordond/MaterialKolor) · AlarmManager · Foreground Service.
 
