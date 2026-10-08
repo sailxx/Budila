@@ -168,15 +168,36 @@ internal fun rememberPermissions(): Permissions {
                 Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM, Uri.parse("package:${context.packageName}")),
             )
         },
-        fixFullScreen = {
-            context.startActivity(
-                Intent(
-                    Settings.ACTION_MANAGE_APP_USE_FULL_SCREEN_INTENT,
-                    Uri.parse("package:${context.packageName}"),
-                ),
-            )
-        },
+        fixFullScreen = { openFullScreenSettings(context) },
     )
+}
+
+/**
+ * Экран разрешения на полноэкранные оповещения. На части прошивок (Xiaomi/HyperOS и др.)
+ * стандартного экрана нет — тогда открываем первый, который найдётся: разрешения MIUI,
+ * настройки уведомлений приложения, карточку приложения.
+ */
+private fun openFullScreenSettings(context: android.content.Context) {
+    val pkg = context.packageName
+    val pkgUri = Uri.parse("package:$pkg")
+    val candidates = buildList {
+        if (Build.VERSION.SDK_INT >= 34) add(Intent(Settings.ACTION_MANAGE_APP_USE_FULL_SCREEN_INTENT, pkgUri))
+        add(
+            Intent("miui.intent.action.APP_PERM_EDITOR")
+                .setClassName("com.miui.securitycenter", "com.miui.permcenter.permissions.PermissionsEditorActivity")
+                .putExtra("extra_pkgname", pkg),
+        )
+        add(Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(Settings.EXTRA_APP_PACKAGE, pkg))
+        add(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, pkgUri))
+    }
+    for (intent in candidates) {
+        try {
+            context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+            return
+        } catch (_: Exception) {
+            // ActivityNotFoundException или SecurityException — пробуем следующий экран
+        }
+    }
 }
 
 /** Сохранение и удаление будильников с сообщением внизу экрана (и «Вернуть» после удаления). */
