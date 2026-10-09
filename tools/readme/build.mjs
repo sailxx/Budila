@@ -4,6 +4,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { renderPngs } from './png.mjs';
 
 const DIR = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.resolve(DIR, '../../assets/readme');
@@ -345,3 +346,4 @@ for (const [code, t] of Object.entries(STR)) {
 }
 if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
 console.log(`${Object.keys(STR).length} языков × ${Object.keys(parts).length} картинок → assets/readme`);
+renderPngs();
