@@ -84,6 +84,9 @@ val ALARM_COLORS = listOf(
 
 fun dayShortNames(context: Context): List<String> = context.resources.getStringArray(R.array.days_short).toList()
 
+/** Номера дней (0 — понедельник) в порядке показа: неделя начинается с дня из настроек. */
+fun weekOrder(start: WeekStart = SettingsRepository.current.weekStart): List<Int> = (0..6).map { (it + start.offset) % 7 }
+
 fun defaultTags(context: Context): List<String> = context.resources.getStringArray(R.array.default_tags).toList()
 
 fun formatTime(context: Context, hour: Int, minute: Int): String {
@@ -98,7 +101,9 @@ fun daysText(context: Context, days: Int): String = when (days) {
     0b1111111 -> context.getString(R.string.repeat_every_day)
     0b0011111 -> context.getString(R.string.repeat_weekdays)
     0b1100000 -> context.getString(R.string.repeat_weekend)
-    else -> dayShortNames(context).filterIndexed { i, _ -> days and (1 shl i) != 0 }.joinToString(", ")
+    else -> dayShortNames(context).let { names ->
+        weekOrder().filter { days and (1 shl it) != 0 }.joinToString(", ") { names[it] }
+    }
 }
 
 fun untilText(context: Context, target: ZonedDateTime, now: ZonedDateTime = ZonedDateTime.now()): String {

@@ -79,7 +79,6 @@ internal fun InstrumentListScreen(onOpenSettings: () -> Unit = {}) {
     val allTags = remember(alarms) { alarms.flatMap { it.tags }.distinct().sorted() }
     if (tagFilter != null && tagFilter !in allTags) tagFilter = null
     val shown = if (tagFilter == null) alarms else alarms.filter { tagFilter in it.tags }
-    val locale = appLocale(context)
 
     Box(Modifier.fillMaxSize().background(colors.bg)) {
         LazyColumn(
@@ -93,16 +92,8 @@ internal fun InstrumentListScreen(onOpenSettings: () -> Unit = {}) {
                 Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().padding(bottom = 6.dp)) {
                     Wordmark()
                     Spacer(Modifier.weight(1f))
-                    Text(formatTime(context, now.hour, now.minute), style = IType.reading.copy(fontSize = 15.sp), color = colors.ink)
-                    Spacer(Modifier.width(14.dp))
                     IconKey(onOpenSettings) { Icon(Icons.Rounded.Tune, stringResource(R.string.settings), Modifier.size(20.dp)) }
                 }
-            }
-            item(key = "date") {
-                val date = remember(now.toLocalDate(), locale) {
-                    now.format(DateTimeFormatter.ofPattern(datePattern(locale), locale)).replaceFirstChar { it.uppercase() }
-                }
-                Text(date, style = IType.headline, color = colors.ink, modifier = Modifier.padding(top = 4.dp, bottom = 6.dp))
             }
             item(key = "next") { NextWell(alarms, now) }
             if (!perms.notifOk) item(key = "p_notif") {
@@ -344,7 +335,8 @@ private fun DayLetters(days: Int, on: Boolean) {
     val colors = LocalInstrument.current
     val names = remember { dayShortNames(context) }
     Row(horizontalArrangement = Arrangement.spacedBy(7.dp)) {
-        names.forEachIndexed { i, name ->
+        weekOrder().forEach { i ->
+            val name = names[i]
             val lit = days and (1 shl i) != 0
             Text(
                 name.take(2).uppercase(),
@@ -543,7 +535,9 @@ internal fun InstrumentEditorContent(
         CasingLegend(stringResource(R.string.repeat_label, daysText(context, days)))
         Spacer(Modifier.height(8.dp))
         Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-            dayShortNames(context).forEachIndexed { i, name ->
+            val names = dayShortNames(context)
+            weekOrder().forEach { i ->
+                val name = names[i]
                 val bit = 1 shl i
                 val sel = days and bit != 0
                 Key({ days = days xor bit }, Modifier.weight(1f).height(44.dp), latched = sel, contentColor = if (sel) colors.ink else colors.muted) {
@@ -719,10 +713,13 @@ internal fun InstrumentRingingScreen(
     onDismiss: () -> Unit,
     task: WakeTask = WakeTask.NONE,
     snoozesLeft: Int? = null,
+    gesture: DismissGesture = SettingsRepository.current.dismissGesture,
 ) {
     val context = LocalContext.current
     val colors = LocalInstrument.current
     val timeout = remember { SettingsRepository.current.timeoutMinutes * 60 }
+    // 0 — звонок не затихает сам: отсчёта нет, все сегменты горят
+    val never = timeout <= 0
     val startedAt = remember { System.currentTimeMillis() }
     val now = rememberNow()
     val elapsed = ((now.toInstant().toEpochMilli() - startedAt) / 1000).toInt().coerceIn(0, timeout)
@@ -754,10 +751,12 @@ internal fun InstrumentRingingScreen(
 
         Well(Modifier.fillMaxWidth(), padding = PaddingValues(start = 18.dp, end = 18.dp, top = 18.dp, bottom = 14.dp)) {
             LegendRow(stringResource(R.string.legend_ringing)) {
-                Text(
-                    stringResource(R.string.legend_silence, "%d:%02d".format(left / 60, left % 60)).uppercase(),
-                    style = IType.label, color = colors.wellDim,
-                )
+                if (!never) {
+                    Text(
+                        stringResource(R.string.legend_silence, "%d:%02d".format(left / 60, left % 60)).uppercase(),
+                        style = IType.label, color = colors.wellDim,
+                    )
+                }
             }
             Spacer(Modifier.height(10.dp))
             BoxWithConstraints(Modifier.fillMaxWidth(), contentAlignment = Alignment.CenterEnd) {
@@ -770,15 +769,22 @@ internal fun InstrumentRingingScreen(
                 }
             }
             Spacer(Modifier.height(14.dp))
-            Segments(24, (24 * left + timeout - 1) / timeout.coerceAtLeast(1), color = colors.red)
+            Segments(24, if (never) 24 else (24 * left + timeout - 1) / timeout.coerceAtLeast(1), color = colors.red)
         }
 
         Spacer(Modifier.weight(1f))
-        PrimaryKey(
-            stringResource(taskActionText(task)), onDismiss,
+        val action = stringResource(taskActionText(task))
+        DismissControl(
+            gesture, action, taskIcon(task), onDismiss,
+            DismissStyle(RoundedCornerShape(8.dp), colors.key, colors.keyInk, colors.primary, colors.onPrimary, IType.keyText),
             Modifier.fillMaxWidth().height(72.dp),
-            icon = { Icon(taskIcon(task), null) },
-        )
+        ) {
+            PrimaryKey(
+                action, onDismiss,
+                Modifier.fillMaxWidth().height(72.dp),
+                icon = { Icon(taskIcon(task), null) },
+            )
+        }
         if (onSnooze != null) {
             Spacer(Modifier.height(12.dp))
             TextKey(

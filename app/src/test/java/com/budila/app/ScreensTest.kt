@@ -198,7 +198,7 @@ class ScreensTest {
         shot("i6_ringing_oled", custom = instrument(dark = DarkMode.DARK, amoled = true)) { InstrumentRingingScreen("Работа", onSnooze = {}, onDismiss = {}) }
 
     @Test fun iSettings() {
-        RuntimeEnvironment.setQualifiers("+h2400dp")
+        RuntimeEnvironment.setQualifiers("+h3200dp")
         shot("i7_settings", custom = instrument()) { InstrumentSettingsScreen(onBack = {}) }
     }
 
@@ -219,6 +219,18 @@ class ScreensTest {
     }
 
     @Test fun iCheck() = shot("i13_check", custom = instrument()) { InstrumentCheckScreen(onAwake = {}) }
+
+    @Test fun iRingingSlide() = shot("i14_ringing_slide", custom = instrument()) {
+        InstrumentRingingScreen("Работа", onSnooze = {}, onDismiss = {}, gesture = DismissGesture.SLIDE)
+    }
+
+    @Test fun iRingingHold() = shot("i15_ringing_hold", custom = instrument(dark = DarkMode.DARK)) {
+        InstrumentRingingScreen("Работа", onSnooze = {}, onDismiss = {}, gesture = DismissGesture.HOLD)
+    }
+
+    @Test fun ringingSlide() = shot("19_ringing_slide") {
+        RingingScreen("Работа", onSnooze = {}, onDismiss = {}, gesture = DismissGesture.SLIDE)
+    }
 
     @Test fun math() = shot("17_math") {
         val state = remember { WakeTaskState(WakeTask.MATH, "", random = kotlin.random.Random(3)) }

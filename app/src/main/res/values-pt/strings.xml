@@ -59,7 +59,6 @@
     <string name="empty_text">Toque em “Adicionar” para criar o primeiro</string>
 
     <string name="gentle_wake">Despertar suave</string>
-    <string name="gentle_wake_desc">Início silencioso: o volume sobe por cerca de um minuto, vibração após 30 segundos</string>
     <string name="color_selected">Selecionado</string>
     <string name="color_none">Sem cor</string>
     <string name="editor_new">Novo alarme</string>
@@ -88,7 +87,6 @@
     <string name="ringtone_picker_title">Toque do alarme</string>
     <string name="ringtone_default">Toque de alarme padrão</string>
     <string name="ringtone_custom">Toque próprio</string>
-    <string name="gentle_default_desc">Para novos alarmes: início silencioso, o volume sobe por cerca de um minuto, vibração após 30 segundos. Pode ser desligado em cada alarme</string>
     <string name="snooze_title">Adiar por</string>
     <string name="timeout_title">Silenciar se não atender após</string>
     <string name="minutes_short">%1$d min</string>
@@ -178,4 +176,23 @@
     <string name="task_repeats_title">Repetir a tarefa</string>
     <string name="task_repeats_desc">Quantas contas resolver ou quantas vezes seguidas digitar a senha</string>
     <string name="task_entry">Entrada %1$d de %2$d</string>
+    <string name="gentle_wake_desc">Início suave: o volume sobe aos poucos, a vibração na metade</string>
+    <string name="gentle_default_desc">Para novos alarmes: início suave, o volume sobe aos poucos. Pode ser desativado em cada alarme</string>
+    <string name="dismiss_gesture_title">Desligar o alarme com</string>
+    <string name="dismiss_gesture_desc">Quanto mais difícil o gesto, menor a chance de desligar dormindo. Com uma tarefa, o gesto abre a tarefa</string>
+    <string name="gesture_tap">Toque</string>
+    <string name="gesture_slide">Deslizar</string>
+    <string name="gesture_hold">Segurar</string>
+    <string name="gesture_hold_hint">Segure até encher</string>
+    <string name="volume_keys_title">Botões de volume durante o alarme</string>
+    <string name="volume_keys_volume">Volume</string>
+    <string name="volume_keys_snooze">Adiar</string>
+    <string name="volume_keys_dismiss">Desligar</string>
+    <string name="volume_keys_nothing">Nada</string>
+    <string name="week_start_title">A semana começa no</string>
+    <string name="never">Nunca</string>
+    <string name="alarm_volume">Volume do alarme</string>
+    <string name="ramp_title">Aumentar o volume aos poucos</string>
+    <string name="ramp_desc">Para alarmes com despertar suave</string>
+    <string name="seconds_short">%1$d s</string>
 </resources>

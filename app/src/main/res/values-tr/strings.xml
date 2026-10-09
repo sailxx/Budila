@@ -59,7 +59,6 @@
     <string name="empty_text">İlkini oluşturmak için “Ekle”ye dokunun</string>
 
     <string name="gentle_wake">Sakin uyanış</string>
-    <string name="gentle_wake_desc">Sessiz başlangıç: ses yaklaşık bir dakikada yükselir, titreşim 30 saniye sonra</string>
     <string name="color_selected">Seçili</string>
     <string name="color_none">Renksiz</string>
     <string name="editor_new">Yeni alarm</string>
@@ -88,7 +87,6 @@
     <string name="ringtone_picker_title">Alarm melodisi</string>
     <string name="ringtone_default">Varsayılan alarm melodisi</string>
     <string name="ringtone_custom">Özel melodi</string>
-    <string name="gentle_default_desc">Yeni alarmlar için: sessiz başlangıç, ses yaklaşık bir dakikada yükselir, titreşim 30 saniye sonra. Her alarm için ayrı kapatılabilir</string>
     <string name="snooze_title">Erteleme süresi</string>
     <string name="timeout_title">Yanıt verilmezse susma süresi</string>
     <string name="minutes_short">%1$d dk</string>
@@ -178,4 +176,23 @@
     <string name="task_repeats_title">Görevi tekrarla</string>
     <string name="task_repeats_desc">Kaç işlem çözüleceği veya parolanın arka arkaya kaç kez yazılacağı</string>
     <string name="task_entry">Giriş %1$d / %2$d</string>
+    <string name="gentle_wake_desc">Sessiz başlangıç: ses yavaşça yükselir, titreşim yarıda başlar</string>
+    <string name="gentle_default_desc">Yeni alarmlar için: sessiz başlangıç, ses yavaşça yükselir. Her alarmda ayrı kapatılabilir</string>
+    <string name="dismiss_gesture_title">Alarmı kapatma hareketi</string>
+    <string name="dismiss_gesture_desc">Hareket ne kadar zorsa, uykuda kapatma ihtimali o kadar düşük. Görevli alarmda hareket görevi açar</string>
+    <string name="gesture_tap">Dokunma</string>
+    <string name="gesture_slide">Kaydırma</string>
+    <string name="gesture_hold">Basılı tutma</string>
+    <string name="gesture_hold_hint">Dolana kadar basılı tut</string>
+    <string name="volume_keys_title">Alarm sırasında ses tuşları</string>
+    <string name="volume_keys_volume">Ses</string>
+    <string name="volume_keys_snooze">Ertele</string>
+    <string name="volume_keys_dismiss">Kapat</string>
+    <string name="volume_keys_nothing">Hiçbir şey</string>
+    <string name="week_start_title">Hafta başlangıcı</string>
+    <string name="never">Asla</string>
+    <string name="alarm_volume">Alarm sesi</string>
+    <string name="ramp_title">Sesi yavaşça artır</string>
+    <string name="ramp_desc">Yumuşak uyandırmalı alarmlar için</string>
+    <string name="seconds_short">%1$d sn</string>
 </resources>

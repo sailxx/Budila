@@ -59,7 +59,6 @@
     <string name="empty_text">Нажмите «Добавить», чтобы создать первый</string>
 
     <string name="gentle_wake">Спокойное пробуждение</string>
-    <string name="gentle_wake_desc">Тихий старт: громкость растёт около минуты, вибрация — через 30 секунд</string>
     <string name="color_selected">Выбран</string>
     <string name="color_none">Без цвета</string>
     <string name="editor_new">Новый будильник</string>
@@ -88,7 +87,6 @@
     <string name="ringtone_picker_title">Мелодия будильника</string>
     <string name="ringtone_default">Мелодия будильника по умолчанию</string>
     <string name="ringtone_custom">Своя мелодия</string>
-    <string name="gentle_default_desc">Для новых будильников: тихий старт, громкость растёт около минуты, вибрация — через 30 секунд. Можно выключить у каждого будильника отдельно</string>
     <string name="snooze_title">Отложить на</string>
     <string name="timeout_title">Затихнуть, если не ответили, через</string>
     <string name="minutes_short">%1$d мин</string>
@@ -178,4 +176,23 @@
     <string name="task_repeats_title">Повторить задание</string>
     <string name="task_repeats_desc">Сколько примеров решить или сколько раз подряд ввести пароль</string>
     <string name="task_entry">Ввод %1$d из %2$d</string>
+    <string name="gentle_wake_desc">Тихий старт: громкость растёт плавно, вибрация — с середины</string>
+    <string name="gentle_default_desc">Для новых будильников: тихий старт, громкость растёт плавно. Можно выключить у каждого будильника отдельно</string>
+    <string name="dismiss_gesture_title">Жест выключения</string>
+    <string name="dismiss_gesture_desc">Чем сложнее жест, тем меньше шанс выключить звонок во сне. С заданием жест открывает задание</string>
+    <string name="gesture_tap">Нажатие</string>
+    <string name="gesture_slide">Свайп</string>
+    <string name="gesture_hold">Удержание</string>
+    <string name="gesture_hold_hint">Держи, пока не заполнится</string>
+    <string name="volume_keys_title">Кнопки громкости во время звонка</string>
+    <string name="volume_keys_volume">Громкость</string>
+    <string name="volume_keys_snooze">Отложить</string>
+    <string name="volume_keys_dismiss">Выключить</string>
+    <string name="volume_keys_nothing">Ничего</string>
+    <string name="week_start_title">Первый день недели</string>
+    <string name="never">Никогда</string>
+    <string name="alarm_volume">Громкость будильника</string>
+    <string name="ramp_title">Нарастание громкости</string>
+    <string name="ramp_desc">Для будильников со спокойным пробуждением</string>
+    <string name="seconds_short">%1$d с</string>
 </resources>
