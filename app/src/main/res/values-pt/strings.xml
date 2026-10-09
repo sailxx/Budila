@@ -143,4 +143,39 @@
     <string name="icon_orange">Laranja</string>
     <string name="icon_white">Branco</string>
     <string name="icon_desc">A tela inicial atualizará o ícone em alguns segundos</string>
+
+    <!-- Проверка пробуждения -->
+    <string name="task_title">Para desligar</string>
+    <string name="task_none">Botão</string>
+    <string name="task_math">Contas</string>
+    <string name="task_password">Senha</string>
+    <string name="task_hint_none">Desliga com um toque</string>
+    <string name="password_legend">Senha (a mesma para todos os alarmes)</string>
+    <string name="password_show">Mostrar senha</string>
+    <string name="task_action_math">Resolver e desligar</string>
+    <string name="task_action_password">Digitar senha</string>
+    <string name="task_prove">Prove que está acordado</string>
+    <string name="task_problem">Conta %1$d de %2$d</string>
+    <string name="task_wrong">Errado, de novo</string>
+    <string name="password_wrong">Senha incorreta</string>
+    <string name="task_submit">Verificar</string>
+    <string name="snooze_left">%1$s · restam %2$d</string>
+    <string name="check_title">Levantou mesmo?</string>
+    <string name="check_awake">Estou acordado</string>
+    <string name="check_hint">Sem resposta em um minuto, o alarme toca de novo e não dá para adiar</string>
+    <string name="legend_check">Verificação</string>
+    <string name="section_wake">Verificação de despertar</string>
+    <string name="password_title">Senha</string>
+    <string name="password_desc">Para alarmes com a tarefa «Senha». Escolha uma que exija pensar. Sem senha, serão contas</string>
+    <string name="max_snoozes_title">Limite de adiamentos</string>
+    <string name="max_snoozes_desc">Quantas vezes um alarme pode ser adiado</string>
+    <string name="awake_check_title">Verificar de novo</string>
+    <string name="awake_check_desc">Depois desse tempo do desligamento, o Budila pergunta «Levantou mesmo?». Sem resposta em um minuto, toca de novo</string>
+    <string name="off">Não</string>
+    <string name="task_hint_math">Para desligar, resolva contas. Repetições: %1$d</string>
+    <string name="task_hint_password">Para desligar, digite sua senha. Repetições: %1$d</string>
+    <string name="default_task_title">Tarefa para novos alarmes</string>
+    <string name="task_repeats_title">Repetir a tarefa</string>
+    <string name="task_repeats_desc">Quantas contas resolver ou quantas vezes seguidas digitar a senha</string>
+    <string name="task_entry">Entrada %1$d de %2$d</string>
 </resources>

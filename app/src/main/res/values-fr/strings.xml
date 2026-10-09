@@ -143,4 +143,39 @@
     <string name="icon_orange">Orange</string>
     <string name="icon_white">Blanche</string>
     <string name="icon_desc">Le lanceur mettra à jour l’icône dans quelques secondes</string>
+
+    <!-- Проверка пробуждения -->
+    <string name="task_title">Pour arrêter</string>
+    <string name="task_none">Bouton</string>
+    <string name="task_math">Calcul</string>
+    <string name="task_password">Mot de passe</string>
+    <string name="task_hint_none">Un appui arrête l\'alarme</string>
+    <string name="password_legend">Mot de passe (commun à toutes les alarmes)</string>
+    <string name="password_show">Afficher le mot de passe</string>
+    <string name="task_action_math">Résoudre et arrêter</string>
+    <string name="task_action_password">Saisir le mot de passe</string>
+    <string name="task_prove">Prouvez que vous êtes réveillé</string>
+    <string name="task_problem">Calcul %1$d sur %2$d</string>
+    <string name="task_wrong">Faux, encore une fois</string>
+    <string name="password_wrong">Mot de passe incorrect</string>
+    <string name="task_submit">Vérifier</string>
+    <string name="snooze_left">%1$s · reste %2$d</string>
+    <string name="check_title">Vraiment levé ?</string>
+    <string name="check_awake">Je suis réveillé</string>
+    <string name="check_hint">Sans réponse dans la minute, l\'alarme sonne à nouveau, sans possibilité de répéter</string>
+    <string name="legend_check">Contrôle</string>
+    <string name="section_wake">Contrôle du réveil</string>
+    <string name="password_title">Mot de passe</string>
+    <string name="password_desc">Pour les alarmes avec la tâche « Mot de passe ». Choisissez-en un qui demande réflexion. Sans mot de passe, ce sera du calcul</string>
+    <string name="max_snoozes_title">Limite de répétitions</string>
+    <string name="max_snoozes_desc">Combien de fois une alarme peut être répétée</string>
+    <string name="awake_check_title">Revérifier</string>
+    <string name="awake_check_desc">Ce délai après l\'arrêt, Budila demande « Vraiment levé ? ». Sans réponse dans la minute, l\'alarme sonne à nouveau</string>
+    <string name="off">Non</string>
+    <string name="task_hint_math">Pour l\'arrêter, résolvez des calculs. Répétitions : %1$d</string>
+    <string name="task_hint_password">Pour l\'arrêter, saisissez votre mot de passe. Répétitions : %1$d</string>
+    <string name="default_task_title">Tâche des nouvelles alarmes</string>
+    <string name="task_repeats_title">Répéter la tâche</string>
+    <string name="task_repeats_desc">Combien de calculs résoudre ou combien de fois saisir le mot de passe d\'affilée</string>
+    <string name="task_entry">Saisie %1$d sur %2$d</string>
 </resources>

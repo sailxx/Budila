@@ -17,6 +17,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.unit.dp
@@ -197,11 +198,34 @@ class ScreensTest {
         shot("i6_ringing_oled", custom = instrument(dark = DarkMode.DARK, amoled = true)) { InstrumentRingingScreen("Работа", onSnooze = {}, onDismiss = {}) }
 
     @Test fun iSettings() {
-        RuntimeEnvironment.setQualifiers("+h1900dp")
+        RuntimeEnvironment.setQualifiers("+h2400dp")
         shot("i7_settings", custom = instrument()) { InstrumentSettingsScreen(onBack = {}) }
     }
 
     @Test fun iListMidnight() { seed(sample); shot("i8_list_midnight", custom = instrument(InstrumentTheme.MIDNIGHT)) { InstrumentListScreen() } }
+
+    @Test fun iRingingTask() = shot("i10_ringing_task", custom = instrument()) {
+        InstrumentRingingScreen("Работа", onSnooze = {}, onDismiss = {}, task = WakeTask.PASSWORD, snoozesLeft = 1)
+    }
+
+    @Test fun iMath() = shot("i11_math", custom = instrument()) {
+        val state = remember { WakeTaskState(WakeTask.MATH, "", random = kotlin.random.Random(3)).apply { type('4'); type('2') } }
+        InstrumentTaskScreen(state, onSolved = {}, onBack = {})
+    }
+
+    @Test fun iPassword() = shot("i12_password", custom = instrument()) {
+        val state = remember { WakeTaskState(WakeTask.PASSWORD, "утро", repeats = 2).apply { edit("сон"); submit(); edit("утр") } }
+        InstrumentTaskScreen(state, onSolved = {}, onBack = {})
+    }
+
+    @Test fun iCheck() = shot("i13_check", custom = instrument()) { InstrumentCheckScreen(onAwake = {}) }
+
+    @Test fun math() = shot("17_math") {
+        val state = remember { WakeTaskState(WakeTask.MATH, "", random = kotlin.random.Random(3)) }
+        TaskScreen(state, onSolved = {}, onBack = {})
+    }
+
+    @Test fun check() = shot("18_check") { CheckScreen(onAwake = {}) }
 
     @Test fun iEmpty() { seed(emptyList()); shot("i9_empty", custom = instrument()) { InstrumentListScreen() } }
 }

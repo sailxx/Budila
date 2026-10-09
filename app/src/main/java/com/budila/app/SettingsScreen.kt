@@ -237,6 +237,51 @@ internal fun SettingsScreen(onBack: () -> Unit) {
                 ) { v -> SettingsRepository.update { it.copy(defaultVibrate = v) } }
             }
 
+            item { SectionHeader(stringResource(R.string.section_wake)) }
+            item {
+                ChoiceItem(
+                    taskIcon(s.defaultTask), stringResource(R.string.default_task_title),
+                    WakeTask.entries.map { it.ordinal }, s.defaultTask.ordinal,
+                    subtitle = taskHint(s.defaultTask, s.taskRepeats),
+                    label = { stringResource(WakeTask.entries[it].title) },
+                ) { v -> SettingsRepository.update { it.copy(defaultTask = WakeTask.entries[v]) } }
+            }
+            item {
+                ChoiceItem(
+                    Icons.Rounded.Repeat, stringResource(R.string.task_repeats_title), TASK_REPEAT_OPTIONS, s.taskRepeats,
+                    subtitle = stringResource(R.string.task_repeats_desc),
+                    label = { "×$it" },
+                ) { v -> SettingsRepository.update { it.copy(taskRepeats = v) } }
+            }
+            item {
+                Column(Modifier.padding(horizontal = 16.dp)) {
+                    MaterialPasswordField(
+                        s.password, { v -> SettingsRepository.update { it.copy(password = v) } },
+                        stringResource(R.string.password_title),
+                    )
+                    Text(
+                        stringResource(R.string.password_desc),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(top = 6.dp, bottom = 4.dp),
+                    )
+                }
+            }
+            item {
+                ChoiceItem(
+                    Icons.Rounded.Snooze, stringResource(R.string.max_snoozes_title), listOf(-1, 0, 1, 2, 3), s.maxSnoozes,
+                    subtitle = stringResource(R.string.max_snoozes_desc),
+                    label = { if (it < 0) "∞" else "$it" },
+                ) { v -> SettingsRepository.update { it.copy(maxSnoozes = v) } }
+            }
+            item {
+                ChoiceItem(
+                    Icons.Rounded.Verified, stringResource(R.string.awake_check_title), listOf(0, 3, 5, 10), s.awakeCheckMinutes,
+                    subtitle = stringResource(R.string.awake_check_desc),
+                    label = { if (it == 0) context.getString(R.string.off) else context.getString(R.string.minutes_short, it) },
+                ) { v -> SettingsRepository.update { it.copy(awakeCheckMinutes = v) } }
+            }
+
             item { SectionHeader(stringResource(R.string.section_about)) }
             item { AboutCard(version) }
             item {
@@ -351,19 +396,30 @@ private fun SwitchItem(icon: ImageVector, title: String, subtitle: String?, chec
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun ChoiceItem(icon: ImageVector, title: String, options: List<Int>, selected: Int, onSelect: (Int) -> Unit) {
+private fun ChoiceItem(
+    icon: ImageVector,
+    title: String,
+    options: List<Int>,
+    selected: Int,
+    subtitle: String? = null,
+    label: @Composable (Int) -> String = { stringResource(R.string.minutes_short, it) },
+    onSelect: (Int) -> Unit,
+) {
     ListItem(
         headlineContent = { Text(title) },
         leadingContent = { Icon(icon, null) },
         supportingContent = {
-            SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth().padding(top = 8.dp)) {
-                options.forEachIndexed { i, o ->
-                    SegmentedButton(
-                        selected = o == selected,
-                        onClick = { onSelect(o) },
-                        shape = SegmentedButtonDefaults.itemShape(i, options.size),
-                        icon = {},
-                    ) { Text(stringResource(R.string.minutes_short, o), maxLines = 1) }
+            Column {
+                if (subtitle != null) Text(subtitle)
+                SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth().padding(top = 8.dp)) {
+                    options.forEachIndexed { i, o ->
+                        SegmentedButton(
+                            selected = o == selected,
+                            onClick = { onSelect(o) },
+                            shape = SegmentedButtonDefaults.itemShape(i, options.size),
+                            icon = {},
+                        ) { Text(label(o), maxLines = 1) }
+                    }
                 }
             }
         },

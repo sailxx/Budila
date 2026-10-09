@@ -20,6 +20,8 @@ import java.util.Locale
 
 const val EXTRA_ALARM_ID = "alarm_id"
 const val EXTRA_SNOOZE = "snooze"
+const val EXTRA_SNOOZE_COUNT = "snooze_count"
+const val EXTRA_CHECK = "check"
 const val ACTION_FIRE = "com.budila.app.FIRE"
 
 
@@ -37,6 +39,8 @@ data class Alarm(
     val color: Int? = null,
     /** Спокойное пробуждение: тихий старт, громкость растёт около минуты, вибрация позже */
     val gentle: Boolean = true,
+    /** Что нужно сделать, чтобы выключить звонок (доказать, что проснулся) */
+    val task: WakeTask = WakeTask.NONE,
 ) {
     val isRepeating get() = days != 0
 
@@ -53,6 +57,7 @@ data class Alarm(
         .put("id", id).put("hour", hour).put("minute", minute).put("label", label)
         .put("days", days).put("enabled", enabled).put("vibrate", vibrate)
         .put("tags", JSONArray(tags)).put("color", color ?: JSONObject.NULL).put("gentle", gentle)
+        .put("task", task.name)
 
     companion object {
         fun fromJson(o: JSONObject) = Alarm(
@@ -66,6 +71,7 @@ data class Alarm(
             tags = o.optJSONArray("tags")?.let { a -> (0 until a.length()).map { a.getString(it) } } ?: emptyList(),
             color = if (o.isNull("color")) null else o.optInt("color"),
             gentle = o.optBoolean("gentle", true),
+            task = WakeTask.entries.find { it.name == o.optString("task") } ?: WakeTask.NONE,
         )
     }
 }
@@ -149,14 +155,16 @@ object AlarmRepository {
 }
 
 object AlarmScheduler {
+    private const val CHECK_REQUEST_BASE = 1_000_000
+
     fun schedule(context: Context, alarm: Alarm) {
         if (!alarm.enabled) return cancel(context, alarm.id)
         scheduleAt(context, alarm.id, alarm.nextTrigger().toInstant().toEpochMilli(), snooze = false)
     }
 
-    fun scheduleAt(context: Context, id: Int, millis: Long, snooze: Boolean) {
+    fun scheduleAt(context: Context, id: Int, millis: Long, snooze: Boolean, snoozeCount: Int = 0, check: Boolean = false) {
         val am = context.getSystemService(AlarmManager::class.java)
-        val fire = firePendingIntent(context, id, snooze)
+        val fire = firePendingIntent(context, id, snooze, snoozeCount, check)
         if (Build.VERSION.SDK_INT >= 31 && !am.canScheduleExactAlarms()) {
             am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, millis, fire)
             return
@@ -176,13 +184,22 @@ object AlarmScheduler {
         AlarmRepository.alarms.value.filter { it.enabled }.forEach { schedule(context, it) }
     }
 
-    private fun firePendingIntent(context: Context, id: Int, snooze: Boolean): PendingIntent =
+    /** Повторная проверка «точно встал?» через несколько минут после выключения. */
+    fun scheduleCheck(context: Context, id: Int, minutes: Int) =
+        scheduleAt(context, id, System.currentTimeMillis() + minutes * 60_000L, snooze = false, check = true)
+
+    // У проверки свой requestCode, чтобы она не заменила следующий звонок этого будильника
+    private fun firePendingIntent(
+        context: Context, id: Int, snooze: Boolean, snoozeCount: Int = 0, check: Boolean = false,
+    ): PendingIntent =
         PendingIntent.getBroadcast(
-            context, id,
+            context, if (check) CHECK_REQUEST_BASE + id else id,
             Intent(context, AlarmReceiver::class.java)
                 .setAction(ACTION_FIRE)
                 .putExtra(EXTRA_ALARM_ID, id)
-                .putExtra(EXTRA_SNOOZE, snooze),
+                .putExtra(EXTRA_SNOOZE, snooze)
+                .putExtra(EXTRA_SNOOZE_COUNT, snoozeCount)
+                .putExtra(EXTRA_CHECK, check),
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
         )
 }

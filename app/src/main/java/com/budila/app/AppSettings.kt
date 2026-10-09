@@ -48,6 +48,16 @@ data class AppSettings(
     val snoozeMinutes: Int = 5,
     val timeoutMinutes: Int = 10,
     val defaultVibrate: Boolean = true,
+    /** Пароль для будильников с заданием «Пароль» */
+    val password: String = "",
+    /** Задание для новых будильников */
+    val defaultTask: WakeTask = WakeTask.NONE,
+    /** Сколько раз подряд выполнить задание: решить примеров / ввести пароль */
+    val taskRepeats: Int = 3,
+    /** Сколько раз можно отложить один звонок; -1 — без ограничений */
+    val maxSnoozes: Int = -1,
+    /** Через сколько минут после выключения спросить «точно встал?»; 0 — не спрашивать */
+    val awakeCheckMinutes: Int = 0,
     /** Своя тема: тон (0–360), насыщенность и стиль палитры */
     val customHue: Float = 265f,
     val customSaturation: Float = 0.6f,
@@ -91,6 +101,11 @@ object SettingsRepository {
             snoozeMinutes = prefs.getInt("snoozeMinutes", d.snoozeMinutes),
             timeoutMinutes = prefs.getInt("timeoutMinutes", d.timeoutMinutes),
             defaultVibrate = prefs.getBoolean("defaultVibrate", d.defaultVibrate),
+            password = prefs.getString("password", null) ?: d.password,
+            defaultTask = WakeTask.entries.find { it.name == prefs.getString("defaultTask", null) } ?: d.defaultTask,
+            taskRepeats = prefs.getInt("taskRepeats", d.taskRepeats),
+            maxSnoozes = prefs.getInt("maxSnoozes", d.maxSnoozes),
+            awakeCheckMinutes = prefs.getInt("awakeCheckMinutes", d.awakeCheckMinutes),
             customHue = prefs.getFloat("customHue", d.customHue),
             customSaturation = prefs.getFloat("customSaturation", d.customSaturation),
             customStyle = CustomStyle.entries.find { it.name == prefs.getString("customStyle", null) } ?: d.customStyle,
@@ -113,6 +128,11 @@ object SettingsRepository {
             .putInt("snoozeMinutes", s.snoozeMinutes)
             .putInt("timeoutMinutes", s.timeoutMinutes)
             .putBoolean("defaultVibrate", s.defaultVibrate)
+            .putString("password", s.password)
+            .putString("defaultTask", s.defaultTask.name)
+            .putInt("taskRepeats", s.taskRepeats)
+            .putInt("maxSnoozes", s.maxSnoozes)
+            .putInt("awakeCheckMinutes", s.awakeCheckMinutes)
             .putFloat("customHue", s.customHue)
             .putFloat("customSaturation", s.customSaturation)
             .putString("customStyle", s.customStyle.name)
