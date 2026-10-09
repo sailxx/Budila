@@ -4,7 +4,7 @@
 
 <br>
 
-<img src="assets/readme/hero-pt.svg" width="100%" alt="Budila — Acorde na hora. Levante sem esforço.">
+<picture><source srcset="assets/readme/hero-pt.svg"><img src="assets/readme/png/hero-pt.png" width="100%" alt="Budila — Acorde na hora. Levante sem esforço."></picture>
 
 <a href="https://github.com/sailxx/Budila/releases/latest/download/Budila.apk"><img src="assets/readme/cta-pt.svg" height="44" alt="Baixar APK"></a>
 
@@ -14,11 +14,11 @@
 
 <br>
 
-<img src="assets/readme/screens-pt.svg" width="100%" alt="Telas do Budila: etiquetas e cores, tema próprio, alarme tocando, tema escuro">
+<picture><source srcset="assets/readme/screens-pt.svg"><img src="assets/readme/png/screens-pt.png" width="100%" alt="Telas do Budila: etiquetas e cores, tema próprio, alarme tocando, tema escuro"></picture>
 
 <br>
 
-<img src="assets/readme/features-pt.svg" width="100%" alt="O que o Budila sabe fazer">
+<picture><source srcset="assets/readme/features-pt.svg"><img src="assets/readme/png/features-pt.png" width="100%" alt="O que o Budila sabe fazer"></picture>
 
 <details>
 <summary>Mais sobre os recursos</summary>
@@ -59,11 +59,11 @@ Os alarmes são agendados pelo `AlarmClock` do sistema e tocam na hora certa mes
 
 <br>
 
-<img src="assets/readme/quality-pt.svg" width="100%" alt="Qualidade em números">
+<picture><source srcset="assets/readme/quality-pt.svg"><img src="assets/readme/png/quality-pt.png" width="100%" alt="Qualidade em números"></picture>
 
 <br>
 
-<img src="assets/readme/design-pt.svg" width="100%" alt="Código de design: Material 3 e Material You">
+<picture><source srcset="assets/readme/design-pt.svg"><img src="assets/readme/png/design-pt.png" width="100%" alt="Código de design: Material 3 e Material You"></picture>
 
 ## Instalação
 

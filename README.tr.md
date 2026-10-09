@@ -4,7 +4,7 @@
 
 <br>
 
-<img src="assets/readme/hero-tr.svg" width="100%" alt="Budila — Zamanında uyan. Kolayca kalk.">
+<picture><source srcset="assets/readme/hero-tr.svg"><img src="assets/readme/png/hero-tr.png" width="100%" alt="Budila — Zamanında uyan. Kolayca kalk."></picture>
 
 <a href="https://github.com/sailxx/Budila/releases/latest/download/Budila.apk"><img src="assets/readme/cta-tr.svg" height="44" alt="APK'yı indir"></a>
 
@@ -14,11 +14,11 @@
 
 <br>
 
-<img src="assets/readme/screens-tr.svg" width="100%" alt="Budila ekranları: etiketler ve renkler, özel tema, çalan alarm, koyu tema">
+<picture><source srcset="assets/readme/screens-tr.svg"><img src="assets/readme/png/screens-tr.png" width="100%" alt="Budila ekranları: etiketler ve renkler, özel tema, çalan alarm, koyu tema"></picture>
 
 <br>
 
-<img src="assets/readme/features-tr.svg" width="100%" alt="Budila neler yapabilir">
+<picture><source srcset="assets/readme/features-tr.svg"><img src="assets/readme/png/features-tr.png" width="100%" alt="Budila neler yapabilir"></picture>
 
 <details>
 <summary>Özellikler hakkında daha fazlası</summary>
@@ -59,11 +59,11 @@ Alarmlar sistemin `AlarmClock` hizmetiyle kurulur ve telefon uykudayken bile zam
 
 <br>
 
-<img src="assets/readme/quality-tr.svg" width="100%" alt="Rakamlarla kalite">
+<picture><source srcset="assets/readme/quality-tr.svg"><img src="assets/readme/png/quality-tr.png" width="100%" alt="Rakamlarla kalite"></picture>
 
 <br>
 
-<img src="assets/readme/design-tr.svg" width="100%" alt="Tasarım kodu: Material 3 ve Material You">
+<picture><source srcset="assets/readme/design-tr.svg"><img src="assets/readme/png/design-tr.png" width="100%" alt="Tasarım kodu: Material 3 ve Material You"></picture>
 
 ## Kurulum
 

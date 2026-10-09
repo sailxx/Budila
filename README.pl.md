@@ -4,7 +4,7 @@
 
 <br>
 
-<img src="assets/readme/hero-pl.svg" width="100%" alt="Budila — Budź się na czas. Wstawaj z łatwością.">
+<picture><source srcset="assets/readme/hero-pl.svg"><img src="assets/readme/png/hero-pl.png" width="100%" alt="Budila — Budź się na czas. Wstawaj z łatwością."></picture>
 
 <a href="https://github.com/sailxx/Budila/releases/latest/download/Budila.apk"><img src="assets/readme/cta-pl.svg" height="44" alt="Pobierz APK"></a>
 
@@ -14,11 +14,11 @@
 
 <br>
 
-<img src="assets/readme/screens-pl.svg" width="100%" alt="Ekrany Budila: tagi i kolory, własny motyw, dzwoniący budzik, ciemny motyw">
+<picture><source srcset="assets/readme/screens-pl.svg"><img src="assets/readme/png/screens-pl.png" width="100%" alt="Ekrany Budila: tagi i kolory, własny motyw, dzwoniący budzik, ciemny motyw"></picture>
 
 <br>
 
-<img src="assets/readme/features-pl.svg" width="100%" alt="Co potrafi Budila">
+<picture><source srcset="assets/readme/features-pl.svg"><img src="assets/readme/png/features-pl.png" width="100%" alt="Co potrafi Budila"></picture>
 
 <details>
 <summary>Więcej o funkcjach</summary>
@@ -59,11 +59,11 @@ Budziki są ustawiane przez systemowy `AlarmClock` i dzwonią punktualnie, nawet
 
 <br>
 
-<img src="assets/readme/quality-pl.svg" width="100%" alt="Jakość w liczbach">
+<picture><source srcset="assets/readme/quality-pl.svg"><img src="assets/readme/png/quality-pl.png" width="100%" alt="Jakość w liczbach"></picture>
 
 <br>
 
-<img src="assets/readme/design-pl.svg" width="100%" alt="Kod designu: Material 3 i Material You">
+<picture><source srcset="assets/readme/design-pl.svg"><img src="assets/readme/png/design-pl.png" width="100%" alt="Kod designu: Material 3 i Material You"></picture>
 
 ## Instalacja
 

@@ -4,7 +4,7 @@
 
 <br>
 
-<img src="assets/readme/hero-en.svg" width="100%" alt="Budila — Wake up on time. Get up with ease.">
+<picture><source srcset="assets/readme/hero-en.svg"><img src="assets/readme/png/hero-en.png" width="100%" alt="Budila — Wake up on time. Get up with ease."></picture>
 
 <a href="https://github.com/sailxx/Budila/releases/latest/download/Budila.apk"><img src="assets/readme/cta-en.svg" height="44" alt="Download APK"></a>
 
@@ -14,11 +14,11 @@
 
 <br>
 
-<img src="assets/readme/screens-en.svg" width="100%" alt="Budila screens: tags and colors, custom theme, ringing, dark theme">
+<picture><source srcset="assets/readme/screens-en.svg"><img src="assets/readme/png/screens-en.png" width="100%" alt="Budila screens: tags and colors, custom theme, ringing, dark theme"></picture>
 
 <br>
 
-<img src="assets/readme/features-en.svg" width="100%" alt="What Budila can do">
+<picture><source srcset="assets/readme/features-en.svg"><img src="assets/readme/png/features-en.png" width="100%" alt="What Budila can do"></picture>
 
 <details>
 <summary>More about the features</summary>
@@ -59,11 +59,11 @@ Alarms are set through the system `AlarmClock` and ring on time even when the ph
 
 <br>
 
-<img src="assets/readme/quality-en.svg" width="100%" alt="Quality in numbers">
+<picture><source srcset="assets/readme/quality-en.svg"><img src="assets/readme/png/quality-en.png" width="100%" alt="Quality in numbers"></picture>
 
 <br>
 
-<img src="assets/readme/design-en.svg" width="100%" alt="Design code: Material 3 and Material You">
+<picture><source srcset="assets/readme/design-en.svg"><img src="assets/readme/png/design-en.png" width="100%" alt="Design code: Material 3 and Material You"></picture>
 
 ## Install
 

@@ -4,7 +4,7 @@
 
 <br>
 
-<img src="assets/readme/hero-uk.svg" width="100%" alt="Budila — Прокидайся вчасно. Вставай легко.">
+<picture><source srcset="assets/readme/hero-uk.svg"><img src="assets/readme/png/hero-uk.png" width="100%" alt="Budila — Прокидайся вчасно. Вставай легко."></picture>
 
 <a href="https://github.com/sailxx/Budila/releases/latest/download/Budila.apk"><img src="assets/readme/cta-uk.svg" height="44" alt="Завантажити APK"></a>
 
@@ -14,11 +14,11 @@
 
 <br>
 
-<img src="assets/readme/screens-uk.svg" width="100%" alt="Екрани Budila: теги й кольори, своя тема, дзвінок, темна тема">
+<picture><source srcset="assets/readme/screens-uk.svg"><img src="assets/readme/png/screens-uk.png" width="100%" alt="Екрани Budila: теги й кольори, своя тема, дзвінок, темна тема"></picture>
 
 <br>
 
-<img src="assets/readme/features-uk.svg" width="100%" alt="Що вміє Budila">
+<picture><source srcset="assets/readme/features-uk.svg"><img src="assets/readme/png/features-uk.png" width="100%" alt="Що вміє Budila"></picture>
 
 <details>
 <summary>Докладніше про можливості</summary>
@@ -59,11 +59,11 @@
 
 <br>
 
-<img src="assets/readme/quality-uk.svg" width="100%" alt="Якість у цифрах">
+<picture><source srcset="assets/readme/quality-uk.svg"><img src="assets/readme/png/quality-uk.png" width="100%" alt="Якість у цифрах"></picture>
 
 <br>
 
-<img src="assets/readme/design-uk.svg" width="100%" alt="Дизайн-код: Material 3 і Material You">
+<picture><source srcset="assets/readme/design-uk.svg"><img src="assets/readme/png/design-uk.png" width="100%" alt="Дизайн-код: Material 3 і Material You"></picture>
 
 ## Встановлення
 

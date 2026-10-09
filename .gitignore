@@ -21,3 +21,4 @@ keystore.properties
 *.iml
 .DS_Store
 Thumbs.db
+tools/readme/.font/

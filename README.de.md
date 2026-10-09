@@ -4,7 +4,7 @@
 
 <br>
 
-<img src="assets/readme/hero-de.svg" width="100%" alt="Budila — Pünktlich aufwachen. Leicht aufstehen.">
+<picture><source srcset="assets/readme/hero-de.svg"><img src="assets/readme/png/hero-de.png" width="100%" alt="Budila — Pünktlich aufwachen. Leicht aufstehen."></picture>
 
 <a href="https://github.com/sailxx/Budila/releases/latest/download/Budila.apk"><img src="assets/readme/cta-de.svg" height="44" alt="APK herunterladen"></a>
 
@@ -14,11 +14,11 @@
 
 <br>
 
-<img src="assets/readme/screens-de.svg" width="100%" alt="Budila-Bildschirme: Tags und Farben, eigenes Design, Weckruf, dunkles Design">
+<picture><source srcset="assets/readme/screens-de.svg"><img src="assets/readme/png/screens-de.png" width="100%" alt="Budila-Bildschirme: Tags und Farben, eigenes Design, Weckruf, dunkles Design"></picture>
 
 <br>
 
-<img src="assets/readme/features-de.svg" width="100%" alt="Was Budila kann">
+<picture><source srcset="assets/readme/features-de.svg"><img src="assets/readme/png/features-de.png" width="100%" alt="Was Budila kann"></picture>
 
 <details>
 <summary>Mehr zu den Funktionen</summary>
@@ -59,11 +59,11 @@ Wecker werden über den System-`AlarmClock` gestellt und klingeln pünktlich, au
 
 <br>
 
-<img src="assets/readme/quality-de.svg" width="100%" alt="Qualität in Zahlen">
+<picture><source srcset="assets/readme/quality-de.svg"><img src="assets/readme/png/quality-de.png" width="100%" alt="Qualität in Zahlen"></picture>
 
 <br>
 
-<img src="assets/readme/design-de.svg" width="100%" alt="Design-Code: Material 3 und Material You">
+<picture><source srcset="assets/readme/design-de.svg"><img src="assets/readme/png/design-de.png" width="100%" alt="Design-Code: Material 3 und Material You"></picture>
 
 ## Installation
 

@@ -4,7 +4,7 @@
 
 <br>
 
-<img src="assets/readme/hero-fr.svg" width="100%" alt="Budila — Réveille-toi à l’heure. Lève-toi en douceur.">
+<picture><source srcset="assets/readme/hero-fr.svg"><img src="assets/readme/png/hero-fr.png" width="100%" alt="Budila — Réveille-toi à l’heure. Lève-toi en douceur."></picture>
 
 <a href="https://github.com/sailxx/Budila/releases/latest/download/Budila.apk"><img src="assets/readme/cta-fr.svg" height="44" alt="Télécharger l’APK"></a>
 
@@ -14,11 +14,11 @@
 
 <br>
 
-<img src="assets/readme/screens-fr.svg" width="100%" alt="Écrans de Budila : étiquettes et couleurs, thème perso, sonnerie, thème sombre">
+<picture><source srcset="assets/readme/screens-fr.svg"><img src="assets/readme/png/screens-fr.png" width="100%" alt="Écrans de Budila : étiquettes et couleurs, thème perso, sonnerie, thème sombre"></picture>
 
 <br>
 
-<img src="assets/readme/features-fr.svg" width="100%" alt="Ce que sait faire Budila">
+<picture><source srcset="assets/readme/features-fr.svg"><img src="assets/readme/png/features-fr.png" width="100%" alt="Ce que sait faire Budila"></picture>
 
 <details>
 <summary>En savoir plus sur les fonctionnalités</summary>
@@ -59,11 +59,11 @@ Les alarmes passent par l’`AlarmClock` du système et sonnent à l’heure mê
 
 <br>
 
-<img src="assets/readme/quality-fr.svg" width="100%" alt="La qualité en chiffres">
+<picture><source srcset="assets/readme/quality-fr.svg"><img src="assets/readme/png/quality-fr.png" width="100%" alt="La qualité en chiffres"></picture>
 
 <br>
 
-<img src="assets/readme/design-fr.svg" width="100%" alt="Code de design : Material 3 et Material You">
+<picture><source srcset="assets/readme/design-fr.svg"><img src="assets/readme/png/design-fr.png" width="100%" alt="Code de design : Material 3 et Material You"></picture>
 
 ## Installation
 
