@@ -21,7 +21,7 @@
 <img src="assets/readme/features-pt.svg" width="100%" alt="O que o Budila sabe fazer">
 
 <details>
-<summary><b>Mais sobre os recursos</b></summary>
+<summary>Mais sobre os recursos</summary>
 
 ### ⏰ Tela principal
 
@@ -76,7 +76,7 @@ Requer Android 8.0 ou mais recente. Não precisa de Google Play nem de contas.
 O Budila também está na [Komi Store](https://github.com/komi-store/komi-store), uma loja de apps baseada nas versões do GitHub: procure “Budila” e a Komi Store vai oferecer as atualizações sozinha.
 
 <details>
-<summary><b>Compilar a partir do código-fonte</b></summary>
+<summary>Compilar a partir do código-fonte</summary>
 
 Você precisa do JDK 17+ e do Android SDK (plataforma 36).
 

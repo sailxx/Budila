@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="880" height="520" viewBox="0 0 880 520" role="img" aria-label="Екрани Budila: теги й кольори, своя тема, дзвінок, темна тема">
 <style>.m{font-family:"JetBrains Mono",SFMono-Regular,Consolas,"Liberation Mono",Menlo,monospace}
-.f{opacity:0;animation:in .7s ease-out forwards}@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}</style>
+.f{animation:in .7s ease-out both}@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}</style>
 <defs><pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#EAE7F0"/></pattern></defs>
 <rect width="880" height="520" rx="18" fill="#FBF8FF"/><rect width="880" height="520" rx="18" fill="url(#dots)"/>
 <rect x=".5" y=".5" width="879" height="519" rx="17.5" fill="none" stroke="#E3E1EC"/>
