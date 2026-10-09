@@ -143,4 +143,39 @@
     <string name="icon_orange">Помаранчева</string>
     <string name="icon_white">Біла</string>
     <string name="icon_desc">Робочий стіл оновить значок за кілька секунд</string>
+
+    <!-- Проверка пробуждения -->
+    <string name="task_title">Як вимкнути</string>
+    <string name="task_none">Кнопка</string>
+    <string name="task_math">Приклади</string>
+    <string name="task_password">Пароль</string>
+    <string name="task_hint_none">Вимикається одним натисканням</string>
+    <string name="password_legend">Пароль (спільний для всіх будильників)</string>
+    <string name="password_show">Показати пароль</string>
+    <string name="task_action_math">Розв’язати й вимкнути</string>
+    <string name="task_action_password">Ввести пароль</string>
+    <string name="task_prove">Доведи, що прокинувся</string>
+    <string name="task_problem">Приклад %1$d з %2$d</string>
+    <string name="task_wrong">Неправильно, ще раз</string>
+    <string name="password_wrong">Неправильний пароль</string>
+    <string name="task_submit">Перевірити</string>
+    <string name="snooze_left">%1$s · залишилось %2$d</string>
+    <string name="check_title">Точно встав?</string>
+    <string name="check_awake">Я не сплю</string>
+    <string name="check_hint">Не відповіси за хвилину — будильник задзвонить знову, і відкласти його не вийде</string>
+    <string name="legend_check">Перевірка</string>
+    <string name="section_wake">Перевірка пробудження</string>
+    <string name="password_title">Пароль</string>
+    <string name="password_desc">Для будильників із завданням «Пароль». Обери такий, щоб його треба було згадувати. Без пароля будуть приклади</string>
+    <string name="max_snoozes_title">Скільки разів можна відкласти</string>
+    <string name="max_snoozes_desc">Ліміт на один дзвінок</string>
+    <string name="awake_check_title">Повторна перевірка</string>
+    <string name="awake_check_desc">Через цей час після вимкнення Budila спитає «Точно встав?». Не відповіси за хвилину — будильник задзвонить знову</string>
+    <string name="off">Вимк</string>
+    <string name="task_hint_math">Щоб вимкнути, треба розв’язати приклади. Повторів: %1$d</string>
+    <string name="task_hint_password">Щоб вимкнути, треба ввести пароль. Повторів: %1$d</string>
+    <string name="default_task_title">Завдання в нових будильниках</string>
+    <string name="task_repeats_title">Повторити завдання</string>
+    <string name="task_repeats_desc">Скільки прикладів розв’язати або скільки разів поспіль ввести пароль</string>
+    <string name="task_entry">Введення %1$d з %2$d</string>
 </resources>

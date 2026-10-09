@@ -143,4 +143,39 @@
     <string name="icon_orange">Arancione</string>
     <string name="icon_white">Bianca</string>
     <string name="icon_desc">La schermata Home aggiornerà l’icona tra pochi secondi</string>
+
+    <!-- Проверка пробуждения -->
+    <string name="task_title">Per spegnere</string>
+    <string name="task_none">Pulsante</string>
+    <string name="task_math">Calcoli</string>
+    <string name="task_password">Password</string>
+    <string name="task_hint_none">Si spegne con un tocco</string>
+    <string name="password_legend">Password (comune a tutte le sveglie)</string>
+    <string name="password_show">Mostra password</string>
+    <string name="task_action_math">Risolvi e spegni</string>
+    <string name="task_action_password">Inserisci password</string>
+    <string name="task_prove">Dimostra di essere sveglio</string>
+    <string name="task_problem">Calcolo %1$d di %2$d</string>
+    <string name="task_wrong">Sbagliato, riprova</string>
+    <string name="password_wrong">Password errata</string>
+    <string name="task_submit">Verifica</string>
+    <string name="snooze_left">%1$s · ne restano %2$d</string>
+    <string name="check_title">Sei davvero in piedi?</string>
+    <string name="check_awake">Sono sveglio</string>
+    <string name="check_hint">Se non rispondi entro un minuto, la sveglia suona di nuovo e non si potrà posticipare</string>
+    <string name="legend_check">Controllo</string>
+    <string name="section_wake">Controllo risveglio</string>
+    <string name="password_title">Password</string>
+    <string name="password_desc">Per le sveglie con l\'attività «Password». Scegline una a cui devi pensare. Senza password si usano i calcoli</string>
+    <string name="max_snoozes_title">Limite posticipi</string>
+    <string name="max_snoozes_desc">Quante volte si può posticipare una sveglia</string>
+    <string name="awake_check_title">Ricontrolla</string>
+    <string name="awake_check_desc">Dopo questo tempo dallo spegnimento, Budila chiede «Sei davvero in piedi?». Senza risposta entro un minuto, suona di nuovo</string>
+    <string name="off">No</string>
+    <string name="task_hint_math">Per spegnerla, risolvi dei calcoli. Ripetizioni: %1$d</string>
+    <string name="task_hint_password">Per spegnerla, digita la password. Ripetizioni: %1$d</string>
+    <string name="default_task_title">Attività per le nuove sveglie</string>
+    <string name="task_repeats_title">Ripeti l\'attività</string>
+    <string name="task_repeats_desc">Quanti calcoli risolvere o quante volte di fila digitare la password</string>
+    <string name="task_entry">Inserimento %1$d di %2$d</string>
 </resources>

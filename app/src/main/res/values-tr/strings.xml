@@ -143,4 +143,39 @@
     <string name="icon_orange">Turuncu</string>
     <string name="icon_white">Beyaz</string>
     <string name="icon_desc">Ana ekran simgeyi birkaç saniye içinde günceller</string>
+
+    <!-- Проверка пробуждения -->
+    <string name="task_title">Kapatmak için</string>
+    <string name="task_none">Düğme</string>
+    <string name="task_math">İşlem</string>
+    <string name="task_password">Parola</string>
+    <string name="task_hint_none">Tek dokunuşla kapanır</string>
+    <string name="password_legend">Parola (tüm alarmlar için ortak)</string>
+    <string name="password_show">Parolayı göster</string>
+    <string name="task_action_math">Çöz ve kapat</string>
+    <string name="task_action_password">Parolayı gir</string>
+    <string name="task_prove">Uyandığını kanıtla</string>
+    <string name="task_problem">İşlem %1$d / %2$d</string>
+    <string name="task_wrong">Yanlış, tekrar dene</string>
+    <string name="password_wrong">Yanlış parola</string>
+    <string name="task_submit">Kontrol et</string>
+    <string name="snooze_left">%1$s · %2$d kaldı</string>
+    <string name="check_title">Gerçekten kalktın mı?</string>
+    <string name="check_awake">Uyanığım</string>
+    <string name="check_hint">Bir dakika içinde yanıt yoksa alarm yeniden çalar ve ertelenemez</string>
+    <string name="legend_check">Kontrol</string>
+    <string name="section_wake">Uyanma kontrolü</string>
+    <string name="password_title">Parola</string>
+    <string name="password_desc">«Parola» görevli alarmlar için. Düşünmeni gerektiren bir tane seç. Parola yoksa işlem sorulur</string>
+    <string name="max_snoozes_title">Erteleme sınırı</string>
+    <string name="max_snoozes_desc">Bir alarm kaç kez ertelenebilir</string>
+    <string name="awake_check_title">Yeniden kontrol</string>
+    <string name="awake_check_desc">Alarmı kapattıktan bu kadar sonra Budila «Gerçekten kalktın mı?» diye sorar. Bir dakika içinde yanıt yoksa yeniden çalar</string>
+    <string name="off">Kapalı</string>
+    <string name="task_hint_math">Kapatmak için işlem çöz. Tekrar: %1$d</string>
+    <string name="task_hint_password">Kapatmak için parolanı yaz. Tekrar: %1$d</string>
+    <string name="default_task_title">Yeni alarmlarda görev</string>
+    <string name="task_repeats_title">Görevi tekrarla</string>
+    <string name="task_repeats_desc">Kaç işlem çözüleceği veya parolanın arka arkaya kaç kez yazılacağı</string>
+    <string name="task_entry">Giriş %1$d / %2$d</string>
 </resources>

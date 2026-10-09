@@ -41,6 +41,8 @@ internal fun InstrumentSettingsScreen(onBack: () -> Unit) {
     val ringtoneTitle = remember(s.ringtone) { ringtoneTitle(context, s.ringtone) }
     val version = rememberAppVersion()
     val minutes = { v: Int -> context.getString(R.string.minutes_short, v) }
+    val snoozeLimitLabel = { v: Int -> if (v < 0) "∞" else "$v" }
+    val checkLabel = { v: Int -> if (v == 0) context.getString(R.string.off) else minutes(v) }
 
     LazyColumn(
         Modifier.fillMaxSize().background(colors.bg),
@@ -165,6 +167,43 @@ internal fun InstrumentSettingsScreen(onBack: () -> Unit) {
             SwitchRow(Icons.Rounded.Vibration, stringResource(R.string.vibrate_default), null, s.defaultVibrate) { v ->
                 SettingsRepository.update { it.copy(defaultVibrate = v) }
             }
+        }
+
+        // ---------- Проверка пробуждения ----------
+        item { Section(stringResource(R.string.section_wake)) }
+        item {
+            CasingLegend(stringResource(R.string.default_task_title))
+            Spacer(Modifier.height(8.dp))
+            Strip(
+                WakeTask.entries.map { stringResource(it.title) }, s.defaultTask.ordinal,
+                { i -> SettingsRepository.update { it.copy(defaultTask = WakeTask.entries[i]) } },
+            )
+            Text(
+                taskHint(s.defaultTask, s.taskRepeats), style = IType.small, color = colors.muted,
+                modifier = Modifier.padding(top = 8.dp, bottom = 8.dp),
+            )
+        }
+        item {
+            ChoiceStrip(Icons.Rounded.Repeat, stringResource(R.string.task_repeats_title), TASK_REPEAT_OPTIONS, s.taskRepeats, { "×$it" }) { v ->
+                SettingsRepository.update { it.copy(taskRepeats = v) }
+            }
+            Text(stringResource(R.string.task_repeats_desc), style = IType.small, color = colors.muted, modifier = Modifier.padding(bottom = 12.dp))
+        }
+        item {
+            PasswordField(s.password, { v -> SettingsRepository.update { it.copy(password = v) } }, stringResource(R.string.password_title))
+            Text(stringResource(R.string.password_desc), style = IType.small, color = colors.muted, modifier = Modifier.padding(top = 8.dp))
+        }
+        item {
+            ChoiceStrip(Icons.Rounded.Snooze, stringResource(R.string.max_snoozes_title), listOf(-1, 0, 1, 2, 3), s.maxSnoozes, snoozeLimitLabel) { v ->
+                SettingsRepository.update { it.copy(maxSnoozes = v) }
+            }
+            Text(stringResource(R.string.max_snoozes_desc), style = IType.small, color = colors.muted)
+        }
+        item {
+            ChoiceStrip(Icons.Rounded.Verified, stringResource(R.string.awake_check_title), listOf(0, 3, 5, 10), s.awakeCheckMinutes, checkLabel) { v ->
+                SettingsRepository.update { it.copy(awakeCheckMinutes = v) }
+            }
+            Text(stringResource(R.string.awake_check_desc), style = IType.small, color = colors.muted)
         }
 
         // ---------- О приложении ----------

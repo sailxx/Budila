@@ -9,6 +9,11 @@ class AlarmReceiver : BroadcastReceiver() {
         if (intent.action != ACTION_FIRE) return
         AlarmRepository.init(context)
         val alarm = AlarmRepository.get(intent.getIntExtra(EXTRA_ALARM_ID, -1)) ?: return
+        // Повторная проверка «точно встал?» — не трогаем расписание самого будильника
+        if (intent.getBooleanExtra(EXTRA_CHECK, false)) {
+            AlarmService.start(context, alarm.id, check = true)
+            return
+        }
         val snooze = intent.getBooleanExtra(EXTRA_SNOOZE, false)
         if (!alarm.enabled && !snooze) return
 
@@ -17,7 +22,7 @@ class AlarmReceiver : BroadcastReceiver() {
         } else if (alarm.enabled) {
             AlarmRepository.upsert(alarm.copy(enabled = false))
         }
-        AlarmService.start(context, alarm.id)
+        AlarmService.start(context, alarm.id, snoozes = if (snooze) intent.getIntExtra(EXTRA_SNOOZE_COUNT, 0) else 0)
     }
 }
 

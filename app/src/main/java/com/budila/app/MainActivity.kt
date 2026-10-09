@@ -55,6 +55,9 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
@@ -246,6 +249,7 @@ internal fun newAlarm(tagFilter: String?): Alarm {
         vibrate = s.defaultVibrate,
         gentle = s.gentleDefault,
         tags = listOfNotNull(tagFilter),
+        task = s.defaultTask,
     )
 }
 
@@ -499,6 +503,14 @@ private fun AlarmCard(alarm: Alarm, onToggle: (Boolean) -> Unit, onClick: () -> 
                         style = MaterialTheme.typography.displayMedium,
                         color = content,
                     )
+                    if (alarm.task != WakeTask.NONE) {
+                        Spacer(Modifier.width(10.dp))
+                        Icon(
+                            taskIcon(alarm.task), stringResource(alarm.task.title),
+                            tint = (accent ?: colors.primary).copy(alpha = if (alarm.enabled) 1f else 0.5f),
+                            modifier = Modifier.size(22.dp),
+                        )
+                    }
                     if (alarm.gentle) {
                         Spacer(Modifier.width(10.dp))
                         Icon(
@@ -623,6 +635,8 @@ internal fun AlarmEditorContent(
     var days by remember { mutableIntStateOf(initial.days) }
     var vibrate by remember { mutableStateOf(initial.vibrate) }
     var gentle by remember { mutableStateOf(initial.gentle) }
+    var task by remember { mutableStateOf(initial.task) }
+    var password by remember { mutableStateOf(SettingsRepository.current.password) }
     var tags by remember { mutableStateOf(initial.tags) }
     var color by remember { mutableStateOf(initial.color) }
     var addingTag by remember { mutableStateOf(false) }
@@ -735,6 +749,28 @@ internal fun AlarmEditorContent(
             ALARM_COLORS.forEach { c -> ColorDot(Color(c), color == c) { color = c } }
         }
 
+        EditorSection(stringResource(R.string.task_title))
+        SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
+            WakeTask.entries.forEachIndexed { i, t ->
+                SegmentedButton(
+                    selected = task == t,
+                    onClick = { task = t },
+                    shape = SegmentedButtonDefaults.itemShape(i, WakeTask.entries.size),
+                    icon = { Icon(taskIcon(t), null, Modifier.size(SegmentedButtonDefaults.IconSize)) },
+                ) { Text(stringResource(t.title), maxLines = 1) }
+            }
+        }
+        Text(
+            taskHint(task, SettingsRepository.current.taskRepeats),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+        )
+        if (task == WakeTask.PASSWORD) {
+            Spacer(Modifier.height(8.dp))
+            MaterialPasswordField(password, { password = it }, stringResource(R.string.password_legend))
+        }
+
         Spacer(Modifier.height(12.dp))
         EditorSwitch(
             Icons.Rounded.Spa, stringResource(R.string.gentle_wake),
@@ -758,8 +794,9 @@ internal fun AlarmEditorContent(
             Spacer(Modifier.weight(1f))
             TextButton(onClick = onCancel) { Text(stringResource(R.string.cancel)) }
             Spacer(Modifier.width(8.dp))
-            Button(onClick = {
+            Button(enabled = task != WakeTask.PASSWORD || password.isNotBlank(), onClick = {
                 if (addingTag) addTag()
+                if (task == WakeTask.PASSWORD) SettingsRepository.update { it.copy(password = password.trim()) }
                 onSave(
                     initial.copy(
                         hour = timeState.hour,
@@ -771,6 +808,7 @@ internal fun AlarmEditorContent(
                         tags = tags,
                         color = color,
                         enabled = true,
+                        task = task,
                     ),
                 )
             }) { Text(stringResource(R.string.save)) }
@@ -784,6 +822,27 @@ private fun EditorSection(title: String) {
         title,
         style = MaterialTheme.typography.titleSmall,
         modifier = Modifier.fillMaxWidth().padding(top = 20.dp, bottom = 10.dp),
+    )
+}
+
+/** Поле пароля со значком «показать» (редактор и настройки). */
+@Composable
+internal fun MaterialPasswordField(value: String, onChange: (String) -> Unit, label: String, modifier: Modifier = Modifier) {
+    var visible by remember { mutableStateOf(false) }
+    OutlinedTextField(
+        value = value,
+        onValueChange = onChange,
+        label = { Text(label) },
+        leadingIcon = { Icon(Icons.Rounded.Password, null) },
+        trailingIcon = {
+            IconButton(onClick = { visible = !visible }) {
+                Icon(if (visible) Icons.Rounded.VisibilityOff else Icons.Rounded.Visibility, stringResource(R.string.password_show))
+            }
+        },
+        singleLine = true,
+        visualTransformation = if (visible) VisualTransformation.None else PasswordVisualTransformation(),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
+        modifier = modifier.fillMaxWidth(),
     )
 }
 

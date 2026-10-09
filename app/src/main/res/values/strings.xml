@@ -146,4 +146,39 @@
     <string name="icon_orange">Orange</string>
     <string name="icon_white">White</string>
     <string name="icon_desc">The launcher may take a few seconds to update the icon</string>
+
+    <!-- Проверка пробуждения -->
+    <string name="task_title">To dismiss</string>
+    <string name="task_none">Button</string>
+    <string name="task_math">Math</string>
+    <string name="task_password">Password</string>
+    <string name="task_hint_none">One tap turns the alarm off</string>
+    <string name="password_legend">Password (shared by all alarms)</string>
+    <string name="password_show">Show password</string>
+    <string name="task_action_math">Solve to dismiss</string>
+    <string name="task_action_password">Enter password</string>
+    <string name="task_prove">Prove you\'re awake</string>
+    <string name="task_problem">Problem %1$d of %2$d</string>
+    <string name="task_wrong">Wrong, try again</string>
+    <string name="password_wrong">Wrong password</string>
+    <string name="task_submit">Check</string>
+    <string name="snooze_left">%1$s · %2$d left</string>
+    <string name="check_title">Are you up?</string>
+    <string name="check_awake">I\'m awake</string>
+    <string name="check_hint">No answer within a minute — the alarm rings again, and it can\'t be snoozed</string>
+    <string name="legend_check">Check</string>
+    <string name="section_wake">Wake-up check</string>
+    <string name="password_title">Password</string>
+    <string name="password_desc">For alarms with the Password task. Pick one you have to think about. Without a password they use math</string>
+    <string name="max_snoozes_title">Snooze limit</string>
+    <string name="max_snoozes_desc">How many times one alarm can be snoozed</string>
+    <string name="awake_check_title">Check again</string>
+    <string name="awake_check_desc">This long after you dismiss the alarm, Budila asks “Are you up?”. No answer within a minute — it rings again</string>
+    <string name="off">Off</string>
+    <string name="task_hint_math">Solve math problems to turn it off. Repeats: %1$d</string>
+    <string name="task_hint_password">Type your password to turn it off. Repeats: %1$d</string>
+    <string name="default_task_title">Task for new alarms</string>
+    <string name="task_repeats_title">Repeat the task</string>
+    <string name="task_repeats_desc">How many problems to solve or how many times to type the password in a row</string>
+    <string name="task_entry">Entry %1$d of %2$d</string>
 </resources>

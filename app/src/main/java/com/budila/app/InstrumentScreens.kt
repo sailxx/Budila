@@ -16,6 +16,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.automirrored.rounded.Backspace
 import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.*
@@ -32,8 +33,13 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -276,6 +282,10 @@ private fun AlarmWell(alarm: Alarm, order: Int, onToggle: (Boolean) -> Unit, onC
                 DayLetters(alarm.days, on)
             }
             Spacer(Modifier.weight(1f))
+            if (alarm.task != WakeTask.NONE) {
+                Icon(taskIcon(alarm.task), stringResource(alarm.task.title), tint = colors.wellDim, modifier = Modifier.size(15.dp))
+                Spacer(Modifier.width(6.dp))
+            }
             if (alarm.gentle) {
                 Icon(Icons.Rounded.Spa, stringResource(R.string.gentle_wake), tint = colors.wellDim, modifier = Modifier.size(15.dp))
             }
@@ -437,6 +447,8 @@ internal fun InstrumentEditorContent(
     var days by remember { mutableIntStateOf(alarm.days) }
     var vibrate by remember { mutableStateOf(alarm.vibrate) }
     var gentle by remember { mutableStateOf(alarm.gentle) }
+    var task by remember { mutableStateOf(alarm.task) }
+    var password by remember { mutableStateOf(SettingsRepository.current.password) }
     var tags by remember { mutableStateOf(alarm.tags) }
     var color by remember { mutableStateOf(alarm.color) }
     var addingTag by remember { mutableStateOf(false) }
@@ -597,6 +609,17 @@ internal fun InstrumentEditorContent(
             }
         }
 
+        // --- как выключить: проверка, что проснулся ---
+        Spacer(Modifier.height(20.dp))
+        CasingLegend(stringResource(R.string.task_title))
+        Spacer(Modifier.height(8.dp))
+        Strip(WakeTask.entries.map { stringResource(it.title) }, task.ordinal, { task = WakeTask.entries[it] })
+        Text(taskHint(task, SettingsRepository.current.taskRepeats), style = IType.small, color = colors.muted, modifier = Modifier.padding(top = 8.dp))
+        if (task == WakeTask.PASSWORD) {
+            Spacer(Modifier.height(12.dp))
+            PasswordField(password, { password = it }, stringResource(R.string.password_legend))
+        }
+
         // --- переключатели ---
         Spacer(Modifier.height(14.dp))
         SwitchRow(Icons.Rounded.Spa, stringResource(R.string.gentle_wake), stringResource(R.string.gentle_wake_desc), gentle) { gentle = it }
@@ -615,16 +638,18 @@ internal fun InstrumentEditorContent(
             stringResource(R.string.save),
             onClick = {
                 if (addingTag) addTag()
+                if (task == WakeTask.PASSWORD) SettingsRepository.update { it.copy(password = password.trim()) }
                 onSave(
                     alarm.copy(
                         hour = hour24, minute = m,
                         label = label.trim(), days = days,
                         vibrate = vibrate, gentle = gentle,
                         tags = tags, color = color, enabled = true,
+                        task = task,
                     ),
                 )
             },
-            enabled = valid,
+            enabled = valid && (task != WakeTask.PASSWORD || password.isNotBlank()),
             modifier = Modifier.fillMaxWidth(),
         )
     }
@@ -635,6 +660,27 @@ private val padStyle = IType.readout(20.sp).copy(fontWeight = FontWeight.SemiBol
 @Composable
 private fun PadKey(modifier: Modifier, onClick: () -> Unit, content: @Composable BoxScope.() -> Unit) {
     Key(onClick, modifier.height(52.dp), content = content)
+}
+
+/** Поле пароля с клавишей «показать» (редактор и настройки). */
+@Composable
+internal fun PasswordField(value: String, onChange: (String) -> Unit, legend: String) {
+    var visible by remember { mutableStateOf(false) }
+    Row(verticalAlignment = Alignment.Bottom) {
+        Field(
+            value, onChange, legend,
+            modifier = Modifier.weight(1f),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
+            visualTransformation = if (visible) VisualTransformation.None else PasswordVisualTransformation(),
+        )
+        Spacer(Modifier.width(8.dp))
+        IconKey({ visible = !visible }, size = 48.dp) {
+            Icon(
+                if (visible) Icons.Rounded.VisibilityOff else Icons.Rounded.Visibility,
+                stringResource(R.string.password_show), Modifier.size(20.dp),
+            )
+        }
+    }
 }
 
 /** Строка с переключателем на корпусе (редактор и настройки). */
@@ -667,7 +713,13 @@ internal fun SwitchRow(icon: ImageVector?, title: String, subtitle: String?, che
 // ======================================================================
 
 @Composable
-internal fun InstrumentRingingScreen(label: String, onSnooze: () -> Unit, onDismiss: () -> Unit) {
+internal fun InstrumentRingingScreen(
+    label: String,
+    onSnooze: (() -> Unit)?,
+    onDismiss: () -> Unit,
+    task: WakeTask = WakeTask.NONE,
+    snoozesLeft: Int? = null,
+) {
     val context = LocalContext.current
     val colors = LocalInstrument.current
     val timeout = remember { SettingsRepository.current.timeoutMinutes * 60 }
@@ -723,15 +775,160 @@ internal fun InstrumentRingingScreen(label: String, onSnooze: () -> Unit, onDism
 
         Spacer(Modifier.weight(1f))
         PrimaryKey(
-            stringResource(R.string.dismiss), onDismiss,
+            stringResource(taskActionText(task)), onDismiss,
             Modifier.fillMaxWidth().height(72.dp),
-            icon = { Icon(Icons.Rounded.AlarmOff, null) },
+            icon = { Icon(taskIcon(task), null) },
         )
-        Spacer(Modifier.height(12.dp))
-        TextKey(
-            stringResource(R.string.snooze_for, SettingsRepository.current.snoozeMinutes), onSnooze,
-            Modifier.fillMaxWidth().height(60.dp),
-            icon = { Icon(Icons.Rounded.Snooze, null) },
+        if (onSnooze != null) {
+            Spacer(Modifier.height(12.dp))
+            TextKey(
+                snoozeText(snoozesLeft), onSnooze,
+                Modifier.fillMaxWidth().height(60.dp),
+                icon = { Icon(Icons.Rounded.Snooze, null) },
+            )
+        }
+        Spacer(Modifier.height(8.dp))
+    }
+}
+
+// ======================================================================
+// Задание: доказать, что проснулся
+// ======================================================================
+
+@Composable
+internal fun InstrumentTaskScreen(state: WakeTaskState, onSolved: () -> Unit, onBack: () -> Unit) {
+    val colors = LocalInstrument.current
+    val submit = { if (state.submit()) onSolved() }
+
+    Column(
+        Modifier
+            .fillMaxSize()
+            .background(colors.bg)
+            .systemBarsPadding()
+            .imePadding()
+            .padding(horizontal = 16.dp, vertical = 12.dp),
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            IconKey(onBack) { Icon(Icons.AutoMirrored.Rounded.ArrowBack, stringResource(R.string.back), Modifier.size(20.dp)) }
+            Spacer(Modifier.weight(1f))
+            Wordmark()
+        }
+        Spacer(Modifier.height(20.dp))
+        Text(stringResource(R.string.task_prove), style = IType.headline.copy(fontSize = 30.sp, lineHeight = 34.sp), color = colors.ink)
+        Spacer(Modifier.weight(1f))
+
+        if (state.task == WakeTask.PASSWORD) {
+            var visible by remember { mutableStateOf(false) }
+            val focus = remember { FocusRequester() }
+            LaunchedEffect(Unit) { runCatching { focus.requestFocus() } }
+            Row(verticalAlignment = Alignment.Bottom) {
+                Field(
+                    state.input, state::edit, passwordLegend(state),
+                    modifier = Modifier.weight(1f),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
+                    keyboardActions = KeyboardActions(onDone = { submit() }),
+                    visualTransformation = if (visible) VisualTransformation.None else PasswordVisualTransformation(),
+                    inputModifier = Modifier.focusRequester(focus),
+                    error = state.wrong,
+                )
+                Spacer(Modifier.width(8.dp))
+                IconKey({ visible = !visible }, size = 48.dp) {
+                    Icon(
+                        if (visible) Icons.Rounded.VisibilityOff else Icons.Rounded.Visibility,
+                        stringResource(R.string.password_show), Modifier.size(20.dp),
+                    )
+                }
+            }
+            Text(
+                if (state.wrong) stringResource(R.string.password_wrong).uppercase() else "",
+                style = IType.label, color = colors.red, modifier = Modifier.padding(top = 8.dp),
+            )
+        } else {
+            Well(Modifier.fillMaxWidth(), padding = PaddingValues(start = 16.dp, end = 16.dp, top = 14.dp, bottom = 16.dp)) {
+                LegendRow(stringResource(R.string.task_problem, state.solved + 1, state.repeats)) {
+                    if (state.wrong) Text(stringResource(R.string.task_wrong).uppercase(), style = IType.label, color = colors.red)
+                }
+                Spacer(Modifier.height(10.dp))
+                BoxWithConstraints(Modifier.fillMaxWidth(), contentAlignment = Alignment.CenterEnd) {
+                    val text = "${state.problem.text} = ${state.input.ifEmpty { "?" }}"
+                    Text(
+                        text, style = IType.readout(readoutSize(maxWidth, text.length.coerceAtLeast(9), 54f)),
+                        color = colors.wellInk, maxLines = 1,
+                    )
+                }
+                Spacer(Modifier.height(12.dp))
+                Segments(state.repeats, state.solved)
+            }
+            Spacer(Modifier.height(12.dp))
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                listOf("123", "456", "789").forEach { row ->
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        row.forEach { d -> PadKey(Modifier.weight(1f), { state.type(d) }) { Text("$d", style = padStyle) } }
+                    }
+                }
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    PadKey(Modifier.weight(1f), { state.edit("") }) { Text("C", style = padStyle) }
+                    PadKey(Modifier.weight(1f), { state.type('0') }) { Text("0", style = padStyle) }
+                    PadKey(Modifier.weight(1f), state::erase) {
+                        Icon(Icons.AutoMirrored.Rounded.Backspace, stringResource(R.string.erase), Modifier.size(20.dp))
+                    }
+                }
+            }
+        }
+        Spacer(Modifier.height(16.dp))
+        PrimaryKey(
+            stringResource(R.string.task_submit), submit,
+            Modifier.fillMaxWidth().height(64.dp),
+            enabled = state.input.isNotBlank(),
+        )
+        Spacer(Modifier.height(8.dp))
+    }
+}
+
+// ======================================================================
+// Повторная проверка: «Точно встал?»
+// ======================================================================
+
+@Composable
+internal fun InstrumentCheckScreen(onAwake: () -> Unit) {
+    val context = LocalContext.current
+    val colors = LocalInstrument.current
+    val left = rememberCheckSecondsLeft()
+    val now = rememberNow()
+
+    Column(
+        Modifier
+            .fillMaxSize()
+            .background(colors.bg)
+            .systemBarsPadding()
+            .padding(horizontal = 16.dp, vertical = 12.dp),
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
+            Wordmark()
+            Spacer(Modifier.weight(1f))
+            Text(clockDigits(context, now.hour, now.minute).trim(), style = IType.label, color = colors.muted)
+        }
+        Spacer(Modifier.height(28.dp))
+        Text(stringResource(R.string.check_title), style = IType.headline.copy(fontSize = 34.sp, lineHeight = 38.sp), color = colors.ink)
+        Spacer(Modifier.height(10.dp))
+        Text(stringResource(R.string.check_hint), style = IType.body, color = colors.muted)
+        Spacer(Modifier.weight(1f))
+
+        Well(Modifier.fillMaxWidth(), padding = PaddingValues(start = 18.dp, end = 18.dp, top = 18.dp, bottom = 14.dp)) {
+            LegendRow(stringResource(R.string.legend_check))
+            Spacer(Modifier.height(10.dp))
+            BoxWithConstraints(Modifier.fillMaxWidth(), contentAlignment = Alignment.CenterEnd) {
+                Digits("%d:%02d".format(left / 60, left % 60), IType.readout(readoutSize(maxWidth, 5, 150f)), color = colors.wellInk)
+            }
+            Spacer(Modifier.height(14.dp))
+            Segments(24, (24 * left + CHECK_ANSWER_SECONDS - 1) / CHECK_ANSWER_SECONDS)
+        }
+
+        Spacer(Modifier.weight(1f))
+        PrimaryKey(
+            stringResource(R.string.check_awake), onAwake,
+            Modifier.fillMaxWidth().height(72.dp),
+            icon = { Icon(Icons.Rounded.WbSunny, null) },
         )
         Spacer(Modifier.height(8.dp))
     }

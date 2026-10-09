@@ -143,4 +143,39 @@
     <string name="icon_orange">Naranja</string>
     <string name="icon_white">Blanco</string>
     <string name="icon_desc">La pantalla de inicio actualizará el icono en unos segundos</string>
+
+    <!-- Проверка пробуждения -->
+    <string name="task_title">Para apagar</string>
+    <string name="task_none">Botón</string>
+    <string name="task_math">Cuentas</string>
+    <string name="task_password">Contraseña</string>
+    <string name="task_hint_none">Se apaga con un toque</string>
+    <string name="password_legend">Contraseña (común a todas las alarmas)</string>
+    <string name="password_show">Mostrar contraseña</string>
+    <string name="task_action_math">Resolver y apagar</string>
+    <string name="task_action_password">Escribir contraseña</string>
+    <string name="task_prove">Demuestra que estás despierto</string>
+    <string name="task_problem">Cuenta %1$d de %2$d</string>
+    <string name="task_wrong">Incorrecto, otra vez</string>
+    <string name="password_wrong">Contraseña incorrecta</string>
+    <string name="task_submit">Comprobar</string>
+    <string name="snooze_left">%1$s · quedan %2$d</string>
+    <string name="check_title">¿Ya te levantaste?</string>
+    <string name="check_awake">Estoy despierto</string>
+    <string name="check_hint">Si no respondes en un minuto, la alarma vuelve a sonar y no se podrá posponer</string>
+    <string name="legend_check">Control</string>
+    <string name="section_wake">Control de despertar</string>
+    <string name="password_title">Contraseña</string>
+    <string name="password_desc">Para alarmas con la tarea «Contraseña». Elige una que tengas que pensar. Sin contraseña, se usan cuentas</string>
+    <string name="max_snoozes_title">Límite de posponer</string>
+    <string name="max_snoozes_desc">Cuántas veces se puede posponer una alarma</string>
+    <string name="awake_check_title">Volver a comprobar</string>
+    <string name="awake_check_desc">Tras este tiempo desde que apagas la alarma, Budila pregunta «¿Ya te levantaste?». Sin respuesta en un minuto, vuelve a sonar</string>
+    <string name="off">No</string>
+    <string name="task_hint_math">Para apagarla, resuelve cuentas. Repeticiones: %1$d</string>
+    <string name="task_hint_password">Para apagarla, escribe tu contraseña. Repeticiones: %1$d</string>
+    <string name="default_task_title">Tarea para alarmas nuevas</string>
+    <string name="task_repeats_title">Repetir la tarea</string>
+    <string name="task_repeats_desc">Cuántas cuentas resolver o cuántas veces seguidas escribir la contraseña</string>
+    <string name="task_entry">Intento %1$d de %2$d</string>
 </resources>

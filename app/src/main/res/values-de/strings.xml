@@ -143,4 +143,39 @@
     <string name="icon_orange">Orange</string>
     <string name="icon_white">Weiß</string>
     <string name="icon_desc">Der Startbildschirm aktualisiert das Symbol in wenigen Sekunden</string>
+
+    <!-- Проверка пробуждения -->
+    <string name="task_title">Ausschalten mit</string>
+    <string name="task_none">Taste</string>
+    <string name="task_math">Rechnen</string>
+    <string name="task_password">Passwort</string>
+    <string name="task_hint_none">Ein Tippen schaltet den Wecker aus</string>
+    <string name="password_legend">Passwort (für alle Wecker)</string>
+    <string name="password_show">Passwort zeigen</string>
+    <string name="task_action_math">Lösen und ausschalten</string>
+    <string name="task_action_password">Passwort eingeben</string>
+    <string name="task_prove">Beweise, dass du wach bist</string>
+    <string name="task_problem">Aufgabe %1$d von %2$d</string>
+    <string name="task_wrong">Falsch, noch mal</string>
+    <string name="password_wrong">Falsches Passwort</string>
+    <string name="task_submit">Prüfen</string>
+    <string name="snooze_left">%1$s · noch %2$d</string>
+    <string name="check_title">Bist du wirklich wach?</string>
+    <string name="check_awake">Ich bin wach</string>
+    <string name="check_hint">Keine Antwort binnen einer Minute — der Wecker klingelt erneut, ohne Schlummern</string>
+    <string name="legend_check">Kontrolle</string>
+    <string name="section_wake">Wach-Kontrolle</string>
+    <string name="password_title">Passwort</string>
+    <string name="password_desc">Für Wecker mit der Aufgabe „Passwort“. Wähle eines, über das du nachdenken musst. Ohne Passwort wird gerechnet</string>
+    <string name="max_snoozes_title">Schlummer-Limit</string>
+    <string name="max_snoozes_desc">Wie oft ein Wecker verschoben werden darf</string>
+    <string name="awake_check_title">Erneut prüfen</string>
+    <string name="awake_check_desc">So lange nach dem Ausschalten fragt Budila „Bist du wirklich wach?“. Ohne Antwort binnen einer Minute klingelt es erneut</string>
+    <string name="off">Aus</string>
+    <string name="task_hint_math">Zum Ausschalten Aufgaben lösen. Wiederholungen: %1$d</string>
+    <string name="task_hint_password">Zum Ausschalten das Passwort eingeben. Wiederholungen: %1$d</string>
+    <string name="default_task_title">Aufgabe für neue Wecker</string>
+    <string name="task_repeats_title">Aufgabe wiederholen</string>
+    <string name="task_repeats_desc">Wie viele Aufgaben zu lösen sind oder wie oft hintereinander das Passwort einzugeben ist</string>
+    <string name="task_entry">Eingabe %1$d von %2$d</string>
 </resources>

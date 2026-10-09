@@ -49,6 +49,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
@@ -553,6 +554,11 @@ fun Field(
     placeholder: String = "",
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    /** Модификатор самого поля ввода (например, чтобы поставить в него фокус) */
+    inputModifier: Modifier = Modifier,
+    /** Красная рамка — введено неверно */
+    error: Boolean = false,
 ) {
     val colors = LocalInstrument.current
     var focused by remember { mutableStateOf(false) }
@@ -567,14 +573,21 @@ fun Field(
             cursorBrush = SolidColor(colors.ink),
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
-            modifier = Modifier.fillMaxWidth().onFocusChanged { focused = it.isFocused },
+            visualTransformation = visualTransformation,
+            modifier = inputModifier.fillMaxWidth().onFocusChanged { focused = it.isFocused },
             decorationBox = { inner ->
                 Box(
                     Modifier
                         .fillMaxWidth()
                         .height(48.dp)
                         .wellFace(colors)
-                        .then(if (focused) Modifier.border(2.dp, colors.ink, RoundedCornerShape(8.dp)) else Modifier)
+                        .then(
+                            when {
+                                error -> Modifier.border(2.dp, colors.red, RoundedCornerShape(8.dp))
+                                focused -> Modifier.border(2.dp, colors.ink, RoundedCornerShape(8.dp))
+                                else -> Modifier
+                            },
+                        )
                         .padding(horizontal = 14.dp),
                     contentAlignment = Alignment.CenterStart,
                 ) {

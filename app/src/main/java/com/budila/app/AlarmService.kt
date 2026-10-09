@@ -35,13 +35,19 @@ class AlarmService : Service() {
         private const val NOTIFICATION_ID = 42
         private const val GENTLE_VIBRATION_DELAY_MS = 30_000L
 
-        /** Будильник, который звонит прямо сейчас (null — тишина). */
-        val ringing = MutableStateFlow<Alarm?>(null)
+        /** Звонок, который идёт прямо сейчас (null — тишина). */
+        val ringing = MutableStateFlow<Ringing?>(null)
 
-        fun start(context: Context, alarmId: Int) = ContextCompat.startForegroundService(
-            context, Intent(context, AlarmService::class.java).putExtra(EXTRA_ALARM_ID, alarmId),
-        )
+        fun start(context: Context, alarmId: Int, snoozes: Int = 0, check: Boolean = false) =
+            ContextCompat.startForegroundService(
+                context,
+                Intent(context, AlarmService::class.java)
+                    .putExtra(EXTRA_ALARM_ID, alarmId)
+                    .putExtra(EXTRA_SNOOZE_COUNT, snoozes)
+                    .putExtra(EXTRA_CHECK, check),
+            )
 
+        /** Выключить звонок. Если у будильника есть задание, вызывать только после того, как оно выполнено. */
         fun dismiss(context: Context) {
             context.startService(Intent(context, AlarmService::class.java).setAction(ACTION_DISMISS))
         }
@@ -59,9 +65,8 @@ class AlarmService : Service() {
     private var vibrator: Vibrator? = null
     private var wakeLock: PowerManager.WakeLock? = null
     private val handler = Handler(Looper.getMainLooper())
-    private val timeout = Runnable { stopRinging() }
+    private val timeout = Runnable { onTimeout() }
     private var volume = 0.1f
-    private val timeoutMs get() = SettingsRepository.current.timeoutMinutes * 60_000L
     private val rampUp = object : Runnable {
         override fun run() {
             volume = (volume + 0.03f).coerceAtMost(1f)
@@ -74,13 +79,17 @@ class AlarmService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when (intent?.action) {
-            ACTION_DISMISS -> stopRinging()
+            ACTION_DISMISS -> {
+                val r = ringing.value
+                // Выключил настоящий звонок — через несколько минут проверим, не уснул ли снова
+                val checkIn = SettingsRepository.current.awakeCheckMinutes
+                if (r != null && !r.check && checkIn > 0) AlarmScheduler.scheduleCheck(this, r.alarm.id, checkIn)
+                stopRinging()
+            }
             ACTION_SNOOZE -> {
-                ringing.value?.let {
-                    AlarmScheduler.scheduleAt(
-                        this, it.id, System.currentTimeMillis() + SettingsRepository.current.snoozeMinutes * 60_000L, snooze = true,
-                    )
-                }
+                val r = ringing.value
+                if (r != null && !r.canSnooze) return START_NOT_STICKY
+                r?.let { snoozeFor(it, it.snoozes + 1) }
                 stopRinging()
             }
             else -> {
@@ -89,30 +98,54 @@ class AlarmService : Service() {
                 val id = intent?.getIntExtra(EXTRA_ALARM_ID, -1) ?: -1
                 val now = LocalTime.now()
                 val alarm = AlarmRepository.get(id) ?: Alarm(id, now.hour, now.minute)
-                startRinging(alarm)
+                val r = Ringing.of(
+                    alarm, SettingsRepository.current,
+                    snoozes = intent?.getIntExtra(EXTRA_SNOOZE_COUNT, 0) ?: 0,
+                    check = intent?.getBooleanExtra(EXTRA_CHECK, false) ?: false,
+                )
+                startRinging(r, gentle = r.check || alarm.gentle)
             }
         }
         return START_NOT_STICKY
     }
 
-    private fun startRinging(alarm: Alarm) {
+    private fun snoozeFor(r: Ringing, count: Int) = AlarmScheduler.scheduleAt(
+        this, r.alarm.id, System.currentTimeMillis() + SettingsRepository.current.snoozeMinutes * 60_000L,
+        snooze = true, snoozeCount = count,
+    )
+
+    private fun onTimeout() {
+        val r = ringing.value
+        when {
+            r == null -> stopRinging()
+            // Не ответил на проверку — значит, уснул: звоним по-настоящему, без «отложить»
+            r.check -> startRinging(Ringing.of(r.alarm, SettingsRepository.current, strict = true), gentle = false)
+            // С заданием звонок не затихает насовсем: замолкает и возвращается через «отложить»
+            r.task != WakeTask.NONE -> {
+                snoozeFor(r, r.snoozes)
+                stopRinging()
+            }
+            else -> stopRinging()
+        }
+    }
+
+    private fun startRinging(r: Ringing, gentle: Boolean) {
         stopSound()
         handler.removeCallbacksAndMessages(null)
-        ringing.value = alarm
+        ringing.value = r
         ServiceCompat.startForeground(
-            this, NOTIFICATION_ID, buildNotification(alarm),
+            this, NOTIFICATION_ID, buildNotification(r),
             if (Build.VERSION.SDK_INT >= 29) ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK else 0,
         )
-        if (wakeLock?.isHeld != true) {
-            wakeLock = getSystemService(PowerManager::class.java)
-                .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "budila:ringing")
-                .apply { acquire(timeoutMs + 5_000) }
+        val timeoutMs = if (r.check) CHECK_ANSWER_SECONDS * 1_000L else SettingsRepository.current.timeoutMinutes * 60_000L
+        wakeLock?.takeIf { it.isHeld }?.release()
+        wakeLock = getSystemService(PowerManager::class.java)
+            .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "budila:ringing")
+            .apply { acquire(timeoutMs + 5_000) }
+        playSound(gentle)
+        if (r.alarm.vibrate || r.check) {
+            if (gentle) handler.postDelayed({ vibrate() }, if (r.check) 0 else GENTLE_VIBRATION_DELAY_MS) else vibrate()
         }
-        playSound(alarm.gentle)
-        if (alarm.vibrate) {
-            if (alarm.gentle) handler.postDelayed({ vibrate() }, GENTLE_VIBRATION_DELAY_MS) else vibrate()
-        }
-        handler.removeCallbacks(timeout)
         handler.postDelayed(timeout, timeoutMs)
     }
 
@@ -178,7 +211,8 @@ class AlarmService : Service() {
         super.onDestroy()
     }
 
-    private fun buildNotification(alarm: Alarm): Notification {
+    private fun buildNotification(r: Ringing): Notification {
+        val alarm = r.alarm
         val nm = getSystemService(NotificationManager::class.java)
         nm.createNotificationChannel(
             NotificationChannel(CHANNEL_ID, getString(R.string.channel_ringing), NotificationManager.IMPORTANCE_HIGH).apply {
@@ -202,7 +236,9 @@ class AlarmService : Service() {
         )
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_alarm)
-            .setContentTitle(alarm.label.ifBlank { getString(R.string.alarm_default_label) })
+            .setContentTitle(
+                if (r.check) getString(R.string.check_title) else alarm.label.ifBlank { getString(R.string.alarm_default_label) },
+            )
             .setContentText(formatTime(this, alarm.hour, alarm.minute))
             .setCategory(NotificationCompat.CATEGORY_ALARM)
             .setPriority(NotificationCompat.PRIORITY_MAX)
@@ -210,8 +246,14 @@ class AlarmService : Service() {
             .setOngoing(true)
             .setFullScreenIntent(fullScreen, true)
             .setContentIntent(fullScreen)
-            .addAction(0, getString(R.string.snooze_for, SettingsRepository.current.snoozeMinutes), snooze)
-            .addAction(0, getString(R.string.dismiss), dismiss)
+            .apply {
+                if (r.canSnooze) addAction(0, getString(R.string.snooze_for, SettingsRepository.current.snoozeMinutes), snooze)
+                // С заданием выключить можно только на экране звонка — кнопку в шторке не показываем
+                when {
+                    r.check -> addAction(0, getString(R.string.check_awake), dismiss)
+                    r.task == WakeTask.NONE -> addAction(0, getString(R.string.dismiss), dismiss)
+                }
+            }
             .build()
     }
 }

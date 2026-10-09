@@ -143,4 +143,39 @@
     <string name="icon_orange">Pomarańczowa</string>
     <string name="icon_white">Biała</string>
     <string name="icon_desc">Ekran główny zaktualizuje ikonę za kilka sekund</string>
+
+    <!-- Проверка пробуждения -->
+    <string name="task_title">Wyłączanie</string>
+    <string name="task_none">Przycisk</string>
+    <string name="task_math">Działania</string>
+    <string name="task_password">Hasło</string>
+    <string name="task_hint_none">Wyłącza się jednym dotknięciem</string>
+    <string name="password_legend">Hasło (wspólne dla wszystkich alarmów)</string>
+    <string name="password_show">Pokaż hasło</string>
+    <string name="task_action_math">Rozwiąż i wyłącz</string>
+    <string name="task_action_password">Wpisz hasło</string>
+    <string name="task_prove">Udowodnij, że nie śpisz</string>
+    <string name="task_problem">Działanie %1$d z %2$d</string>
+    <string name="task_wrong">Źle, jeszcze raz</string>
+    <string name="password_wrong">Złe hasło</string>
+    <string name="task_submit">Sprawdź</string>
+    <string name="snooze_left">%1$s · zostało %2$d</string>
+    <string name="check_title">Na pewno wstałeś?</string>
+    <string name="check_awake">Nie śpię</string>
+    <string name="check_hint">Brak odpowiedzi w ciągu minuty — alarm zadzwoni ponownie i nie będzie można go odłożyć</string>
+    <string name="legend_check">Kontrola</string>
+    <string name="section_wake">Kontrola pobudki</string>
+    <string name="password_title">Hasło</string>
+    <string name="password_desc">Dla alarmów z zadaniem „Hasło”. Wybierz takie, nad którym trzeba pomyśleć. Bez hasła będą działania</string>
+    <string name="max_snoozes_title">Limit drzemek</string>
+    <string name="max_snoozes_desc">Ile razy można odłożyć jeden alarm</string>
+    <string name="awake_check_title">Ponowna kontrola</string>
+    <string name="awake_check_desc">Po tym czasie od wyłączenia Budila zapyta „Na pewno wstałeś?”. Brak odpowiedzi w ciągu minuty — alarm zadzwoni ponownie</string>
+    <string name="off">Wył.</string>
+    <string name="task_hint_math">Aby wyłączyć, rozwiąż działania. Powtórzenia: %1$d</string>
+    <string name="task_hint_password">Aby wyłączyć, wpisz hasło. Powtórzenia: %1$d</string>
+    <string name="default_task_title">Zadanie w nowych alarmach</string>
+    <string name="task_repeats_title">Powtórz zadanie</string>
+    <string name="task_repeats_desc">Ile działań rozwiązać lub ile razy z rzędu wpisać hasło</string>
+    <string name="task_entry">Wpis %1$d z %2$d</string>
 </resources>
