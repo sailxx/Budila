@@ -2,7 +2,7 @@
 <style>
 .m{font-family:"JetBrains Mono",SFMono-Regular,Consolas,"Liberation Mono",Menlo,monospace}
 .s{font-family:"Google Sans",Roboto,"Segoe UI",Helvetica,Arial,sans-serif}
-.f{opacity:0;animation:in .7s ease-out forwards}
+.f{animation:in .7s ease-out both}
 .d1{animation-delay:.1s}.d2{animation-delay:.25s}.d3{animation-delay:.4s}.d4{animation-delay:.55s}
 @keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .card{fill:#F3EFF7;stroke:#E3E1EC}

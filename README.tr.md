@@ -21,7 +21,7 @@
 <img src="assets/readme/features-tr.svg" width="100%" alt="Budila neler yapabilir">
 
 <details>
-<summary><b>Özellikler hakkında daha fazlası</b></summary>
+<summary>Özellikler hakkında daha fazlası</summary>
 
 ### ⏰ Ana ekran
 
@@ -76,7 +76,7 @@ Android 8.0 veya daha yenisi gerekir. Google Play ya da hesap gerekmez.
 Budila, GitHub sürümlerine dayanan bir uygulama mağazası olan [Komi Store](https://github.com/komi-store/komi-store)'da da var: “Budila” diye arayın, güncellemeleri Komi Store kendisi önerir.
 
 <details>
-<summary><b>Kaynak koddan derleme</b></summary>
+<summary>Kaynak koddan derleme</summary>
 
 JDK 17+ ve Android SDK (platform 36) gerekir.
 

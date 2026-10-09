@@ -51,7 +51,7 @@ ${b.map((l, i) => `  <text x="${x + 18}" y="${358 + i * 16}" class="m" font-size
 <style>
 ${MONO}
 ${SANS}
-.f{opacity:0;animation:in .7s ease-out forwards}
+.f{animation:in .7s ease-out both}
 .d1{animation-delay:.1s}.d2{animation-delay:.25s}.d3{animation-delay:.4s}.d4{animation-delay:.55s}.d5{animation-delay:.7s}.d6{animation-delay:.85s}.d7{animation-delay:1s}
 @keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .ring{transform-origin:808px 112px;animation:pulse 1.6s ease-out infinite}
@@ -135,7 +135,7 @@ ${lines.map((l, k) => `  <text x="${x + 20}" y="${y + 80 + k * 16}" class="m x">
 <style>
 ${MONO}
 ${SANS}
-.f{opacity:0;animation:in .7s ease-out forwards}
+.f{animation:in .7s ease-out both}
 .d1{animation-delay:.1s}.d2{animation-delay:.25s}.d3{animation-delay:.4s}.d4{animation-delay:.55s}
 @keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .card{fill:#F3EFF7;stroke:#E3E1EC}
@@ -180,7 +180,7 @@ function quality(t) {
 <style>
 ${MONO}
 ${SANS}
-.f{opacity:0;animation:in .7s ease-out forwards}
+.f{animation:in .7s ease-out both}
 .d1{animation-delay:.1s}.d2{animation-delay:.25s}.d3{animation-delay:.4s}.d4{animation-delay:.55s}
 @keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .card{fill:#1B1C22;stroke:#2A2C35}
@@ -247,7 +247,7 @@ function design(t) {
 <style>
 ${MONO}
 ${SANS}
-.f{opacity:0;animation:in .7s ease-out forwards}
+.f{animation:in .7s ease-out both}
 .d1{animation-delay:.1s}.d2{animation-delay:.25s}.d3{animation-delay:.4s}
 @keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .card{fill:#F3EFF7;stroke:#E3E1EC}
@@ -328,7 +328,7 @@ function screens(t) {
   };
   return `<svg xmlns="http://www.w3.org/2000/svg" width="880" height="520" viewBox="0 0 880 520" role="img" aria-label="${esc(s.alt)}">
 <style>${MONO}
-.f{opacity:0;animation:in .7s ease-out forwards}@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}</style>
+.f{animation:in .7s ease-out both}@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}</style>
 ${DOTS}
 <rect width="880" height="520" rx="18" fill="#FBF8FF"/><rect width="880" height="520" rx="18" fill="url(#dots)"/>
 <rect x=".5" y=".5" width="879" height="519" rx="17.5" fill="none" stroke="#E3E1EC"/>

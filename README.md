@@ -21,7 +21,7 @@
 <img src="assets/readme/features-ru.svg" width="100%" alt="Что умеет Budila">
 
 <details>
-<summary><b>Подробнее о возможностях</b></summary>
+<summary>Подробнее о возможностях</summary>
 
 ### ⏰ Главный экран
 
@@ -76,7 +76,7 @@
 Budila есть и в [Komi Store](https://github.com/komi-store/komi-store) — магазине приложений из GitHub-релизов: найдите «Budila» в поиске, и Komi Store будет сам предлагать обновления.
 
 <details>
-<summary><b>Собрать из исходников</b></summary>
+<summary>Собрать из исходников</summary>
 
 Нужны JDK 17+ и Android SDK (платформа 36).
 
