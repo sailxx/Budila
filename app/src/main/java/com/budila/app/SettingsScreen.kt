@@ -37,6 +37,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.automirrored.rounded.OpenInNew
+import androidx.compose.material.icons.automirrored.rounded.TrendingUp
 import androidx.compose.material.icons.automirrored.rounded.VolumeUp
 import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.*
@@ -204,6 +205,14 @@ internal fun SettingsScreen(onBack: () -> Unit) {
                     },
                 )
             }
+            item {
+                val days = remember { dayShortNames(context) }
+                ChoiceItem(
+                    Icons.Rounded.CalendarMonth, stringResource(R.string.week_start_title),
+                    WeekStart.entries.map { it.ordinal }, s.weekStart.ordinal,
+                    label = { days[WeekStart.entries[it].offset] },
+                ) { v -> SettingsRepository.update { it.copy(weekStart = WeekStart.entries[v]) } }
+            }
             item { SectionHeader(stringResource(R.string.section_ringing)) }
             item {
                 ListItem(
@@ -213,6 +222,36 @@ internal fun SettingsScreen(onBack: () -> Unit) {
                     trailingContent = { Icon(Icons.Rounded.ChevronRight, null) },
                     modifier = Modifier.clickable(onClick = pickRingtone),
                 )
+            }
+            item {
+                val volume = rememberAlarmVolume()
+                DisposableEffect(Unit) { onDispose { volume.stopPreview() } }
+                ListItem(
+                    headlineContent = { Text(stringResource(R.string.alarm_volume)) },
+                    leadingContent = { Icon(Icons.Rounded.Alarm, null) },
+                    supportingContent = {
+                        Slider(
+                            value = volume.value.toFloat(),
+                            onValueChange = { volume.set(it.roundToInt()) },
+                            onValueChangeFinished = volume::preview,
+                            valueRange = volume.min.toFloat()..volume.max.toFloat().coerceAtLeast(volume.min + 1f),
+                            steps = (volume.max - volume.min - 1).coerceAtLeast(0),
+                        )
+                    },
+                )
+            }
+            item {
+                ChoiceItem(
+                    Icons.AutoMirrored.Rounded.TrendingUp, stringResource(R.string.ramp_title), listOf(0, 15, 30, 60, 120), s.rampSeconds,
+                    subtitle = stringResource(R.string.ramp_desc),
+                    label = {
+                        when {
+                            it == 0 -> stringResource(R.string.off)
+                            it % 60 == 0 -> stringResource(R.string.minutes_short, it / 60)
+                            else -> stringResource(R.string.seconds_short, it)
+                        }
+                    },
+                ) { v -> SettingsRepository.update { it.copy(rampSeconds = v) } }
             }
             item {
                 SwitchItem(
@@ -227,9 +266,25 @@ internal fun SettingsScreen(onBack: () -> Unit) {
                 }
             }
             item {
-                ChoiceItem(Icons.Rounded.TimerOff, stringResource(R.string.timeout_title), listOf(5, 10, 20, 30), s.timeoutMinutes) { v ->
-                    SettingsRepository.update { it.copy(timeoutMinutes = v) }
-                }
+                ChoiceItem(
+                    Icons.Rounded.TimerOff, stringResource(R.string.timeout_title), listOf(5, 10, 20, 30, 0), s.timeoutMinutes,
+                    label = { if (it == 0) stringResource(R.string.never) else stringResource(R.string.minutes_short, it) },
+                ) { v -> SettingsRepository.update { it.copy(timeoutMinutes = v) } }
+            }
+            item {
+                ChoiceItem(
+                    Icons.Rounded.TouchApp, stringResource(R.string.dismiss_gesture_title),
+                    DismissGesture.entries.map { it.ordinal }, s.dismissGesture.ordinal,
+                    subtitle = stringResource(R.string.dismiss_gesture_desc),
+                    label = { stringResource(DismissGesture.entries[it].title) },
+                ) { v -> SettingsRepository.update { it.copy(dismissGesture = DismissGesture.entries[v]) } }
+            }
+            item {
+                ChoiceItem(
+                    Icons.AutoMirrored.Rounded.VolumeUp, stringResource(R.string.volume_keys_title),
+                    VolumeKeys.entries.map { it.ordinal }, s.volumeKeys.ordinal,
+                    label = { stringResource(VolumeKeys.entries[it].title) },
+                ) { v -> SettingsRepository.update { it.copy(volumeKeys = VolumeKeys.entries[v]) } }
             }
             item {
                 SwitchItem(

@@ -16,13 +16,18 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.automirrored.rounded.OpenInNew
+import androidx.compose.material.icons.automirrored.rounded.TrendingUp
+import androidx.compose.material.icons.automirrored.rounded.VolumeUp
 import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -31,6 +36,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kotlin.math.roundToInt
 
 @Composable
 internal fun InstrumentSettingsScreen(onBack: () -> Unit) {
@@ -41,7 +47,15 @@ internal fun InstrumentSettingsScreen(onBack: () -> Unit) {
     val ringtoneTitle = remember(s.ringtone) { ringtoneTitle(context, s.ringtone) }
     val version = rememberAppVersion()
     val minutes = { v: Int -> context.getString(R.string.minutes_short, v) }
-    val snoozeLimitLabel = { v: Int -> if (v < 0) "∞" else "$v" }
+    val timeoutLabel = { v: Int -> if (v == 0) context.getString(R.string.never) else minutes(v) }
+    val rampLabel = { v: Int ->
+        when {
+            v == 0 -> context.getString(R.string.off)
+            v % 60 == 0 -> minutes(v / 60)
+            else -> context.getString(R.string.seconds_short, v)
+        }
+    }
+    val snoozeLimitLabel ={ v: Int -> if (v < 0) "∞" else "$v" }
     val checkLabel = { v: Int -> if (v == 0) context.getString(R.string.off) else minutes(v) }
 
     LazyColumn(
@@ -144,10 +158,23 @@ internal fun InstrumentSettingsScreen(onBack: () -> Unit) {
                 context.startActivity(Intent(Settings.ACTION_APP_LOCALE_SETTINGS, Uri.parse("package:${context.packageName}")))
             }
         }
+        item {
+            val days = remember { dayShortNames(context) }
+            ChoiceStrip(Icons.Rounded.CalendarMonth, stringResource(R.string.week_start_title), WeekStart.entries.map { it.ordinal }, s.weekStart.ordinal, { days[WeekStart.entries[it].offset] }) { v ->
+                SettingsRepository.update { it.copy(weekStart = WeekStart.entries[v]) }
+            }
+        }
 
         // ---------- Звонок ----------
         item { Section(stringResource(R.string.section_ringing)) }
         item { Row_(Icons.Rounded.MusicNote, stringResource(R.string.ringtone), ringtoneTitle, onClick = pickRingtone) }
+        item { InstrumentVolumeRow() }
+        item {
+            ChoiceStrip(Icons.AutoMirrored.Rounded.TrendingUp, stringResource(R.string.ramp_title), listOf(0, 15, 30, 60, 120), s.rampSeconds, rampLabel) { v ->
+                SettingsRepository.update { it.copy(rampSeconds = v) }
+            }
+            Text(stringResource(R.string.ramp_desc), style = IType.small, color = colors.muted)
+        }
         item {
             SwitchRow(Icons.Rounded.Spa, stringResource(R.string.gentle_wake), stringResource(R.string.gentle_default_desc), s.gentleDefault) { v ->
                 SettingsRepository.update { it.copy(gentleDefault = v) }
@@ -159,8 +186,19 @@ internal fun InstrumentSettingsScreen(onBack: () -> Unit) {
             }
         }
         item {
-            ChoiceStrip(Icons.Rounded.TimerOff, stringResource(R.string.timeout_title), listOf(5, 10, 20, 30), s.timeoutMinutes, minutes) { v ->
+            ChoiceStrip(Icons.Rounded.TimerOff, stringResource(R.string.timeout_title), listOf(5, 10, 20, 30, 0), s.timeoutMinutes, timeoutLabel) { v ->
                 SettingsRepository.update { it.copy(timeoutMinutes = v) }
+            }
+        }
+        item {
+            ChoiceStrip(Icons.Rounded.TouchApp, stringResource(R.string.dismiss_gesture_title), DismissGesture.entries.map { it.ordinal }, s.dismissGesture.ordinal, { context.getString(DismissGesture.entries[it].title) }) { v ->
+                SettingsRepository.update { it.copy(dismissGesture = DismissGesture.entries[v]) }
+            }
+            Text(stringResource(R.string.dismiss_gesture_desc), style = IType.small, color = colors.muted)
+        }
+        item {
+            ChoiceStrip(Icons.AutoMirrored.Rounded.VolumeUp, stringResource(R.string.volume_keys_title), VolumeKeys.entries.map { it.ordinal }, s.volumeKeys.ordinal, { context.getString(VolumeKeys.entries[it].title) }) { v ->
+                SettingsRepository.update { it.copy(volumeKeys = VolumeKeys.entries[v]) }
             }
         }
         item {
@@ -347,5 +385,35 @@ private fun ChoiceStrip(icon: ImageVector, title: String, options: List<Int>, se
         }
         Spacer(Modifier.height(10.dp))
         Strip(options.map(label), options.indexOf(selected).coerceAtLeast(0), { onSelect(options[it]) })
+    }
+}
+
+/** Громкость будильника — ползунок системной громкости; отпустил — короткое прослушивание. */
+@Composable
+private fun InstrumentVolumeRow() {
+    val colors = LocalInstrument.current
+    val volume = rememberAlarmVolume()
+    DisposableEffect(Unit) { onDispose { volume.stopPreview() } }
+    Column(Modifier.padding(vertical = 10.dp)) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(Icons.Rounded.Alarm, null, tint = colors.muted, modifier = Modifier.size(22.dp))
+            Spacer(Modifier.width(14.dp))
+            Text(stringResource(R.string.alarm_volume), style = IType.body.copy(fontWeight = FontWeight.Medium), color = colors.ink)
+        }
+        Slider(
+            value = volume.value.toFloat(),
+            onValueChange = { volume.set(it.roundToInt()) },
+            onValueChangeFinished = volume::preview,
+            valueRange = volume.min.toFloat()..volume.max.toFloat().coerceAtLeast(volume.min + 1f),
+            steps = (volume.max - volume.min - 1).coerceAtLeast(0),
+            colors = SliderDefaults.colors(
+                thumbColor = colors.ink,
+                activeTrackColor = colors.ink,
+                inactiveTrackColor = colors.line,
+                activeTickColor = Color.Transparent,
+                inactiveTickColor = Color.Transparent,
+            ),
+            modifier = Modifier.padding(start = 36.dp),
+        )
     }
 }

@@ -682,7 +682,9 @@ internal fun AlarmEditorContent(
 
         EditorSection(stringResource(R.string.repeat_label, daysText(context, days)))
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            dayShortNames(context).forEachIndexed { i, name ->
+            val names = dayShortNames(context)
+            weekOrder().forEach { i ->
+                val name = names[i]
                 val bit = 1 shl i
                 val selected = days and bit != 0
                 Surface(

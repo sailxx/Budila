@@ -59,7 +59,6 @@
     <string name="empty_text">Tippe auf „Hinzufügen“, um den ersten zu erstellen</string>
 
     <string name="gentle_wake">Sanftes Wecken</string>
-    <string name="gentle_wake_desc">Leiser Start: Die Lautstärke steigt etwa eine Minute lang, Vibration nach 30 Sekunden</string>
     <string name="color_selected">Ausgewählt</string>
     <string name="color_none">Keine Farbe</string>
     <string name="editor_new">Neuer Wecker</string>
@@ -88,7 +87,6 @@
     <string name="ringtone_picker_title">Weckton</string>
     <string name="ringtone_default">Standard-Weckton</string>
     <string name="ringtone_custom">Eigener Ton</string>
-    <string name="gentle_default_desc">Für neue Wecker: leiser Start, die Lautstärke steigt etwa eine Minute lang, Vibration nach 30 Sekunden. Für jeden Wecker einzeln abschaltbar</string>
     <string name="snooze_title">Schlummern für</string>
     <string name="timeout_title">Verstummen, wenn unbeantwortet, nach</string>
     <string name="minutes_short">%1$d Min.</string>
@@ -178,4 +176,23 @@
     <string name="task_repeats_title">Aufgabe wiederholen</string>
     <string name="task_repeats_desc">Wie viele Aufgaben zu lösen sind oder wie oft hintereinander das Passwort einzugeben ist</string>
     <string name="task_entry">Eingabe %1$d von %2$d</string>
+    <string name="gentle_wake_desc">Leiser Start: Die Lautstärke steigt allmählich, Vibration ab der Hälfte</string>
+    <string name="gentle_default_desc">Für neue Wecker: leiser Start, die Lautstärke steigt allmählich. Für jeden Wecker einzeln abschaltbar</string>
+    <string name="dismiss_gesture_title">Wecker ausschalten mit</string>
+    <string name="dismiss_gesture_desc">Je schwieriger die Geste, desto seltener schaltest du im Schlaf aus. Mit Aufgabe öffnet die Geste die Aufgabe</string>
+    <string name="gesture_tap">Tippen</string>
+    <string name="gesture_slide">Wischen</string>
+    <string name="gesture_hold">Halten</string>
+    <string name="gesture_hold_hint">Halten, bis es voll ist</string>
+    <string name="volume_keys_title">Lautstärketasten beim Klingeln</string>
+    <string name="volume_keys_volume">Lautstärke</string>
+    <string name="volume_keys_snooze">Schlummern</string>
+    <string name="volume_keys_dismiss">Ausschalten</string>
+    <string name="volume_keys_nothing">Nichts</string>
+    <string name="week_start_title">Woche beginnt am</string>
+    <string name="never">Nie</string>
+    <string name="alarm_volume">Weckerlautstärke</string>
+    <string name="ramp_title">Lautstärke langsam erhöhen</string>
+    <string name="ramp_desc">Für Wecker mit sanftem Wecken</string>
+    <string name="seconds_short">%1$d s</string>
 </resources>

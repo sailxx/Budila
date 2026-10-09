@@ -13,7 +13,9 @@ import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ColorScheme
@@ -501,11 +503,12 @@ fun Strip(options: List<String>, selected: Int, onSelect: (Int) -> Unit, modifie
                             Led(true, size = 5.dp)
                             Spacer(Modifier.width(6.dp))
                         }
-                        Text(
+                        // Длинная подпись («ГРОМКОСТЬ», «AUSSCHALTEN») уменьшается, а не обрезается
+                        BasicText(
                             label.uppercase(),
-                            style = IType.legend.copy(fontSize = 11.sp),
-                            color = if (i == selected) colors.ink else colors.muted,
+                            style = IType.legend.copy(fontSize = 11.sp, color = if (i == selected) colors.ink else colors.muted),
                             maxLines = 1,
+                            autoSize = TextAutoSize.StepBased(minFontSize = 7.sp, maxFontSize = 11.sp, stepSize = 0.5.sp),
                         )
                     }
                 }

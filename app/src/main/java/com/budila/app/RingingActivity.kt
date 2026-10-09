@@ -2,6 +2,7 @@ package com.budila.app
 
 import android.os.Build
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
@@ -78,7 +79,7 @@ class RingingActivity : ComponentActivity() {
                 val settings by SettingsRepository.settings.collectAsStateWithLifecycle()
                 val instrument = settings.design == Design.INSTRUMENT
                 // Задание начинается заново, если звонок сменился (например, проверка перешла в настоящий звонок)
-                var solving by remember(r) { mutableStateOf(false) }
+                LaunchedEffect(r) { solving = false }
                 val label = r.alarm.label.ifBlank { null } ?: getString(R.string.alarm_default_label)
                 val onSnooze = if (r.canSnooze) ({ AlarmService.snooze(this); finish() }) else null
                 val dismiss = { AlarmService.dismiss(this); finish() }
@@ -107,6 +108,33 @@ class RingingActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    /** Открыт экран задания (а не сам звонок). Здесь, а не в Compose, — чтобы до него дотянулись кнопки громкости. */
+    private var solving by mutableStateOf(false)
+
+    /** Кнопки громкости во время звонка — как выбрано в настройках. */
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        val volumeKey = keyCode == KeyEvent.KEYCODE_VOLUME_UP || keyCode == KeyEvent.KEYCODE_VOLUME_DOWN
+        val r = AlarmService.ringing.value
+        val mode = SettingsRepository.current.volumeKeys
+        if (!volumeKey || r == null || mode == VolumeKeys.VOLUME) return super.onKeyDown(keyCode, event)
+        if (event.repeatCount > 0) return true
+        when (mode) {
+            VolumeKeys.SNOOZE -> if (r.canSnooze) {
+                AlarmService.snooze(this)
+                finish()
+            }
+            // С заданием кнопка не выключает, а открывает задание
+            VolumeKeys.DISMISS -> if (r.check || r.task == WakeTask.NONE) {
+                AlarmService.dismiss(this)
+                finish()
+            } else {
+                solving = true
+            }
+            else -> Unit
+        }
+        return true
     }
 }
 
@@ -201,6 +229,7 @@ internal fun RingingScreen(
     onDismiss: () -> Unit,
     task: WakeTask = WakeTask.NONE,
     snoozesLeft: Int? = null,
+    gesture: DismissGesture = SettingsRepository.current.dismissGesture,
 ) {
     val context = LocalContext.current
     var now by remember { mutableStateOf(LocalTime.now()) }
@@ -250,10 +279,17 @@ internal fun RingingScreen(
             }
 
             Column(verticalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
-                Button(onClick = onDismiss, modifier = Modifier.fillMaxWidth().height(72.dp)) {
-                    Icon(taskIcon(task), null)
-                    Spacer(Modifier.width(12.dp))
-                    Text(stringResource(taskActionText(task)), style = MaterialTheme.typography.titleLarge)
+                val action = stringResource(taskActionText(task))
+                DismissControl(
+                    gesture, action, taskIcon(task), onDismiss,
+                    DismissStyle(CircleShape, colors.surface, colors.primary, colors.primary, colors.onPrimary, MaterialTheme.typography.titleLarge),
+                    Modifier.fillMaxWidth().height(72.dp),
+                ) {
+                    Button(onClick = onDismiss, modifier = Modifier.fillMaxWidth().height(72.dp)) {
+                        Icon(taskIcon(task), null)
+                        Spacer(Modifier.width(12.dp))
+                        Text(action, style = MaterialTheme.typography.titleLarge)
+                    }
                 }
                 if (onSnooze != null) {
                     FilledTonalButton(

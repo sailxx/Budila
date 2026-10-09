@@ -34,6 +34,24 @@ enum class DarkMode(@StringRes val title: Int) {
 /** Дизайн приложения: фирменный «Инструмент» (как в Okto) или Material 3. */
 enum class Design { INSTRUMENT, MATERIAL }
 
+/** Чем выключать звонок: чем труднее жест, тем меньше шанс выключить его во сне. */
+enum class DismissGesture(@StringRes val title: Int) {
+    TAP(R.string.gesture_tap),
+    SLIDE(R.string.gesture_slide),
+    HOLD(R.string.gesture_hold),
+}
+
+/** Что делают кнопки громкости, пока звонит будильник. */
+enum class VolumeKeys(@StringRes val title: Int) {
+    VOLUME(R.string.volume_keys_volume),
+    SNOOZE(R.string.volume_keys_snooze),
+    DISMISS(R.string.volume_keys_dismiss),
+    NOTHING(R.string.volume_keys_nothing),
+}
+
+/** Первый день недели; [offset] — его номер, считая понедельник нулём. */
+enum class WeekStart(val offset: Int) { MONDAY(0), SATURDAY(5), SUNDAY(6) }
+
 data class AppSettings(
     val design: Design = Design.INSTRUMENT,
     /** Тема «Инструмента»; темы Material 3 — в [theme] */
@@ -46,8 +64,14 @@ data class AppSettings(
     val ringtone: String? = null,
     val gentleDefault: Boolean = true,
     val snoozeMinutes: Int = 5,
+    /** Через сколько минут звонок затихнет сам; 0 — никогда */
     val timeoutMinutes: Int = 10,
     val defaultVibrate: Boolean = true,
+    /** За сколько секунд громкость дорастает до полной у будильников со спокойным пробуждением; 0 — сразу */
+    val rampSeconds: Int = 60,
+    val dismissGesture: DismissGesture = DismissGesture.TAP,
+    val volumeKeys: VolumeKeys = VolumeKeys.VOLUME,
+    val weekStart: WeekStart = WeekStart.MONDAY,
     /** Пароль для будильников с заданием «Пароль» */
     val password: String = "",
     /** Задание для новых будильников */
@@ -101,6 +125,10 @@ object SettingsRepository {
             snoozeMinutes = prefs.getInt("snoozeMinutes", d.snoozeMinutes),
             timeoutMinutes = prefs.getInt("timeoutMinutes", d.timeoutMinutes),
             defaultVibrate = prefs.getBoolean("defaultVibrate", d.defaultVibrate),
+            rampSeconds = prefs.getInt("rampSeconds", d.rampSeconds),
+            dismissGesture = DismissGesture.entries.find { it.name == prefs.getString("dismissGesture", null) } ?: d.dismissGesture,
+            volumeKeys = VolumeKeys.entries.find { it.name == prefs.getString("volumeKeys", null) } ?: d.volumeKeys,
+            weekStart = WeekStart.entries.find { it.name == prefs.getString("weekStart", null) } ?: d.weekStart,
             password = prefs.getString("password", null) ?: d.password,
             defaultTask = WakeTask.entries.find { it.name == prefs.getString("defaultTask", null) } ?: d.defaultTask,
             taskRepeats = prefs.getInt("taskRepeats", d.taskRepeats),
@@ -128,6 +156,10 @@ object SettingsRepository {
             .putInt("snoozeMinutes", s.snoozeMinutes)
             .putInt("timeoutMinutes", s.timeoutMinutes)
             .putBoolean("defaultVibrate", s.defaultVibrate)
+            .putInt("rampSeconds", s.rampSeconds)
+            .putString("dismissGesture", s.dismissGesture.name)
+            .putString("volumeKeys", s.volumeKeys.name)
+            .putString("weekStart", s.weekStart.name)
             .putString("password", s.password)
             .putString("defaultTask", s.defaultTask.name)
             .putInt("taskRepeats", s.taskRepeats)

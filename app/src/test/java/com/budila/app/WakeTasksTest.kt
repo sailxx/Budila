@@ -91,6 +91,12 @@ class WakeTasksTest {
         assertTrue(WakeTaskState(WakeTask.PASSWORD, "утро", repeats = 1).apply { edit("утро") }.submit())
     }
 
+    @Test fun weekStartsOnChosenDay() {
+        assertEquals(listOf(0, 1, 2, 3, 4, 5, 6), weekOrder(WeekStart.MONDAY))
+        assertEquals(listOf(6, 0, 1, 2, 3, 4, 5), weekOrder(WeekStart.SUNDAY))
+        assertEquals(listOf(5, 6, 0, 1, 2, 3, 4), weekOrder(WeekStart.SATURDAY))
+    }
+
     @Test fun alarmTaskSurvivesJson() {
         val a = alarm.copy(task = WakeTask.PASSWORD)
         assertEquals(a, Alarm.fromJson(a.toJson()))

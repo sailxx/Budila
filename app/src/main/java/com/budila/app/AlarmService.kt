@@ -33,7 +33,12 @@ class AlarmService : Service() {
         private const val ACTION_SNOOZE = "com.budila.app.SNOOZE"
         private const val CHANNEL_ID = "alarm_ringing"
         private const val NOTIFICATION_ID = 42
-        private const val GENTLE_VIBRATION_DELAY_MS = 30_000L
+        private const val RAMP_TICK_MS = 500L
+        private const val QUIET_START = 0.02f
+        /** Повторная проверка всегда начинается тихо и дорастает за полминуты */
+        private const val CHECK_RAMP_MS = 30_000L
+        /** «Никогда не затихать» — но телефон не должен держать звонок бесконечно */
+        private const val NEVER_TIMEOUT_MS = 3 * 60 * 60_000L
 
         /** Звонок, который идёт прямо сейчас (null — тишина). */
         val ringing = MutableStateFlow<Ringing?>(null)
@@ -67,11 +72,13 @@ class AlarmService : Service() {
     private val handler = Handler(Looper.getMainLooper())
     private val timeout = Runnable { onTimeout() }
     private var volume = 0.1f
+    /** На сколько поднимать громкость каждые [RAMP_TICK_MS], чтобы дойти до полной за заданное время */
+    private var rampStep = 0.03f
     private val rampUp = object : Runnable {
         override fun run() {
-            volume = (volume + 0.03f).coerceAtMost(1f)
+            volume = (volume + rampStep).coerceAtMost(1f)
             player?.setVolume(volume, volume)
-            if (volume < 1f) handler.postDelayed(this, 2_000)
+            if (volume < 1f) handler.postDelayed(this, RAMP_TICK_MS)
         }
     }
 
@@ -137,26 +144,35 @@ class AlarmService : Service() {
             this, NOTIFICATION_ID, buildNotification(r),
             if (Build.VERSION.SDK_INT >= 29) ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK else 0,
         )
-        val timeoutMs = if (r.check) CHECK_ANSWER_SECONDS * 1_000L else SettingsRepository.current.timeoutMinutes * 60_000L
+        val settings = SettingsRepository.current
+        val timeoutMs = when {
+            r.check -> CHECK_ANSWER_SECONDS * 1_000L
+            settings.timeoutMinutes <= 0 -> NEVER_TIMEOUT_MS
+            else -> settings.timeoutMinutes * 60_000L
+        }
         wakeLock?.takeIf { it.isHeld }?.release()
         wakeLock = getSystemService(PowerManager::class.java)
             .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "budila:ringing")
             .apply { acquire(timeoutMs + 5_000) }
-        playSound(gentle)
+        val rampMs = if (!gentle) 0L else if (r.check) CHECK_RAMP_MS else settings.rampSeconds * 1_000L
+        playSound(rampMs)
         if (r.alarm.vibrate || r.check) {
-            if (gentle) handler.postDelayed({ vibrate() }, if (r.check) 0 else GENTLE_VIBRATION_DELAY_MS) else vibrate()
+            // При плавном старте вибрация включается на середине нарастания; у проверки — сразу
+            if (rampMs > 0 && !r.check) handler.postDelayed({ vibrate() }, rampMs / 2) else vibrate()
         }
-        handler.postDelayed(timeout, timeoutMs)
+        if (timeoutMs != NEVER_TIMEOUT_MS) handler.postDelayed(timeout, timeoutMs)
     }
 
-    private fun playSound(gentle: Boolean) {
+    /** [rampMs] — за сколько дорасти до полной громкости; 0 — сразу полная. */
+    private fun playSound(rampMs: Long) {
         val uris = listOfNotNull(
             SettingsRepository.current.ringtone?.let(Uri::parse),
             RingtoneManager.getActualDefaultRingtoneUri(this, RingtoneManager.TYPE_ALARM),
             RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE),
             RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION),
         )
-        volume = if (gentle) 0.02f else 1f
+        volume = if (rampMs > 0) QUIET_START else 1f
+        rampStep = if (rampMs > 0) (1f - QUIET_START) / (rampMs / RAMP_TICK_MS).coerceAtLeast(1) else 1f
         for (uri in uris) {
             val mp = MediaPlayer()
             try {

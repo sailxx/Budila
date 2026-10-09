@@ -59,7 +59,6 @@
     <string name="empty_text">Pulsa «Añadir» para crear la primera</string>
 
     <string name="gentle_wake">Despertar suave</string>
-    <string name="gentle_wake_desc">Inicio silencioso: el volumen sube durante un minuto, vibración a los 30 segundos</string>
     <string name="color_selected">Seleccionado</string>
     <string name="color_none">Sin color</string>
     <string name="editor_new">Nueva alarma</string>
@@ -88,7 +87,6 @@
     <string name="ringtone_picker_title">Tono de alarma</string>
     <string name="ringtone_default">Tono de alarma predeterminado</string>
     <string name="ringtone_custom">Tono propio</string>
-    <string name="gentle_default_desc">Para nuevas alarmas: inicio silencioso, el volumen sube durante un minuto, vibración a los 30 segundos. Se puede desactivar en cada alarma</string>
     <string name="snooze_title">Posponer</string>
     <string name="timeout_title">Silenciar si no respondes tras</string>
     <string name="minutes_short">%1$d min</string>
@@ -178,4 +176,23 @@
     <string name="task_repeats_title">Repetir la tarea</string>
     <string name="task_repeats_desc">Cuántas cuentas resolver o cuántas veces seguidas escribir la contraseña</string>
     <string name="task_entry">Intento %1$d de %2$d</string>
+    <string name="gentle_wake_desc">Inicio suave: el volumen sube poco a poco, la vibración a mitad</string>
+    <string name="gentle_default_desc">Para alarmas nuevas: inicio suave, el volumen sube poco a poco. Se puede desactivar en cada alarma</string>
+    <string name="dismiss_gesture_title">Apagar la alarma con</string>
+    <string name="dismiss_gesture_desc">Cuanto más difícil el gesto, menos probable apagarla dormido. Con una tarea, el gesto abre la tarea</string>
+    <string name="gesture_tap">Toque</string>
+    <string name="gesture_slide">Deslizar</string>
+    <string name="gesture_hold">Mantener</string>
+    <string name="gesture_hold_hint">Mantén hasta que se llene</string>
+    <string name="volume_keys_title">Botones de volumen durante la alarma</string>
+    <string name="volume_keys_volume">Volumen</string>
+    <string name="volume_keys_snooze">Posponer</string>
+    <string name="volume_keys_dismiss">Apagar</string>
+    <string name="volume_keys_nothing">Nada</string>
+    <string name="week_start_title">La semana empieza el</string>
+    <string name="never">Nunca</string>
+    <string name="alarm_volume">Volumen de la alarma</string>
+    <string name="ramp_title">Subir el volumen poco a poco</string>
+    <string name="ramp_desc">Para alarmas con despertar suave</string>
+    <string name="seconds_short">%1$d s</string>
 </resources>

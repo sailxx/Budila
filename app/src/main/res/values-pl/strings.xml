@@ -59,7 +59,6 @@
     <string name="empty_text">Dotknij „Dodaj”, aby utworzyć pierwszy</string>
 
     <string name="gentle_wake">Łagodne budzenie</string>
-    <string name="gentle_wake_desc">Cichy start: głośność rośnie przez około minutę, wibracje po 30 sekundach</string>
     <string name="color_selected">Wybrany</string>
     <string name="color_none">Bez koloru</string>
     <string name="editor_new">Nowy alarm</string>
@@ -88,7 +87,6 @@
     <string name="ringtone_picker_title">Dzwonek alarmu</string>
     <string name="ringtone_default">Domyślny dźwięk alarmu</string>
     <string name="ringtone_custom">Własny dźwięk</string>
-    <string name="gentle_default_desc">Dla nowych alarmów: cichy start, głośność rośnie przez około minutę, wibracje po 30 sekundach. Można wyłączyć dla każdego alarmu</string>
     <string name="snooze_title">Drzemka na</string>
     <string name="timeout_title">Ucisz bez odpowiedzi po</string>
     <string name="minutes_short">%1$d min</string>
@@ -178,4 +176,23 @@
     <string name="task_repeats_title">Powtórz zadanie</string>
     <string name="task_repeats_desc">Ile działań rozwiązać lub ile razy z rzędu wpisać hasło</string>
     <string name="task_entry">Wpis %1$d z %2$d</string>
+    <string name="gentle_wake_desc">Cichy start: głośność rośnie stopniowo, wibracja od połowy</string>
+    <string name="gentle_default_desc">Dla nowych alarmów: cichy start, głośność rośnie stopniowo. Można wyłączyć dla każdego alarmu</string>
+    <string name="dismiss_gesture_title">Wyłączanie alarmu</string>
+    <string name="dismiss_gesture_desc">Im trudniejszy gest, tym mniejsza szansa wyłączenia przez sen. Przy zadaniu gest otwiera zadanie</string>
+    <string name="gesture_tap">Dotknięcie</string>
+    <string name="gesture_slide">Przesunięcie</string>
+    <string name="gesture_hold">Przytrzymanie</string>
+    <string name="gesture_hold_hint">Trzymaj, aż się wypełni</string>
+    <string name="volume_keys_title">Przyciski głośności podczas alarmu</string>
+    <string name="volume_keys_volume">Głośność</string>
+    <string name="volume_keys_snooze">Drzemka</string>
+    <string name="volume_keys_dismiss">Wyłącz</string>
+    <string name="volume_keys_nothing">Nic</string>
+    <string name="week_start_title">Pierwszy dzień tygodnia</string>
+    <string name="never">Nigdy</string>
+    <string name="alarm_volume">Głośność alarmu</string>
+    <string name="ramp_title">Stopniowe zwiększanie głośności</string>
+    <string name="ramp_desc">Dla alarmów z łagodnym budzeniem</string>
+    <string name="seconds_short">%1$d s</string>
 </resources>
