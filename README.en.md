@@ -6,9 +6,9 @@
 
 <picture><source srcset="assets/readme/hero-en.svg"><img src="assets/readme/png/hero-en.png" width="100%" alt="Budila — Wake up on time. Get up with ease."></picture>
 
-<a href="https://github.com/sailxx/Budila/releases/latest/download/Budila.apk"><img src="assets/readme/cta-en.svg" height="44" alt="Download APK"></a>
+<a href="https://github.com/sailxx/Budila/releases/latest/download/Budila.apk"><img src="assets/readme/cta-en.svg" height="52" alt="Download APK"></a>&nbsp;&nbsp;<a href="https://github.com/sailxx/Budila/releases/latest"><img src="assets/readme/btn-new-en.svg" height="52" alt="What’s new"></a>
 
-[![Build](https://github.com/sailxx/Budila/actions/workflows/build.yml/badge.svg)](https://github.com/sailxx/Budila/actions/workflows/build.yml)
+**Budila is an Android alarm clock that wakes you on time, without the stress.** Gentle wake-up, tags and colors, the signature “Instrument” design and 8 Material You themes. No internet access, no ads, no trackers.
 
 </div>
 
@@ -21,7 +21,7 @@
 <picture><source srcset="assets/readme/features-en.svg"><img src="assets/readme/png/features-en.png" width="100%" alt="What Budila can do"></picture>
 
 <details>
-<summary>More about the features</summary>
+<summary><b>More about the features</b></summary>
 
 ### ⏰ Main screen
 
@@ -65,7 +65,8 @@ Alarms are set through the system `AlarmClock` and ring on time even when the ph
 
 <picture><source srcset="assets/readme/design-en.svg"><img src="assets/readme/png/design-en.png" width="100%" alt="Design code: Material 3 and Material You"></picture>
 
-## Install
+<details>
+<summary><b>Install</b></summary>
 
 1. Download [**Budila.apk**](https://github.com/sailxx/Budila/releases/latest/download/Budila.apk) to your phone.
 2. Open the file and allow installs from this source.
@@ -75,8 +76,17 @@ Requires Android 8.0 or newer. No Google Play and no accounts needed.
 
 Budila is also in [Komi Store](https://github.com/komi-store/komi-store), an app store built on GitHub releases: search for “Budila”, and Komi Store will offer updates by itself.
 
+</details>
+
 <details>
-<summary>Build from source</summary>
+<summary><b>Privacy and security</b></summary>
+
+Budila has **no internet access**: there is no `INTERNET` permission in the manifest. Alarms are stored only on the phone and are not included in cloud backups. No ads, no analytics, no trackers. Details and how to report a vulnerability are in [SECURITY.md](SECURITY.md).
+
+</details>
+
+<details>
+<summary><b>Build from source</b></summary>
 
 You need JDK 17+ and the Android SDK (platform 36).
 
@@ -86,15 +96,13 @@ cd Budila
 ./gradlew assembleRelease
 ```
 
-Releases are built on GitHub automatically: bump `versionCode`/`versionName` in `app/build.gradle.kts` and push a tag (`git tag v2.5 && git push origin v2.5`) — Actions will build, sign and publish `Budila.apk`. For a local signed build, copy `keystore.properties.example` to `keystore.properties` and fill in your key; without it you get an unsigned APK. Screenshots (including English, German and Spanish ones) are redrawn by `./gradlew testDebugUnitTest` (Robolectric, no phone needed) and land in `screenshots/`. The README images in every language are built by `node tools/readme/build.mjs`; their texts live in `tools/readme/strings.json`.
+Releases are built on GitHub automatically: bump `versionCode`/`versionName` in `app/build.gradle.kts` and push a tag (`git tag v2.5 && git push origin v2.5`) — Actions will build, sign and publish `Budila.apk`. For a local signed build, copy `keystore.properties.example` to `keystore.properties` and fill in your key; without it you get an unsigned APK. Screenshots (including English, German and Spanish ones) are redrawn by `./gradlew testDebugUnitTest` (Robolectric, no phone needed) and land in `screenshots/`. The README images in every language are built by `cd tools/readme && npm install && node build.mjs`; their texts live in `tools/readme/strings.json` (README — `md.json`).
 
 **Stack:** Kotlin · Jetpack Compose · Material 3 · [MaterialKolor](https://github.com/jordond/MaterialKolor) · AlarmManager · Foreground Service.
 
+[![Build](https://github.com/sailxx/Budila/actions/workflows/build.yml/badge.svg)](https://github.com/sailxx/Budila/actions/workflows/build.yml)
+
 </details>
-
-## Privacy and security
-
-Budila has **no internet access**: there is no `INTERNET` permission in the manifest. Alarms are stored only on the phone and are not included in cloud backups. No ads, no analytics, no trackers. Details and how to report a vulnerability are in [SECURITY.md](SECURITY.md).
 
 <br>
 

@@ -6,9 +6,9 @@
 
 <picture><source srcset="assets/readme/hero-es.svg"><img src="assets/readme/png/hero-es.png" width="100%" alt="Budila — Despierta a tiempo. Levántate sin esfuerzo."></picture>
 
-<a href="https://github.com/sailxx/Budila/releases/latest/download/Budila.apk"><img src="assets/readme/cta-es.svg" height="44" alt="Descargar APK"></a>
+<a href="https://github.com/sailxx/Budila/releases/latest/download/Budila.apk"><img src="assets/readme/cta-es.svg" height="52" alt="Descargar APK"></a>&nbsp;&nbsp;<a href="https://github.com/sailxx/Budila/releases/latest"><img src="assets/readme/btn-new-es.svg" height="52" alt="Novedades"></a>
 
-[![Build](https://github.com/sailxx/Budila/actions/workflows/build.yml/badge.svg)](https://github.com/sailxx/Budila/actions/workflows/build.yml)
+**Budila es un despertador para Android que te despierta a tiempo y sin estrés.** Despertar suave, etiquetas y colores, el diseño propio «Instrumento» y 8 temas Material You. Sin acceso a internet, sin anuncios ni rastreadores.
 
 </div>
 
@@ -21,7 +21,7 @@
 <picture><source srcset="assets/readme/features-es.svg"><img src="assets/readme/png/features-es.png" width="100%" alt="Lo que sabe hacer Budila"></picture>
 
 <details>
-<summary>Más sobre las funciones</summary>
+<summary><b>Más sobre las funciones</b></summary>
 
 ### ⏰ Pantalla principal
 
@@ -65,7 +65,8 @@ Las alarmas se programan con el `AlarmClock` del sistema y suenan a su hora aunq
 
 <picture><source srcset="assets/readme/design-es.svg"><img src="assets/readme/png/design-es.png" width="100%" alt="Código de diseño: Material 3 y Material You"></picture>
 
-## Instalación
+<details>
+<summary><b>Instalación</b></summary>
 
 1. Descarga [**Budila.apk**](https://github.com/sailxx/Budila/releases/latest/download/Budila.apk) en el teléfono.
 2. Abre el archivo y permite la instalación desde este origen.
@@ -75,8 +76,17 @@ Requiere Android 8.0 o superior. No hacen falta Google Play ni cuentas.
 
 Budila también está en [Komi Store](https://github.com/komi-store/komi-store), una tienda de apps basada en las versiones de GitHub: busca «Budila» y Komi Store te ofrecerá las actualizaciones.
 
+</details>
+
 <details>
-<summary>Compilar desde el código fuente</summary>
+<summary><b>Privacidad y seguridad</b></summary>
+
+Budila **no tiene acceso a internet**: el manifiesto no incluye el permiso `INTERNET`. Las alarmas se guardan solo en el teléfono y no entran en las copias de seguridad en la nube. Sin anuncios, analítica ni rastreadores. Los detalles y cómo informar de una vulnerabilidad están en [SECURITY.md](SECURITY.md).
+
+</details>
+
+<details>
+<summary><b>Compilar desde el código fuente</b></summary>
 
 Necesitas JDK 17+ y el Android SDK (plataforma 36).
 
@@ -86,15 +96,13 @@ cd Budila
 ./gradlew assembleRelease
 ```
 
-Las versiones se compilan en GitHub automáticamente: sube `versionCode`/`versionName` en `app/build.gradle.kts` y envía una etiqueta (`git tag v2.5 && git push origin v2.5`); Actions compilará, firmará y publicará `Budila.apk`. Para una compilación local firmada, copia `keystore.properties.example` a `keystore.properties` e indica tu clave; sin ella se genera un APK sin firmar. Las capturas (también en inglés, alemán y español) se regeneran con `./gradlew testDebugUnitTest` (Robolectric, sin teléfono) y aparecen en `screenshots/`. Las imágenes del README en todos los idiomas las genera `node tools/readme/build.mjs`; sus textos están en `tools/readme/strings.json`.
+Las versiones se compilan en GitHub automáticamente: sube `versionCode`/`versionName` en `app/build.gradle.kts` y envía una etiqueta (`git tag v2.5 && git push origin v2.5`); Actions compilará, firmará y publicará `Budila.apk`. Para una compilación local firmada, copia `keystore.properties.example` a `keystore.properties` e indica tu clave; sin ella se genera un APK sin firmar. Las capturas (también en inglés, alemán y español) se regeneran con `./gradlew testDebugUnitTest` (Robolectric, sin teléfono) y aparecen en `screenshots/`. Las imágenes del README en todos los idiomas las genera `cd tools/readme && npm install && node build.mjs`; sus textos están en `tools/readme/strings.json` (README — `md.json`).
 
 **Tecnologías:** Kotlin · Jetpack Compose · Material 3 · [MaterialKolor](https://github.com/jordond/MaterialKolor) · AlarmManager · Foreground Service.
 
+[![Build](https://github.com/sailxx/Budila/actions/workflows/build.yml/badge.svg)](https://github.com/sailxx/Budila/actions/workflows/build.yml)
+
 </details>
-
-## Privacidad y seguridad
-
-Budila **no tiene acceso a internet**: el manifiesto no incluye el permiso `INTERNET`. Las alarmas se guardan solo en el teléfono y no entran en las copias de seguridad en la nube. Sin anuncios, analítica ni rastreadores. Los detalles y cómo informar de una vulnerabilidad están en [SECURITY.md](SECURITY.md).
 
 <br>
 

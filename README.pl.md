@@ -6,9 +6,9 @@
 
 <picture><source srcset="assets/readme/hero-pl.svg"><img src="assets/readme/png/hero-pl.png" width="100%" alt="Budila — Budź się na czas. Wstawaj z łatwością."></picture>
 
-<a href="https://github.com/sailxx/Budila/releases/latest/download/Budila.apk"><img src="assets/readme/cta-pl.svg" height="44" alt="Pobierz APK"></a>
+<a href="https://github.com/sailxx/Budila/releases/latest/download/Budila.apk"><img src="assets/readme/cta-pl.svg" height="52" alt="Pobierz APK"></a>&nbsp;&nbsp;<a href="https://github.com/sailxx/Budila/releases/latest"><img src="assets/readme/btn-new-pl.svg" height="52" alt="Co nowego"></a>
 
-[![Build](https://github.com/sailxx/Budila/actions/workflows/build.yml/badge.svg)](https://github.com/sailxx/Budila/actions/workflows/build.yml)
+**Budila to budzik na Androida, który budzi punktualnie i bez stresu.** Łagodne budzenie, tagi i kolory, autorski wygląd „Instrument” i 8 motywów Material You. Bez dostępu do internetu, bez reklam i trackerów.
 
 </div>
 
@@ -21,7 +21,7 @@
 <picture><source srcset="assets/readme/features-pl.svg"><img src="assets/readme/png/features-pl.png" width="100%" alt="Co potrafi Budila"></picture>
 
 <details>
-<summary>Więcej o funkcjach</summary>
+<summary><b>Więcej o funkcjach</b></summary>
 
 ### ⏰ Ekran główny
 
@@ -65,7 +65,8 @@ Budziki są ustawiane przez systemowy `AlarmClock` i dzwonią punktualnie, nawet
 
 <picture><source srcset="assets/readme/design-pl.svg"><img src="assets/readme/png/design-pl.png" width="100%" alt="Kod designu: Material 3 i Material You"></picture>
 
-## Instalacja
+<details>
+<summary><b>Instalacja</b></summary>
 
 1. Pobierz [**Budila.apk**](https://github.com/sailxx/Budila/releases/latest/download/Budila.apk) na telefon.
 2. Otwórz plik i zezwól na instalację z tego źródła.
@@ -75,8 +76,17 @@ Wymaga Androida 8.0 lub nowszego. Nie potrzeba Google Play ani kont.
 
 Budila jest też w [Komi Store](https://github.com/komi-store/komi-store) — sklepie z aplikacjami opartym na wydaniach z GitHuba: wyszukaj „Budila”, a Komi Store sam zaproponuje aktualizacje.
 
+</details>
+
 <details>
-<summary>Budowanie ze źródeł</summary>
+<summary><b>Prywatność i bezpieczeństwo</b></summary>
+
+Budila **nie ma dostępu do internetu**: w manifeście nie ma uprawnienia `INTERNET`. Budziki są przechowywane tylko na telefonie i nie trafiają do kopii zapasowych w chmurze. Bez reklam, analityki i trackerów. Szczegóły i sposób zgłoszenia podatności są w [SECURITY.md](SECURITY.md).
+
+</details>
+
+<details>
+<summary><b>Budowanie ze źródeł</b></summary>
 
 Potrzebujesz JDK 17+ i Android SDK (platforma 36).
 
@@ -86,15 +96,13 @@ cd Budila
 ./gradlew assembleRelease
 ```
 
-Wydania są budowane na GitHubie automatycznie: podnieś `versionCode`/`versionName` w `app/build.gradle.kts` i wypchnij tag (`git tag v2.5 && git push origin v2.5`) — Actions zbuduje, podpisze i opublikuje `Budila.apk`. Do lokalnej podpisanej kompilacji skopiuj `keystore.properties.example` do `keystore.properties` i wpisz swój klucz; bez niego powstanie niepodpisany APK. Zrzuty ekranu (także po angielsku, niemiecku i hiszpańsku) odświeża `./gradlew testDebugUnitTest` (Robolectric, bez telefonu), trafiają do `screenshots/`. Obrazki README we wszystkich językach generuje `node tools/readme/build.mjs`, ich teksty są w `tools/readme/strings.json`.
+Wydania są budowane na GitHubie automatycznie: podnieś `versionCode`/`versionName` w `app/build.gradle.kts` i wypchnij tag (`git tag v2.5 && git push origin v2.5`) — Actions zbuduje, podpisze i opublikuje `Budila.apk`. Do lokalnej podpisanej kompilacji skopiuj `keystore.properties.example` do `keystore.properties` i wpisz swój klucz; bez niego powstanie niepodpisany APK. Zrzuty ekranu (także po angielsku, niemiecku i hiszpańsku) odświeża `./gradlew testDebugUnitTest` (Robolectric, bez telefonu), trafiają do `screenshots/`. Obrazki README we wszystkich językach generuje `cd tools/readme && npm install && node build.mjs`, ich teksty są w `tools/readme/strings.json` (README — `md.json`).
 
 **Technologie:** Kotlin · Jetpack Compose · Material 3 · [MaterialKolor](https://github.com/jordond/MaterialKolor) · AlarmManager · Foreground Service.
 
+[![Build](https://github.com/sailxx/Budila/actions/workflows/build.yml/badge.svg)](https://github.com/sailxx/Budila/actions/workflows/build.yml)
+
 </details>
-
-## Prywatność i bezpieczeństwo
-
-Budila **nie ma dostępu do internetu**: w manifeście nie ma uprawnienia `INTERNET`. Budziki są przechowywane tylko na telefonie i nie trafiają do kopii zapasowych w chmurze. Bez reklam, analityki i trackerów. Szczegóły i sposób zgłoszenia podatności są w [SECURITY.md](SECURITY.md).
 
 <br>
 

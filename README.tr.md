@@ -6,9 +6,9 @@
 
 <picture><source srcset="assets/readme/hero-tr.svg"><img src="assets/readme/png/hero-tr.png" width="100%" alt="Budila — Zamanında uyan. Kolayca kalk."></picture>
 
-<a href="https://github.com/sailxx/Budila/releases/latest/download/Budila.apk"><img src="assets/readme/cta-tr.svg" height="44" alt="APK'yı indir"></a>
+<a href="https://github.com/sailxx/Budila/releases/latest/download/Budila.apk"><img src="assets/readme/cta-tr.svg" height="52" alt="APK'yı indir"></a>&nbsp;&nbsp;<a href="https://github.com/sailxx/Budila/releases/latest"><img src="assets/readme/btn-new-tr.svg" height="52" alt="Yenilikler"></a>
 
-[![Build](https://github.com/sailxx/Budila/actions/workflows/build.yml/badge.svg)](https://github.com/sailxx/Budila/actions/workflows/build.yml)
+**Budila, sizi zamanında ve stressiz uyandıran bir Android çalar saatidir.** Yumuşak uyanma, etiketler ve renkler, özgün “Enstrüman” tasarımı ve 8 Material You teması. İnternet erişimi yok, reklam ve izleyici yok.
 
 </div>
 
@@ -21,7 +21,7 @@
 <picture><source srcset="assets/readme/features-tr.svg"><img src="assets/readme/png/features-tr.png" width="100%" alt="Budila neler yapabilir"></picture>
 
 <details>
-<summary>Özellikler hakkında daha fazlası</summary>
+<summary><b>Özellikler hakkında daha fazlası</b></summary>
 
 ### ⏰ Ana ekran
 
@@ -65,7 +65,8 @@ Alarmlar sistemin `AlarmClock` hizmetiyle kurulur ve telefon uykudayken bile zam
 
 <picture><source srcset="assets/readme/design-tr.svg"><img src="assets/readme/png/design-tr.png" width="100%" alt="Tasarım kodu: Material 3 ve Material You"></picture>
 
-## Kurulum
+<details>
+<summary><b>Kurulum</b></summary>
 
 1. [**Budila.apk**](https://github.com/sailxx/Budila/releases/latest/download/Budila.apk) dosyasını telefonunuza indirin.
 2. Dosyayı açın ve bu kaynaktan yüklemeye izin verin.
@@ -75,8 +76,17 @@ Android 8.0 veya daha yenisi gerekir. Google Play ya da hesap gerekmez.
 
 Budila, GitHub sürümlerine dayanan bir uygulama mağazası olan [Komi Store](https://github.com/komi-store/komi-store)'da da var: “Budila” diye arayın, güncellemeleri Komi Store kendisi önerir.
 
+</details>
+
 <details>
-<summary>Kaynak koddan derleme</summary>
+<summary><b>Gizlilik ve güvenlik</b></summary>
+
+Budila'nın **internet erişimi yoktur**: manifestte `INTERNET` izni bulunmaz. Alarmlar yalnızca telefonda saklanır ve bulut yedeklerine girmez. Reklam, analiz ve izleyici yok. Ayrıntılar ve bir güvenlik açığını nasıl bildireceğiniz [SECURITY.md](SECURITY.md) dosyasında.
+
+</details>
+
+<details>
+<summary><b>Kaynak koddan derleme</b></summary>
 
 JDK 17+ ve Android SDK (platform 36) gerekir.
 
@@ -86,15 +96,13 @@ cd Budila
 ./gradlew assembleRelease
 ```
 
-Sürümler GitHub'da otomatik derlenir: `app/build.gradle.kts` içinde `versionCode`/`versionName` değerini artırın ve bir etiket gönderin (`git tag v2.5 && git push origin v2.5`) — Actions `Budila.apk` dosyasını derler, imzalar ve yayınlar. Yerel imzalı derleme için `keystore.properties.example` dosyasını `keystore.properties` olarak kopyalayıp anahtarınızı yazın; o olmadan imzasız bir APK çıkar. Ekran görüntüleri (İngilizce, Almanca ve İspanyolca olanlar dahil) `./gradlew testDebugUnitTest` ile yeniden çizilir (Robolectric, telefon gerekmez) ve `screenshots/` klasörüne düşer. Tüm dillerdeki README görsellerini `node tools/readme/build.mjs` oluşturur; metinleri `tools/readme/strings.json` dosyasındadır.
+Sürümler GitHub'da otomatik derlenir: `app/build.gradle.kts` içinde `versionCode`/`versionName` değerini artırın ve bir etiket gönderin (`git tag v2.5 && git push origin v2.5`) — Actions `Budila.apk` dosyasını derler, imzalar ve yayınlar. Yerel imzalı derleme için `keystore.properties.example` dosyasını `keystore.properties` olarak kopyalayıp anahtarınızı yazın; o olmadan imzasız bir APK çıkar. Ekran görüntüleri (İngilizce, Almanca ve İspanyolca olanlar dahil) `./gradlew testDebugUnitTest` ile yeniden çizilir (Robolectric, telefon gerekmez) ve `screenshots/` klasörüne düşer. Tüm dillerdeki README görsellerini `cd tools/readme && npm install && node build.mjs` oluşturur; metinleri `tools/readme/strings.json` (README — `md.json`) dosyasındadır.
 
 **Teknolojiler:** Kotlin · Jetpack Compose · Material 3 · [MaterialKolor](https://github.com/jordond/MaterialKolor) · AlarmManager · Foreground Service.
 
+[![Build](https://github.com/sailxx/Budila/actions/workflows/build.yml/badge.svg)](https://github.com/sailxx/Budila/actions/workflows/build.yml)
+
 </details>
-
-## Gizlilik ve güvenlik
-
-Budila'nın **internet erişimi yoktur**: manifestte `INTERNET` izni bulunmaz. Alarmlar yalnızca telefonda saklanır ve bulut yedeklerine girmez. Reklam, analiz ve izleyici yok. Ayrıntılar ve bir güvenlik açığını nasıl bildireceğiniz [SECURITY.md](SECURITY.md) dosyasında.
 
 <br>
 

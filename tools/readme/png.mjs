@@ -31,7 +31,6 @@ export function renderPngs() {
     console.warn('PNG для Komi Store не обновлены: не найден Chrome (задайте переменную CHROME)');
     return;
   }
-  if (!fs.existsSync(FONT)) console.warn('Нет tools/readme/.font/JetBrainsMono-Var.woff2 — PNG будут с запасным шрифтом');
   const face = fs.existsSync(FONT)
     ? `@font-face{font-family:"JetBrains Mono";src:url(${pathToFileURL(FONT)}) format("woff2");font-weight:100 800}`
     : '';

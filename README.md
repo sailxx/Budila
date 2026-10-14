@@ -6,9 +6,9 @@
 
 <picture><source srcset="assets/readme/hero-ru.svg"><img src="assets/readme/png/hero-ru.png" width="100%" alt="Budila — Просыпайся вовремя. Вставай легко."></picture>
 
-<a href="https://github.com/sailxx/Budila/releases/latest/download/Budila.apk"><img src="assets/readme/cta-ru.svg" height="44" alt="Скачать APK"></a>
+<a href="https://github.com/sailxx/Budila/releases/latest/download/Budila.apk"><img src="assets/readme/cta-ru.svg" height="52" alt="Скачать APK"></a>&nbsp;&nbsp;<a href="https://github.com/sailxx/Budila/releases/latest"><img src="assets/readme/btn-new-ru.svg" height="52" alt="Что нового"></a>
 
-[![Build](https://github.com/sailxx/Budila/actions/workflows/build.yml/badge.svg)](https://github.com/sailxx/Budila/actions/workflows/build.yml)
+**Budila — будильник для Android, который будит вовремя и без стресса.** Спокойное пробуждение, теги и цвета, фирменный дизайн «Инструмент» и 8 тем Material You. Работает без интернета, без рекламы и трекеров.
 
 </div>
 
@@ -21,7 +21,7 @@
 <picture><source srcset="assets/readme/features-ru.svg"><img src="assets/readme/png/features-ru.png" width="100%" alt="Что умеет Budila"></picture>
 
 <details>
-<summary>Подробнее о возможностях</summary>
+<summary><b>Подробнее о возможностях</b></summary>
 
 ### ⏰ Главный экран
 
@@ -65,7 +65,8 @@
 
 <picture><source srcset="assets/readme/design-ru.svg"><img src="assets/readme/png/design-ru.png" width="100%" alt="Дизайн-код: Material 3 и Material You"></picture>
 
-## Установка
+<details>
+<summary><b>Установка</b></summary>
 
 1. Скачайте [**Budila.apk**](https://github.com/sailxx/Budila/releases/latest/download/Budila.apk) на телефон.
 2. Откройте файл и разрешите установку из этого источника.
@@ -75,8 +76,17 @@
 
 Budila есть и в [Komi Store](https://github.com/komi-store/komi-store) — магазине приложений из GitHub-релизов: найдите «Budila» в поиске, и Komi Store будет сам предлагать обновления.
 
+</details>
+
 <details>
-<summary>Собрать из исходников</summary>
+<summary><b>Приватность и безопасность</b></summary>
+
+У Budila **нет доступа к интернету**: в манифесте нет разрешения `INTERNET`. Будильники хранятся только на телефоне и не попадают в облачные бэкапы. Нет рекламы, аналитики и трекеров. Подробности и как сообщить об уязвимости — в [SECURITY.md](SECURITY.md).
+
+</details>
+
+<details>
+<summary><b>Собрать из исходников</b></summary>
 
 Нужны JDK 17+ и Android SDK (платформа 36).
 
@@ -86,15 +96,13 @@ cd Budila
 ./gradlew assembleRelease
 ```
 
-Релизы собираются на GitHub автоматически: поднимите `versionCode`/`versionName` в `app/build.gradle.kts` и отправьте тег (`git tag v2.5 && git push origin v2.5`) — Actions соберёт, подпишет и опубликует `Budila.apk`. Для локальной подписанной сборки скопируйте `keystore.properties.example` в `keystore.properties` и укажите свой ключ; без него соберётся неподписанный APK. Скриншоты экранов (в том числе на английском, немецком и испанском) перерисовываются командой `./gradlew testDebugUnitTest` (Robolectric, без телефона) и появляются в `screenshots/`. Картинки README на всех языках собирает `node tools/readme/build.mjs`, тексты для них — в `tools/readme/strings.json`.
+Релизы собираются на GitHub автоматически: поднимите `versionCode`/`versionName` в `app/build.gradle.kts` и отправьте тег (`git tag v2.5 && git push origin v2.5`) — Actions соберёт, подпишет и опубликует `Budila.apk`. Для локальной подписанной сборки скопируйте `keystore.properties.example` в `keystore.properties` и укажите свой ключ; без него соберётся неподписанный APK. Скриншоты экранов (в том числе на английском, немецком и испанском) перерисовываются командой `./gradlew testDebugUnitTest` (Robolectric, без телефона) и появляются в `screenshots/`. Картинки README на всех языках собирает `cd tools/readme && npm install && node build.mjs`, тексты для них — в `tools/readme/strings.json` (README — `md.json`).
 
 **Стек:** Kotlin · Jetpack Compose · Material 3 · [MaterialKolor](https://github.com/jordond/MaterialKolor) · AlarmManager · Foreground Service.
 
+[![Build](https://github.com/sailxx/Budila/actions/workflows/build.yml/badge.svg)](https://github.com/sailxx/Budila/actions/workflows/build.yml)
+
 </details>
-
-## Приватность и безопасность
-
-У Budila **нет доступа к интернету**: в манифесте нет разрешения `INTERNET`. Будильники хранятся только на телефоне и не попадают в облачные бэкапы. Нет рекламы, аналитики и трекеров. Подробности и как сообщить об уязвимости — в [SECURITY.md](SECURITY.md).
 
 <br>
 
