@@ -25,6 +25,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
@@ -165,88 +166,76 @@ internal fun InstrumentListScreen(onOpenSettings: () -> Unit = {}) {
     }
 }
 
-/** Главный дисплей: следующий будильник крупно, сколько осталось и шкала суток. */
+/** Белая карточка Okto 3.0: светлая тема — почти белая, тёмная — на ступень светлее корпуса. */
+@Composable
+private fun cardFace(): Color {
+    val colors = LocalInstrument.current
+    return if (colors.dark) colors.soft else lerp(colors.soft, colors.bg, 0.8f)
+}
+
+/** Главная плашка: следующий будильник, сколько осталось, подпись и сегменты суток до звонка. */
 @Composable
 private fun NextWell(alarms: List<Alarm>, now: ZonedDateTime) {
     val context = LocalContext.current
     val colors = LocalInstrument.current
-    val enabled = alarms.filter { it.enabled }
-    val next = enabled.minByOrNull { it.nextTrigger(now) }
+    val next = alarms.filter { it.enabled }.minByOrNull { it.nextTrigger(now) }
     val at = next?.nextTrigger(now)
-    Well(Modifier.fillMaxWidth()) {
-        LegendRow(stringResource(R.string.legend_next)) {
-            if (at != null) {
-                val day = when (at.toLocalDate()) {
-                    now.toLocalDate() -> stringResource(R.string.today)
-                    now.toLocalDate().plusDays(1) -> stringResource(R.string.tomorrow)
-                    else -> at.dayOfWeek.getDisplayName(TextStyle.SHORT, appLocale(context))
-                }
-                Text(day.uppercase(), style = IType.label, color = colors.wellInk)
+    val shape = RoundedCornerShape(24.dp)
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .shadow(8.dp, shape, clip = false, ambientColor = Color.Black.copy(alpha = 0.1f), spotColor = Color.Black.copy(alpha = 0.1f))
+            .clip(shape)
+            .background(cardFace())
+            .border(1.dp, colors.line, shape)
+            .padding(horizontal = 18.dp, vertical = 16.dp),
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            val day = when (at?.toLocalDate()) {
+                null -> null
+                now.toLocalDate() -> stringResource(R.string.today)
+                now.toLocalDate().plusDays(1) -> stringResource(R.string.tomorrow)
+                else -> at.dayOfWeek.getDisplayName(TextStyle.SHORT, appLocale(context))
             }
+            Text(
+                listOfNotNull(stringResource(R.string.legend_next), day).joinToString(" · ").uppercase(),
+                style = IType.label, color = colors.muted, maxLines = 1, modifier = Modifier.weight(1f),
+            )
+            if (at != null) Text(untilText(context, at, now), style = IType.label.copy(letterSpacing = 0.sp), color = colors.muted, maxLines = 1)
         }
         Spacer(Modifier.height(10.dp))
         BoxWithConstraints(Modifier.fillMaxWidth()) {
-            val size = readoutSize(maxWidth, 5, 104f)
+            val size = readoutSize(maxWidth - 90.dp, 5, 72f)
             Row(verticalAlignment = Alignment.Bottom) {
                 Digits(
                     if (at != null) clockDigits(context, at.hour, at.minute) else "--:--",
                     IType.readout(size),
-                    color = if (at != null) colors.wellInk else colors.wellDim,
+                    color = if (at != null) colors.ink else colors.muted,
+                    ghost = colors.ink.copy(alpha = 0.055f),
                 )
                 if (at != null) amPm(context, at.hour)?.let {
                     Spacer(Modifier.width(8.dp))
-                    Text(it, style = IType.label, color = colors.wellDim, modifier = Modifier.padding(bottom = 10.dp))
+                    Text(it, style = IType.label, color = colors.muted, modifier = Modifier.padding(bottom = 8.dp))
+                }
+                Spacer(Modifier.weight(1f))
+                val label = next?.label?.ifBlank { null }
+                    ?: if (at == null) stringResource(R.string.not_scheduled) else null
+                if (label != null) {
+                    Text(
+                        label, style = IType.reading.copy(fontSize = 12.sp), color = colors.muted,
+                        maxLines = 1, overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier
+                            .widthIn(max = 110.dp)
+                            .background(colors.ink.copy(alpha = 0.06f), RoundedCornerShape(13.dp))
+                            .padding(horizontal = 10.dp, vertical = 5.dp),
+                    )
                 }
             }
         }
-        Spacer(Modifier.height(4.dp))
-        Text(
-            if (at != null) untilText(context, at, now) else stringResource(R.string.not_scheduled),
-            style = IType.reading,
-            color = colors.wellDim,
-        )
         Spacer(Modifier.height(14.dp))
-        DayStrip(enabled, now)
-    }
-}
-
-/** Шкала суток 00–24: отметка на каждом включённом будильнике, красная черта — сейчас. */
-@Composable
-private fun DayStrip(alarms: List<Alarm>, now: ZonedDateTime) {
-    val colors = LocalInstrument.current
-    val today = 1 shl (now.dayOfWeek.value - 1)
-    val tomorrow = 1 shl (now.dayOfWeek.value % 7)
-    Column {
-        Canvas(Modifier.fillMaxWidth().height(30.dp)) {
-            val w = size.width
-            val h = size.height
-            val px = 1.dp.toPx()
-            drawRect(colors.wellGhost, topLeft = Offset(0f, h - px), size = Size(w, px))
-            for (hr in 0..24 step 3) {
-                val x = (w - px) * hr / 24f
-                drawRect(colors.wellGhost, topLeft = Offset(x, h - 6 * px), size = Size(px, 5 * px))
-            }
-            val bar = 3 * px
-            alarms.forEach { a ->
-                val minutes = a.hour * 60 + a.minute
-                val x = (w - bar) * minutes / 1440f
-                // Ярко — то, что прозвенит в ближайшие сутки; остальное приглушено
-                val passed = minutes <= now.hour * 60 + now.minute
-                val soon = if (passed) a.days == 0 || a.days and tomorrow != 0 else a.days == 0 || a.days and today != 0
-                drawRoundRect(
-                    if (soon) colors.wellInk else colors.wellInk.copy(alpha = 0.3f),
-                    topLeft = Offset(x, h - 16 * px), size = Size(bar, 14 * px), cornerRadius = CornerRadius(px),
-                )
-            }
-            val nowX = (w - 2 * px) * (now.hour * 60 + now.minute) / 1440f
-            drawRect(colors.red, topLeft = Offset(nowX, 0f), size = Size(2 * px, h))
-        }
-        Spacer(Modifier.height(5.dp))
-        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            listOf("00", "06", "12", "18", "24").forEach {
-                Text(it, style = IType.label.copy(fontSize = 10.sp, letterSpacing = 0.sp), color = colors.wellDim)
-            }
-        }
+        // 24 сегмента: сколько из ближайших суток уже прошло до звонка
+        val left = if (at == null) 24f else (java.time.Duration.between(now, at).toMinutes() / 60f).coerceIn(0f, 24f)
+        Segments(24, if (at == null) 0 else 24 - kotlin.math.ceil(left.toDouble()).toInt(), color = colors.ink, ghost = colors.ink.copy(alpha = 0.08f))
     }
 }
 
@@ -262,7 +251,7 @@ private fun AlarmWell(alarm: Alarm, order: Int, onToggle: (Boolean) -> Unit, onC
         modifier
             .fillMaxWidth()
             .clip(shape)
-            .background(lerp(colors.soft, colors.bg, 0.22f))
+            .background(cardFace())
             .border(1.dp, colors.line, shape)
             .clickable(onClick = onClick)
             .padding(horizontal = 16.dp, vertical = 14.dp),
