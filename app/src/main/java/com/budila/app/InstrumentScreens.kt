@@ -29,6 +29,7 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -249,18 +250,22 @@ private fun DayStrip(alarms: List<Alarm>, now: ZonedDateTime) {
     }
 }
 
-/** Будильник — дисплей: дни недели, время, подпись и теги; выключенный гаснет. */
+/** Будильник — мягкая карточка Okto 3.0: дни недели, время, подпись и теги; выключенный гаснет. */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun AlarmWell(alarm: Alarm, order: Int, onToggle: (Boolean) -> Unit, onClick: () -> Unit, modifier: Modifier = Modifier) {
     val context = LocalContext.current
     val colors = LocalInstrument.current
     val on = alarm.enabled
-    Well(
+    val shape = RoundedCornerShape(20.dp)
+    Column(
         modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(8.dp))
-            .clickable(onClick = onClick),
+            .clip(shape)
+            .background(lerp(colors.soft, colors.bg, 0.22f))
+            .border(1.dp, colors.line, shape)
+            .clickable(onClick = onClick)
+            .padding(horizontal = 16.dp, vertical = 14.dp),
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             if (alarm.color != null) {
@@ -268,17 +273,17 @@ private fun AlarmWell(alarm: Alarm, order: Int, onToggle: (Boolean) -> Unit, onC
                 Spacer(Modifier.width(8.dp))
             }
             if (alarm.days == 0) {
-                Text(stringResource(R.string.repeat_once).uppercase(), style = IType.label, color = colors.wellDim)
+                Text(stringResource(R.string.repeat_once).uppercase(), style = IType.label, color = colors.muted)
             } else {
                 DayLetters(alarm.days, on)
             }
             Spacer(Modifier.weight(1f))
             if (alarm.task != WakeTask.NONE) {
-                Icon(taskIcon(alarm.task), stringResource(alarm.task.title), tint = colors.wellDim, modifier = Modifier.size(15.dp))
+                Icon(taskIcon(alarm.task), stringResource(alarm.task.title), tint = colors.muted, modifier = Modifier.size(15.dp))
                 Spacer(Modifier.width(6.dp))
             }
             if (alarm.gentle) {
-                Icon(Icons.Rounded.Spa, stringResource(R.string.gentle_wake), tint = colors.wellDim, modifier = Modifier.size(15.dp))
+                Icon(Icons.Rounded.Spa, stringResource(R.string.gentle_wake), tint = colors.muted, modifier = Modifier.size(15.dp))
             }
         }
         Spacer(Modifier.height(6.dp))
@@ -286,41 +291,41 @@ private fun AlarmWell(alarm: Alarm, order: Int, onToggle: (Boolean) -> Unit, onC
             Row(verticalAlignment = Alignment.Bottom, modifier = Modifier.weight(1f)) {
                 Digits(
                     clockDigits(context, alarm.hour, alarm.minute),
-                    IType.readout(52.sp),
-                    color = if (on) colors.wellInk else colors.wellDim.copy(alpha = 0.6f),
+                    IType.readout(40.sp),
+                    color = if (on) colors.ink else colors.muted.copy(alpha = 0.6f),
+                    ghost = colors.ink.copy(alpha = 0.06f),
                     order = order,
                 )
                 amPm(context, alarm.hour)?.let {
                     Spacer(Modifier.width(6.dp))
-                    Text(it, style = IType.label, color = colors.wellDim, modifier = Modifier.padding(bottom = 6.dp))
+                    Text(it, style = IType.label, color = colors.muted, modifier = Modifier.padding(bottom = 4.dp))
+                }
+                val caption = alarm.label.ifBlank { null }
+                if (caption != null) {
+                    Text(
+                        caption, style = IType.bodyStrong,
+                        color = if (on) colors.ink else colors.muted,
+                        maxLines = 1, overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.padding(start = 12.dp, bottom = 3.dp),
+                    )
                 }
             }
-            InstrumentSwitch(on, onToggle, onWell = true)
+            InstrumentSwitch(on, onToggle)
         }
-        val caption = alarm.label.ifBlank { null }
-        if (caption != null || alarm.tags.isNotEmpty()) {
+        if (alarm.tags.isNotEmpty()) {
             Spacer(Modifier.height(8.dp))
             FlowRow(
                 horizontalArrangement = Arrangement.spacedBy(6.dp),
                 verticalArrangement = Arrangement.spacedBy(6.dp),
-                itemVerticalAlignment = Alignment.CenterVertically,
             ) {
-                if (caption != null) {
-                    Text(
-                        caption, style = IType.bodyStrong,
-                        color = if (on) colors.wellInk else colors.wellDim,
-                        maxLines = 1, overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier.padding(end = 4.dp),
-                    )
-                }
                 alarm.tags.forEach { tag ->
                     Text(
                         tag,
                         style = IType.small.copy(fontSize = 12.sp),
-                        color = colors.wellDim,
+                        color = colors.muted,
                         modifier = Modifier
-                            .border(1.dp, colors.wellEdge, RoundedCornerShape(6.dp))
-                            .padding(horizontal = 7.dp, vertical = 2.dp),
+                            .border(1.dp, colors.line, RoundedCornerShape(10.dp))
+                            .padding(horizontal = 8.dp, vertical = 2.dp),
                     )
                 }
             }
@@ -342,9 +347,9 @@ private fun DayLetters(days: Int, on: Boolean) {
                 name.take(2).uppercase(),
                 style = IType.label.copy(letterSpacing = 0.04.sp),
                 color = when {
-                    !lit -> colors.wellDim.copy(alpha = 0.35f)
-                    on -> colors.wellInk
-                    else -> colors.wellDim
+                    !lit -> colors.muted.copy(alpha = 0.4f)
+                    on -> colors.ink
+                    else -> colors.muted
                 },
             )
         }
