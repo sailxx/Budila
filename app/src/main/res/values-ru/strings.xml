@@ -195,4 +195,10 @@
     <string name="ramp_title">Нарастание громкости</string>
     <string name="ramp_desc">Для будильников со спокойным пробуждением</string>
     <string name="seconds_short">%1$d с</string>
+    <string name="card_style_title">Карточки будильников</string>
+    <string name="card_plain">Белые</string>
+    <string name="card_tint">Тон</string>
+    <string name="card_stripe">Полоса</string>
+    <string name="card_solid">Цвет</string>
+    <string name="card_gradient">Градиент</string>
 </resources>

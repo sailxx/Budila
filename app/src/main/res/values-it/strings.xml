@@ -195,4 +195,10 @@
     <string name="ramp_title">Aumenta gradualmente il volume</string>
     <string name="ramp_desc">Per le sveglie con risveglio dolce</string>
     <string name="seconds_short">%1$d s</string>
+    <string name="card_style_title">Schede delle sveglie</string>
+    <string name="card_plain">Bianca</string>
+    <string name="card_tint">Tinta</string>
+    <string name="card_stripe">Striscia</string>
+    <string name="card_solid">Piena</string>
+    <string name="card_gradient">Sfumata</string>
 </resources>

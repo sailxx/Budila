@@ -195,4 +195,10 @@
     <string name="ramp_title">Aumentar o volume aos poucos</string>
     <string name="ramp_desc">Para alarmes com despertar suave</string>
     <string name="seconds_short">%1$d s</string>
+    <string name="card_style_title">Cartões de alarme</string>
+    <string name="card_plain">Branco</string>
+    <string name="card_tint">Tom</string>
+    <string name="card_stripe">Faixa</string>
+    <string name="card_solid">Sólido</string>
+    <string name="card_gradient">Gradiente</string>
 </resources>

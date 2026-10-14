@@ -195,4 +195,10 @@
     <string name="ramp_title">Наростання гучності</string>
     <string name="ramp_desc">Для будильників зі спокійним пробудженням</string>
     <string name="seconds_short">%1$d с</string>
+    <string name="card_style_title">Картки будильників</string>
+    <string name="card_plain">Білі</string>
+    <string name="card_tint">Тон</string>
+    <string name="card_stripe">Смужка</string>
+    <string name="card_solid">Колір</string>
+    <string name="card_gradient">Градієнт</string>
 </resources>
