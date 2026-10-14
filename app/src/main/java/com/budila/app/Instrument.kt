@@ -411,17 +411,18 @@ fun Digits(
     modifier: Modifier = Modifier,
     color: Color = LocalInstrument.current.wellInk,
     order: Int = 0,
+    ghost: Color = LocalInstrument.current.wellGhost,
 ) {
     val colors = LocalInstrument.current
     val t = LocalBoot.current.value
-    val ghost = remember(text) { text.map { if (it.isDigit()) '8' else it }.joinToString("") }
+    val ghostText = remember(text) { text.map { if (it.isDigit()) '8' else it }.joinToString("") }
     val lit = when {
         t < BOOT_OFF -> null
         t >= BOOT_DONE -> text
         else -> text.mapIndexed { i, ch -> if (ch.isDigit() && t < BOOT_SETTLE + order * 90 + i * 70) '8' else ch }.joinToString("")
     }
     Box(modifier) {
-        Text(ghost, style = style, color = colors.wellGhost, maxLines = 1, softWrap = false)
+        Text(ghostText, style = style, color = ghost, maxLines = 1, softWrap = false)
         if (lit != null) Text(lit, style = style, color = color, maxLines = 1, softWrap = false)
     }
 }
@@ -521,13 +522,15 @@ fun Strip(options: List<String>, selected: Int, onSelect: (Int) -> Unit, modifie
 @Composable
 fun Chip(text: String, selected: Boolean, onClick: () -> Unit, modifier: Modifier = Modifier, count: Int? = null, led: Color? = null) {
     val colors = LocalInstrument.current
-    val shape = RoundedCornerShape(8.dp)
+    val shape = RoundedCornerShape(16.dp)
     val ledColor = led ?: colors.ink
+    val fg = if (selected) colors.onPrimary else colors.ink
     Row(
         modifier
-            .height(36.dp)
-            .then(if (selected) Modifier.keyFace(colors, 8.dp, false) else Modifier.border(1.dp, colors.line, shape))
+            .height(34.dp)
             .clip(shape)
+            .background(if (selected) colors.primary else Color.Transparent)
+            .then(if (selected) Modifier else Modifier.border(1.dp, colors.line, shape))
             .clickable(onClick = onClick)
             .padding(start = 10.dp, end = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -535,14 +538,13 @@ fun Chip(text: String, selected: Boolean, onClick: () -> Unit, modifier: Modifie
         Box(
             Modifier
                 .size(7.dp)
-                .then(if (selected) Modifier.shadow(3.dp, RoundedCornerShape(2.dp), ambientColor = ledColor, spotColor = ledColor) else Modifier)
-                .background(ledColor.copy(alpha = if (selected) 1f else 0.55f), RoundedCornerShape(2.dp)),
+                .background((if (selected && led == null) fg else ledColor).copy(alpha = if (selected) 1f else 0.55f), RoundedCornerShape(2.dp)),
         )
         Spacer(Modifier.width(8.dp))
-        Text(text, style = IType.body.copy(fontSize = 14.sp, fontWeight = FontWeight.Medium), color = colors.ink, maxLines = 1)
+        Text(text, style = IType.body.copy(fontSize = 14.sp, fontWeight = FontWeight.Medium), color = fg, maxLines = 1)
         if (count != null) {
             Spacer(Modifier.width(6.dp))
-            Text("$count", style = IType.reading.copy(fontSize = 12.sp), color = colors.muted)
+            Text("$count", style = IType.reading.copy(fontSize = 12.sp), color = if (selected) fg.copy(alpha = 0.7f) else colors.muted)
         }
     }
 }
