@@ -436,7 +436,7 @@ fun Led(on: Boolean, modifier: Modifier = Modifier, size: Dp = 6.dp, color: Colo
 
 /** ЖК-сегменты прогресса: [lit] из [count] горят. */
 @Composable
-fun Segments(count: Int, lit: Int, modifier: Modifier = Modifier, color: Color = LocalInstrument.current.wellInk, height: Dp = 6.dp) {
+fun Segments(count: Int, lit: Int, modifier: Modifier = Modifier, color: Color = LocalInstrument.current.wellInk, height: Dp = 6.dp, ghost: Color = LocalInstrument.current.wellGhost) {
     val colors = LocalInstrument.current
     val testing = bootTesting()
     Row(modifier.fillMaxWidth().height(height), horizontalArrangement = Arrangement.spacedBy(3.dp)) {
@@ -447,7 +447,7 @@ fun Segments(count: Int, lit: Int, modifier: Modifier = Modifier, color: Color =
                     when {
                         testing -> colors.wellDim
                         on -> color
-                        else -> colors.wellGhost
+                        else -> ghost
                     },
                     RoundedCornerShape(1.5.dp),
                 ),
