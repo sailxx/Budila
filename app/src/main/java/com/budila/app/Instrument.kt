@@ -40,6 +40,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.geometry.toRect
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -77,7 +78,11 @@ data class Instrument(
     /** Главная клавиша — инверсия чернил; у цветных тем свой цвет */
     val primary: Color = ink,
     val onPrimary: Color = bg,
-)
+    /** Цвет карточек будильников; у тем без своего цвета — отдельный акцент */
+    val accent: Color = Color.Unspecified,
+) {
+    val tone: Color get() = if (accent.isSpecified) accent else primary
+}
 
 private fun c(rgb: Long) = Color(0xFF000000 or rgb)
 private fun c(rgb: Long, alpha: Float) = c(rgb).copy(alpha = alpha)
@@ -87,30 +92,35 @@ private val LightColors = Instrument(
     c(0xffffff), c(0x141414), c(0xcfcfcc), Color.White,
     c(0xf1f1ef), c(0x111111), c(0x5a5a57), c(0, 0.06f), c(0, 0.13f),
     c(0xd33a3f),
+    accent = c(0x3b6df0),
 )
 private val DarkColors = Instrument(
     true, c(0x141414), c(0xededed), c(0x8e8e8e), c(0x2a2a2a), c(0x1d1d1d),
     c(0x262626), c(0xededed), c(0x070707), c(0xffffff, 0.07f),
     c(0x0a0a0a), c(0xf2f2f2), c(0x8a8a8a), c(0xffffff, 0.06f), c(0, 0.6f),
     c(0xef5a5f),
+    accent = c(0x7a9bff),
 )
 private val OledColors = Instrument(
     true, c(0x000000), c(0xf4f4f4), c(0x8d8d8d), c(0x1d1d1d), c(0x0d0d0d),
     c(0x111111), c(0xf4f4f4), c(0x000000), c(0xffffff, 0.09f),
     c(0x000000), c(0xffffff), c(0x8d8d8d), c(0xffffff, 0.06f), c(0x262626),
     c(0xff5a5f),
+    accent = c(0x7a9bff),
 )
 private val PaperColors = Instrument(
     false, c(0xe9e2d1), c(0x2a251b), c(0x645a49), c(0xd6ccb6), c(0xdfd6c2),
     c(0xf6f0e1), c(0x2a251b), c(0xc2b69c), c(0xffffff, 0.8f),
     c(0x2b2820), c(0xf1e6c8), c(0xa69b80), c(0xf1e6c8, 0.07f), c(0, 0.45f),
     c(0xd33a3f),
+    accent = c(0xc2552d),
 )
 private val MintColors = Instrument(
     false, c(0xe1eae3), c(0x14241a), c(0x4a5f52), c(0xc9d8cd), c(0xd6e2d9),
     c(0xf1f6f2), c(0x14241a), c(0xb2c4b6), c(0xffffff, 0.8f),
     c(0xcbd9c4), c(0x142313), c(0x415539), c(0x142313, 0.08f), c(0, 0.2f),
     c(0xd33a3f),
+    accent = c(0x2f9e63),
 )
 private val SakuraColors = Instrument(
     false, c(0xfbeff1), c(0x2b1a1f), c(0x7d5e66), c(0xefd6dc), c(0xf6e2e7),
@@ -123,6 +133,7 @@ private val MidnightColors = Instrument(
     c(0x1b2331), c(0xe2e7f0), c(0x060a10), c(0xffffff, 0.06f),
     c(0x070a0f), c(0xdfe7f5), c(0x7a879c), c(0xdfe7f5, 0.06f), c(0, 0.65f),
     c(0xf0646a),
+    accent = c(0x6a8dff),
 )
 private val OceanColors = Instrument(
     true, c(0x0b1a22), c(0xe2f1f5), c(0x7d9ba6), c(0x1a2e38), c(0x0f222c),

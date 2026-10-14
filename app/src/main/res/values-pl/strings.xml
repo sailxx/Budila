@@ -195,4 +195,10 @@
     <string name="ramp_title">Stopniowe zwiększanie głośności</string>
     <string name="ramp_desc">Dla alarmów z łagodnym budzeniem</string>
     <string name="seconds_short">%1$d s</string>
+    <string name="card_style_title">Karty budzików</string>
+    <string name="card_plain">Białe</string>
+    <string name="card_tint">Odcień</string>
+    <string name="card_stripe">Pasek</string>
+    <string name="card_solid">Pełne</string>
+    <string name="card_gradient">Gradient</string>
 </resources>

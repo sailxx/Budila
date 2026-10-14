@@ -49,6 +49,15 @@ enum class VolumeKeys(@StringRes val title: Int) {
     NOTHING(R.string.volume_keys_nothing),
 }
 
+/** Как выглядят карточки будильников: цвет берётся из темы или из цвета самого будильника. */
+enum class CardStyle(@StringRes val title: Int) {
+    PLAIN(R.string.card_plain),
+    TINT(R.string.card_tint),
+    STRIPE(R.string.card_stripe),
+    SOLID(R.string.card_solid),
+    GRADIENT(R.string.card_gradient),
+}
+
 /** Первый день недели; [offset] — его номер, считая понедельник нулём. */
 enum class WeekStart(val offset: Int) { MONDAY(0), SATURDAY(5), SUNDAY(6) }
 
@@ -60,6 +69,7 @@ data class AppSettings(
     val darkMode: DarkMode = DarkMode.SYSTEM,
     /** Чистый чёрный фон в тёмной теме */
     val amoled: Boolean = false,
+    val cardStyle: CardStyle = CardStyle.PLAIN,
     /** null — системная мелодия будильника */
     val ringtone: String? = null,
     val gentleDefault: Boolean = true,
@@ -120,6 +130,7 @@ object SettingsRepository {
             theme = theme,
             darkMode = DarkMode.entries.find { it.name == prefs.getString("darkMode", null) } ?: d.darkMode,
             amoled = prefs.getBoolean("amoled", d.amoled),
+            cardStyle = CardStyle.entries.find { it.name == prefs.getString("cardStyle", null) } ?: d.cardStyle,
             ringtone = prefs.getString("ringtone", null),
             gentleDefault = prefs.getBoolean("gentleDefault", d.gentleDefault),
             snoozeMinutes = prefs.getInt("snoozeMinutes", d.snoozeMinutes),
@@ -151,6 +162,7 @@ object SettingsRepository {
             .putString("theme", s.theme.name)
             .putString("darkMode", s.darkMode.name)
             .putBoolean("amoled", s.amoled)
+            .putString("cardStyle", s.cardStyle.name)
             .putString("ringtone", s.ringtone)
             .putBoolean("gentleDefault", s.gentleDefault)
             .putInt("snoozeMinutes", s.snoozeMinutes)

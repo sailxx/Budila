@@ -120,6 +120,9 @@ internal fun InstrumentSettingsScreen(onBack: () -> Unit) {
                         }
                     }
                 }
+                ChoiceStrip(Icons.Rounded.ViewAgenda, stringResource(R.string.card_style_title), CardStyle.entries.map { it.ordinal }, s.cardStyle.ordinal, { context.getString(CardStyle.entries[it].title) }) { v ->
+                    SettingsRepository.update { it.copy(cardStyle = CardStyle.entries[v]) }
+                }
                 if (s.instrumentTheme == InstrumentTheme.CLASSIC) {
                     Spacer(Modifier.height(14.dp))
                     CasingLegend(stringResource(R.string.mode_title))

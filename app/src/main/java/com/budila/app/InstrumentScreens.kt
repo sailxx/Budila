@@ -29,7 +29,10 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
@@ -244,15 +247,48 @@ private fun NextWell(alarms: List<Alarm>, now: ZonedDateTime) {
 @Composable
 private fun AlarmWell(alarm: Alarm, order: Int, onToggle: (Boolean) -> Unit, onClick: () -> Unit, modifier: Modifier = Modifier) {
     val context = LocalContext.current
-    val colors = LocalInstrument.current
+    val base = LocalInstrument.current
+    val style = SettingsRepository.settings.collectAsStateWithLifecycle().value.cardStyle
     val on = alarm.enabled
+    val accent = alarm.color?.let { Color(it).copy(alpha = 1f) } ?: base.tone
+    val plain = cardFace()
+    val solid = style == CardStyle.SOLID && on
+    // Выключенный будильник — обычная белая карточка: цвет только у включённых
+    val face = when {
+        !on -> plain
+        style == CardStyle.TINT -> lerp(plain, accent, if (base.dark) 0.2f else 0.16f)
+        solid -> accent
+        else -> plain
+    }
+    val onSolid = if (accent.luminance() > 0.5f) Color(0xFF141414) else Color.White
+    val colors = if (solid) {
+        base.copy(ink = onSolid, muted = onSolid.copy(alpha = 0.72f), line = onSolid.copy(alpha = 0.25f), primary = onSolid, onPrimary = accent)
+    } else {
+        base
+    }
+    val edge = if (on && style != CardStyle.PLAIN && !solid) accent.copy(alpha = 0.35f) else colors.line
     val shape = RoundedCornerShape(20.dp)
+    CompositionLocalProvider(LocalInstrument provides colors) {
     Column(
         modifier
             .fillMaxWidth()
             .clip(shape)
-            .background(cardFace())
-            .border(1.dp, colors.line, shape)
+            .background(face)
+            .then(
+                if (on && style == CardStyle.GRADIENT) {
+                    Modifier.background(Brush.horizontalGradient(listOf(accent.copy(alpha = if (base.dark) 0.34f else 0.3f), Color.Transparent)))
+                } else {
+                    Modifier
+                },
+            )
+            .then(
+                if (on && style == CardStyle.STRIPE) {
+                    Modifier.drawBehind { drawRect(accent, size = Size(5.dp.toPx(), size.height)) }
+                } else {
+                    Modifier
+                },
+            )
+            .border(1.dp, edge, shape)
             .clickable(onClick = onClick)
             .padding(horizontal = 16.dp, vertical = 14.dp),
     ) {
@@ -319,6 +355,7 @@ private fun AlarmWell(alarm: Alarm, order: Int, onToggle: (Boolean) -> Unit, onC
                 }
             }
         }
+    }
     }
 }
 

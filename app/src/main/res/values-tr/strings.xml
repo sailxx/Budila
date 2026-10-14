@@ -195,4 +195,10 @@
     <string name="ramp_title">Sesi yavaşça artır</string>
     <string name="ramp_desc">Yumuşak uyandırmalı alarmlar için</string>
     <string name="seconds_short">%1$d sn</string>
+    <string name="card_style_title">Alarm kartları</string>
+    <string name="card_plain">Beyaz</string>
+    <string name="card_tint">Tonlu</string>
+    <string name="card_stripe">Şerit</string>
+    <string name="card_solid">Dolu</string>
+    <string name="card_gradient">Gradyan</string>
 </resources>
