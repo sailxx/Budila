@@ -15,8 +15,8 @@ android {
         applicationId = "com.budila.app"
         minSdk = 26
         targetSdk = 36
-        versionCode = 16
-        versionName = "2.10"
+        versionCode = 17
+        versionName = "2.11"
     }
 
     // Ключ подписи хранится вне репозитория; путь и пароли — в keystore.properties (в .gitignore)
