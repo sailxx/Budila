@@ -28,10 +28,9 @@ const flat = (s) => String(s).replace(/\n/g, ' ');
 
 // Значок «Сегменты» — те же пути, что в ic_launcher_foreground_segments.xml
 const logo = (x, y, s) => `<g transform="translate(${x} ${y}) scale(${s / 108})"><rect width="108" height="108" rx="30" fill="#000" stroke="#3a3a3a" stroke-width="3"/>
-<g transform="translate(54 54) scale(1.25) translate(-54 -56)" fill="none" stroke-width="3.6" stroke-linecap="round">
-<path d="M54,41L54,35M61.5,43.01L64.5,37.81M66.99,48.5L72.19,45.5M69,56L75,56M66.99,63.5L72.19,66.5M61.5,68.99L64.5,74.19M54,71L54,77M46.5,68.99L43.5,74.19" stroke="#FF6A00"/>
-<path d="M41.01,63.5L35.81,66.5M39,56L33,56M41.01,48.5L35.81,45.5M46.5,43.01L43.5,37.81" stroke="#3A3A3A"/>
-<path d="M54,56L54,45.5M54,56L50,62.9" stroke="#fff"/></g><circle cx="54" cy="54" r="3.2" fill="#fff"/></g>`;
+<g transform="translate(54 54) scale(1.2) translate(-54 -54)" fill="none" stroke-width="6.5" stroke-linecap="round">
+<path d="M48.09,32L66.09,32M42.39,37L40.7,49M45,54L63,54M39.3,59L37.61,71M67.3,59L65.61,71M41.91,76L59.91,76" stroke="#FF6A00"/>
+<path d="M70.39,37L68.7,49" stroke="#333"/></g></g>`;
 
 const RING = '.ring{transform-box:fill-box;transform-origin:center;animation:ring 1.6s ease-out infinite}@keyframes ring{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(2.6)}}@media (prefers-reduced-motion:reduce){.ring{animation:none}}';
 
