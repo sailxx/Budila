@@ -194,7 +194,6 @@ for (const [code, t] of Object.entries(STR)) {
     [`screens-${code}.svg`]: screens(t),
     [`features-${code}.svg`]: features(t),
     [`quality-${code}.svg`]: quality(t),
-    [`design-${code}.svg`]: design(t),
   });
 }
 await K.build(OUT, langs, 'Budilav.:–/');
@@ -203,7 +202,6 @@ renderPngs();
 // ---------- README на всех языках (тексты — md.json) ----------
 const pic = (name, code, alt) => `<picture><source srcset="assets/readme/${name}-${code}.svg"><img src="assets/readme/png/${name}-${code}.png" width="100%" alt="${alt}"></picture>`;
 const det = (summary, body) => `<details>\n<summary><b>${summary}</b></summary>\n\n${body}\n\n</details>`;
-const BADGE = '[![Build](https://github.com/sailxx/Budila/actions/workflows/build.yml/badge.svg)](https://github.com/sailxx/Budila/actions/workflows/build.yml)';
 for (const [code, m] of Object.entries(MD)) {
   const sw = Object.values(MD).map((x) => (x === m ? `**${x.name}**` : `[${x.name}](${x.file})`)).join(' · ');
   const text = `<div align="center">
@@ -234,19 +232,9 @@ ${det(m.featuresMore, m.features)}
 
 ${pic('quality', code, m.qualityAlt)}
 
-<br>
-
-${pic('design', code, m.designAlt)}
-
 ${det(m.install, m.installBody)}
 
 ${det(m.privacy, m.privacyBody)}
-
-${det(m.build, `${m.buildBody}\n\n${BADGE}`)}
-
-<br>
-
-<div align="center"><sub>${m.footer}</sub></div>
 `;
   fs.writeFileSync(path.join(REPO, m.file), text);
 }

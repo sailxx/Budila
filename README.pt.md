@@ -61,10 +61,6 @@ Os alarmes são agendados pelo `AlarmClock` do sistema e tocam na hora certa mes
 
 <picture><source srcset="assets/readme/quality-pt.svg"><img src="assets/readme/png/quality-pt.png" width="100%" alt="Qualidade em números"></picture>
 
-<br>
-
-<picture><source srcset="assets/readme/design-pt.svg"><img src="assets/readme/png/design-pt.png" width="100%" alt="Código de design: Material 3 e Material You"></picture>
-
 <details>
 <summary><b>Instalação</b></summary>
 
@@ -84,26 +80,3 @@ O Budila também está na [Komi Store](https://github.com/komi-store/komi-store)
 O Budila **não tem acesso à internet**: o manifesto não tem a permissão `INTERNET`. Os alarmes ficam só no celular e não entram nos backups na nuvem. Sem anúncios, análises nem rastreadores. Detalhes e como relatar uma vulnerabilidade estão em [SECURITY.md](SECURITY.md).
 
 </details>
-
-<details>
-<summary><b>Compilar a partir do código-fonte</b></summary>
-
-Você precisa do JDK 17+ e do Android SDK (plataforma 36).
-
-```bash
-git clone https://github.com/sailxx/Budila.git
-cd Budila
-./gradlew assembleRelease
-```
-
-As versões são compiladas no GitHub automaticamente: aumente `versionCode`/`versionName` em `app/build.gradle.kts` e envie uma tag (`git tag v2.5 && git push origin v2.5`) — o Actions compila, assina e publica o `Budila.apk`. Para uma compilação local assinada, copie `keystore.properties.example` para `keystore.properties` e informe sua chave; sem ela sai um APK não assinado. As capturas de tela (inclusive em inglês, alemão e espanhol) são refeitas por `./gradlew testDebugUnitTest` (Robolectric, sem celular) e aparecem em `screenshots/`. As imagens do README em todos os idiomas são geradas por `cd tools/readme && npm install && node build.mjs`; os textos delas ficam em `tools/readme/strings.json` (README — `md.json`).
-
-**Tecnologias:** Kotlin · Jetpack Compose · Material 3 · [MaterialKolor](https://github.com/jordond/MaterialKolor) · AlarmManager · Foreground Service.
-
-[![Build](https://github.com/sailxx/Budila/actions/workflows/build.yml/badge.svg)](https://github.com/sailxx/Budila/actions/workflows/build.yml)
-
-</details>
-
-<br>
-
-<div align="center"><sub>© 2026 sailxx. Todos os direitos reservados.</sub></div>

@@ -61,10 +61,6 @@ Alarmlar sistemin `AlarmClock` hizmetiyle kurulur ve telefon uykudayken bile zam
 
 <picture><source srcset="assets/readme/quality-tr.svg"><img src="assets/readme/png/quality-tr.png" width="100%" alt="Rakamlarla kalite"></picture>
 
-<br>
-
-<picture><source srcset="assets/readme/design-tr.svg"><img src="assets/readme/png/design-tr.png" width="100%" alt="Tasarım kodu: Material 3 ve Material You"></picture>
-
 <details>
 <summary><b>Kurulum</b></summary>
 
@@ -84,26 +80,3 @@ Budila, GitHub sürümlerine dayanan bir uygulama mağazası olan [Komi Store](h
 Budila'nın **internet erişimi yoktur**: manifestte `INTERNET` izni bulunmaz. Alarmlar yalnızca telefonda saklanır ve bulut yedeklerine girmez. Reklam, analiz ve izleyici yok. Ayrıntılar ve bir güvenlik açığını nasıl bildireceğiniz [SECURITY.md](SECURITY.md) dosyasında.
 
 </details>
-
-<details>
-<summary><b>Kaynak koddan derleme</b></summary>
-
-JDK 17+ ve Android SDK (platform 36) gerekir.
-
-```bash
-git clone https://github.com/sailxx/Budila.git
-cd Budila
-./gradlew assembleRelease
-```
-
-Sürümler GitHub'da otomatik derlenir: `app/build.gradle.kts` içinde `versionCode`/`versionName` değerini artırın ve bir etiket gönderin (`git tag v2.5 && git push origin v2.5`) — Actions `Budila.apk` dosyasını derler, imzalar ve yayınlar. Yerel imzalı derleme için `keystore.properties.example` dosyasını `keystore.properties` olarak kopyalayıp anahtarınızı yazın; o olmadan imzasız bir APK çıkar. Ekran görüntüleri (İngilizce, Almanca ve İspanyolca olanlar dahil) `./gradlew testDebugUnitTest` ile yeniden çizilir (Robolectric, telefon gerekmez) ve `screenshots/` klasörüne düşer. Tüm dillerdeki README görsellerini `cd tools/readme && npm install && node build.mjs` oluşturur; metinleri `tools/readme/strings.json` (README — `md.json`) dosyasındadır.
-
-**Teknolojiler:** Kotlin · Jetpack Compose · Material 3 · [MaterialKolor](https://github.com/jordond/MaterialKolor) · AlarmManager · Foreground Service.
-
-[![Build](https://github.com/sailxx/Budila/actions/workflows/build.yml/badge.svg)](https://github.com/sailxx/Budila/actions/workflows/build.yml)
-
-</details>
-
-<br>
-
-<div align="center"><sub>© 2026 sailxx. Tüm hakları saklıdır.</sub></div>

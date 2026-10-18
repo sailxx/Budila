@@ -61,10 +61,6 @@ Alarms are set through the system `AlarmClock` and ring on time even when the ph
 
 <picture><source srcset="assets/readme/quality-en.svg"><img src="assets/readme/png/quality-en.png" width="100%" alt="Quality in numbers"></picture>
 
-<br>
-
-<picture><source srcset="assets/readme/design-en.svg"><img src="assets/readme/png/design-en.png" width="100%" alt="Design code: Material 3 and Material You"></picture>
-
 <details>
 <summary><b>Install</b></summary>
 
@@ -84,26 +80,3 @@ Budila is also in [Komi Store](https://github.com/komi-store/komi-store), an app
 Budila has **no internet access**: there is no `INTERNET` permission in the manifest. Alarms are stored only on the phone and are not included in cloud backups. No ads, no analytics, no trackers. Details and how to report a vulnerability are in [SECURITY.md](SECURITY.md).
 
 </details>
-
-<details>
-<summary><b>Build from source</b></summary>
-
-You need JDK 17+ and the Android SDK (platform 36).
-
-```bash
-git clone https://github.com/sailxx/Budila.git
-cd Budila
-./gradlew assembleRelease
-```
-
-Releases are built on GitHub automatically: bump `versionCode`/`versionName` in `app/build.gradle.kts` and push a tag (`git tag v2.5 && git push origin v2.5`) — Actions will build, sign and publish `Budila.apk`. For a local signed build, copy `keystore.properties.example` to `keystore.properties` and fill in your key; without it you get an unsigned APK. Screenshots (including English, German and Spanish ones) are redrawn by `./gradlew testDebugUnitTest` (Robolectric, no phone needed) and land in `screenshots/`. The README images in every language are built by `cd tools/readme && npm install && node build.mjs`; their texts live in `tools/readme/strings.json` (README — `md.json`).
-
-**Stack:** Kotlin · Jetpack Compose · Material 3 · [MaterialKolor](https://github.com/jordond/MaterialKolor) · AlarmManager · Foreground Service.
-
-[![Build](https://github.com/sailxx/Budila/actions/workflows/build.yml/badge.svg)](https://github.com/sailxx/Budila/actions/workflows/build.yml)
-
-</details>
-
-<br>
-
-<div align="center"><sub>© 2026 sailxx. All rights reserved.</sub></div>

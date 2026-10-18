@@ -61,10 +61,6 @@ Budziki są ustawiane przez systemowy `AlarmClock` i dzwonią punktualnie, nawet
 
 <picture><source srcset="assets/readme/quality-pl.svg"><img src="assets/readme/png/quality-pl.png" width="100%" alt="Jakość w liczbach"></picture>
 
-<br>
-
-<picture><source srcset="assets/readme/design-pl.svg"><img src="assets/readme/png/design-pl.png" width="100%" alt="Kod designu: Material 3 i Material You"></picture>
-
 <details>
 <summary><b>Instalacja</b></summary>
 
@@ -84,26 +80,3 @@ Budila jest też w [Komi Store](https://github.com/komi-store/komi-store) — sk
 Budila **nie ma dostępu do internetu**: w manifeście nie ma uprawnienia `INTERNET`. Budziki są przechowywane tylko na telefonie i nie trafiają do kopii zapasowych w chmurze. Bez reklam, analityki i trackerów. Szczegóły i sposób zgłoszenia podatności są w [SECURITY.md](SECURITY.md).
 
 </details>
-
-<details>
-<summary><b>Budowanie ze źródeł</b></summary>
-
-Potrzebujesz JDK 17+ i Android SDK (platforma 36).
-
-```bash
-git clone https://github.com/sailxx/Budila.git
-cd Budila
-./gradlew assembleRelease
-```
-
-Wydania są budowane na GitHubie automatycznie: podnieś `versionCode`/`versionName` w `app/build.gradle.kts` i wypchnij tag (`git tag v2.5 && git push origin v2.5`) — Actions zbuduje, podpisze i opublikuje `Budila.apk`. Do lokalnej podpisanej kompilacji skopiuj `keystore.properties.example` do `keystore.properties` i wpisz swój klucz; bez niego powstanie niepodpisany APK. Zrzuty ekranu (także po angielsku, niemiecku i hiszpańsku) odświeża `./gradlew testDebugUnitTest` (Robolectric, bez telefonu), trafiają do `screenshots/`. Obrazki README we wszystkich językach generuje `cd tools/readme && npm install && node build.mjs`, ich teksty są w `tools/readme/strings.json` (README — `md.json`).
-
-**Technologie:** Kotlin · Jetpack Compose · Material 3 · [MaterialKolor](https://github.com/jordond/MaterialKolor) · AlarmManager · Foreground Service.
-
-[![Build](https://github.com/sailxx/Budila/actions/workflows/build.yml/badge.svg)](https://github.com/sailxx/Budila/actions/workflows/build.yml)
-
-</details>
-
-<br>
-
-<div align="center"><sub>© 2026 sailxx. Wszelkie prawa zastrzeżone.</sub></div>

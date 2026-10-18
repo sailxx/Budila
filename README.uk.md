@@ -61,10 +61,6 @@
 
 <picture><source srcset="assets/readme/quality-uk.svg"><img src="assets/readme/png/quality-uk.png" width="100%" alt="Якість у цифрах"></picture>
 
-<br>
-
-<picture><source srcset="assets/readme/design-uk.svg"><img src="assets/readme/png/design-uk.png" width="100%" alt="Дизайн-код: Material 3 і Material You"></picture>
-
 <details>
 <summary><b>Встановлення</b></summary>
 
@@ -84,26 +80,3 @@ Budila є і в [Komi Store](https://github.com/komi-store/komi-store) — ма�
 У Budila **немає доступу до інтернету**: у маніфесті немає дозволу `INTERNET`. Будильники зберігаються лише на телефоні й не потрапляють у хмарні резервні копії. Немає реклами, аналітики й трекерів. Подробиці та як повідомити про вразливість — у [SECURITY.md](SECURITY.md).
 
 </details>
-
-<details>
-<summary><b>Зібрати з вихідного коду</b></summary>
-
-Потрібні JDK 17+ і Android SDK (платформа 36).
-
-```bash
-git clone https://github.com/sailxx/Budila.git
-cd Budila
-./gradlew assembleRelease
-```
-
-Релізи збираються на GitHub автоматично: підніміть `versionCode`/`versionName` в `app/build.gradle.kts` і надішліть тег (`git tag v2.5 && git push origin v2.5`) — Actions збере, підпише й опублікує `Budila.apk`. Для локальної підписаної збірки скопіюйте `keystore.properties.example` у `keystore.properties` і вкажіть свій ключ; без нього збереться непідписаний APK. Скриншоти екранів (зокрема англійською, німецькою та іспанською) перемальовуються командою `./gradlew testDebugUnitTest` (Robolectric, без телефона) і з’являються в `screenshots/`. Картинки README всіма мовами збирає `cd tools/readme && npm install && node build.mjs`, тексти для них — у `tools/readme/strings.json` (README — `md.json`).
-
-**Стек:** Kotlin · Jetpack Compose · Material 3 · [MaterialKolor](https://github.com/jordond/MaterialKolor) · AlarmManager · Foreground Service.
-
-[![Build](https://github.com/sailxx/Budila/actions/workflows/build.yml/badge.svg)](https://github.com/sailxx/Budila/actions/workflows/build.yml)
-
-</details>
-
-<br>
-
-<div align="center"><sub>© 2026 sailxx. Усі права захищено.</sub></div>

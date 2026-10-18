@@ -61,10 +61,6 @@
 
 <picture><source srcset="assets/readme/quality-ru.svg"><img src="assets/readme/png/quality-ru.png" width="100%" alt="Качество в цифрах"></picture>
 
-<br>
-
-<picture><source srcset="assets/readme/design-ru.svg"><img src="assets/readme/png/design-ru.png" width="100%" alt="Дизайн-код: Material 3 и Material You"></picture>
-
 <details>
 <summary><b>Установка</b></summary>
 
@@ -84,26 +80,3 @@ Budila есть и в [Komi Store](https://github.com/komi-store/komi-store) —
 У Budila **нет доступа к интернету**: в манифесте нет разрешения `INTERNET`. Будильники хранятся только на телефоне и не попадают в облачные бэкапы. Нет рекламы, аналитики и трекеров. Подробности и как сообщить об уязвимости — в [SECURITY.md](SECURITY.md).
 
 </details>
-
-<details>
-<summary><b>Собрать из исходников</b></summary>
-
-Нужны JDK 17+ и Android SDK (платформа 36).
-
-```bash
-git clone https://github.com/sailxx/Budila.git
-cd Budila
-./gradlew assembleRelease
-```
-
-Релизы собираются на GitHub автоматически: поднимите `versionCode`/`versionName` в `app/build.gradle.kts` и отправьте тег (`git tag v2.5 && git push origin v2.5`) — Actions соберёт, подпишет и опубликует `Budila.apk`. Для локальной подписанной сборки скопируйте `keystore.properties.example` в `keystore.properties` и укажите свой ключ; без него соберётся неподписанный APK. Скриншоты экранов (в том числе на английском, немецком и испанском) перерисовываются командой `./gradlew testDebugUnitTest` (Robolectric, без телефона) и появляются в `screenshots/`. Картинки README на всех языках собирает `cd tools/readme && npm install && node build.mjs`, тексты для них — в `tools/readme/strings.json` (README — `md.json`).
-
-**Стек:** Kotlin · Jetpack Compose · Material 3 · [MaterialKolor](https://github.com/jordond/MaterialKolor) · AlarmManager · Foreground Service.
-
-[![Build](https://github.com/sailxx/Budila/actions/workflows/build.yml/badge.svg)](https://github.com/sailxx/Budila/actions/workflows/build.yml)
-
-</details>
-
-<br>
-
-<div align="center"><sub>© 2026 sailxx. Все права защищены.</sub></div>

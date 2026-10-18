@@ -61,10 +61,6 @@ Les alarmes passent par l’`AlarmClock` du système et sonnent à l’heure mê
 
 <picture><source srcset="assets/readme/quality-fr.svg"><img src="assets/readme/png/quality-fr.png" width="100%" alt="La qualité en chiffres"></picture>
 
-<br>
-
-<picture><source srcset="assets/readme/design-fr.svg"><img src="assets/readme/png/design-fr.png" width="100%" alt="Code de design : Material 3 et Material You"></picture>
-
 <details>
 <summary><b>Installation</b></summary>
 
@@ -84,26 +80,3 @@ Budila est aussi disponible dans [Komi Store](https://github.com/komi-store/komi
 Budila **n’a pas accès à internet** : le manifeste ne contient pas l’autorisation `INTERNET`. Les alarmes restent uniquement sur le téléphone et ne vont pas dans les sauvegardes cloud. Pas de publicité, pas d’analytique, pas de traqueurs. Les détails et la façon de signaler une vulnérabilité sont dans [SECURITY.md](SECURITY.md).
 
 </details>
-
-<details>
-<summary><b>Compiler depuis les sources</b></summary>
-
-Il faut le JDK 17+ et l’Android SDK (plateforme 36).
-
-```bash
-git clone https://github.com/sailxx/Budila.git
-cd Budila
-./gradlew assembleRelease
-```
-
-Les versions sont compilées automatiquement sur GitHub : augmentez `versionCode`/`versionName` dans `app/build.gradle.kts` et poussez un tag (`git tag v2.5 && git push origin v2.5`) — Actions compile, signe et publie `Budila.apk`. Pour une compilation locale signée, copiez `keystore.properties.example` vers `keystore.properties` et indiquez votre clé ; sans elle, l’APK n’est pas signé. Les captures d’écran (y compris en anglais, allemand et espagnol) sont redessinées par `./gradlew testDebugUnitTest` (Robolectric, sans téléphone) et arrivent dans `screenshots/`. Les images du README dans toutes les langues sont générées par `cd tools/readme && npm install && node build.mjs` ; leurs textes sont dans `tools/readme/strings.json` (README — `md.json`).
-
-**Technologies :** Kotlin · Jetpack Compose · Material 3 · [MaterialKolor](https://github.com/jordond/MaterialKolor) · AlarmManager · Foreground Service.
-
-[![Build](https://github.com/sailxx/Budila/actions/workflows/build.yml/badge.svg)](https://github.com/sailxx/Budila/actions/workflows/build.yml)
-
-</details>
-
-<br>
-
-<div align="center"><sub>© 2026 sailxx. Tous droits réservés.</sub></div>

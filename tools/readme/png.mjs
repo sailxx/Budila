@@ -14,7 +14,7 @@ const SRC = path.resolve(DIR, '../../assets/readme');
 const OUT = path.join(SRC, 'png');
 const FONT = path.join(DIR, '.font/JetBrainsMono-Var.woff2');
 const SCALE = 1.5;
-const IMAGES = ['hero', 'screens', 'features', 'quality', 'design'];
+const IMAGES = ['hero', 'screens', 'features', 'quality'];
 
 const chrome = [
   process.env.CHROME,
