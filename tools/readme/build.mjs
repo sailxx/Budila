@@ -28,7 +28,7 @@ const flat = (s) => String(s).replace(/\n/g, ' ');
 
 // Значок «Сегменты» — те же пути, что в ic_launcher_foreground_segments.xml
 const logo = (x, y, s) => `<g transform="translate(${x} ${y}) scale(${s / 108})"><rect width="108" height="108" rx="30" fill="#000" stroke="#3a3a3a" stroke-width="3"/>
-<g transform="translate(54 54) scale(1.2) translate(-54 -54)" fill="none" stroke-width="6.5" stroke-linecap="round">
+<g transform="translate(54 54) scale(0.95) translate(-54 -54)" fill="none" stroke-width="6.5" stroke-linecap="round">
 <path d="M48.09,32L66.09,32M42.39,37L40.7,49M45,54L63,54M39.3,59L37.61,71M67.3,59L65.61,71M41.91,76L59.91,76" stroke="#FF6A00"/>
 <path d="M70.39,37L68.7,49" stroke="#333"/></g></g>`;
 
