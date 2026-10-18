@@ -8,8 +8,8 @@
     <group
         android:pivotX="54"
         android:pivotY="54"
-        android:scaleX="1.2"
-        android:scaleY="1.2">
+        android:scaleX="0.95"
+        android:scaleY="0.95">
         <!-- горящие сегменты -->
         <path
             android:pathData="M48.09,32L66.09,32M42.39,37L40.7,49M45,54L63,54M39.3,59L37.61,71M67.3,59L65.61,71M41.91,76L59.91,76"
