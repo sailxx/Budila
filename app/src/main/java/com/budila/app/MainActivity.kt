@@ -156,7 +156,9 @@ internal fun rememberPermissions(): Permissions {
         Build.VERSION.SDK_INT < 31 || context.getSystemService(AlarmManager::class.java).canScheduleExactAlarms()
     }
     val fullScreenOk = remember(permTick) {
-        Build.VERSION.SDK_INT < 34 || context.getSystemService(NotificationManager::class.java).canUseFullScreenIntent()
+        Build.VERSION.SDK_INT < 34 || context.getSystemService(NotificationManager::class.java).canUseFullScreenIntent() ||
+            // Xiaomi/POCO: право лежит в разрешениях MIUI/HyperOS, а canUseFullScreenIntent() остаётся false — после захода туда не донимаем
+            (isXiaomi() && fsiPrefs(context).getBoolean("asked", false))
     }
     LaunchedEffect(Unit) {
         if (!notifOk && Build.VERSION.SDK_INT >= 33) notifLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
@@ -171,9 +173,16 @@ internal fun rememberPermissions(): Permissions {
                 Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM, Uri.parse("package:${context.packageName}")),
             )
         },
-        fixFullScreen = { openFullScreenSettings(context) },
+        fixFullScreen = {
+            fsiPrefs(context).edit().putBoolean("asked", true).apply()
+            openFullScreenSettings(context)
+        },
     )
 }
+
+private fun fsiPrefs(context: android.content.Context) = context.getSharedPreferences("fsi", android.content.Context.MODE_PRIVATE)
+
+private fun isXiaomi() = Build.MANUFACTURER.lowercase() in setOf("xiaomi", "redmi", "poco")
 
 /**
  * Экран разрешения на полноэкранные оповещения. На части прошивок (Xiaomi/HyperOS и др.)
