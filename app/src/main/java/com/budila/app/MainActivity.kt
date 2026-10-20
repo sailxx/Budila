@@ -227,13 +227,24 @@ internal class AlarmActions(
         }
     }
 
+    /** Режим дисциплины: незадолго до звонка его нельзя отключить, перенести или удалить. */
+    private fun blockedByDiscipline(old: Alarm?, changes: (Alarm) -> Boolean): Boolean {
+        if (old == null || !old.isLocked() || !changes(old)) return false
+        showMessage(context.getString(R.string.msg_locked, DISCIPLINE_LOCK_MINUTES))
+        return true
+    }
+
     fun save(alarm: Alarm) {
+        if (blockedByDiscipline(AlarmRepository.get(alarm.id)) {
+                !alarm.enabled || alarm.hour != it.hour || alarm.minute != it.minute || alarm.days != it.days
+            }) return
         AlarmRepository.upsert(alarm)
         AlarmScheduler.schedule(context, alarm)
         if (alarm.enabled) showMessage(context.getString(R.string.msg_will_ring, untilText(context, alarm.nextTrigger())))
     }
 
     fun delete(alarm: Alarm) {
+        if (blockedByDiscipline(AlarmRepository.get(alarm.id)) { true }) return
         AlarmScheduler.cancel(context, alarm.id)
         AlarmRepository.delete(alarm.id)
         showMessage(context.getString(R.string.msg_deleted), context.getString(R.string.action_undo)) {
@@ -277,6 +288,7 @@ internal fun AlarmListScreen(onOpenSettings: () -> Unit = {}) {
     val shown = if (tagFilter == null) alarms else alarms.filter { tagFilter in it.tags }
 
     val now = rememberNow()
+    val streak by WakeStats.summary.collectAsStateWithLifecycle()
     val perms = rememberPermissions()
     val notifOk = perms.notifOk
     val exactOk = perms.exactOk
@@ -321,6 +333,7 @@ internal fun AlarmListScreen(onOpenSettings: () -> Unit = {}) {
                 val next = alarms.filter { it.enabled }.minOfOrNull { it.nextTrigger(now) }
                 NextAlarmCard(next, now)
             }
+            if (streak.best > 0) item(key = "streak") { StreakCard(streak) }
             if (!notifOk) item(key = "p_notif") {
                 PermissionCard(
                     Icons.Rounded.NotificationsOff,
@@ -416,6 +429,31 @@ private fun NextAlarmCard(next: ZonedDateTime?, now: ZonedDateTime) {
                 null,
                 modifier = Modifier.size(40.dp),
             )
+        }
+    }
+}
+
+@Composable
+private fun StreakCard(streak: WakeSummary) {
+    val context = LocalContext.current
+    Card(
+        shape = RoundedCornerShape(24.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+            contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+        ),
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Row(Modifier.padding(horizontal = 24.dp, vertical = 16.dp), verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text(stringResource(R.string.streak_title), style = MaterialTheme.typography.labelLarge)
+                Text(context.getString(R.string.unit_days, streak.streak), style = MaterialTheme.typography.headlineMedium)
+                Text(
+                    stringResource(R.string.streak_best, context.getString(R.string.unit_days, streak.best)),
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            }
+            Icon(Icons.Rounded.LocalFireDepartment, null, modifier = Modifier.size(40.dp))
         }
     }
 }

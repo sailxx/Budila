@@ -63,7 +63,7 @@ data class Ringing(
          */
         fun of(alarm: Alarm, settings: AppSettings, snoozes: Int = 0, check: Boolean = false, strict: Boolean = false): Ringing {
             var task = if (check) WakeTask.NONE else alarm.task
-            if (strict && task == WakeTask.NONE) task = WakeTask.MATH
+            if ((strict || settings.discipline && !check) && task == WakeTask.NONE) task = WakeTask.MATH
             if (task == WakeTask.PASSWORD && settings.password.isBlank()) task = WakeTask.MATH
             val left = when {
                 strict -> 0

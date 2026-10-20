@@ -201,4 +201,11 @@
     <string name="card_stripe">Striscia</string>
     <string name="card_solid">Piena</string>
     <string name="card_gradient">Sfumata</string>
+    <string name="discipline_title">Modalità disciplina</string>
+    <string name="discipline_desc">Ogni sveglia richiede un compito per essere spenta. %1$d minuti prima dello squillo non si può disattivare, spostare o eliminare, e nemmeno questo interruttore</string>
+    <string name="msg_locked">Bloccato: mancano meno di %1$d minuti alla sveglia. Modalità disciplina attiva</string>
+    <string name="streak_title">Serie di risvegli</string>
+    <string name="streak_best">Record: %1$s</string>
+    <string name="streak_toast">Alzato in orario! Serie: %1$s</string>
+    <string name="streak_broken">Serie interrotta. Domani si ricomincia</string>
 </resources>

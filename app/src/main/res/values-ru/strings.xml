@@ -201,4 +201,11 @@
     <string name="card_stripe">Полоса</string>
     <string name="card_solid">Цвет</string>
     <string name="card_gradient">Градиент</string>
+    <string name="discipline_title">Режим дисциплины</string>
+    <string name="discipline_desc">У любого будильника есть задание, без него не выключить. За %1$d мин до звонка будильник нельзя отключить, перенести или удалить — как и сам этот переключатель</string>
+    <string name="msg_locked">Заблокировано: до будильника меньше %1$d мин. Включён режим дисциплины</string>
+    <string name="streak_title">Серия подъёмов</string>
+    <string name="streak_best">Рекорд: %1$s</string>
+    <string name="streak_toast">Встал вовремя! Серия: %1$s</string>
+    <string name="streak_broken">Серия прервалась. Завтра начнёшь заново</string>
 </resources>

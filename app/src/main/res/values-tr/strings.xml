@@ -201,4 +201,11 @@
     <string name="card_stripe">Şerit</string>
     <string name="card_solid">Dolu</string>
     <string name="card_gradient">Gradyan</string>
+    <string name="discipline_title">Disiplin modu</string>
+    <string name="discipline_desc">Her alarmı kapatmak için bir görev gerekir. Çalmasına %1$d dakika kala alarm kapatılamaz, taşınamaz veya silinemez — bu anahtar da değiştirilemez</string>
+    <string name="msg_locked">Kilitli: alarma %1$d dakikadan az kaldı. Disiplin modu açık</string>
+    <string name="streak_title">Uyanma serisi</string>
+    <string name="streak_best">Rekor: %1$s</string>
+    <string name="streak_toast">Zamanında kalktın! Seri: %1$s</string>
+    <string name="streak_broken">Seri bozuldu. Yarın yeniden başlarsın</string>
 </resources>

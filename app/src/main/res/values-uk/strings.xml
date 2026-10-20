@@ -201,4 +201,11 @@
     <string name="card_stripe">Смужка</string>
     <string name="card_solid">Колір</string>
     <string name="card_gradient">Градієнт</string>
+    <string name="discipline_title">Режим дисципліни</string>
+    <string name="discipline_desc">У кожного будильника є завдання, без нього не вимкнути. За %1$d хв до дзвінка будильник не можна вимкнути, перенести чи видалити — як і сам цей перемикач</string>
+    <string name="msg_locked">Заблоковано: до будильника менше %1$d хв. Увімкнено режим дисципліни</string>
+    <string name="streak_title">Серія підйомів</string>
+    <string name="streak_best">Рекорд: %1$s</string>
+    <string name="streak_toast">Встав вчасно! Серія: %1$s</string>
+    <string name="streak_broken">Серія перервалася. Завтра почнеш заново</string>
 </resources>

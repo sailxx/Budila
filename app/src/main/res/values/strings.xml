@@ -204,4 +204,11 @@
     <string name="card_stripe">Stripe</string>
     <string name="card_solid">Solid</string>
     <string name="card_gradient">Gradient</string>
+    <string name="discipline_title">Discipline mode</string>
+    <string name="discipline_desc">Every alarm needs a task to turn it off. %1$d minutes before an alarm rings, it can’t be turned off, moved or deleted — and neither can this switch</string>
+    <string name="msg_locked">Locked: less than %1$d minutes until the alarm. Discipline mode is on</string>
+    <string name="streak_title">Wake-up streak</string>
+    <string name="streak_best">Best: %1$s</string>
+    <string name="streak_toast">Up on time! Streak: %1$s</string>
+    <string name="streak_broken">Streak broken. Tomorrow you start again</string>
 </resources>

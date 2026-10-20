@@ -208,6 +208,10 @@ internal fun InstrumentSettingsScreen(onBack: () -> Unit) {
 
         item {
             SettingsGroup("wake", Icons.Rounded.Verified, stringResource(R.string.section_wake), stringResource(s.defaultTask.title)) {
+                SwitchRow(Icons.Rounded.Lock, stringResource(R.string.discipline_title), stringResource(R.string.discipline_desc, DISCIPLINE_LOCK_MINUTES), s.discipline) { v ->
+                    setDiscipline(context, v)
+                }
+                Spacer(Modifier.height(8.dp))
                 CasingLegend(stringResource(R.string.default_task_title))
                 Spacer(Modifier.height(8.dp))
                 Strip(

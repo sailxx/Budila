@@ -92,6 +92,8 @@ data class AppSettings(
     val maxSnoozes: Int = -1,
     /** Через сколько минут после выключения спросить «точно встал?»; 0 — не спрашивать */
     val awakeCheckMinutes: Int = 0,
+    /** Режим дисциплины: у каждого будильника есть задание, а перед звонком его нельзя отключить или изменить */
+    val discipline: Boolean = false,
     /** Своя тема: тон (0–360), насыщенность и стиль палитры */
     val customHue: Float = 265f,
     val customSaturation: Float = 0.6f,
@@ -145,6 +147,7 @@ object SettingsRepository {
             taskRepeats = prefs.getInt("taskRepeats", d.taskRepeats),
             maxSnoozes = prefs.getInt("maxSnoozes", d.maxSnoozes),
             awakeCheckMinutes = prefs.getInt("awakeCheckMinutes", d.awakeCheckMinutes),
+            discipline = prefs.getBoolean("discipline", d.discipline),
             customHue = prefs.getFloat("customHue", d.customHue),
             customSaturation = prefs.getFloat("customSaturation", d.customSaturation),
             customStyle = CustomStyle.entries.find { it.name == prefs.getString("customStyle", null) } ?: d.customStyle,
@@ -177,6 +180,7 @@ object SettingsRepository {
             .putInt("taskRepeats", s.taskRepeats)
             .putInt("maxSnoozes", s.maxSnoozes)
             .putInt("awakeCheckMinutes", s.awakeCheckMinutes)
+            .putBoolean("discipline", s.discipline)
             .putFloat("customHue", s.customHue)
             .putFloat("customSaturation", s.customSaturation)
             .putString("customStyle", s.customStyle.name)

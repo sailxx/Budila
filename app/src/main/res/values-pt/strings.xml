@@ -201,4 +201,11 @@
     <string name="card_stripe">Faixa</string>
     <string name="card_solid">Sólido</string>
     <string name="card_gradient">Gradiente</string>
+    <string name="discipline_title">Modo disciplina</string>
+    <string name="discipline_desc">Todo alarme exige uma tarefa para desligar. %1$d minutos antes de tocar, ele não pode ser desativado, movido nem excluído — nem este interruptor</string>
+    <string name="msg_locked">Bloqueado: faltam menos de %1$d minutos para o alarme. Modo disciplina ativo</string>
+    <string name="streak_title">Sequência de despertares</string>
+    <string name="streak_best">Recorde: %1$s</string>
+    <string name="streak_toast">Levantou na hora! Sequência: %1$s</string>
+    <string name="streak_broken">Sequência quebrada. Amanhã você recomeça</string>
 </resources>

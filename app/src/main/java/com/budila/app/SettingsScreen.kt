@@ -294,6 +294,12 @@ internal fun SettingsScreen(onBack: () -> Unit) {
 
             item { SectionHeader(stringResource(R.string.section_wake)) }
             item {
+                SwitchItem(
+                    Icons.Rounded.Lock, stringResource(R.string.discipline_title),
+                    stringResource(R.string.discipline_desc, DISCIPLINE_LOCK_MINUTES), s.discipline,
+                ) { v -> setDiscipline(context, v) }
+            }
+            item {
                 ChoiceItem(
                     taskIcon(s.defaultTask), stringResource(R.string.default_task_title),
                     WakeTask.entries.map { it.ordinal }, s.defaultTask.ordinal,

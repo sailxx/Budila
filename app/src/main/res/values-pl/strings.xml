@@ -201,4 +201,11 @@
     <string name="card_stripe">Pasek</string>
     <string name="card_solid">Pełne</string>
     <string name="card_gradient">Gradient</string>
+    <string name="discipline_title">Tryb dyscypliny</string>
+    <string name="discipline_desc">Każdy budzik wymaga zadania, by go wyłączyć. Na %1$d min przed dzwonkiem nie można go wyłączyć, przesunąć ani usunąć — tego przełącznika też</string>
+    <string name="msg_locked">Zablokowane: do budzika zostało mniej niż %1$d min. Tryb dyscypliny jest włączony</string>
+    <string name="streak_title">Seria wstawania</string>
+    <string name="streak_best">Rekord: %1$s</string>
+    <string name="streak_toast">Wstałeś na czas! Seria: %1$s</string>
+    <string name="streak_broken">Seria przerwana. Jutro zaczynasz od nowa</string>
 </resources>

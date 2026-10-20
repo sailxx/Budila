@@ -201,4 +201,11 @@
     <string name="card_stripe">Bande</string>
     <string name="card_solid">Pleine</string>
     <string name="card_gradient">Dégradé</string>
+    <string name="discipline_title">Mode discipline</string>
+    <string name="discipline_desc">Chaque réveil exige une tâche pour être éteint. %1$d minutes avant la sonnerie, il ne peut plus être désactivé, déplacé ni supprimé — ni cet interrupteur</string>
+    <string name="msg_locked">Verrouillé : moins de %1$d minutes avant le réveil. Mode discipline activé</string>
+    <string name="streak_title">Série de levers</string>
+    <string name="streak_best">Record : %1$s</string>
+    <string name="streak_toast">Debout à l’heure ! Série : %1$s</string>
+    <string name="streak_broken">Série interrompue. Demain, on recommence</string>
 </resources>
