@@ -90,22 +90,24 @@ class MainActivity : ComponentActivity() {
                 val settings by SettingsRepository.settings.collectAsStateWithLifecycle()
                 val instrument = settings.design == Design.INSTRUMENT
                 var settingsOpen by rememberSaveable { mutableStateOf(false) }
-                BackHandler(enabled = settingsOpen) { settingsOpen = false }
+                var statsOpen by rememberSaveable { mutableStateOf(false) }
+                BackHandler(enabled = settingsOpen || statsOpen) { settingsOpen = false; statsOpen = false }
                 Surface(color = MaterialTheme.colorScheme.background) {
                     AnimatedContent(
-                        targetState = settingsOpen,
+                        targetState = if (statsOpen) 2 else if (settingsOpen) 1 else 0,
                         transitionSpec = {
-                            val dir = if (targetState) 1 else -1
+                            val dir = if (targetState > initialState) 1 else -1
                             (slideInHorizontally { w -> dir * w / 4 } + fadeIn()) togetherWith
                                 (slideOutHorizontally { w -> -dir * w / 4 } + fadeOut())
                         },
                         label = "screen",
-                    ) { open ->
+                    ) { page ->
                         when {
-                            open && instrument -> InstrumentSettingsScreen(onBack = { settingsOpen = false })
-                            open -> SettingsScreen(onBack = { settingsOpen = false })
-                            instrument -> InstrumentListScreen(onOpenSettings = { settingsOpen = true })
-                            else -> AlarmListScreen(onOpenSettings = { settingsOpen = true })
+                            page == 2 -> StatsScreen(onBack = { statsOpen = false })
+                            page == 1 && instrument -> InstrumentSettingsScreen(onBack = { settingsOpen = false })
+                            page == 1 -> SettingsScreen(onBack = { settingsOpen = false })
+                            instrument -> InstrumentListScreen(onOpenSettings = { settingsOpen = true }, onOpenStats = { statsOpen = true })
+                            else -> AlarmListScreen(onOpenSettings = { settingsOpen = true }, onOpenStats = { statsOpen = true })
                         }
                     }
                 }
@@ -275,7 +277,7 @@ internal fun newAlarm(tagFilter: String?): Alarm {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun AlarmListScreen(onOpenSettings: () -> Unit = {}) {
+internal fun AlarmListScreen(onOpenSettings: () -> Unit = {}, onOpenStats: () -> Unit = {}) {
     val context = LocalContext.current
     val alarms by AlarmRepository.alarms.collectAsStateWithLifecycle()
     val actions = rememberAlarmActions()
@@ -333,7 +335,7 @@ internal fun AlarmListScreen(onOpenSettings: () -> Unit = {}) {
                 val next = alarms.filter { it.enabled }.minOfOrNull { it.nextTrigger(now) }
                 NextAlarmCard(next, now)
             }
-            if (streak.best > 0) item(key = "streak") { StreakCard(streak) }
+            if (streak.best > 0) item(key = "streak") { StreakCard(streak, onOpenStats) }
             if (!notifOk) item(key = "p_notif") {
                 PermissionCard(
                     Icons.Rounded.NotificationsOff,
@@ -434,7 +436,7 @@ private fun NextAlarmCard(next: ZonedDateTime?, now: ZonedDateTime) {
 }
 
 @Composable
-private fun StreakCard(streak: WakeSummary) {
+private fun StreakCard(streak: WakeSummary, onClick: () -> Unit) {
     val context = LocalContext.current
     Card(
         shape = RoundedCornerShape(24.dp),
@@ -442,6 +444,7 @@ private fun StreakCard(streak: WakeSummary) {
             containerColor = MaterialTheme.colorScheme.tertiaryContainer,
             contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
         ),
+        onClick = onClick,
         modifier = Modifier.fillMaxWidth(),
     ) {
         Row(Modifier.padding(horizontal = 24.dp, vertical = 16.dp), verticalAlignment = Alignment.CenterVertically) {

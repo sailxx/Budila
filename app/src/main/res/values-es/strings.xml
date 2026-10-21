@@ -202,10 +202,18 @@
     <string name="card_solid">Sólida</string>
     <string name="card_gradient">Degradado</string>
     <string name="discipline_title">Modo disciplina</string>
-    <string name="discipline_desc">Toda alarma necesita una tarea para apagarla. %1$d minutos antes de sonar no se puede apagar, mover ni borrar, ni tampoco este interruptor</string>
     <string name="msg_locked">Bloqueado: faltan menos de %1$d minutos para la alarma. Modo disciplina activo</string>
     <string name="streak_title">Racha de despertares</string>
     <string name="streak_best">Récord: %1$s</string>
     <string name="streak_toast">¡Arriba a tiempo! Racha: %1$s</string>
     <string name="streak_broken">Racha rota. Mañana empiezas de nuevo</string>
+    <string name="stats_title">Estadísticas</string>
+    <string name="stats_best">Mejor racha</string>
+    <string name="stats_woke">Levantado</string>
+    <string name="stats_missed">Fallado</string>
+    <string name="stats_avg">Hora media</string>
+    <string name="stats_hint">Verde: te levantaste a tiempo; rojo: pospusiste o dormiste de más. Se abre al tocar la racha en la pantalla principal</string>
+    <string name="promise_title">Para qué me levanto</string>
+    <string name="promise_desc">Se muestra en la pantalla de la alarma para que la mañana tenga un motivo</string>
+    <string name="discipline_desc">Toda alarma necesita una tarea para apagarla, y posponer exige resolver cuentas, una más cada vez. %1$d minutos antes de sonar no se puede apagar, mover ni borrar, ni tampoco este interruptor</string>
 </resources>

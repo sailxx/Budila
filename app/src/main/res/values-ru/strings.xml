@@ -202,10 +202,18 @@
     <string name="card_solid">Цвет</string>
     <string name="card_gradient">Градиент</string>
     <string name="discipline_title">Режим дисциплины</string>
-    <string name="discipline_desc">У любого будильника есть задание, без него не выключить. За %1$d мин до звонка будильник нельзя отключить, перенести или удалить — как и сам этот переключатель</string>
     <string name="msg_locked">Заблокировано: до будильника меньше %1$d мин. Включён режим дисциплины</string>
     <string name="streak_title">Серия подъёмов</string>
     <string name="streak_best">Рекорд: %1$s</string>
     <string name="streak_toast">Встал вовремя! Серия: %1$s</string>
     <string name="streak_broken">Серия прервалась. Завтра начнёшь заново</string>
+    <string name="stats_title">Статистика подъёмов</string>
+    <string name="stats_best">Лучшая серия</string>
+    <string name="stats_woke">Встал</string>
+    <string name="stats_missed">Сорвано</string>
+    <string name="stats_avg">Среднее время</string>
+    <string name="stats_hint">Зелёный — встал вовремя, красный — отложил или проспал. Открывается по нажатию на серию на главном экране</string>
+    <string name="promise_title">Зачем я встаю</string>
+    <string name="promise_desc">Покажется на экране звонка — чтобы у утра была причина</string>
+    <string name="discipline_desc">У любого будильника есть задание, а отложить можно только решив примеры — с каждым разом на один больше. За %1$d мин до звонка будильник нельзя отключить, перенести или удалить — как и сам этот переключатель</string>
 </resources>

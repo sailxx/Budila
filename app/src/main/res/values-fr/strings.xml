@@ -202,10 +202,18 @@
     <string name="card_solid">Pleine</string>
     <string name="card_gradient">Dégradé</string>
     <string name="discipline_title">Mode discipline</string>
-    <string name="discipline_desc">Chaque réveil exige une tâche pour être éteint. %1$d minutes avant la sonnerie, il ne peut plus être désactivé, déplacé ni supprimé — ni cet interrupteur</string>
     <string name="msg_locked">Verrouillé : moins de %1$d minutes avant le réveil. Mode discipline activé</string>
     <string name="streak_title">Série de levers</string>
     <string name="streak_best">Record : %1$s</string>
     <string name="streak_toast">Debout à l’heure ! Série : %1$s</string>
     <string name="streak_broken">Série interrompue. Demain, on recommence</string>
+    <string name="stats_title">Statistiques</string>
+    <string name="stats_best">Meilleure série</string>
+    <string name="stats_woke">Levé</string>
+    <string name="stats_missed">Raté</string>
+    <string name="stats_avg">Heure moyenne</string>
+    <string name="stats_hint">Vert : levé à l’heure, rouge : report ou grasse matinée. S’ouvre en touchant la série sur l’écran principal</string>
+    <string name="promise_title">Pourquoi je me lève</string>
+    <string name="promise_desc">Affiché sur l’écran du réveil pour donner une raison au matin</string>
+    <string name="discipline_desc">Chaque réveil exige une tâche pour être éteint, et reporter demande de résoudre des calculs, un de plus à chaque fois. %1$d minutes avant la sonnerie, il ne peut plus être désactivé, déplacé ni supprimé — ni cet interrupteur</string>
 </resources>

@@ -202,10 +202,18 @@
     <string name="card_solid">Pełne</string>
     <string name="card_gradient">Gradient</string>
     <string name="discipline_title">Tryb dyscypliny</string>
-    <string name="discipline_desc">Każdy budzik wymaga zadania, by go wyłączyć. Na %1$d min przed dzwonkiem nie można go wyłączyć, przesunąć ani usunąć — tego przełącznika też</string>
     <string name="msg_locked">Zablokowane: do budzika zostało mniej niż %1$d min. Tryb dyscypliny jest włączony</string>
     <string name="streak_title">Seria wstawania</string>
     <string name="streak_best">Rekord: %1$s</string>
     <string name="streak_toast">Wstałeś na czas! Seria: %1$s</string>
     <string name="streak_broken">Seria przerwana. Jutro zaczynasz od nowa</string>
+    <string name="stats_title">Statystyki</string>
+    <string name="stats_best">Najlepsza seria</string>
+    <string name="stats_woke">Wstałeś</string>
+    <string name="stats_missed">Nieudane</string>
+    <string name="stats_avg">Średnia godzina</string>
+    <string name="stats_hint">Zielony — wstałeś na czas, czerwony — drzemka lub zaspanie. Otwiera się po dotknięciu serii na ekranie głównym</string>
+    <string name="promise_title">Po co wstaję</string>
+    <string name="promise_desc">Pokaże się na ekranie budzika, żeby poranek miał powód</string>
+    <string name="discipline_desc">Każdy budzik wymaga zadania, by go wyłączyć, a drzemka oznacza rozwiązywanie przykładów — za każdym razem o jeden więcej. Na %1$d min przed dzwonkiem nie można go wyłączyć, przesunąć ani usunąć — tego przełącznika też</string>
 </resources>

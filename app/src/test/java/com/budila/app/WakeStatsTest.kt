@@ -18,7 +18,11 @@ class WakeStatsTest {
 
     @Test fun streakCountsTrailingSuccessesAndKeepsBest() {
         val days = mapOf(d to true, d.plusDays(1) to true, d.plusDays(2) to true, d.plusDays(3) to false, d.plusDays(4) to true)
-        assertEquals(WakeSummary(streak = 1, best = 3), summarize(days))
+        val s = summarize(days)
+        assertEquals(1, s.streak)
+        assertEquals(3, s.best)
+        assertEquals(4, s.woke)
+        assertEquals(1, s.missed)
         assertEquals(WakeSummary(), summarize(emptyMap()))
     }
 
@@ -39,6 +43,28 @@ class WakeStatsTest {
         assertEquals(WakeTask.NONE, Ringing.of(alarm, AppSettings()).task)
         assertEquals(WakeTask.MATH, Ringing.of(alarm, AppSettings(discipline = true)).task)
         assertEquals(WakeTask.NONE, Ringing.of(alarm, AppSettings(discipline = true), check = true).task)
+    }
+
+    @Test fun averageTimeCountsOnlySuccessfulDays() {
+        val days = mapOf(d to true, d.plusDays(1) to true, d.plusDays(2) to false)
+        val times = mapOf(d to 400, d.plusDays(1) to 440, d.plusDays(2) to 900)
+        assertEquals(420, summarize(days, times).avgMinute)
+        assertEquals(null, summarize(emptyMap()).avgMinute)
+    }
+
+    @Test fun snoozeCostGrowsAndOnlyInDiscipline() {
+        val alarm = Alarm(1, 7, 0)
+        assertEquals(0, Ringing.of(alarm, AppSettings(), snoozes = 3).snoozeProblems)
+        assertEquals(1, Ringing.of(alarm, AppSettings(discipline = true)).snoozeProblems)
+        assertEquals(3, Ringing.of(alarm, AppSettings(discipline = true), snoozes = 2).snoozeProblems)
+        assertEquals(MAX_SNOOZE_PROBLEMS, Ringing.of(alarm, AppSettings(discipline = true), snoozes = 40).snoozeProblems)
+        assertEquals(0, Ringing.of(alarm, AppSettings(discipline = true), check = true).snoozeProblems)
+    }
+
+    @Test fun calendarStartsOnWeekStartFourWeeksBack() {
+        val wed = LocalDate.of(2026, 10, 21)
+        assertEquals(LocalDate.of(2026, 9, 21), calendarStart(wed, WeekStart.MONDAY))
+        assertEquals(LocalDate.of(2026, 9, 20), calendarStart(wed, WeekStart.SUNDAY))
     }
 
     @Test fun alarmLocksShortlyBeforeRinging() {

@@ -202,10 +202,18 @@
     <string name="card_solid">Sólido</string>
     <string name="card_gradient">Gradiente</string>
     <string name="discipline_title">Modo disciplina</string>
-    <string name="discipline_desc">Todo alarme exige uma tarefa para desligar. %1$d minutos antes de tocar, ele não pode ser desativado, movido nem excluído — nem este interruptor</string>
     <string name="msg_locked">Bloqueado: faltam menos de %1$d minutos para o alarme. Modo disciplina ativo</string>
     <string name="streak_title">Sequência de despertares</string>
     <string name="streak_best">Recorde: %1$s</string>
     <string name="streak_toast">Levantou na hora! Sequência: %1$s</string>
     <string name="streak_broken">Sequência quebrada. Amanhã você recomeça</string>
+    <string name="stats_title">Estatísticas</string>
+    <string name="stats_best">Melhor sequência</string>
+    <string name="stats_woke">Levantou</string>
+    <string name="stats_missed">Falhou</string>
+    <string name="stats_avg">Hora média</string>
+    <string name="stats_hint">Verde: levantou na hora, vermelho: adiou ou dormiu demais. Abre ao tocar na sequência na tela principal</string>
+    <string name="promise_title">Por que eu acordo</string>
+    <string name="promise_desc">Aparece na tela do alarme para dar um motivo à manhã</string>
+    <string name="discipline_desc">Todo alarme exige uma tarefa para desligar, e adiar exige resolver contas, uma a mais a cada vez. %1$d minutos antes de tocar, ele não pode ser desativado, movido nem excluído — nem este interruptor</string>
 </resources>

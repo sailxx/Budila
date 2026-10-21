@@ -202,10 +202,18 @@
     <string name="card_solid">Piena</string>
     <string name="card_gradient">Sfumata</string>
     <string name="discipline_title">Modalità disciplina</string>
-    <string name="discipline_desc">Ogni sveglia richiede un compito per essere spenta. %1$d minuti prima dello squillo non si può disattivare, spostare o eliminare, e nemmeno questo interruttore</string>
     <string name="msg_locked">Bloccato: mancano meno di %1$d minuti alla sveglia. Modalità disciplina attiva</string>
     <string name="streak_title">Serie di risvegli</string>
     <string name="streak_best">Record: %1$s</string>
     <string name="streak_toast">Alzato in orario! Serie: %1$s</string>
     <string name="streak_broken">Serie interrotta. Domani si ricomincia</string>
+    <string name="stats_title">Statistiche</string>
+    <string name="stats_best">Serie migliore</string>
+    <string name="stats_woke">Alzato</string>
+    <string name="stats_missed">Mancato</string>
+    <string name="stats_avg">Ora media</string>
+    <string name="stats_hint">Verde: alzato in orario, rosso: rinviato o dormito. Si apre toccando la serie nella schermata principale</string>
+    <string name="promise_title">Perché mi alzo</string>
+    <string name="promise_desc">Appare sulla schermata della sveglia, così la mattina ha un motivo</string>
+    <string name="discipline_desc">Ogni sveglia richiede un compito per essere spenta e rinviare significa risolvere calcoli, uno in più ogni volta. %1$d minuti prima dello squillo non si può disattivare, spostare o eliminare, e nemmeno questo interruttore</string>
 </resources>

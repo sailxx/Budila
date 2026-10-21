@@ -268,7 +268,8 @@ class AlarmService : Service() {
             .setFullScreenIntent(fullScreen, true)
             .setContentIntent(fullScreen)
             .apply {
-                if (r.canSnooze) addAction(0, getString(R.string.snooze_for, SettingsRepository.current.snoozeMinutes), snooze)
+                // В режиме дисциплины отложить — только примерами на экране звонка
+                if (r.canSnooze && r.snoozeProblems == 0) addAction(0, getString(R.string.snooze_for, SettingsRepository.current.snoozeMinutes), snooze)
                 // С заданием выключить можно только на экране звонка — кнопку в шторке не показываем
                 when {
                     r.check -> addAction(0, getString(R.string.check_awake), dismiss)

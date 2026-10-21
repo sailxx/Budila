@@ -8,35 +8,56 @@ import kotlinx.coroutines.flow.StateFlow
 import org.json.JSONObject
 import java.time.Duration
 import java.time.LocalDate
+import java.time.LocalTime
 import java.time.ZonedDateTime
 
 /** За сколько минут до звонка «режим дисциплины» запрещает выключать, удалять и менять будильник. */
 const val DISCIPLINE_LOCK_MINUTES = 30
 
+/** Длина фразы «зачем встаёшь» на экране звонка. */
+const val PROMISE_MAX = 80
+
 /** Сколько дней истории хранить: для серии хватает, а хранилище не растёт бесконечно. */
 private const val KEEP_DAYS = 400
 
-/** [streak] — сколько дней подряд встал вовремя; [best] — рекорд. */
-data class WakeSummary(val streak: Int = 0, val best: Int = 0)
+/**
+ * [streak] — сколько дней подряд встал вовремя; [best] — рекорд; [woke] и [missed] — всего дней
+ * с подъёмом и со срывом; [avgMinute] — среднее время подъёма в минутах от полуночи;
+ * [days] — итог каждого дня (true — встал вовремя).
+ */
+data class WakeSummary(
+    val streak: Int = 0,
+    val best: Int = 0,
+    val woke: Int = 0,
+    val missed: Int = 0,
+    val avgMinute: Int? = null,
+    val days: Map<LocalDate, Boolean> = emptyMap(),
+)
 
 /**
  * Серия подъёмов. День, в который встал вовремя (выключил без «отложить» и, если включена проверка,
  * ответил на неё), — успех; любой «отложить» или проспанный звонок за день — срыв, серия начинается заново.
  * Дни без будильников серию не рвут.
  */
-fun summarize(days: Map<LocalDate, Boolean>): WakeSummary {
+fun summarize(days: Map<LocalDate, Boolean>, times: Map<LocalDate, Int> = emptyMap()): WakeSummary {
     var run = 0
     var best = 0
     for ((_, woke) in days.toSortedMap()) {
         run = if (woke) run + 1 else 0
         best = maxOf(best, run)
     }
-    return WakeSummary(run, best)
+    val minutes = times.filterKeys { days[it] == true }.values
+    return WakeSummary(
+        run, best, days.count { it.value }, days.count { !it.value },
+        if (minutes.isEmpty()) null else minutes.average().toInt(), days.toMap(),
+    )
 }
 
 object WakeStats {
     private lateinit var prefs: SharedPreferences
     private var days = sortedMapOf<LocalDate, Boolean>()
+    /** Во сколько встал в успешные дни (минуты от полуночи) */
+    private var times = sortedMapOf<LocalDate, Int>()
     private val _summary = MutableStateFlow(WakeSummary())
     val summary: StateFlow<WakeSummary> = _summary
 
@@ -48,19 +69,31 @@ object WakeStats {
         json.keys().forEach { key ->
             runCatching { LocalDate.parse(key) }.getOrNull()?.let { days[it] = json.optBoolean(key) }
         }
-        _summary.value = summarize(days)
+        val t = JSONObject(prefs.getString("times", "{}") ?: "{}")
+        t.keys().forEach { key ->
+            runCatching { LocalDate.parse(key) }.getOrNull()?.let { times[it] = t.optInt(key) }
+        }
+        _summary.value = summarize(days, times)
     }
 
     /** Записать итог сегодняшнего подъёма. Срыв сильнее успеха: после «отложить» день уже не засчитать. */
     @Synchronized
-    fun record(woke: Boolean, today: LocalDate = LocalDate.now()): WakeSummary {
+    fun record(
+        woke: Boolean,
+        today: LocalDate = LocalDate.now(),
+        minuteOfDay: Int = LocalTime.now().let { it.hour * 60 + it.minute },
+    ): WakeSummary {
         days[today] = woke && days[today] != false
+        if (days[today] == true) times.putIfAbsent(today, minuteOfDay) else times.remove(today)
         while (days.size > KEEP_DAYS) days.remove(days.firstKey())
-        _summary.value = summarize(days)
+        times.keys.retainAll(days.keys)
+        _summary.value = summarize(days, times)
         if (::prefs.isInitialized) {
             val json = JSONObject()
             days.forEach { (d, ok) -> json.put(d.toString(), ok) }
-            prefs.edit().putString("days", json.toString()).apply()
+            val t = JSONObject()
+            times.forEach { (d, m) -> t.put(d.toString(), m) }
+            prefs.edit().putString("days", json.toString()).putString("times", t.toString()).apply()
         }
         return _summary.value
     }

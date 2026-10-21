@@ -212,6 +212,11 @@ internal fun InstrumentSettingsScreen(onBack: () -> Unit) {
                     setDiscipline(context, v)
                 }
                 Spacer(Modifier.height(8.dp))
+                Field(
+                    s.promise, { v -> SettingsRepository.update { it.copy(promise = v.take(PROMISE_MAX)) } },
+                    stringResource(R.string.promise_title),
+                )
+                Text(stringResource(R.string.promise_desc), style = IType.small, color = colors.muted, modifier = Modifier.padding(top = 6.dp, bottom = 12.dp))
                 CasingLegend(stringResource(R.string.default_task_title))
                 Spacer(Modifier.height(8.dp))
                 Strip(
