@@ -91,12 +91,15 @@ class AlarmService : Service() {
                 // Выключил настоящий звонок — через несколько минут проверим, не уснул ли снова
                 val checkIn = SettingsRepository.current.awakeCheckMinutes
                 if (r != null && !r.check && checkIn > 0) AlarmScheduler.scheduleCheck(this, r.alarm.id, checkIn)
+                // Серия: встал без «отложить» — успех, но с проверкой он засчитывается только после ответа на неё
+                if (r != null && (r.check || checkIn <= 0 || r.snoozes > 0)) WakeStats.recordWithToast(this, r.check || r.snoozes == 0)
                 stopRinging()
             }
             ACTION_SNOOZE -> {
                 val r = ringing.value
                 if (r != null && !r.canSnooze) return START_NOT_STICKY
                 r?.let { snoozeFor(it, it.snoozes + 1) }
+                if (r != null) WakeStats.record(woke = false)
                 stopRinging()
             }
             else -> {
@@ -123,6 +126,8 @@ class AlarmService : Service() {
 
     private fun onTimeout() {
         val r = ringing.value
+        // Звонок прозвенел до конца, а ты не встал — серия прерывается
+        if (r != null) WakeStats.record(woke = false)
         when {
             r == null -> stopRinging()
             // Не ответил на проверку — значит, уснул: звоним по-настоящему, без «отложить»
@@ -263,7 +268,8 @@ class AlarmService : Service() {
             .setFullScreenIntent(fullScreen, true)
             .setContentIntent(fullScreen)
             .apply {
-                if (r.canSnooze) addAction(0, getString(R.string.snooze_for, SettingsRepository.current.snoozeMinutes), snooze)
+                // В режиме дисциплины отложить — только примерами на экране звонка
+                if (r.canSnooze && r.snoozeProblems == 0) addAction(0, getString(R.string.snooze_for, SettingsRepository.current.snoozeMinutes), snooze)
                 // С заданием выключить можно только на экране звонка — кнопку в шторке не показываем
                 when {
                     r.check -> addAction(0, getString(R.string.check_awake), dismiss)

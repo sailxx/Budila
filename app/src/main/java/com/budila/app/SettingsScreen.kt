@@ -294,6 +294,24 @@ internal fun SettingsScreen(onBack: () -> Unit) {
 
             item { SectionHeader(stringResource(R.string.section_wake)) }
             item {
+                SwitchItem(
+                    Icons.Rounded.Lock, stringResource(R.string.discipline_title),
+                    stringResource(R.string.discipline_desc, DISCIPLINE_LOCK_MINUTES), s.discipline,
+                ) { v -> setDiscipline(context, v) }
+            }
+            item {
+                Column(Modifier.padding(horizontal = 16.dp)) {
+                    OutlinedTextField(
+                        value = s.promise,
+                        onValueChange = { v -> SettingsRepository.update { it.copy(promise = v.take(PROMISE_MAX)) } },
+                        label = { Text(stringResource(R.string.promise_title)) },
+                        supportingText = { Text(stringResource(R.string.promise_desc)) },
+                        maxLines = 2,
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                }
+            }
+            item {
                 ChoiceItem(
                     taskIcon(s.defaultTask), stringResource(R.string.default_task_title),
                     WakeTask.entries.map { it.ordinal }, s.defaultTask.ordinal,

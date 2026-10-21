@@ -79,30 +79,37 @@ class RingingActivity : ComponentActivity() {
                 val settings by SettingsRepository.settings.collectAsStateWithLifecycle()
                 val instrument = settings.design == Design.INSTRUMENT
                 // Задание начинается заново, если звонок сменился (например, проверка перешла в настоящий звонок)
-                LaunchedEffect(r) { solving = false }
+                LaunchedEffect(r) { solving = false; solvingSnooze = false }
                 val label = r.alarm.label.ifBlank { null } ?: getString(R.string.alarm_default_label)
-                val onSnooze = if (r.canSnooze) ({ AlarmService.snooze(this); finish() }) else null
+                val onSnooze = if (r.canSnooze) ({ snoozeOrSolve(r) }) else null
                 val dismiss = { AlarmService.dismiss(this); finish() }
 
                 // «Назад» не выключает звонок; из задания возвращает к звонку
-                BackHandler { solving = false }
+                BackHandler { solving = false; solvingSnooze = false }
 
                 when {
                     r.check -> if (instrument) InstrumentCheckScreen(dismiss) else CheckScreen(dismiss)
                     solving -> {
-                        val state = remember(r) { WakeTaskState(r.task, settings.password, settings.taskRepeats) }
+                        // Отложить в режиме дисциплины — только примерами, и с каждым разом их больше
+                        val forSnooze = solvingSnooze
+                        val state = remember(r, forSnooze) {
+                            if (forSnooze) WakeTaskState(WakeTask.MATH, "", r.snoozeProblems)
+                            else WakeTaskState(r.task, settings.password, settings.taskRepeats)
+                        }
+                        val solved = if (forSnooze) ({ AlarmService.snooze(this); finish() }) else dismiss
+                        val back = { solving = false; solvingSnooze = false }
                         if (instrument) {
-                            InstrumentTaskScreen(state, onSolved = dismiss, onBack = { solving = false })
+                            InstrumentTaskScreen(state, onSolved = solved, onBack = back)
                         } else {
-                            TaskScreen(state, onSolved = dismiss, onBack = { solving = false })
+                            TaskScreen(state, onSolved = solved, onBack = back)
                         }
                     }
                     else -> {
                         val onDismiss = if (r.task == WakeTask.NONE) dismiss else ({ solving = true })
                         if (instrument) {
-                            InstrumentRingingScreen(label, onSnooze, onDismiss, r.task, r.snoozesLeft)
+                            InstrumentRingingScreen(label, onSnooze, onDismiss, r.task, r.snoozesLeft, promise = settings.promise)
                         } else {
-                            RingingScreen(label, onSnooze, onDismiss, r.task, r.snoozesLeft)
+                            RingingScreen(label, onSnooze, onDismiss, r.task, r.snoozesLeft, promise = settings.promise)
                         }
                     }
                 }
@@ -113,6 +120,19 @@ class RingingActivity : ComponentActivity() {
     /** Открыт экран задания (а не сам звонок). Здесь, а не в Compose, — чтобы до него дотянулись кнопки громкости. */
     private var solving by mutableStateOf(false)
 
+    /** Задание открыто ради «отложить», а не ради «выключить» */
+    private var solvingSnooze by mutableStateOf(false)
+
+    private fun snoozeOrSolve(r: Ringing) {
+        if (r.snoozeProblems > 0) {
+            solvingSnooze = true
+            solving = true
+        } else {
+            AlarmService.snooze(this)
+            finish()
+        }
+    }
+
     /** Кнопки громкости во время звонка — как выбрано в настройках. */
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         val volumeKey = keyCode == KeyEvent.KEYCODE_VOLUME_UP || keyCode == KeyEvent.KEYCODE_VOLUME_DOWN
@@ -121,10 +141,7 @@ class RingingActivity : ComponentActivity() {
         if (!volumeKey || r == null || mode == VolumeKeys.VOLUME) return super.onKeyDown(keyCode, event)
         if (event.repeatCount > 0) return true
         when (mode) {
-            VolumeKeys.SNOOZE -> if (r.canSnooze) {
-                AlarmService.snooze(this)
-                finish()
-            }
+            VolumeKeys.SNOOZE -> if (r.canSnooze) snoozeOrSolve(r)
             // С заданием кнопка не выключает, а открывает задание
             VolumeKeys.DISMISS -> if (r.check || r.task == WakeTask.NONE) {
                 AlarmService.dismiss(this)
@@ -230,6 +247,7 @@ internal fun RingingScreen(
     task: WakeTask = WakeTask.NONE,
     snoozesLeft: Int? = null,
     gesture: DismissGesture = SettingsRepository.current.dismissGesture,
+    promise: String = "",
 ) {
     val context = LocalContext.current
     var now by remember { mutableStateOf(LocalTime.now()) }
@@ -266,6 +284,13 @@ internal fun RingingScreen(
                     color = colors.onPrimaryContainer,
                 )
                 Text(label, style = MaterialTheme.typography.headlineSmall, color = colors.onPrimaryContainer)
+                if (promise.isNotBlank()) {
+                    Spacer(Modifier.height(12.dp))
+                    Text(
+                        promise, style = MaterialTheme.typography.titleMedium, color = colors.onPrimaryContainer,
+                        textAlign = TextAlign.Center, maxLines = 3,
+                    )
+                }
             }
 
             Box(

@@ -16,6 +16,9 @@ val TASK_REPEAT_OPTIONS = listOf(1, 2, 3, 5)
 /** Сколько секунд даётся, чтобы ответить на повторную проверку, прежде чем будильник зазвонит снова. */
 const val CHECK_ANSWER_SECONDS = 60
 
+/** Потолок примеров, которые нужно решить, чтобы отложить. */
+const val MAX_SNOOZE_PROBLEMS = 5
+
 data class MathProblem(val text: String, val answer: Int)
 
 /** Пример, который не решить во сне, но и не мучительный: двузначные числа, умножение на однозначное. */
@@ -53,6 +56,8 @@ data class Ringing(
     val snoozes: Int = 0,
     val snoozesLeft: Int? = null,
     val check: Boolean = false,
+    /** Сколько примеров решить, чтобы отложить (режим дисциплины); 0 — отложить можно сразу */
+    val snoozeProblems: Int = 0,
 ) {
     val canSnooze get() = !check && (snoozesLeft == null || snoozesLeft > 0)
 
@@ -63,14 +68,16 @@ data class Ringing(
          */
         fun of(alarm: Alarm, settings: AppSettings, snoozes: Int = 0, check: Boolean = false, strict: Boolean = false): Ringing {
             var task = if (check) WakeTask.NONE else alarm.task
-            if (strict && task == WakeTask.NONE) task = WakeTask.MATH
+            if ((strict || settings.discipline && !check) && task == WakeTask.NONE) task = WakeTask.MATH
             if (task == WakeTask.PASSWORD && settings.password.isBlank()) task = WakeTask.MATH
             val left = when {
                 strict -> 0
                 settings.maxSnoozes < 0 -> null
                 else -> (settings.maxSnoozes - snoozes).coerceAtLeast(0)
             }
-            return Ringing(alarm, task, snoozes, left, check)
+            // Отложить — не бесплатно: с каждым разом примеров на один больше
+            val cost = if (settings.discipline && !check) (snoozes + 1).coerceAtMost(MAX_SNOOZE_PROBLEMS) else 0
+            return Ringing(alarm, task, snoozes, left, check, cost)
         }
     }
 }

@@ -201,4 +201,19 @@
     <string name="card_stripe">Şerit</string>
     <string name="card_solid">Dolu</string>
     <string name="card_gradient">Gradyan</string>
+    <string name="discipline_title">Disiplin modu</string>
+    <string name="msg_locked">Kilitli: alarma %1$d dakikadan az kaldı. Disiplin modu açık</string>
+    <string name="streak_title">Uyanma serisi</string>
+    <string name="streak_best">Rekor: %1$s</string>
+    <string name="streak_toast">Zamanında kalktın! Seri: %1$s</string>
+    <string name="streak_broken">Seri bozuldu. Yarın yeniden başlarsın</string>
+    <string name="stats_title">İstatistikler</string>
+    <string name="stats_best">En iyi seri</string>
+    <string name="stats_woke">Kalktı</string>
+    <string name="stats_missed">Kaçırıldı</string>
+    <string name="stats_avg">Ortalama saat</string>
+    <string name="stats_hint">Yeşil — zamanında kalktın, kırmızı — erteledin ya da uyuyakaldın. Ana ekranda seriye dokununca açılır</string>
+    <string name="promise_title">Neden kalkıyorum</string>
+    <string name="promise_desc">Sabahın bir nedeni olsun diye alarm ekranında gösterilir</string>
+    <string name="discipline_desc">Her alarmı kapatmak için bir görev gerekir, ertelemek için ise işlem çözmek — her seferinde bir tane fazla. Çalmasına %1$d dakika kala alarm kapatılamaz, taşınamaz veya silinemez — bu anahtar da değiştirilemez</string>
 </resources>

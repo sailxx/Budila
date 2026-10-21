@@ -204,4 +204,19 @@
     <string name="card_stripe">Stripe</string>
     <string name="card_solid">Solid</string>
     <string name="card_gradient">Gradient</string>
+    <string name="discipline_title">Discipline mode</string>
+    <string name="msg_locked">Locked: less than %1$d minutes until the alarm. Discipline mode is on</string>
+    <string name="streak_title">Wake-up streak</string>
+    <string name="streak_best">Best: %1$s</string>
+    <string name="streak_toast">Up on time! Streak: %1$s</string>
+    <string name="streak_broken">Streak broken. Tomorrow you start again</string>
+    <string name="stats_title">Wake-up stats</string>
+    <string name="stats_best">Best streak</string>
+    <string name="stats_woke">Got up</string>
+    <string name="stats_missed">Missed</string>
+    <string name="stats_avg">Average time</string>
+    <string name="stats_hint">Green — got up on time, red — snoozed or overslept. Tap a streak on the main screen to open this</string>
+    <string name="promise_title">Why I get up</string>
+    <string name="promise_desc">Shown on the alarm screen so the morning has a reason</string>
+    <string name="discipline_desc">Every alarm needs a task to turn it off, and snoozing means solving problems — one more each time. %1$d minutes before an alarm rings, it can’t be turned off, moved or deleted — and neither can this switch</string>
 </resources>

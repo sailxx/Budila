@@ -201,4 +201,19 @@
     <string name="card_stripe">Смужка</string>
     <string name="card_solid">Колір</string>
     <string name="card_gradient">Градієнт</string>
+    <string name="discipline_title">Режим дисципліни</string>
+    <string name="msg_locked">Заблоковано: до будильника менше %1$d хв. Увімкнено режим дисципліни</string>
+    <string name="streak_title">Серія підйомів</string>
+    <string name="streak_best">Рекорд: %1$s</string>
+    <string name="streak_toast">Встав вчасно! Серія: %1$s</string>
+    <string name="streak_broken">Серія перервалася. Завтра почнеш заново</string>
+    <string name="stats_title">Статистика підйомів</string>
+    <string name="stats_best">Найкраща серія</string>
+    <string name="stats_woke">Встав</string>
+    <string name="stats_missed">Зірвано</string>
+    <string name="stats_avg">Середній час</string>
+    <string name="stats_hint">Зелений — встав вчасно, червоний — відклав або проспав. Відкривається за натисканням на серію на головному екрані</string>
+    <string name="promise_title">Навіщо я встаю</string>
+    <string name="promise_desc">З’явиться на екрані дзвінка — щоб у ранку була причина</string>
+    <string name="discipline_desc">У кожного будильника є завдання, а відкласти можна лише розв’язавши приклади — щоразу на один більше. За %1$d хв до дзвінка будильник не можна вимкнути, перенести чи видалити — як і сам цей перемикач</string>
 </resources>

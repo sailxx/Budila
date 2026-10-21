@@ -72,12 +72,13 @@ private fun amPm(context: android.content.Context, hour: Int): String? =
 // ======================================================================
 
 @Composable
-internal fun InstrumentListScreen(onOpenSettings: () -> Unit = {}) {
+internal fun InstrumentListScreen(onOpenSettings: () -> Unit = {}, onOpenStats: () -> Unit = {}) {
     val context = LocalContext.current
     val colors = LocalInstrument.current
     val alarms by AlarmRepository.alarms.collectAsStateWithLifecycle()
     val actions = rememberAlarmActions()
     val now = rememberNow()
+    val streak by WakeStats.summary.collectAsStateWithLifecycle()
     val perms = rememberPermissions()
     var editor by remember { mutableStateOf<EditorState?>(null) }
     var tagFilter by rememberSaveable { mutableStateOf<String?>(null) }
@@ -101,6 +102,7 @@ internal fun InstrumentListScreen(onOpenSettings: () -> Unit = {}) {
                 }
             }
             item(key = "next") { NextWell(alarms, now) }
+            if (streak.best > 0) item(key = "streak") { StreakWell(streak, onOpenStats) }
             if (!perms.notifOk) item(key = "p_notif") {
                 PermissionWell(R.string.perm_notif_title, R.string.perm_notif_text, perms.fixNotif)
             }
@@ -394,6 +396,26 @@ private fun PermissionWell(title: Int, text: Int, onFix: () -> Unit) {
         Text(stringResource(text), style = IType.small, color = colors.wellDim)
         Spacer(Modifier.height(12.dp))
         TextKey(stringResource(R.string.perm_allow), onFix, Modifier.height(42.dp))
+    }
+}
+
+/** Серия подъёмов: сколько дней подряд встал вовремя и рекорд. */
+@Composable
+private fun StreakWell(streak: WakeSummary, onClick: () -> Unit) {
+    val context = LocalContext.current
+    val colors = LocalInstrument.current
+    Well(Modifier.fillMaxWidth().clip(RoundedCornerShape(12.dp)).clickable(onClick = onClick)) {
+        LegendRow(stringResource(R.string.streak_title)) {
+            Icon(Icons.Rounded.LocalFireDepartment, null, tint = colors.wellDim, modifier = Modifier.size(18.dp))
+        }
+        Spacer(Modifier.height(6.dp))
+        Row(verticalAlignment = Alignment.Bottom) {
+            Text(context.getString(R.string.unit_days, streak.streak), style = IType.title, color = colors.wellInk, modifier = Modifier.weight(1f))
+            Text(
+                stringResource(R.string.streak_best, context.getString(R.string.unit_days, streak.best)),
+                style = IType.small, color = colors.wellDim,
+            )
+        }
     }
 }
 
@@ -745,6 +767,7 @@ internal fun InstrumentRingingScreen(
     task: WakeTask = WakeTask.NONE,
     snoozesLeft: Int? = null,
     gesture: DismissGesture = SettingsRepository.current.dismissGesture,
+    promise: String = "",
 ) {
     val context = LocalContext.current
     val colors = LocalInstrument.current
@@ -778,6 +801,10 @@ internal fun InstrumentRingingScreen(
         }
         Spacer(Modifier.height(28.dp))
         Text(label, style = IType.headline.copy(fontSize = 34.sp, lineHeight = 38.sp), color = colors.ink)
+        if (promise.isNotBlank()) {
+            Spacer(Modifier.height(8.dp))
+            Text(promise, style = IType.reading, color = colors.muted, maxLines = 3)
+        }
         Spacer(Modifier.weight(1f))
 
         Well(Modifier.fillMaxWidth(), padding = PaddingValues(start = 18.dp, end = 18.dp, top = 18.dp, bottom = 14.dp)) {

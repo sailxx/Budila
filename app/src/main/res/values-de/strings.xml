@@ -201,4 +201,19 @@
     <string name="card_stripe">Streifen</string>
     <string name="card_solid">Voll</string>
     <string name="card_gradient">Verlauf</string>
+    <string name="discipline_title">Disziplinmodus</string>
+    <string name="msg_locked">Gesperrt: weniger als %1$d Minuten bis zum Wecker. Disziplinmodus ist an</string>
+    <string name="streak_title">Aufsteh-Serie</string>
+    <string name="streak_best">Rekord: %1$s</string>
+    <string name="streak_toast">Pünktlich auf! Serie: %1$s</string>
+    <string name="streak_broken">Serie unterbrochen. Morgen beginnst du neu</string>
+    <string name="stats_title">Aufsteh-Statistik</string>
+    <string name="stats_best">Beste Serie</string>
+    <string name="stats_woke">Aufgestanden</string>
+    <string name="stats_missed">Verpasst</string>
+    <string name="stats_avg">Ø Uhrzeit</string>
+    <string name="stats_hint">Grün — pünktlich auf, rot — Schlummern oder verschlafen. Öffnet sich per Tipp auf die Serie auf dem Startbildschirm</string>
+    <string name="promise_title">Wofür ich aufstehe</string>
+    <string name="promise_desc">Erscheint auf dem Weckbildschirm, damit der Morgen einen Grund hat</string>
+    <string name="discipline_desc">Jeder Wecker braucht eine Aufgabe zum Ausschalten, und Schlummern heißt Rechenaufgaben lösen — jedes Mal eine mehr. %1$d Minuten vor dem Klingeln lässt er sich nicht mehr ausschalten, verschieben oder löschen — dieser Schalter auch nicht</string>
 </resources>
