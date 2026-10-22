@@ -88,23 +88,23 @@ private fun c(rgb: Long) = Color(0xFF000000 or rgb)
 private fun c(rgb: Long, alpha: Float) = c(rgb).copy(alpha = alpha)
 
 private val LightColors = Instrument(
-    false, c(0xffffff), c(0x141414), c(0x5f5f5c), c(0xe4e4e1), c(0xf3f3f1),
-    c(0xffffff), c(0x141414), c(0xcfcfcc), Color.White,
-    c(0xf1f1ef), c(0x111111), c(0x5a5a57), c(0, 0.06f), c(0, 0.13f),
+    false, c(0xffffff), c(0x111111), c(0x595959), c(0xe6e6e6), c(0xf4f4f4),
+    c(0xffffff), c(0x111111), c(0xcdcdcd), Color.White,
+    c(0xf0f0f0), c(0x111111), c(0x585858), c(0, 0.06f), c(0, 0.13f),
     c(0xd33a3f),
     accent = c(0x3b6df0),
 )
 private val DarkColors = Instrument(
-    true, c(0x141414), c(0xededed), c(0x8e8e8e), c(0x2a2a2a), c(0x1d1d1d),
-    c(0x262626), c(0xededed), c(0x070707), c(0xffffff, 0.07f),
-    c(0x0a0a0a), c(0xf2f2f2), c(0x8a8a8a), c(0xffffff, 0.06f), c(0, 0.6f),
+    true, c(0x121212), c(0xf0f0f0), c(0x9a9a9a), c(0x2c2c2c), c(0x1c1c1c),
+    c(0x262626), c(0xf0f0f0), c(0x070707), c(0xffffff, 0.07f),
+    c(0x0a0a0a), c(0xf4f4f4), c(0x969696), c(0xffffff, 0.06f), c(0, 0.6f),
     c(0xef5a5f),
     accent = c(0x7a9bff),
 )
 private val OledColors = Instrument(
-    true, c(0x000000), c(0xf4f4f4), c(0x8d8d8d), c(0x1d1d1d), c(0x0d0d0d),
+    true, c(0x000000), c(0xf4f4f4), c(0x999999), c(0x202020), c(0x0d0d0d),
     c(0x111111), c(0xf4f4f4), c(0x000000), c(0xffffff, 0.09f),
-    c(0x000000), c(0xffffff), c(0x8d8d8d), c(0xffffff, 0.06f), c(0x262626),
+    c(0x000000), c(0xffffff), c(0x999999), c(0xffffff, 0.06f), c(0x2a2a2a),
     c(0xff5a5f),
     accent = c(0x7a9bff),
 )
