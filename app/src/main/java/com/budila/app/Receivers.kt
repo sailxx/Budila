@@ -29,7 +29,16 @@ class AlarmReceiver : BroadcastReceiver() {
 /** Перезагрузка, смена времени/часового пояса, обновление приложения — заново ставим будильники. */
 class SystemEventsReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
+        if (intent.action !in SYSTEM_ACTIONS) return
         AlarmRepository.init(context)
         AlarmScheduler.rescheduleAll(context)
     }
 }
+
+private val SYSTEM_ACTIONS = setOf(
+    Intent.ACTION_BOOT_COMPLETED,
+    Intent.ACTION_MY_PACKAGE_REPLACED,
+    Intent.ACTION_TIME_CHANGED,
+    Intent.ACTION_TIMEZONE_CHANGED,
+    "android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED",
+)
