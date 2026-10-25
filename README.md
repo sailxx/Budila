@@ -1,5 +1,9 @@
 <div align="center">
 
+[Русский](README.ru.md) · **English** · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Polski](README.pl.md)
+
+<br>
+
 <picture><source srcset="assets/readme/hero-en.svg"><img src="assets/readme/png/hero-en.png" width="100%" alt="Budila — Wake up on time. Get up with ease."></picture>
 
 <a href="https://github.com/sailxx/Budila/releases/latest/download/Budila.apk"><img src="assets/readme/cta-en.svg" height="52" alt="Download APK"></a>&nbsp;&nbsp;<a href="https://github.com/sailxx/Budila/releases/latest"><img src="assets/readme/btn-new-en.svg" height="52" alt="What’s new"></a>

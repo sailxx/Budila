@@ -1,6 +1,6 @@
 {
   "ru": {
-    "file": "README.md",
+    "file": "README.ru.md",
     "name": "Русский",
     "intro": "**Budila — будильник для Android, который будит вовремя и без стресса.** Спокойное пробуждение, теги и цвета, фирменный дизайн «Инструмент» и 8 тем Material You. Работает без интернета, без рекламы и трекеров.",
     "whatsNew": "Что нового",
@@ -21,7 +21,7 @@
     "footer": "© 2026 sailxx. Все права защищены."
   },
   "en": {
-    "file": "README.en.md",
+    "file": "README.md",
     "name": "English",
     "intro": "**Budila is an Android alarm clock that wakes you on time, without the stress.** Gentle wake-up, tags and colors, the signature “Instrument” design and 8 Material You themes. No internet access, no ads, no trackers.",
     "whatsNew": "What’s new",
