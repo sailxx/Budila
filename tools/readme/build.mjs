@@ -200,13 +200,8 @@ renderPngs();
 // ---------- README на всех языках (тексты — md.json) ----------
 const pic = (name, code, alt) => `<picture><source srcset="assets/readme/${name}-${code}.svg"><img src="assets/readme/png/${name}-${code}.png" width="100%" alt="${alt}"></picture>`;
 const det = (summary, body) => `<details>\n<summary><b>${summary}</b></summary>\n\n${body}\n\n</details>`;
-for (const [code, m] of Object.entries(MD)) {
-  const sw = Object.values(MD).map((x) => (x === m ? `**${x.name}**` : `[${x.name}](${x.file})`)).join(' · ');
+for (const [code, m] of Object.entries(MD).filter(([c]) => c === 'en')) {
   const text = `<div align="center">
-
-${sw}
-
-<br>
 
 ${pic('hero', code, m.heroAlt)}
 
@@ -234,6 +229,6 @@ ${det(m.install, m.installBody)}
 
 ${det(m.privacy, m.privacyBody)}
 `;
-  fs.writeFileSync(path.join(REPO, m.file), text);
+  fs.writeFileSync(path.join(REPO, 'README.md'), text);
 }
-console.log('README: ' + Object.values(MD).map((m) => m.file).join(', '));
+console.log('README: README.md');
