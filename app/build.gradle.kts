@@ -72,7 +72,7 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.material:material-icons-extended")
     // Палитры Material 3 из одного цвета (для 7 тем)
-    implementation("com.materialkolor:material-kolor:3.0.1")
+    implementation("com.materialkolor:material-kolor:5.0.1")
 
     // Скриншоты экранов на JVM (./gradlew testDebugUnitTest → screenshots/)
     testImplementation("junit:junit:4.13.2")
